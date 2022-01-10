@@ -3,7 +3,7 @@
 (scroll-bar-mode -1) ; Disable visible scrollbar
 (tool-bar-mode -1) ; Disable toolbar
 (tooltip-mode -1) ; Disable tooltips
-(set-fringe-mode 10) ; Add margins
+(set-fringe-mode 50) ; Add margins
 (menu-bar-mode -1) ; Disable menubar
 
 ;; Set up visible bell
