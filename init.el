@@ -144,3 +144,7 @@
   (when (file-directory-p "~/Projects")
     (setq projectile-project-search-path '("~/Projects")))
   (setq projectile-switch-project-acion #'projectile-dired))
+
+(use-package magit
+  :custom
+  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
