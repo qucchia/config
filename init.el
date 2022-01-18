@@ -148,3 +148,7 @@
 (use-package magit
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+
+(setq js-indent-level 2)
+
+(use-package json-mode)
