@@ -155,3 +155,8 @@
 (setq js-indent-level 2)
 
 (use-package json-mode)
+
+(use-package forge
+  :after magit)
+
+(setq auth-sources '("~/.authinfo"))
