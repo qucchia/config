@@ -121,7 +121,10 @@
   (evil-set-initial-state 'messages-buffer-mode -normal)
   (evil-set-initial-state 'dashboard-mode 'normal))
 
-(use-package evil-collection)
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
 
 (use-package hydra)
 
