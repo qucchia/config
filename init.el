@@ -164,9 +164,7 @@
 (defun q/org-mode-setup ()
   (org-indent-mode)
   (variable-pitch-mode 1)
-  (auto-fill-mode 0)
-  (visual-line-mode 1)
-  (setq evil-auto-indent nil))
+  (visual-line-mode 1))
 
 (use-package org
   :hook (org-mode . q/org-mode-setup)
@@ -193,4 +191,25 @@
 		(org-level-7 . 1.1)
 		(org-level-8 . 1.1)))
   (set-face-attribute (car face) nil :font "DejaVu sans" :weight 'regular :height (cdr face)))
-		
+
+;; Set fonts
+(set-face-attribute 'default nil :font "Source Code Pro" :height 120)
+(set-face-attribute 'fixed-pitch nil :font "Source Code Pro" :height 120)
+(set-face-attribute 'variable-pitch nil :font "DejaVu sans" :height 120 :weight 'regular)
+
+;; Ensure that anything that should be fixed pitch in Org mode appears that way
+(set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
+(set-face-attribute 'org-table nil :inherit '(org-hide fixed-pitch))
+(set-face-attribute 'org-indent nil :inherit '(org-hide fixed-pitch))
+(set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+(set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+(set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+(set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
+
+(defun q/org-mode-visual-fill ()
+  (setq visual-fill-column-width 100
+	visual-fill-column-center-text t)
+  (visual-fill-column-mode 1))
+
+(use-package visual-fill-column
+  :hook (org-mode . q/org-visual-mode-fill))
