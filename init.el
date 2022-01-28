@@ -9,6 +9,12 @@
 ;; Set up visible bell
 (setq visible-bell t)
 
+
+;; Set fonts
+(set-face-attribute 'default nil :font "Source Code Pro" :height 120)
+(set-face-attribute 'fixed-pitch nil :font "Source Code Pro" :height 120)
+(set-face-attribute 'variable-pitch nil :font "DejaVu sans" :height 120 :weight 'regular)
+
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 ;; Initialise package sources
