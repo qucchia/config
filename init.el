@@ -276,3 +276,8 @@
 
 (use-package visual-fill-column
   :hook (org-mode . q/org-visual-mode-fill))
+
+(use-package prettier)
+(use-package prettier-js
+  :after pretter)
+(add-hook 'js-mode-hook 'prettier-js-mode)
