@@ -213,6 +213,22 @@
 	'((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
 	  (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
 
+  (setq org-tag-alist
+	'((:startgroup)
+	  ;Put mutually exclusive tags here
+	  (:endgroup)
+	  ("@errand" . ?E)
+	  ("@home" . ?H)
+	  ("@work" . ?W)
+	  ("@school" . ?S)
+	  ("@coding" . ?C)
+	  ("agenda" . ?a)
+	  ("planning" . ?p)
+	  ("publish" . ?P)
+	  ("batch" . ?b)
+	  ("note" . ?n)
+	  ("idea" . ?i)))
+
   ;; Configure custom agenda views
   (setq org-agenda-custom-commands
 	'(("d" "Dashboard"
@@ -225,7 +241,7 @@
 	   ((todo "NEXT"
 		  ((org-agenda-overriding-header "Next Tasks")))))
 
-	  ("W" "Work Tasks" tags-todo "+work")
+	  ("W" "Work Tasks" tags-todo "+@school")
 
 	  ;; Low-effort next actions
 	  ("e" tags-todo "+TODO=\"NEXT\"+Effort<156+Effort>0"
