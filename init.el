@@ -104,7 +104,8 @@
 
   (q/leader-keys
    "t"  '(:ignore t :which-key "toggles")
-   "tt" '(counsel-load-theme :which-key "choose theme")))
+   "tt" '(counsel-load-theme :which-key "choose theme")
+   "c"  '(org-capture :which-key "capture")))
 
 (general-define-key
  "C-M-n" 'counsel-switch-buffer)
@@ -283,6 +284,33 @@
 	    (todo "CANC"
 		  ((org-agenda-overriding-header "Cancelled Projects")
 		   (org-agenda-files org-agenda-files)))))))
+
+  (setq org-capture-templates
+	`(("t" "Tasks / Projects")
+	  ("tt" "Task" entry (file+olp "~/Projects/life/Tasks.org" "Inbox")
+	   "* TODO %?\n %U\n %a\n %i" :empty-lines 1)
+	  ("ts" "Clocked Entry Subtask" entry (clock)
+	   "* TODO %?\n %U\n %a\n %i" :empty-lines 1)
+
+	  ("j" "Journal Entries")
+	  ("jj" "Journal" entry
+	   (file+olp+datetree "~/Projects/life/Journal.org")
+	   "\n* %<%I:%M %p> - Journal :journal:\n\n%?\n\n"
+	   :clock-in :clock-resume
+	   :empty-lines 1)
+	  ("jm" "Meeting" entry
+	   (file+olp+datetree "~/Projects/life/Journal.org")
+	   "* %<%I:%M %p> - %a :meetings:\n\n%?\n\n"
+	   :clock-in :clock-resume
+	   :empty-lines 1)
+
+	  ("w" "Workflows")
+	  ("we" "Checking Email" entry (file+olp+datetree "~/Projects/life/Journal.org")
+	   "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)
+
+	  ("m" "Metrics Capture")
+	  ("mw" "Weight" table-line (file+headline "~/Projects/life/Metrics.org" "Weight")
+	   "| %U | %^{Weight} | %^{Notes} |" :kill-buffer t)))
 
   (q/org-font-setup))
 
