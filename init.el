@@ -269,7 +269,7 @@
   :custom
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
-(defun q/org-mode-visual-fill ()
+(defun q/org-visual-mode-fill ()
   (setq visual-fill-column-width 100
 	visual-fill-column-center-text t)
   (visual-fill-column-mode 1))
