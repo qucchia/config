@@ -206,8 +206,8 @@
   (setq org-log-into-drawer t)
   
   (setq org-agenda-files
-	'("~/Projects/life/todo.org"
-	  "~/Projects/life/birthdays.org"))
+	'("~/Projects/life/Tasks.org"
+	  "~/Projects/life/Birthdays.org"))
 
   (setq org-todo-keywords
 	'((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
