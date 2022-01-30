@@ -103,9 +103,10 @@
     :global-prefix "C-SPC")
 
   (q/leader-keys
+   "a"  '(org-agenda :which-key "agenda")
+   "c"  '(org-capture :which-key "capture")
    "t"  '(:ignore t :which-key "toggles")
-   "tt" '(counsel-load-theme :which-key "choose theme")
-   "c"  '(org-capture :which-key "capture")))
+   "tt" '(counsel-load-theme :which-key "choose theme")))
 
 (general-define-key
  "C-M-n" 'counsel-switch-buffer)
