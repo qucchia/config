@@ -341,3 +341,6 @@
 
 (use-package speed-type)
 (use-package typit)
+
+;; Start server to allow opening files from other applications
+(server-start)
