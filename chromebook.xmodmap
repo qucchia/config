@@ -23,7 +23,7 @@ keycode  45 = e E KP_Left KP_4 eacute Eacute eacute Eacute e E eacute Eacute e E
 keycode  46 = i I KP_Begin KP_5 iacute Iacute iacute Iacute
 keycode  47 = o O KP_Right KP_6 oacute Oacute oacute Oacute o O oacute Oacute o O oacute Oacute
 keycode  59 = comma less KP_End KP_1 dead_cedilla asciitilde dead_cedilla asciitilde comma less dead_cedilla asciitilde comma less dead_cedilla asciitilde
-keycode  60 = period greater KP_Down KP_2 dead_abovedot asciitilde dead_abovedot asciitilde period greater dead_abovedot asciitilde period greater dead_abovedot asciitilde
+keycode  60 = period greater KP_Down KP_2 periodcentered dead_abovedot dead_abovedot asciitilde period greater dead_abovedot asciitilde period greater dead_abovedot asciitilde
 keycode  61 = slash question KP_Next KP_3 questiondown asciitilde questiondown asciitilde slash question questiondown asciitilde slash question questiondown asciitilde
 
 !Keep LControl mapping
