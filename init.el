@@ -316,7 +316,7 @@
 
 	  ("m" "Metrics Capture")
 	  ("mt" "Typing Speed" table-line (file+headline "~/Projects/life/Metrics.org" "Typing Speed")
-	   "| %U | %^{Speed} | %^{Program} | %^{Notes} |" :kill-buffer t)))
+	   "| %U | %^{Speed} | %^{Accuracy} | %^{Program} | %^{Notes} |" :kill-buffer t)))
 
   (q/org-font-setup))
 
