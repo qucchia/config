@@ -315,8 +315,8 @@
 	   "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)
 
 	  ("m" "Metrics Capture")
-	  ("mw" "Weight" table-line (file+headline "~/Projects/life/Metrics.org" "Weight")
-	   "| %U | %^{Weight} | %^{Notes} |" :kill-buffer t)))
+	  ("mt" "Typing Speed" table-line (file+headline "~/Projects/life/Metrics.org" "Typing Speed")
+	   "| %U | %^{Speed} | %^{Program} | %^{Notes} |" :kill-buffer t)))
 
   (q/org-font-setup))
 
@@ -338,3 +338,6 @@
 (use-package prettier-js
   :after pretter)
 (add-hook 'js-mode-hook 'prettier-js-mode)
+
+(use-package speed-type)
+(use-package typit)
