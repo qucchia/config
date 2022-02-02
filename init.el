@@ -395,9 +395,8 @@
   :init
   ;; set prefix for lsp-command-keymap
   (setq lsp-keymap-prefix "C-c l")
-  :hook
-  (typescript-mode lsp)
-  (lsp-mode . lsp-enable-which-key-integration)
+  :hook ((typescript-mode . lsp)
+         (lsp-mode . 'lsp-enable-which-key-integration))
   :commands lsp)
 
 (use-package lsp-ui :commands lsp-ui-mode)
