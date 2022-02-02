@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<channel name="pointers" version="1.0">
+  <property name="Genius_USB_Optical_Mouse" type="empty">
+    <property name="Properties" type="empty">
+      <property name="Device_Enabled" type="int" value="1"/>
+    </property>
+  </property>
+  <property name="Elan_Touchpad" type="empty">
+    <property name="Properties" type="empty">
+      <property name="Device_Enabled" type="int" value="1"/>
+    </property>
+  </property>
+</channel>
