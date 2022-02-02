@@ -36,7 +36,7 @@ keycode  66 = Super_L
 keycode  94 = Escape NoSymbol Escape
 
 !Map LWindows to Mod and Shift + LWindows to Menu
-keycode  133 = Mode_switch Mode_switch
+keycode  133 = Mode_switch Menu
 
 !Keep RSuper mapping
 keycode  134 = Super_R
