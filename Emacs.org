@@ -1,7 +1,7 @@
 #+title Emacs Configuration
 #+PROPERTY: header-args:emacs-lisp :tangle ./init.el :mkdirp yes
 
-* Use-Package
+* System Package Configuration
 
 #+begin_src emacs-lisp
 
@@ -87,7 +87,7 @@
   (load-theme 'doom-dracula t)
 
 #+end_src
-** Hydra
+** Text Scaling
 
 #+begin_src emacs-lisp
 
@@ -101,7 +101,6 @@
 
 #+end_src
 
-* Ivy and Counsel
 ** Ivy
 #+begin_src emacs-lisp
 
@@ -212,44 +211,6 @@
     :config
     (evil-collection-init))
 
-#+end_src
-
-* Project Management
-** Projectile
-
-#+begin_src emacs-lisp
-
-  (use-package projectile
-    :diminish projectile-mode
-    :config (projectile-mode)
-    :custom ((projectile-completion-system 'ivy))
-    :bind-keymap
-    ("C-c p" . projectile-command-map)
-    :init
-    (when (file-directory-p "~/Projects")
-      (setq projectile-project-search-path '("~/Projects")))
-    (setq projectile-switch-project-acion #'projectile-dired))
-
-#+end_src
-
-** Magit
-
-#+begin_src emacs-lisp
-
-  (use-package magit
-    :custom
-    (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
-
-#+end_src
-
-** Forge
-
-
-#+begin_src emacs-lisp
-  (use-package forge
-    :after magit)
-
-  (setq auth-sources '("~/.authinfo"))
 #+end_src
 
 * Org Mode
@@ -492,7 +453,7 @@
 
 #+end_src
 
-* Programming
+* Development
 ** JavaScript
 
 #+begin_src emacs-lisp
@@ -555,7 +516,8 @@
   (use-package json-mode)
 
 #+end_src
-* LSP Mode
+
+** LSP Mode
 
 https://emacs-lsp.github.io/lsp-mode
 
@@ -574,6 +536,43 @@ https://emacs-lsp.github.io/lsp-mode
   (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
   (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 
+#+end_src
+
+** Projectile
+
+#+begin_src emacs-lisp
+
+  (use-package projectile
+    :diminish projectile-mode
+    :config (projectile-mode)
+    :custom ((projectile-completion-system 'ivy))
+    :bind-keymap
+    ("C-c p" . projectile-command-map)
+    :init
+    (when (file-directory-p "~/Projects")
+      (setq projectile-project-search-path '("~/Projects")))
+    (setq projectile-switch-project-acion #'projectile-dired))
+
+#+end_src
+
+** Magit
+
+#+begin_src emacs-lisp
+
+  (use-package magit
+    :custom
+    (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+
+#+end_src
+
+** Forge
+
+
+#+begin_src emacs-lisp
+  (use-package forge
+    :after magit)
+
+  (setq auth-sources '("~/.authinfo"))
 #+end_src
 
 * Run On Start
