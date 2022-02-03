@@ -614,6 +614,61 @@ https://emacs-lsp.github.io/lsp-mode
   (setq auth-sources '("~/.authinfo"))
 #+end_src
 
+* Terminals
+
+** term-mode
+
+#+begin_src emacs-lisp
+
+  (use-package term
+    :config
+    (setq explicit-shell-file-name "bash")
+    (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *"))
+
+  (use-package eterm-256color
+    :hook (term-mode . eterm-256color-mode))
+
+#+end_src
+
+** vterm-mode
+
+https://github.com/akermu/emacs-libvterm
+
+#+begin_src emacs-lisp
+
+  (use-package vterm
+    :commands vterm
+    :config
+    (setq vterm-max-scrollback 10000))
+
+#+end_src
+
+** eshell-mode
+
+#+begin_src emacs-lisp
+
+    (use-package eshell-git-prompt)
+
+  (defun q/configure-eshell ()
+    (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)
+    (add-to-list 'eshell-output-filter-functions 'eshell-truncate-buffer)
+
+    (evil-define-key '(normal insert visual) eshell-mode-map (kbd "C-r") 'counsel-esh-history)
+    (evil-define-key '(normal insert visual) eshell-mode-map (kbd "<home>") 'eshell-bol)
+    (evil-normalize-keymaps)
+
+    (setq eshell-history-size 10000
+          eshell-buffer-maximum-lines 10000
+          eshell-hist-ignoredups t
+          eshell-scroll-to-bottom-on-input t))
+
+    (use-package eshell
+      :hook (eshell-first-time-mode . q/configure-eshell)
+      :config
+      (eshell-git-prompt-use-theme 'powerline))
+
+#+end_src
+
 * Run On Start
 #+begin_src emacs-lisp
 

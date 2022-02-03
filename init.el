@@ -422,6 +422,39 @@
 
 (setq auth-sources '("~/.authinfo"))
 
+(use-package term
+  :config
+  (setq explicit-shell-file-name "bash")
+  (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *"))
+
+(use-package eterm-256color
+  :hook (term-mode . eterm-256color-mode))
+
+(use-package vterm
+  :commands vterm
+  :config
+  (setq vterm-max-scrollback 10000))
+
+(use-package eshell-git-prompt)
+
+(defun q/configure-eshell ()
+  (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)
+  (add-to-list 'eshell-output-filter-functions 'eshell-truncate-buffer)
+
+  (evil-define-key '(normal insert visual) eshell-mode-map (kbd "C-r") 'counsel-esh-history)
+  (evil-define-key '(normal insert visual) eshell-mode-map (kbd "<home>") 'eshell-bol)
+  (evil-normalize-keymaps)
+
+  (setq eshell-history-size 10000
+        eshell-buffer-maximum-lines 10000
+        eshell-hist-ignoredups t
+        eshell-scroll-to-bottom-on-input t))
+
+  (use-package eshell
+    :hook (eshell-first-time-mode . q/configure-eshell)
+    :config
+    (eshell-git-prompt-use-theme 'powerline))
+
 ;; Start server to allow opening files from other applications
 (server-start)
 
