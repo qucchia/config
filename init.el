@@ -31,12 +31,13 @@
 (dolist (mode '(org-mode-hook
                 term-mode-hook
                 shell-mode-hook
+                treemacs-mode-hook
+                lsp-treemacs-generic-mode-hook
                 eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 (column-number-mode)
 (global-display-line-numbers-mode t)
-
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
@@ -342,6 +343,28 @@
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'q/org-babel-tangle-config)))
 
+(defun q/lsp-mode-setup ()
+  (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+  (lsp-headerline-breadcrumb-mode))
+
+(use-package lsp-mode
+  :custom (lsp lsp-deferred)
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :config
+  (lsp-enable-which-key-integration t)
+  :hook (lsp-mode . q/lsp-mode-setup))
+
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode)
+  :custom
+  (lsp-ui-doc-position 'bottom))
+
+(use-package lsp-treemacs
+  :after lsp)
+
+(use-package lsp-ivy)
+
 (setq js-indent-level 2)
 
 (use-package js2-mode)
@@ -353,46 +376,27 @@
   :after prettier)
 (add-hook 'js-mode-hook 'prettier-js-mode)
 
-(use-package typescript-mode)
-(setq typescript-indent-level 2)
-
-(use-package company)
-(use-package flycheck)
-(use-package tide
-  :after (typescript-mode company flycheck)
-  :hook ((typescript-mode . tide-setup)
-         (typescript-mode . tide-hl-identifier-mode)
-         (before-save . tide-format-before-save)))
-
-(defun setup-tide-mode ()
-  (interactive)
-  (tide-setup)
-  (flycheck-mode +1)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  (eldoc-mode +1)
-  (tide-hl-identifier-mode +1)
-  (company-mode +1))
-
-(setq company-tooltip-align-annotations t)
-
-(add-hook 'before-save-hook 'tide-format-before-save)
-
-(add-hook 'typescript-mode-hook #'setup-tide-mode)
+(use-package typescript-mode
+  :mode "\\.ts\\'"
+  :hook (typescript-mode . lsp-deferred)
+  :config
+  (setq typescript-indent-level 2))
 
 (use-package json-mode)
 
-(use-package lsp-mode
-  :init
-  ;; set prefix for lsp-command-keymap
-  (setq lsp-keymap-prefix "C-c l")
-  :hook ((typescript-mode . lsp)
-         (lsp-mode . 'lsp-enable-which-key-integration))
-  :commands lsp)
+(use-package company
+  :after lsp-mode
+  :hook (lsp-mode . company-mode)
+  :bind (:map company-active-map
+              ("<tab>" . company-complete-selection))
+  (:map lsp-mode-map
+        ("<tab>" . company-indent-or-complete-common))
+  :custom
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.0))
 
-(use-package lsp-ui :commands lsp-ui-mode)
-
-(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
-(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+(use-package company-box
+  :hook (company-mode . company-box-mode))
 
 (use-package projectile
   :diminish projectile-mode
