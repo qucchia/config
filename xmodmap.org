@@ -61,7 +61,7 @@
 
   keycode  66 = Mode_switch Mode_switch
   keycode  38 =          a        A     Alt_L     Alt_L               aacute               Aacute
-  keycode  39 =          r        R   Super_L   Super_L            dead_grave 
+  keycode  39 =          r        R  NoSymbol  NoSymbol            dead_grave 
   keycode  40 =          s        S   Shift_L   Shift_L             EuroSign                U00A3
   keycode  41 =          t        T
   keycode  42 =          d        D   KP_Down   KP_Down             division
