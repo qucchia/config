@@ -344,6 +344,9 @@
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'q/org-babel-tangle-config)))
 
+(use-package evil-nerd-commenter
+  :bind ("M-/" . evilnc-comment-or-uncomment-lines))
+
 (defun q/lsp-mode-setup ()
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
   (lsp-headerline-breadcrumb-mode))
