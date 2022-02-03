@@ -333,6 +333,7 @@
 (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
 (add-to-list 'org-structure-template-alist '("py" . "src python"))
 (add-to-list 'org-structure-template-alist '("js" . "src js"))
+(add-to-list 'org-structure-template-alist '("conf" . "src conf"))
 
 (defun q/org-babel-tangle-config ()
   (when (string-equal (buffer-file-name)
