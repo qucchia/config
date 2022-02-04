@@ -21,13 +21,13 @@
   keycode  12 =     3  numbersign  F3 NoSymbol   NoSymbol  threesuperior
   keycode  13 =     4      dollar  F4 NoSymbol   NoSymbol   foursuperior
   keycode  14 =     5     percent  F5 NoSymbol   NoSymbol   fivesuperior
-  keycode  15 =     6 asciicircum  F6 NoSymbol   NoSymbol    sixsuperior
-  keycode  16 =     7   ampersand  F7 NoSymbol   NoSymbol  sevensuperior
-  keycode  17 =     8    asterisk  F8 NoSymbol   NoSymbol  eightsuperior
-  keycode  18 =     9   parenleft  F9 NoSymbol   NoSymbol   ninesuperior
-  keycode  19 =     0  parenright F10 NoSymbol   NoSymbol   zerosuperior
-  keycode  20 = minus  underscore F11 NoSymbol     endash         emdash
-  keycode  21 = equal        plus F12
+  keycode  15 = equal        plus  F6
+  keycode  16 =     6 asciicircum  F7 NoSymbol   NoSymbol    sixsuperior
+  keycode  17 =     7   ampersand  F8 NoSymbol   NoSymbol  sevensuperior
+  keycode  18 =     8    asterisk  F9 NoSymbol   NoSymbol  eightsuperior
+  keycode  19 =     9   parenleft F10 NoSymbol   NoSymbol   ninesuperior
+  keycode  20 =     0  parenright F11 NoSymbol   NoSymbol   zerosuperior
+  keycode  21 = minus  underscore F12 NoSymbol     endash         emdash
   keycode  22 = BackSpace
 
 #+end_src
@@ -43,13 +43,13 @@
   keycode  26 =            f          F NoSymbol NoSymbol           cent
   keycode  27 =            p          P NoSymbol NoSymbol           plus
   keycode  28 =            g          G    KP_Up    KP_Up     asciitilde 
-  keycode  29 =            j          J    Prior    Prior
-  keycode  30 =            l          L     Home     Home 
-  keycode  31 =            u          U       Up       Up         uacute     Uacute
-  keycode  32 =            y          Y      End      End     udiaeresis Udiaeresis
-  keycode  33 =    semicolon      colon   Delete   Delete     idiaeresis Idiaeresis
-  keycode  34 =  bracketleft  braceleft NoSymbol NoSymbol  guillemotleft      U2039
-  keycode  35 = bracketright braceright NoSymbol NoSymbol guillemotright      U203A
+  keycode  29 =  bracketleft  braceleft NoSymbol NoSymbol  guillemotleft      U2039
+  keycode  30 =            j          J    Prior    Prior
+  keycode  31 =            l          L     Home     Home 
+  keycode  32 =            u          U       Up       Up         uacute     Uacute
+  keycode  33 =            y          Y      End      End     udiaeresis Udiaeresis
+  keycode  34 =    semicolon      colon   Delete   Delete     idiaeresis Idiaeresis
+  keycode  35 =  backslash      bar  NoSymbol  NoSymbol rightdoublequotemark rightsinglequotemark
 
   keycode  36 = Return
 
@@ -65,13 +65,13 @@
   keycode  40 =          s        S   Shift_L   Shift_L             EuroSign                U00A3
   keycode  41 =          t        T
   keycode  42 =          d        D   KP_Down   KP_Down             division
-  keycode  43 =          h        H      Next      Next
-  keycode  44 =          n        N      Left      Left               ntilde               Ntilde
-  keycode  45 =          e        E      Down      Down               eacute               Eacute
-  keycode  46 =          i        I     Right     Right               iacute               Iacute
-  keycode  47 =          o        O BackSpace BackSpace               oacute               Oacute
-  keycode  48 = apostrophe quotedbl    Return    Return  leftdoublequotemark  leftsinglequotemark
-  keycode  51 =  backslash      bar  NoSymbol  NoSymbol rightdoublequotemark rightsinglequotemark
+  keycode  43 = bracketright braceright NoSymbol NoSymbol guillemotright      U203A
+  keycode  44 =          h        H      Next      Next
+  keycode  45 =          n        N      Left      Left               ntilde               Ntilde
+  keycode  46 =          e        E      Down      Down               eacute               Eacute
+  keycode  47 =          i        I     Right     Right               iacute               Iacute
+  keycode  48 =          o        O BackSpace BackSpace               oacute               Oacute
+  keycode  51 = apostrophe quotedbl    Return    Return  leftdoublequotemark  leftsinglequotemark
 
 #+end_src
 
@@ -86,11 +86,11 @@
   keycode  54 = c C NoSymbol NoSymbol ccedilla Ccedilla
   keycode  55 = v V
   keycode  56 = b B KP_Begin KP_Begin
-  keycode  57 = k K
-  keycode  58 = m M Menu Menu minus
-  keycode  59 = comma less KP_Left KP_Left grave
-  keycode  60 = period greater KP_Right KP_Right periodcentered
-  keycode  61 = slash question NoSymbol NoSymbol questiondown
+  keycode  57 = slash question NoSymbol NoSymbol questiondown
+  keycode  58 = k K
+  keycode  59 = m M Menu Menu minus
+  keycode  60 = comma less KP_Left KP_Left grave
+  keycode  61 = period greater KP_Right KP_Right periodcentered
   keycode  62 = Shift_R
 
 #+end_src
