@@ -73,6 +73,8 @@
 
 #+begin_src emacs-lisp
 
+  (use-package all-the-icons)
+
   (use-package doom-modeline
     :ensure t
     :init (doom-modeline-mode 1)
@@ -130,6 +132,7 @@
 #+begin_src emacs-lisp
 
   (use-package ivy-rich
+    :after counsel
     :init
     (ivy-rich-mode 1))
 
@@ -670,6 +673,7 @@ https://github.com/akermu/emacs-libvterm
 #+end_src
 
 * Run On Start
+
 #+begin_src emacs-lisp
 
   ;; Start server to allow opening files from other applications
