@@ -39,7 +39,7 @@
   keycode  23 = Tab ISO_Left_Tab
 
   keycode  24 =            q          Q NoSymbol NoSymbol      masculine
-  keycode  25 =            w          W Ncedilla NoSymbol    ordfeminine
+  keycode  25 =            w          W NoSymbol NoSymbol    ordfeminine
   keycode  26 =            f          F NoSymbol NoSymbol           cent
   keycode  27 =            p          P NoSymbol NoSymbol           plus
   keycode  28 =            g          G    KP_Up    KP_Up     asciitilde 
@@ -49,7 +49,7 @@
   keycode  32 =            u          U       Up       Up         uacute     Uacute
   keycode  33 =            y          Y      End      End     udiaeresis Udiaeresis
   keycode  34 =    semicolon      colon   Delete   Delete     idiaeresis Idiaeresis
-  keycode  35 =  backslash      bar  NoSymbol  NoSymbol rightdoublequotemark rightsinglequotemark
+  keycode  35 =    backslash        bar NoSymbol  NoSymbol rightdoublequotemark rightsinglequotemark
 
   keycode  36 = Return
 
