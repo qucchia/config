@@ -1,5 +1,5 @@
 #+title Keyboard configuration
-#+PROPERTY: header-args:conf :tangle ./full.xmodmap :mkdirp yes
+#+PROPERTY: header-args:conf :tangle ./.Xmodmap :mkdirp yes
 
 * Clear Modifier Keys
 
