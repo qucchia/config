@@ -21,7 +21,7 @@ keycode  22 = BackSpace
 keycode  23 = Tab ISO_Left_Tab
 
 keycode  24 =            q          Q NoSymbol NoSymbol     apostrophe   quotedbl
-keycode  25 =            w          W Ncedilla NoSymbol    bracketleft  braceleft
+keycode  25 =            w          W NoSymbol NoSymbol    bracketleft  braceleft
 keycode  26 =            f          F NoSymbol NoSymbol   bracketright braceright
 keycode  27 =            p          P NoSymbol NoSymbol        percent
 keycode  28 =            g          G    KP_Up    KP_Up     dead_grave 
@@ -35,7 +35,7 @@ keycode  35 =    backslash        bar  NoSymbol  NoSymbol rightdoublequotemark r
 
 keycode  36 = Return
 
-keycode  66 = Super_L Super_L
+keycode  66 =    Super_L  Super_L
 keycode  38 =          a        A     Alt_L     Alt_L               aacute               Aacute
 keycode  39 =          r        R  NoSymbol  NoSymbol            parenleft        guillemotleft
 keycode  40 =          s        S   Shift_L   Shift_L           parenright       guillemotright

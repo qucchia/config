@@ -1,6 +1,8 @@
 #+title Keyboard configuration
 #+PROPERTY: header-args:conf :tangle ./.Xmodmap :mkdirp yes
 
+This keyboard configuration uses =xmodmap=. See https://wiki.archlinux.org/title/xmodmap for documentation on Xmodmap.
+
 * Clear Modifier Keys
 
 #+begin_src conf
@@ -60,7 +62,7 @@
 
 #+begin_src conf       
 
-  keycode  66 = Super_L Super_L
+  keycode  66 =    Super_L  Super_L
   keycode  38 =          a        A     Alt_L     Alt_L               aacute               Aacute
   keycode  39 =          r        R  NoSymbol  NoSymbol            parenleft        guillemotleft
   keycode  40 =          s        S   Shift_L   Shift_L           parenright       guillemotright
