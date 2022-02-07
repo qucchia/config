@@ -46,6 +46,8 @@
 (set-face-attribute 'fixed-pitch nil :font "Source Code Pro" :height 120)
 (set-face-attribute 'variable-pitch nil :font "DejaVu sans" :height 120 :weight 'regular)
 
+(use-package all-the-icons)
+
 (use-package doom-modeline
   :ensure t
   :init (doom-modeline-mode 1)
@@ -81,6 +83,7 @@
   (ivy-mode 1))
 
 (use-package ivy-rich
+  :after counsel
   :init
   (ivy-rich-mode 1))
 

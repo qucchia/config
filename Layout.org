@@ -1,0 +1,83 @@
+* Layout
+
+#+begin_src
+
+// qucchia's custom layout
+partial alphanumeric_keys
+xkb_symbols "qolemak" {
+    include "us(colemak)"
+    
+    name[Group1] = "qucchia's custom layout";
+
+    key <TLDE> { [        grave,   asciitilde,        NoSymbol,         NoSymbol ] };
+    key <AE01> { [            1,       exclam,      exclamdown,      onesuperior ] };
+    key <AE02> { [            2,           at,        NoSymbol,      twosuperior ] };
+    key <AE03> { [            3,   numbersign,        NoSymbol,    threesuperior ] };
+    key <AE04> { [            4,       dollar,        NoSymbol,     foursuperior ] };
+    key <AE05> { [            5,      percent,        NoSymbol,     fivesuperior ] };
+    key <AE06> { [        equal,         plus,        NoSymbol,         NoSymbol ] };
+    key <AE07> { [            6,  asciicircum,        NoSymbol,      sixsuperior ] };
+    key <AE08> { [            7,    ampersand,        NoSymbol,    sevensuperior ] };
+    key <AE09> { [            8,     asterisk,        NoSymbol,    eightsuperior ] };
+    key <AE10> { [            9,    parenleft,        NoSymbol,     ninesuperior ] };
+    key <AE11> { [            0,   parenright,        NoSymbol,     zerosuperior ] };
+    key <AE12> { [        minus,   underscore,          endash,           emdash ] };
+
+    key <AD01> { [            q,            Q,       masculine,         NoSymbol ] };
+    key <AD02> { [            w,            W,     ordfeminine,         NoSymbol ] };
+    key <AD03> { [            f,            F,            cent,         NoSymbol ] };
+    key <AD04> { [            p,            P,            plus,         NoSymbol ] };
+    key <AD05> { [            g,            G,      asciitilde,         NoSymbol ] };
+    key <AD06> { [  bracketleft,    braceleft,   guillemotleft,        0x1002039 ] };
+    key <AD07> { [            j,            J,        NoSymbol,         NoSymbol ] };
+    key <AD08> { [            l,            L,        NoSymbol,         NoSymbol ] };
+    key <AD09> { [            u,            U,          uacute,           Uacute ] };
+    key <AD10> { [            y,            Y,      udiaeresis,       Udiaeresis ] };
+    key <AD11> { [    semicolon,        colon,      idiaeresis,       Idiaeresis ] };
+    key <BKSL> { [    backslash,          bar,      rightdoublequotemark, rightsinglequotemark ] };
+
+    key <AC01> { [            a,            A,          aacute,           Aacute ] };
+    key <AC02> { [            r,            R,      dead_grave,         NoSymbol ] };
+    key <AC03> { [            s,            S,        EuroSign,         Sterling ] };
+    key <AC04> { [            t,            T,        NoSymbol,         NoSymbol ] };
+    key <AC05> { [            d,            D,        division,         Nosymbol ] };
+    key <AD06> { [ bracketright,   braceright,  guillemotright,        0x100203a ] };
+    key <AC07> { [            h,            H,        NoSymbol,         NoSymbol ] };
+    key <AC08> { [            n,            N,          ntilde,           Ntilde ] };
+    key <AC09> { [            e,            E,          eacute,           Eacute ] };
+    key <AC10> { [            i,            I,          iacute,           Iacute ] };
+    key <AC11> { [            o,            O,          oacute,           Oacute ] };
+    key <AC12> { [   apostrophe,     quotedbl,          leftdoublequotemark  leftsinglequotemark ] };
+
+    key <AB01> { [            z,            Z,        NoSymbol,         NoSymbol ] };
+    key <AB02> { [            x,            X,        multiply,         Nosymbol ] };
+    key <AB03> { [            c,            C,        ccedilla,         Ccedilla ] };
+    key <AB04> { [            v,            V,        NoSymbol,         NoSymbol ] };
+    key <AB05> { [            b,            B,        NoSymbol,         NoSymbol ] };
+    key <AB06> { [        slash,     question,    questiondown,         NoSymbol ] };
+    key <AB07> { [            k,            K,        NoSymbol,         NoSymbol ] };
+    key <AB08> { [            m,            M,           minus,         NoSymbol ] };
+    key <AB09> { [        comma,         less,           grave,         NoSymbol ] };
+    key <AB10> { [       period,      greater,  periodcentered,         NoSymbol ] };
+
+    key <CAPS> { [    BackSpace,    BackSpace,       BackSpace,        BackSpace ] };
+    key <LSGT> { [       Escape,       Escape,        NoSymbol,         NoSymbol ] };
+    key <SPCE> { [        space,        space,          Return,     nobreakspace ] };
+
+    include "level3(ralt_switch)"
+}
+
+#+end_src
+
+* evdev
+
+#+begin_src xml
+
+  <variant>
+    <configItem>
+      <name>qolemak</name>
+      <description>English (Qolemak custom layout)</description>
+    </configItem>
+  </variant>
+
+#+end_src

@@ -40,7 +40,7 @@
   keycode  23 = Tab ISO_Left_Tab
 
   keycode  24 =            q          Q NoSymbol NoSymbol     apostrophe   quotedbl
-  keycode  25 =            w          W Ncedilla NoSymbol    bracketleft  braceleft
+  keycode  25 =            w          W NoSymbol NoSymbol    bracketleft  braceleft
   keycode  26 =            f          F NoSymbol NoSymbol   bracketright braceright
   keycode  27 =            p          P NoSymbol NoSymbol        percent
   keycode  28 =            g          G    KP_Up    KP_Up     dead_grave 
