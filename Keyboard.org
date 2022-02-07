@@ -8,9 +8,10 @@ This keyboard configuration uses =xmodmap=. See https://wiki.archlinux.org/title
 #+begin_src conf
 
   clear control
-  clear mod1
   clear lock
+  clear mod1
   clear mod4
+  clear mod5
 
 #+end_src
 
@@ -319,5 +320,6 @@ This keyboard configuration uses =xmodmap=. See https://wiki.archlinux.org/title
   add lock = Caps_Lock
   add Mod1 = Meta_L 
   add Mod4 = Super_L Super_R
+  add Mod5 = ISO_Level3_Shift Mode_switch
 
 #+end_src
