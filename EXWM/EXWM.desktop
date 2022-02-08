@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=EXWM
+Comment=Emacs Window Manager
+Exec=sh /home/pi/Projects/config/EXWM/start-exwm.sh
+TryExec=sh
+Type=application
+X-LightDM-Desktop=exwm
+DesktopNames=exwm

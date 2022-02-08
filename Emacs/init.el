@@ -30,6 +30,7 @@
 ;; Disable line numbers for some modes
 (dolist (mode '(org-mode-hook
                 term-mode-hook
+
                 shell-mode-hook
                 treemacs-mode-hook
                 lsp-treemacs-generic-mode-hook
@@ -467,3 +468,51 @@
 (use-package typit)
 
 (use-package atomic-chrome)
+
+(defun q/exwm-update-class ()
+  (exwm-workspace-rename-buffer exwm-class-name))
+
+(use-package exwm
+  :config
+  (setq exwm-workspace-number 5)
+
+  (setq exwm-input-prefix-keys
+     '(?\C-x
+       ?\C-u
+       ?\C-h
+       ?\M-x
+       ?\M-`
+       ?\M-&
+       ?\M-:
+       ?\C-\M\-j
+       ?\C-\ )) ;; C-SPC
+
+  ;; C-q will always send the next key directly
+  (define-key exwm-mode-map [?\C-q] 'exwm-input-send-next-key)
+
+  (setq exwm-input-global-keys
+      `(
+           ;; Reset to line-mode
+          ([?\s-r] . ewm-reset)
+
+          ;; Move between windows
+          ([?\s-h] . windowmove-left)
+          ([?\s-j] . windowmove-down)
+          ([?\s-k] . windowmove-up)
+          ([?\s-l] . windowmove-right)
+
+          ;; Launch applications with shell command
+          ([?\s-&] . (lambda (command)
+                       (interactive (list (read-shell-command "$ ")))
+                       (start-process-shell-command command nil command)))
+
+          ;; Switch workspace
+          ([?\s-w] . exwm-workspace-switch)
+          ,@(mapcar (lambda (i)
+                      `(,(kbd (format "s-%d" i)) .
+                        (lambda ()
+                          (interactive)
+                          (exwm-wormspace-switch-create ,i))))
+                    (number-sequence 0 9))))
+
+  (exwm-enable))
