@@ -127,7 +127,9 @@
     "c"  '(org-capture :which-key "capture")
     "t"  '(:ignore t :which-key "toggles")
     "tt" '(counsel-load-theme :which-key "choose theme")
-    "ts" '(hydra-text-scale/body :which-key "scale text")))
+    "ts" '(hydra-text-scale/body :which-key "scale text")
+    "x"  '(:ignore t :which-key "exwm")
+    "xx" '((start-process-shell-command "xmodmap" nil "xmodmap ~/Projects/config/.Xmodmap") :which-key "set keyboard layout")))
 
 (general-define-key
  "C-M-n" 'counsel-switch-buffer)
@@ -341,7 +343,7 @@
 
 (defun q/org-babel-tangle-config ()
   (when (string-equal (buffer-file-name)
-                      (expand-file-name "~/Projects/config/Emacs.org"))
+                      (expand-file-name "~/Projects/config/Emacs/Emacs.org"))
     ;; Dynamic scoping
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle))))
@@ -439,10 +441,16 @@
   :config
   (setq vterm-max-scrollback 10000))
 
+(use-package exec-path-from-shell
+  :config (exec-path-from-shell-initialize))
+
 (use-package eshell-git-prompt)
 
 (defun q/configure-eshell ()
+  ;; Save command history
   (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)
+
+  ;; Truncate buffer for performance
   (add-to-list 'eshell-output-filter-functions 'eshell-truncate-buffer)
 
   (evil-define-key '(normal insert visual) eshell-mode-map (kbd "C-r") 'counsel-esh-history)
@@ -454,20 +462,14 @@
         eshell-hist-ignoredups t
         eshell-scroll-to-bottom-on-input t))
 
-  (use-package eshell
-    :hook (eshell-first-time-mode . q/configure-eshell)
-    :config
-    (eshell-git-prompt-use-theme 'powerline))
+(use-package eshell
+  :hook (eshell-first-time-mode . q/configure-eshell)
+  :config
+  (with-eval-after-load 'esh-opt
+    (setq eshell-destroy-buffer-when-process-dies t)
+    (setq eshell-visual-commands '("htop" "zsh" "vim")))
 
-;; Start server to allow opening files from other applications
-(server-start)
-
-(org-agenda)
-
-(use-package speed-type)
-(use-package typit)
-
-(use-package atomic-chrome)
+  (eshell-git-prompt-use-theme 'powerline))
 
 (defun q/exwm-update-class ()
   (exwm-workspace-rename-buffer exwm-class-name))
@@ -475,6 +477,14 @@
 (use-package exwm
   :config
   (setq exwm-workspace-number 5)
+
+  (add-hook 'exwm-update-class-hook #'q/exwm-update-class)
+
+  ;; Use custom keyboard layout
+  (start-process-shell-command "xmodmap" nil "xmodmap ~/Projects/config/.Xmodmap")
+
+  (require 'exwm-systemtray)
+  (exwm-systemtray-enable)
 
   (setq exwm-input-prefix-keys
      '(?\C-x
@@ -484,7 +494,7 @@
        ?\M-`
        ?\M-&
        ?\M-:
-       ?\C-\M\-j
+       ?\C-\M-j
        ?\C-\ )) ;; C-SPC
 
   ;; C-q will always send the next key directly
@@ -493,13 +503,13 @@
   (setq exwm-input-global-keys
       `(
            ;; Reset to line-mode
-          ([?\s-r] . ewm-reset)
+          ([?\s-r] . exwm-reset)
 
           ;; Move between windows
-          ([?\s-h] . windowmove-left)
-          ([?\s-j] . windowmove-down)
-          ([?\s-k] . windowmove-up)
-          ([?\s-l] . windowmove-right)
+          ([?\s-h] . windmove-left)
+          ([?\s-j] . windmove-down)
+          ([?\s-k] . windmove-up)
+          ([?\s-l] . windmove-right)
 
           ;; Launch applications with shell command
           ([?\s-&] . (lambda (command)
@@ -512,7 +522,17 @@
                       `(,(kbd (format "s-%d" i)) .
                         (lambda ()
                           (interactive)
-                          (exwm-wormspace-switch-create ,i))))
+                          (exwm-workspace-switch-create ,i))))
                     (number-sequence 0 9))))
 
   (exwm-enable))
+
+(use-package speed-type)
+(use-package typit)
+
+(use-package atomic-chrome)
+
+;; Start server to allow opening files from other applications
+(server-start)
+
+(org-agenda)

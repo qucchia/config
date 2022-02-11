@@ -186,22 +186,24 @@
 
 ** General
 #+begin_src emacs-lisp
-  (use-package general
-    :config
-    (general-create-definer q/leader-keys
-      :keymaps '(normal insert visual emacs)
-      :prefix "SPC"
-      :global-prefix "C-SPC")
+      (use-package general
+        :config
+        (general-create-definer q/leader-keys
+          :keymaps '(normal insert visual emacs)
+          :prefix "SPC"
+          :global-prefix "C-SPC")
 
-    (q/leader-keys
-      "a"  '(org-agenda :which-key "agenda")
-      "c"  '(org-capture :which-key "capture")
-      "t"  '(:ignore t :which-key "toggles")
-      "tt" '(counsel-load-theme :which-key "choose theme")
-      "ts" '(hydra-text-scale/body :which-key "scale text")))
+        (q/leader-keys
+          "a"  '(org-agenda :which-key "agenda")
+          "c"  '(org-capture :which-key "capture")
+          "t"  '(:ignore t :which-key "toggles")
+          "tt" '(counsel-load-theme :which-key "choose theme")
+          "ts" '(hydra-text-scale/body :which-key "scale text")
+          "x"  '(:ignore t :which-key "exwm")
+          "xx" '((start-process-shell-command "xmodmap" nil "xmodmap ~/Projects/config/.Xmodmap") :which-key "set keyboard layout")))
 
-  (general-define-key
-   "C-M-n" 'counsel-switch-buffer)
+      (general-define-key
+       "C-M-n" 'counsel-switch-buffer)
 
 #+end_src
 
@@ -466,7 +468,7 @@
 
   (defun q/org-babel-tangle-config ()
     (when (string-equal (buffer-file-name)
-                        (expand-file-name "~/Projects/config/Emacs.org"))
+                        (expand-file-name "~/Projects/config/Emacs/Emacs.org"))
       ;; Dynamic scoping
       (let ((org-confirm-babel-evaluate nil))
         (org-babel-tangle))))
@@ -651,10 +653,16 @@ https://github.com/akermu/emacs-libvterm
 
 #+begin_src emacs-lisp
 
-    (use-package eshell-git-prompt)
+  (use-package exec-path-from-shell
+    :config (exec-path-from-shell-initialize))
+
+  (use-package eshell-git-prompt)
 
   (defun q/configure-eshell ()
+    ;; Save command history
     (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)
+
+    ;; Truncate buffer for performance
     (add-to-list 'eshell-output-filter-functions 'eshell-truncate-buffer)
 
     (evil-define-key '(normal insert visual) eshell-mode-map (kbd "C-r") 'counsel-esh-history)
@@ -666,21 +674,76 @@ https://github.com/akermu/emacs-libvterm
           eshell-hist-ignoredups t
           eshell-scroll-to-bottom-on-input t))
 
-    (use-package eshell
-      :hook (eshell-first-time-mode . q/configure-eshell)
-      :config
-      (eshell-git-prompt-use-theme 'powerline))
+  (use-package eshell
+    :hook (eshell-first-time-mode . q/configure-eshell)
+    :config
+    (with-eval-after-load 'esh-opt
+      (setq eshell-destroy-buffer-when-process-dies t)
+      (setq eshell-visual-commands '("htop" "zsh" "vim")))
+
+    (eshell-git-prompt-use-theme 'powerline))
 
 #+end_src
 
-* Run On Start
+* Window Manager
 
 #+begin_src emacs-lisp
 
-  ;; Start server to allow opening files from other applications
-  (server-start)
+  (defun q/exwm-update-class ()
+    (exwm-workspace-rename-buffer exwm-class-name))
 
-  (org-agenda)
+  (use-package exwm
+    :config
+    (setq exwm-workspace-number 5)
+
+    (add-hook 'exwm-update-class-hook #'q/exwm-update-class)
+
+    ;; Use custom keyboard layout
+    (start-process-shell-command "xmodmap" nil "xmodmap ~/Projects/config/.Xmodmap")
+
+    (require 'exwm-systemtray)
+    (exwm-systemtray-enable)
+
+    (setq exwm-input-prefix-keys
+       '(?\C-x
+         ?\C-u
+         ?\C-h
+         ?\M-x
+         ?\M-`
+         ?\M-&
+         ?\M-:
+         ?\C-\M-j
+         ?\C-\ )) ;; C-SPC
+
+    ;; C-q will always send the next key directly
+    (define-key exwm-mode-map [?\C-q] 'exwm-input-send-next-key)
+
+    (setq exwm-input-global-keys
+        `(
+             ;; Reset to line-mode
+            ([?\s-r] . exwm-reset)
+
+            ;; Move between windows
+            ([?\s-h] . windmove-left)
+            ([?\s-j] . windmove-down)
+            ([?\s-k] . windmove-up)
+            ([?\s-l] . windmove-right)
+
+            ;; Launch applications with shell command
+            ([?\s-&] . (lambda (command)
+                         (interactive (list (read-shell-command "$ ")))
+                         (start-process-shell-command command nil command)))
+
+            ;; Switch workspace
+            ([?\s-w] . exwm-workspace-switch)
+            ,@(mapcar (lambda (i)
+                        `(,(kbd (format "s-%d" i)) .
+                          (lambda ()
+                            (interactive)
+                            (exwm-workspace-switch-create ,i))))
+                      (number-sequence 0 9))))
+
+    (exwm-enable))
 
 #+end_src
 
@@ -704,58 +767,13 @@ Connect to the GhostText browser extension
 
 #+end_src
 
-* Window Manager
+* Run On Start
 
 #+begin_src emacs-lisp
 
-  (defun q/exwm-update-class ()
-    (exwm-workspace-rename-buffer exwm-class-name))
+  ;; Start server to allow opening files from other applications
+  (server-start)
 
-  (use-package exwm
-    :config
-    (setq exwm-workspace-number 5)
-
-    (start-process-shell-command "xmodmap" nil "xmodmap ~/Projects/config/.Xmodmap")
-
-    (setq exwm-input-prefix-keys
-       '(?\C-x
-         ?\C-u
-         ?\C-h
-         ?\M-x
-         ?\M-`
-         ?\M-&
-         ?\M-:
-         ?\C-\M-j
-         ?\C-\ )) ;; C-SPC
-
-    ;; C-q will always send the next key directly
-    (define-key exwm-mode-map [?\C-q] 'exwm-input-send-next-key)
-
-    (setq exwm-input-global-keys
-        `(
-             ;; Reset to line-mode
-            ([?\s-r] . ewm-reset)
-
-            ;; Move between windows
-            ([?\s-h] . windowmove-left)
-            ([?\s-j] . windowmove-down)
-            ([?\s-k] . windowmove-up)
-            ([?\s-l] . windowmove-right)
-
-            ;; Launch applications with shell command
-            ([?\s-&] . (lambda (command)
-                         (interactive (list (read-shell-command "$ ")))
-                         (start-process-shell-command command nil command)))
-
-            ;; Switch workspace
-            ([?\s-w] . exwm-workspace-switch)
-            ,@(mapcar (lambda (i)
-                        `(,(kbd (format "s-%d" i)) .
-                          (lambda ()
-                            (interactive)
-                            (exwm-wormspace-switch-create ,i))))
-                      (number-sequence 0 9))))
-
-    (exwm-enable))
+  (org-agenda)
 
 #+end_src
