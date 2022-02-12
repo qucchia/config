@@ -86,7 +86,7 @@ xkb_keycodes "evdev+aliases(qwerty)" {
      <KP0> = 90;
     <KPDL> = 91;
     <LVL3> = 92;
-    <LSGT> = 94;
+    <ESC2> = 94;
     <FK11> = 95;
     <FK12> = 96;
     // <AB11> = 97;
@@ -1183,56 +1183,54 @@ xkb_symbols "pc+us(colemak)+inet(evdev)" {
     name[group1]="English (Colemak)";
 
     key  <ESC> {         [          Escape ] };
-    key <AE01> {
-        type= "FOUR_LEVEL",
-        symbols[Group1]= [               1,          exclam,      exclamdown,     onesuperior ]
-    };
-    key <AE02> {
-        type= "FOUR_LEVEL",
-        symbols[Group1]= [               2,              at,       masculine,     twosuperior ]
-    };
-    key <AE03> {
-        type= "FOUR_LEVEL",
-        symbols[Group1]= [               3,      numbersign,     ordfeminine,   threesuperior ]
-    };
-    key <AE04> {
-        type= "FOUR_LEVEL",
-        symbols[Group1]= [               4,          dollar,            cent,        sterling ]
-    };
-    key <AE05> {
-        type= "FOUR_LEVEL",
-        symbols[Group1]= [               5,         percent,        EuroSign,             yen ]
-    };
-    key <AE06> {
-        type= "FOUR_LEVEL",
-        symbols[Group1]= [               6,     asciicircum,         hstroke,         Hstroke ]
-    };
-    key <AE07> {
-        type= "FOUR_LEVEL",
-        symbols[Group1]= [               7,       ampersand,             eth,             ETH ]
-    };
-    key <AE08> {
-        type= "FOUR_LEVEL",
-        symbols[Group1]= [               8,        asterisk,           thorn,           THORN ]
-    };
-    key <AE09> {
-        type= "FOUR_LEVEL",
-        symbols[Group1]= [               9,       parenleft, leftsinglequotemark, leftdoublequotemark ]
-    };
-    key <AE10> {
-        type= "FOUR_LEVEL",
-        symbols[Group1]= [               0,      parenright, rightsinglequotemark, rightdoublequotemark ]
-    };
-    key <AE11> {
-        type= "FOUR_LEVEL",
-        symbols[Group1]= [           minus,      underscore,          endash,          emdash ]
-    };
-    key <AE12> {
-        type= "FOUR_LEVEL",
-        symbols[Group1]= [           equal,            plus,        multiply,        division ]
-    };
-    key <BKSP> {         [       BackSpace,       BackSpace ] };
-    key  <TAB> {         [             Tab,    ISO_Left_Tab ] };
+
+key <AE01> {
+    type= "FOUR_LEVEL",
+    symbols[Group1]= [               1,          exclam,      exclamdown,     onesuperior ]
+};
+key <AE02> {
+    type= "FOUR_LEVEL",
+    symbols[Group1]= [               2,              at,       masculine,     twosuperior ]
+};
+key <AE03> {
+    type= "FOUR_LEVEL",
+    symbols[Group1]= [               3,      numbersign,     ordfeminine,   threesuperior ]
+};
+key <AE04> {
+    type= "FOUR_LEVEL",
+    symbols[Group1]= [               4,          dollar,            cent,        sterling ]
+};
+key <AE05> {
+    type= "FOUR_LEVEL",
+    symbols[Group1]= [               5,         percent,        EuroSign,             yen ]
+};
+key <AE07> {
+    type= "FOUR_LEVEL",
+    symbols[Group1]= [               6,     asciicircum,         hstroke,         Hstroke ]
+};
+key <AE08> {
+    type= "FOUR_LEVEL",
+    symbols[Group1]= [               7,       ampersand,             eth,             ETH ]
+};
+key <AE09> {
+    type= "FOUR_LEVEL",
+    symbols[Group1]= [               8,        asterisk,           thorn,           THORN ]
+};
+key <AE10> {
+    type= "FOUR_LEVEL",
+    symbols[Group1]= [               9,       parenleft, leftsinglequotemark, leftdoublequotemark ]
+};
+key <AE11> {
+    type= "FOUR_LEVEL",
+    symbols[Group1]= [               0,      parenright, rightsinglequotemark, rightdoublequotemark ]
+};
+key <AE12> {
+    type= "FOUR_LEVEL",
+    symbols[Group1]= [           minus,      underscore,          endash,          emdash ]
+};
+key <BKSP> {         [       BackSpace,       BackSpace ] };
+
+key  <TAB> {         [             Tab,    ISO_Left_Tab ] };
     key <AD01> {
         type= "FOUR_LEVEL_ALPHABETIC",
         symbols[Group1]= [               q,               Q,      adiaeresis,      Adiaeresis ]
@@ -1275,7 +1273,7 @@ xkb_symbols "pc+us(colemak)+inet(evdev)" {
     };
     key <AD11> {
         type= "FOUR_LEVEL",
-        symbols[Group1]= [     bracketleft,       braceleft,   guillemotleft,           U2039 ]
+        symbols[Group1]= [       backslash,              bar,       NoSymbol,        NoSymbol ]
     };
     key <AD12> {
         type= "FOUR_LEVEL",
@@ -1336,6 +1334,7 @@ xkb_symbols "pc+us(colemak)+inet(evdev)" {
         type= "FOUR_LEVEL",
         symbols[Group1]= [       backslash,             bar,      asciitilde,      asciitilde ]
     };
+    key <ESC2> {         [          Escape ] };
     key <AB01> {
         type= "FOUR_LEVEL_ALPHABETIC",
         symbols[Group1]= [               z,               Z,              ae,              AE ]
@@ -1454,10 +1453,6 @@ xkb_symbols "pc+us(colemak)+inet(evdev)" {
     key <LVL3> {
         type= "ONE_LEVEL",
         symbols[Group1]= [ ISO_Level3_Shift ]
-    };
-    key <LSGT> {
-        type= "FOUR_LEVEL",
-        symbols[Group1]= [           minus,      underscore,          endash,          emdash ]
     };
     key <FK11> {
         type= "CTRL+ALT",

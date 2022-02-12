@@ -5,10 +5,6 @@ This keyboard configuration uses [[https://wiki.archlinux.org/title/X_keyboard_e
 
 * Keymap
 
-Keycode definition. The rest of the file does not use numeric keycodes, only symbolic keylabels defined in this section.
-It is a good idea to leave only those keys the keyboard in question actually has here.
-The labels themselves are arbitrary. They are only used in xkb_symbols section later.
-
 #+begin_src conf
 
   xkb_keymap {
@@ -99,7 +95,7 @@ The labels themselves are arbitrary. They are only used in xkb_symbols section l
        <KP0> = 90;
       <KPDL> = 91;
       <LVL3> = 92;
-      <LSGT> = 94;
+      <ESC2> = 94;
       <FK11> = 95;
       <FK12> = 96;
       // <AB11> = 97;
@@ -1213,55 +1209,65 @@ The labels themselves are arbitrary. They are only used in xkb_symbols section l
       name[group1]="English (Colemak)";
 
       key  <ESC> {         [          Escape ] };
-      key <AE01> {
-          type= "FOUR_LEVEL",
-          symbols[Group1]= [               1,          exclam,      exclamdown,     onesuperior ]
-      };
-      key <AE02> {
-          type= "FOUR_LEVEL",
-          symbols[Group1]= [               2,              at,       masculine,     twosuperior ]
-      };
-      key <AE03> {
-          type= "FOUR_LEVEL",
-          symbols[Group1]= [               3,      numbersign,     ordfeminine,   threesuperior ]
-      };
-      key <AE04> {
-          type= "FOUR_LEVEL",
-          symbols[Group1]= [               4,          dollar,            cent,        sterling ]
-      };
-      key <AE05> {
-          type= "FOUR_LEVEL",
-          symbols[Group1]= [               5,         percent,        EuroSign,             yen ]
-      };
-      key <AE06> {
-          type= "FOUR_LEVEL",
-          symbols[Group1]= [               6,     asciicircum,         hstroke,         Hstroke ]
-      };
-      key <AE07> {
-          type= "FOUR_LEVEL",
-          symbols[Group1]= [               7,       ampersand,             eth,             ETH ]
-      };
-      key <AE08> {
-          type= "FOUR_LEVEL",
-          symbols[Group1]= [               8,        asterisk,           thorn,           THORN ]
-      };
-      key <AE09> {
-          type= "FOUR_LEVEL",
-          symbols[Group1]= [               9,       parenleft, leftsinglequotemark, leftdoublequotemark ]
-      };
-      key <AE10> {
-          type= "FOUR_LEVEL",
-          symbols[Group1]= [               0,      parenright, rightsinglequotemark, rightdoublequotemark ]
-      };
-      key <AE11> {
-          type= "FOUR_LEVEL",
-          symbols[Group1]= [           minus,      underscore,          endash,          emdash ]
-      };
-      key <AE12> {
-          type= "FOUR_LEVEL",
-          symbols[Group1]= [           equal,            plus,        multiply,        division ]
-      };
-      key <BKSP> {         [       BackSpace,       BackSpace ] };
+
+#+end_src
+
+** Number Row
+
+#+begin_src conf	 
+
+  key <AE01> {
+      type= "FOUR_LEVEL",
+      symbols[Group1]= [               1,          exclam,      exclamdown,     onesuperior ]
+  };
+  key <AE02> {
+      type= "FOUR_LEVEL",
+      symbols[Group1]= [               2,              at,       masculine,     twosuperior ]
+  };
+  key <AE03> {
+      type= "FOUR_LEVEL",
+      symbols[Group1]= [               3,      numbersign,     ordfeminine,   threesuperior ]
+  };
+  key <AE04> {
+      type= "FOUR_LEVEL",
+      symbols[Group1]= [               4,          dollar,            cent,        sterling ]
+  };
+  key <AE05> {
+      type= "FOUR_LEVEL",
+      symbols[Group1]= [               5,         percent,        EuroSign,             yen ]
+  };
+  key <AE07> {
+      type= "FOUR_LEVEL",
+      symbols[Group1]= [               6,     asciicircum,         hstroke,         Hstroke ]
+  };
+  key <AE08> {
+      type= "FOUR_LEVEL",
+      symbols[Group1]= [               7,       ampersand,             eth,             ETH ]
+  };
+  key <AE09> {
+      type= "FOUR_LEVEL",
+      symbols[Group1]= [               8,        asterisk,           thorn,           THORN ]
+  };
+  key <AE10> {
+      type= "FOUR_LEVEL",
+      symbols[Group1]= [               9,       parenleft, leftsinglequotemark, leftdoublequotemark ]
+  };
+  key <AE11> {
+      type= "FOUR_LEVEL",
+      symbols[Group1]= [               0,      parenright, rightsinglequotemark, rightdoublequotemark ]
+  };
+  key <AE12> {
+      type= "FOUR_LEVEL",
+      symbols[Group1]= [           minus,      underscore,          endash,          emdash ]
+  };
+  key <BKSP> {         [       BackSpace,       BackSpace ] };
+
+#+end_src
+
+** Top Row
+
+#+begin_src conf	 
+
       key  <TAB> {         [             Tab,    ISO_Left_Tab ] };
       key <AD01> {
           type= "FOUR_LEVEL_ALPHABETIC",
@@ -1283,35 +1289,37 @@ The labels themselves are arbitrary. They are only used in xkb_symbols section l
           type= "FOUR_LEVEL_SEMIALPHABETIC",
           symbols[Group1]= [               g,               G,     dead_ogonek,      asciitilde ]
       };
-      key <AD06> {
+      key <AD07> {
           type= "FOUR_LEVEL_ALPHABETIC",
           symbols[Group1]= [               j,               J,         dstroke,         Dstroke ]
       };
-      key <AD07> {
+      key <AD08> {
           type= "FOUR_LEVEL_ALPHABETIC",
           symbols[Group1]= [               l,               L,         lstroke,         Lstroke ]
       };
-      key <AD08> {
+      key <AD09> {
           type= "FOUR_LEVEL_ALPHABETIC",
           symbols[Group1]= [               u,               U,          uacute,          Uacute ]
       };
-      key <AD09> {
+      key <AD10> {
           type= "FOUR_LEVEL_ALPHABETIC",
           symbols[Group1]= [               y,               Y,      udiaeresis,      Udiaeresis ]
       };
-      key <AD10> {
+      key <AD11> {
           type= "FOUR_LEVEL",
           symbols[Group1]= [       semicolon,           colon,      odiaeresis,      Odiaeresis ]
       };
-      key <AD11> {
-          type= "FOUR_LEVEL",
-          symbols[Group1]= [     bracketleft,       braceleft,   guillemotleft,           U2039 ]
-      };
       key <AD12> {
           type= "FOUR_LEVEL",
-          symbols[Group1]= [    bracketright,      braceright,  guillemotright,           U203A ]
+          symbols[Group1]= [       backslash,              bar,       NoSymbol,        NoSymbol ]
       };
       key <RTRN> {         [          Return ] };
+#+end_src
+
+* Home Row
+
+#+begin_src conf	 
+
       key <LCTL> {         [       Control_L ] };
       key <AC01> {
           type= "FOUR_LEVEL_ALPHABETIC",
@@ -1333,29 +1341,29 @@ The labels themselves are arbitrary. They are only used in xkb_symbols section l
           type= "FOUR_LEVEL_SEMIALPHABETIC",
           symbols[Group1]= [               d,               D,  dead_diaeresis,      asciitilde ]
       };
-      key <AC06> {
+      key <AC07> {
           type= "FOUR_LEVEL_SEMIALPHABETIC",
           symbols[Group1]= [               h,               H,      dead_caron,      asciitilde ]
       };
-      key <AC07> {
+      key <AC08> {
           type= "FOUR_LEVEL_ALPHABETIC",
           symbols[Group1]= [               n,               N,          ntilde,          Ntilde ]
       };
-      key <AC08> {
+      key <AC09> {
           type= "FOUR_LEVEL_ALPHABETIC",
           symbols[Group1]= [               e,               E,          eacute,          Eacute ]
       };
-      key <AC09> {
+      key <AC10> {
           type= "FOUR_LEVEL_ALPHABETIC",
           symbols[Group1]= [               i,               I,          iacute,          Iacute ]
       };
-      key <AC10> {
+      key <AC11> {
           type= "FOUR_LEVEL_ALPHABETIC",
           symbols[Group1]= [               o,               O,          oacute,          Oacute ]
       };
-      key <AC11> {
+      key <AC12> {
           type= "FOUR_LEVEL",
-          symbols[Group1]= [      apostrophe,        quotedbl,          otilde,          Otilde ]
+          symbols[Group1]= [           slash,        question,        NoSymbol,        NoSymbol ]
       };
       key <TLDE> {
           type= "FOUR_LEVEL",
@@ -1366,6 +1374,7 @@ The labels themselves are arbitrary. They are only used in xkb_symbols section l
           type= "FOUR_LEVEL",
           symbols[Group1]= [       backslash,             bar,      asciitilde,      asciitilde ]
       };
+      key <ESC2> {         [          Escape ] };
       key <AB01> {
           type= "FOUR_LEVEL_ALPHABETIC",
           symbols[Group1]= [               z,               Z,              ae,              AE ]
@@ -1484,10 +1493,6 @@ The labels themselves are arbitrary. They are only used in xkb_symbols section l
       key <LVL3> {
           type= "ONE_LEVEL",
           symbols[Group1]= [ ISO_Level3_Shift ]
-      };
-      key <LSGT> {
-          type= "FOUR_LEVEL",
-          symbols[Group1]= [           minus,      underscore,          endash,          emdash ]
       };
       key <FK11> {
           type= "CTRL+ALT",
