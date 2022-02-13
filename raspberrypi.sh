@@ -36,6 +36,10 @@ ssh-keygen -t ed25519 -C "qucchia0@gmail.com"
 echo "You may be asked for the authenticity of GitHub's fingerprint. See https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints for GitHub's supported fingerprints."
 gh auth login
 
+# Allow config repo to use SSH
+cd ~/Documents/config
+git remote set-url origin git@github.com:qucchia/config
+
 # Clone repos
 gh repo clone qucchia/life ~/Documents/life
 mkdir ~/Projects
