@@ -481,6 +481,21 @@
 
 #+end_src
 
+** PDF and Org mode
+
+https://github.com/shg/org-inline-pdf.el
+
+Requires installation of =pdf2svg=, e.g. by running =sudo apt install pdf2svg=.
+
+#+begin_src emacs-lisp
+
+(use-package org-inline-pdf
+  :config
+  (add-hook 'org-mode-hook #'org-inline-pdf-mode)
+  (setq org-image-actual-width nil))
+
+#+end_src
+
 * Development
 
 ** Commenting
