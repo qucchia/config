@@ -4,7 +4,7 @@ This is my desktop configuration.
 
 ** Key Bindings
 
-My custom key bindings are made using [[https://wiki.archlinux.org/title/X_keyboard_extension][xkb]] in the =layout/XKBLayout.org=. It's a modified version of the wide [[https://colemakmods.github.io/ergonomic-mods/wide.html][Colemak mod]].
+My custom key bindings are made using [[https://wiki.archlinux.org/title/X_keyboard_extension][xkb]] in the =layout/Layout.org=. It's a modified version of the wide [[https://colemakmods.github.io/ergonomic-mods/wide.html][Colemak mod]].
 
 Here's a list of the most important changes:
 - Caps Lock is mapped to Super
