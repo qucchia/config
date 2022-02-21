@@ -196,9 +196,9 @@
   (setq org-log-into-drawer t)
 
   (setq org-agenda-files
-        '("~/Projects/life/Tasks.org"
-          "~/Projects/life/Habits.org"
-          "~/Projects/life/Birthdays.org"))
+        '("~/Documents/life/Tasks.org"
+          "~/Documents/life/Habits.org"
+          "~/Documents/life/Birthdays.org"))
 
   (require 'org-habit)
   (add-to-list 'org-modules 'org-habit)
@@ -285,29 +285,29 @@
 
   (setq org-capture-templates
         `(("t" "Tasks / Projects")
-          ("tt" "Task" entry (file+olp "~/Projects/life/Tasks.org" "Inbox")
+          ("tt" "Task" entry (file+olp "~/Documents/life/Tasks.org" "Inbox")
            "* TODO %?\n %U\n %a\n %i" :empty-lines 1)
           ("ts" "Clocked Entry Subtask" entry (clock)
            "* TODO %?\n %U\n %a\n %i" :empty-lines 1)
 
           ("j" "Journal Entries")
           ("jj" "Journal" entry
-           (file+olp+datetree "~/Projects/life/Journal.org")
+           (file+olp+datetree "~/Documents/life/Journal.org")
            "\n* %<%I:%M %p> - Journal :journal:\n\n%?\n\n"
            :clock-in :clock-resume
            :empty-lines 1)
           ("jm" "Meeting" entry
-           (file+olp+datetree "~/Projects/life/Journal.org")
+           (file+olp+datetree "~/Documents/life/Journal.org")
            "* %<%I:%M %p> - %a :meetings:\n\n%?\n\n"
            :clock-in :clock-resume
            :empty-lines 1)
 
           ("w" "Workflows")
-          ("we" "Checking Email" entry (file+olp+datetree "~/Projects/life/Journal.org")
+          ("we" "Checking Email" entry (file+olp+datetree "~/Documents/life/Journal.org")
            "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)
 
           ("m" "Metrics Capture")
-          ("my" "Typing Speed" table-line (file+headline "~/Projects/life/Metrics.org" "Typing Speed")
+          ("my" "Typing Speed" table-line (file+headline "~/Documents/life/Metrics.org" "Typing Speed")
            "| %U | %^{Speed} | %^{Accuracy} | %^{Program} | %^{Notes} |" :kill-buffer t)))
 
   (q/org-font-setup))
@@ -343,12 +343,21 @@
 
 (defun q/org-babel-tangle-config ()
   (when (string-equal (buffer-file-name)
-                      (expand-file-name "~/Projects/config/Emacs/Emacs.org"))
-    ;; Dynamic scoping
+                      (expand-file-name "~/Documents/config/emacs/Emacs.org"))
+    (let ((org-confirm-babel-evaluate nil))
+      (org-babel-tangle)))
+
+  (when (string-equal (buffer-file-name)
+                      (expand-file-name "~/Documents/config/emacs/Emacs.org"))
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle))))
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'q/org-babel-tangle-config)))
+
+(use-package org-inline-pdf
+  :config
+  (add-hook 'org-mode-hook #'org-inline-pdf-mode)
+  (setq org-image-actual-width nil))
 
 (use-package evil-nerd-commenter
   :bind ("M-/" . evilnc-comment-or-uncomment-lines))
@@ -471,61 +480,30 @@
 
   (eshell-git-prompt-use-theme 'powerline))
 
-(defun q/exwm-update-class ()
-  (exwm-workspace-rename-buffer exwm-class-name))
-
-(use-package exwm
+(use-package mu4e
+  :ensure nil
+  :load-path "/usr/share/emacs/site-lisp/mu4e/"
   :config
-  (setq exwm-workspace-number 5)
 
-  (add-hook 'exwm-update-class-hook #'q/exwm-update-class)
+  ;; This is set to 't' to avoid mail syncing issues when using mbsync
+  (setq mu4e-change-filenames-when-moving t)
 
-  ;; Use custom keyboard layout
-  (start-process-shell-command "xmodmap" nil "xmodmap ~/Projects/config/.Xmodmap")
+  ;; Refresh mail using isync every 10 minutes
+  (setq mu4e-update-interval (* 10 60))
+  (setq mu4e-get-mail-command "mbsync -a")
+  (setq mu4e-maildir "~/Mail/")
 
-  (require 'exwm-systemtray)
-  (exwm-systemtray-enable)
+  (setq mu4e-drafts-folder "/[Gmail]/Drafts")
+  (setq mu4e-sent-folder   "/[Gmail]/Sent Mail")
+  (setq mu4e-refile-folder "/[Gmail]/All Mail")
+  (setq mu4e-trash-folder  "/[Gmail]/Trash")
 
-  (setq exwm-input-prefix-keys
-     '(?\C-x
-       ?\C-u
-       ?\C-h
-       ?\M-x
-       ?\M-`
-       ?\M-&
-       ?\M-:
-       ?\C-\M-j
-       ?\C-\ )) ;; C-SPC
-
-  ;; C-q will always send the next key directly
-  (define-key exwm-mode-map [?\C-q] 'exwm-input-send-next-key)
-
-  (setq exwm-input-global-keys
-      `(
-           ;; Reset to line-mode
-          ([?\s-r] . exwm-reset)
-
-          ;; Move between windows
-          ([?\s-h] . windmove-left)
-          ([?\s-j] . windmove-down)
-          ([?\s-k] . windmove-up)
-          ([?\s-l] . windmove-right)
-
-          ;; Launch applications with shell command
-          ([?\s-&] . (lambda (command)
-                       (interactive (list (read-shell-command "$ ")))
-                       (start-process-shell-command command nil command)))
-
-          ;; Switch workspace
-          ([?\s-w] . exwm-workspace-switch)
-          ,@(mapcar (lambda (i)
-                      `(,(kbd (format "s-%d" i)) .
-                        (lambda ()
-                          (interactive)
-                          (exwm-workspace-switch-create ,i))))
-                    (number-sequence 0 9))))
-
-  (exwm-enable))
+  (setq mu4e-maildir-shortcuts
+      '(("/Inbox"             . ?i)
+        ("/[Gmail]/Sent Mail" . ?s)
+        ("/[Gmail]/Trash"     . ?b)
+        ("/[Gmail]/Drafts"    . ?d)
+        ("/[Gmail]/All Mail"  . ?a))))
 
 (use-package speed-type)
 (use-package typit)
