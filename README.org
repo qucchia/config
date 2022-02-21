@@ -4,37 +4,26 @@ This is my desktop configuration.
 
 ** Key Bindings
 
-My custom key bindings are made using [[https://wiki.archlinux.org/title/xmodmap][xmodmap]] in the =normal.xmodmap= and =chromebook.xmodmap= files. One of these has to be copied to =~/.Xmodmap= for it to work. They also assume the keyboard layout is currently Colemak, if you use another layout weird things will happen.
+My custom key bindings are made using [[https://wiki.archlinux.org/title/X_keyboard_extension][xkb]] in the =layout/XKBLayout.org=. It's a modified version of the wide [[https://colemakmods.github.io/ergonomic-mods/wide.html][Colemak mod]].
 
 Here's a list of the most important changes:
 - Caps Lock is mapped to Super
-- The Backslash next to the Z is mapped to Escape
-- Alt Gr + H/J/K/L is mapped to the Left / Down / Up / Right arrow keys
-- Left Super is mapped to the "Modifier" key
-  - Mod + H/L: Page Up / Down
-  - Mod + J/K: Home / End
-  - Mod + D: Delete
-  - Mod + A: Insert
-  - Mod + UY;EIO,./: Numpad keys 789456123
-  - Shift + Mod: Menu (opens a right-click menu in most contexts)
-
-There's also a Chromebook configuration, the only difference being that Left Super remains as Left Super, since on Chromebook keyboards the Caps Lock key is replaced by the Search key, which functions as Left Super. What a mouthful!
+- The key next to the Z on ISO keyboards is mapped to Escape
+- Most punctuation keys are mapped to Alt Gr + <letter key> to avoid having to reach far. For example, Alt Gr + P is mapped to %.
 
 ** Emacs Configuration
 
-The Emacs configuration is following the [[https://github.com/daviwil/emacs-from-scratch/][Emacs from Scratch tutorials by David Wilson]], but also has personal changes. It can be found in the =Emacs.org= file.
+The Emacs configuration is following the [[https://github.com/daviwil/emacs-from-scratch/][Emacs from Scratch tutorials by David Wilson]], but also has personal changes. It can be found in =emacs/Emacs.org=.
 
-** XFCE4 Configuration
+** EXWM Configuration
 
-I am using XFCE4 as my current desktop environment, so in the =xfce/= folder are some of my xfce4 configuration files, copied directly from =./config/xfce4=. Note that these files haven't been cleaned up yet.
+It can be found in =exwm/Desktop.org=.
 
 ** Bash Configuration
 
-I currently have a little script in =setup.sh= that's supposed to install and configure the system automatically, however it's unfinished and a work-in-progress.
+The =raspberrypi.sh= script is intended to automatically set up my configuration on a newly installed Raspberry Pi OS.
 
 ** Plans
 
 The future plans of this project are:
 - To finish the Emacs from Scratch tutorials for the Emacs configuration.
-- To configure the Guix package manager to allow more easily listing packages to install.
-- To make a better configuration script in =setup.sh= and perhaps one in node.js too.
