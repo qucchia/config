@@ -27,7 +27,7 @@
 
 * UI Configuration
 
-** Basics UI Configuration
+** Basic UI Configuration
 
 #+begin_src emacs-lisp
 
