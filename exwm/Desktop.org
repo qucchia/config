@@ -69,3 +69,12 @@
     (exwm-enable))
 
 #+end_src
+
+* Show Time
+
+#+begin_src emacs-lisp
+
+  (setq display-time-default-load-average nil)
+  (display-time-mode t)
+
+#+end_src

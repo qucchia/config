@@ -1,3 +1,13 @@
+(defun q/run-in-background (command)
+  (let ((command-parts (split-string command "[ ]+")))
+    (apply #'call-process `(,(car command-parts) nil 0 nil 0 ,@(cdr command-parts)))))
+
+(defun q/exwm-init-hoom ()
+  ;; Make workspace 1 be the one where we land at startup
+  (exwk-workspace-switch-create 1)
+
+  (eshell))
+
 (defun q/exwm-update-class ()
   (exwm-workspace-rename-buffer exwm-class-name))
 
@@ -6,10 +16,6 @@
   (setq exwm-workspace-number 5)
 
   (add-hook 'exwm-update-class-hook #'q/exwm-update-class)
-
-  ;; Use custom keyboard layout
-
-  ;; (start-process-shell-command "xkbcomp" nil "xkbcomp ~/Projects/config/layout/.Xkeymap $DISPLAY")
 
   (require 'exwm-systemtray)
   (exwm-systemtray-enable)
@@ -54,3 +60,6 @@
                     (number-sequence 0 9))))
 
   (exwm-enable))
+
+(setq display-time-default-load-average nil)
+(display-time-mode t)
