@@ -10,3 +10,6 @@ sudo systemctl start tor@default.service
 
 # Start Emacs
 exec dbus-launch --exit-with-session emacs -mm --debug-init -l $CONFIG_DIR/exwm/desktop.el
+
+# Set up SSH
+ssh-add $HOME/.ssh/codeberg
