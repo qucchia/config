@@ -2,28 +2,29 @@
 
 This is my desktop configuration.
 
-** Key Bindings
+** File structrue
 
-My custom key bindings are made using [[https://wiki.archlinux.org/title/X_keyboard_extension][xkb]] in the =layout/Layout.org=. It's a modified version of the wide [[https://colemakmods.github.io/ergonomic-mods/wide.html][Colemak mod]].
+*** =layout=
 
-Here's a list of the most important changes:
-- Caps Lock is mapped to Super
-- The key next to the Z on ISO keyboards is mapped to Escape
-- Most punctuation keys are mapped to Alt Gr + <letter key> to avoid having to reach far. For example, Alt Gr + P is mapped to %.
+My custom key bindings are made using [[https://wiki.archlinux.org/title/xmodmap][xmodmap]] in =.Xmodmap=. It does the following:
+- Maps Caps Lock to Left Super.
+- Maps the key between Left Shift and Z (only on ISO keyboards) to Escape.
 
-** Emacs Configuration
+*** =emacs=
 
-The Emacs configuration is following the [[https://github.com/daviwil/emacs-from-scratch/][Emacs from Scratch tutorials by David Wilson]], but also has personal changes. It can be found in =emacs/Emacs.org=.
+- The Emacs configuration is following the [[https://github.com/daviwil/emacs-from-scratch/][Emacs from Scratch tutorials by David Wilson]], but also has personal changes. It can be found in =Emacs.org=. Its contents is tangled to =init.el=, which in turn is symlinked to =~/emacs.d/init.el= in the setup script (see below).
+- =Email.org= contains the configuraition for mu4e, an email client for Emacs.
 
-** EXWM Configuration
+*** =exwm=
 
-It can be found in =exwm/Desktop.org=.
+- The start script in =start-exwm.sh= is intended to run when the user session starts. It sets up the Tor network, keyboard configuration, and starts Emacs with the desktop configuration.
+- The configuration in =Desktop.org= sets up EXWM and is tangled to =desktop.el=, which is loaded by the start script.
 
-** Bash Configuration
+*** =setup=
 
-The =raspberrypi.sh= script is intended to automatically set up my configuration on a newly installed Raspberry Pi OS.
+- In =Setup.org= is the script intended to automatically set up my configuration on a newly installed Raspberry Pi OS. It's tangled to =setup.sh=.
+- =FinalSetup.org= is a file which is opened in Emacs once the setup script is complete. It contains some configuration steps that can only be done manually.
+- =.authinfo-model= serves as a template for entering a GitHub auth token for forge.
+- =torrc= is the Tor network configuration. It is symlinked to =/etc/tor/torrc=.
+- =99bionic-updates= is some configuration to prevent the Ubuntu sources to override default ones. (These Ubuntu sources are only used to install Firefox's latest version).
 
-** Plans
-
-The future plans of this project are:
-- To finish the Emacs from Scratch tutorials for the Emacs configuration.
