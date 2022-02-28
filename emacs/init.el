@@ -127,12 +127,10 @@
     "c"  '(org-capture :which-key "capture")
     "t"  '(:ignore t :which-key "toggles")
     "tt" '(counsel-load-theme :which-key "choose theme")
-    "ts" '(hydra-text-scale/body :which-key "scale text")
-    "x"  '(:ignore t :which-key "exwm")
-    "xx" '((start-process-shell-command "xmodmap" nil "xmodmap ~/Projects/config/.Xmodmap") :which-key "set keyboard layout")))
+    "ts" '(hydra-text-scale/body :which-key "scale text"))
 
-(general-define-key
- "C-M-n" 'counsel-switch-buffer)
+  (general-define-key
+   "C-M-n" 'counsel-switch-buffer))
 
 (use-package evil
   :init
@@ -330,7 +328,8 @@
  'org-babel-load-languages
  '((emacs-lisp . t)
    (python . t)
-   (js . t)))
+   (js . t)
+   (shell . t)))
 
 (push '("conf-unix" . conf-unix) org-src-lang-modes)
 
