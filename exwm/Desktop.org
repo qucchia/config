@@ -1,6 +1,25 @@
 #+title:Emacs Desktop Environment
 #+PROPERTY: header-args:emacs-lisp :tangle ./desktop.el
 
+* Start Script
+
+#+begin_src shell :tangle ./start-exwm.sh
+
+  #!/bin/sh
+
+  export CONFIG_DIR=$HOME/Documents/config
+
+  # Set keyboard layout
+  xmodmap $CONFIG_DIR/layout/.Xmodmap
+
+  # Start Tor service
+  sudo systemctl start tor@default.service
+
+  # Start Emacs
+  exec dbus-launch --exit-with-session emacs -mm --debug-init -l $CONFIG_DIR/exwm/desktop.el
+
+#+end_src
+
 * Window Manager
 
 #+begin_src emacs-lisp
