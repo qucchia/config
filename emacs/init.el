@@ -513,3 +513,5 @@
 (server-start)
 
 (org-agenda)
+
+(eshell-command "ssh-add ~/.ssh/codeberg")

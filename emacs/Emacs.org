@@ -764,4 +764,6 @@ Connect to the GhostText browser extension
 
   (org-agenda)
 
+  (eshell-command "ssh-add ~/.ssh/codeberg")
+
 #+end_src
