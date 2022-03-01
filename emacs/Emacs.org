@@ -185,6 +185,9 @@
 #+end_src
 
 ** General
+
+https://github.com/noctuid/general.el
+
 #+begin_src emacs-lisp
 
   (use-package general
@@ -290,10 +293,10 @@
     (setq org-agenda-start-with-log-mode t)
     (setq org-log-done 'time)
     (setq org-log-into-drawer t)
-  
+
     (setq org-agenda-files
           '("~/Documents/life/Tasks.org"
-            "~/Documents/life/Habits.org"
+            ;; "~/Documents/life/Habits.org"
             "~/Documents/life/Birthdays.org"))
 
     (require 'org-habit)
@@ -728,11 +731,11 @@ https://github.com/akermu/emacs-libvterm
     (setq mu4e-trash-folder  "/[Gmail]/Trash")
 
     (setq mu4e-maildir-shortcuts
-        '(("/Inbox"             . ?i)
-          ("/[Gmail]/Sent Mail" . ?s)
-          ("/[Gmail]/Trash"     . ?b)
-          ("/[Gmail]/Drafts"    . ?d)
-          ("/[Gmail]/All Mail"  . ?a))))
+    '((:maildir "/Inbox"             :key ?i)
+      (:maildir "/[Gmail]/Sent Mail" :key ?s)
+      (:maildir "/[Gmail]/Trash"     :key ?b)
+      (:maildir "/[Gmail]/Drafts"    :key ?d)
+      (:maildir "/[Gmail]/All Mail"  :key ?a))))
 
 #+end_src
 

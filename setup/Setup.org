@@ -74,7 +74,7 @@ This script installs and sets up all my configuration on a newly installed Raspb
 #+begin_src shell
 
   sudo apt install -y bluetooth bluez libbluetooth-dev libudev-dev
-  sudo npm install -g espruino-web-ide espruino
+  sudo npm i -g espruino-web-ide espruino
   sudo setcap cap_net_raw+eip $(eval readlink -f `which node`)
 
 #+end_src

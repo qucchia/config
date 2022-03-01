@@ -196,7 +196,7 @@
 
   (setq org-agenda-files
         '("~/Documents/life/Tasks.org"
-          "~/Documents/life/Habits.org"
+          ;; "~/Documents/life/Habits.org"
           "~/Documents/life/Birthdays.org"))
 
   (require 'org-habit)
@@ -499,11 +499,11 @@
   (setq mu4e-trash-folder  "/[Gmail]/Trash")
 
   (setq mu4e-maildir-shortcuts
-      '(("/Inbox"             . ?i)
-        ("/[Gmail]/Sent Mail" . ?s)
-        ("/[Gmail]/Trash"     . ?b)
-        ("/[Gmail]/Drafts"    . ?d)
-        ("/[Gmail]/All Mail"  . ?a))))
+  '((:maildir "/Inbox"             :key ?i)
+    (:maildir "/[Gmail]/Sent Mail" :key ?s)
+    (:maildir "/[Gmail]/Trash"     :key ?b)
+    (:maildir "/[Gmail]/Drafts"    :key ?d)
+    (:maildir "/[Gmail]/All Mail"  :key ?a))))
 
 (use-package speed-type)
 (use-package typit)
