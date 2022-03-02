@@ -63,3 +63,10 @@
 
 (setq display-time-default-load-average nil)
 (display-time-mode t)
+
+;; Start server to allow opening files from other applications
+(server-start)
+
+(org-agenda)
+
+(eshell-command "ssh-add ~/.ssh/codeberg")

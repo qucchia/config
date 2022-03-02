@@ -510,9 +510,3 @@
 
 (use-package atomic-chrome)
 
-;; Start server to allow opening files from other applications
-(server-start)
-
-(org-agenda)
-
-(eshell-command "ssh-add ~/.ssh/codeberg")

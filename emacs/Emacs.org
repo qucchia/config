@@ -759,15 +759,8 @@ Connect to the GhostText browser extension
 
 #+end_src
 
-* Run On Start
 
 #+begin_src emacs-lisp
 
-  ;; Start server to allow opening files from other applications
-  (server-start)
-
-  (org-agenda)
-
-  (eshell-command "ssh-add ~/.ssh/codeberg")
 
 #+end_src
