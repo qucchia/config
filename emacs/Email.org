@@ -1,8 +1,40 @@
-#+begin_src conf :tangle ~/.mbsyncrc
+#+PROPERTY: header-args:conf :tangle ~/.mbsyncrc
+
+* Personal account
+
+#+begin_src conf
 
   IMAPAccount gmail
   Host imap.gmail.com
-  User ${SCHOOL_MAIL}
+  User yijods@gmail.com
+  PassCmd "pass Mail/Personal"
+  SSLType IMAPS
+  CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+  IMAPStore gmail-remote
+  Account gmail
+
+  MaildirStore gmail-local
+  Subfolders Verbatim
+  Path ~/Mail/Personal/
+  Inbox ~/Mail/Personal/Inbox
+
+  Channel gmail
+  Master :gmail-remote:
+  Slave :gmail-local:
+  Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail" "[Gmail]/Trash"
+  Create Both
+  SyncState *
+
+#+end_src
+
+* School account
+
+#+begin_src conf
+
+  IMAPAccount gmail
+  Host imap.gmail.com
+  User timothydavid.skipper@alumnat.ins-mediterrania.cat
   PassCmd "pass Mail/School"
   SSLType IMAPS
   CertificateFile /etc/ssl/certs/ca-certificates.crt
@@ -12,8 +44,8 @@
 
   MaildirStore gmail-local
   Subfolders Verbatim
-  Path ~/Mail/
-  Inbox ~/Mail/Inbox
+  Path ~/Mail/School/
+  Inbox ~/Mail/School/Inbox
 
   Channel gmail
   Master :gmail-remote:
@@ -21,5 +53,73 @@
   Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail" "[Gmail]/Trash"
   Create Both
   SyncState *
+
+#+end_src
+
+* Development account
+
+#+begin_src conf
+
+  IMAPAccount gmail
+  Host imap.gmail.com
+  User qucchia0@gmail.com
+  PassCmd "pass Mail/Development"
+  SSLType IMAPS
+  CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+  IMAPStore gmail-remote
+  Account gmail
+
+  MaildirStore gmail-local
+  Subfolders Verbatim
+  Path ~/Mail/Development/
+  Inbox ~/Mail/Development/Inbox
+
+  Channel gmail
+  Master :gmail-remote:
+  Slave :gmail-local:
+  Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail" "[Gmail]/Trash"
+  Create Both
+  SyncState *
+
+#+end_src
+
+* Work account
+
+#+begin_src conf
+
+  IMAPAccount gmail
+  Host imap.gmail.com
+  User timothydskipper@gmail.com
+  PassCmd "pass Mail/Work"
+  SSLType IMAPS
+  CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+  IMAPStore gmail-remote
+  Account gmail
+
+  MaildirStore gmail-local
+  Subfolders Verbatim
+  Path ~/Mail/Work/
+  Inbox ~/Mail/Work/Inbox
+
+  Channel gmail
+  Master :gmail-remote:
+  Slave :gmail-local:
+  Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail" "[Gmail]/Trash"
+  Create Both
+  SyncState *
+
+#+end_src
+
+* Script
+
+#+begin_src shell
+
+  mu init --maildir=~/Mail \
+     --my-address=yijods@gmail.com \
+     --my-address=timothydavid.skipper@alumnat.ins-mediterrania.cat \
+     --my-address=qucchia0@gmail.com \
+     --my-address=timothydskipper@gmail.com
 
 #+end_src

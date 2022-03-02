@@ -490,6 +490,7 @@
 (use-package mu4e
   :ensure nil
   :load-path "/usr/share/emacs/site-lisp/mu4e/"
+  :defer 20
   :config
 
   ;; This is set to 't' to avoid mail syncing issues when using mbsync
@@ -500,17 +501,97 @@
   (setq mu4e-get-mail-command "mbsync -a")
   (setq mu4e-maildir "~/Mail/")
 
-  (setq mu4e-drafts-folder "/[Gmail]/Drafts")
-  (setq mu4e-sent-folder   "/[Gmail]/Sent Mail")
-  (setq mu4e-refile-folder "/[Gmail]/All Mail")
-  (setq mu4e-trash-folder  "/[Gmail]/Trash")
+  (setq mu4e-contexts
+        (list
+         
+         (make-mu4e-context
+          :name "Personal"
+          :match-func
+          (lambda (msg)
+            (when msg
+              (string-prefix-p "/Personal" (mu4e-message-field msg :maildir))))
+          :vars '((user-mail-address . "yijods@gmail.com")
+                  (user-full-name . "qucchia")
+                  (mu4e-drafts-folder . "/Personal/[Gmail]/Drafts")
+                  (mu4e-sent-folder . "/Personal/[Gmail]/Sent Mail")
+                  (mu4e-refile-folder . "/Personal/[Gmail]/All Mail")
+                  (mu4e-trash-folder . "/Personal/[Gmail]/Trash")
+                  (mu4e-maildir-shortcuts
+                   (:maildir "/Personal/Inbox"             :key ?i)
+                   (:maildir "/Personal/[Gmail]/Sent Mail" :key ?s)
+                   (:maildir "/Personal/[Gmail]/Trash"     :key ?b)
+                   (:maildir "/Personal/[Gmail]/Drafts"    :key ?d)
+                   (:maildir "/Personal/[Gmail]/All Mail"  :key ?a))))
+         
+         
+         (make-mu4e-context
+          :name "School"
+          :match-func
+          (lambda (msg)
+            (when msg
+              (string-prefix-p "/School" (mu4e-message-field msg :maildir))))
+          :vars '((user-mail-address . "timothydavid.skipper@alumnat.ins-mediterrania.cat")
+                  (user-full-name . "Timothy D. Skipper")
+                  (mu4e-drafts-folder . "/School/[Gmail]/Drafts")
+                  (mu4e-sent-folder . "/School/[Gmail]/Sent Mail")
+                  (mu4e-refile-folder . "/School/[Gmail]/All Mail")
+                  (mu4e-trash-folder . "/School/[Gmail]/Trash")
+                  (mu4e-maildir-shortcuts
+                   (:maildir "/School/Inbox"             :key ?i)
+                   (:maildir "/School/[Gmail]/Sent Mail" :key ?s)
+                   (:maildir "/School/[Gmail]/Trash"     :key ?b)
+                   (:maildir "/School/[Gmail]/Drafts"    :key ?d)
+                   (:maildir "/School/[Gmail]/All Mail"  :key ?a))))
+         
+         
+         (make-mu4e-context
+          :name "Development"
+          :match-func
+          (lambda (msg)
+            (when msg
+              (string-prefix-p "/Development" (mu4e-message-field msg :maildir))))
+          :vars '((user-mail-address . "qucchia0@gmail.com")
+                  (user-full-name . "qucchia")
+                  (mu4e-drafts-folder . "/Development/[Gmail]/Drafts")
+                  (mu4e-sent-folder . "/Development/[Gmail]/Sent Mail")
+                  (mu4e-refile-folder . "/Development/[Gmail]/All Mail")
+                  (mu4e-trash-folder . "/Development/[Gmail]/Trash")
+                  (mu4e-maildir-shortcuts
+                   (:maildir "/Development/Inbox"             :key ?i)
+                   (:maildir "/Development/[Gmail]/Sent Mail" :key ?s)
+                   (:maildir "/Development/[Gmail]/Trash"     :key ?b)
+                   (:maildir "/Development/[Gmail]/Drafts"    :key ?d)
+                   (:maildir "/Development/[Gmail]/All Mail"  :key ?a))))
+         
+         
+         (make-mu4e-context
+          :name "Work"
+          :match-func
+          (lambda (msg)
+            (when msg
+              (string-prefix-p "/Work" (mu4e-message-field msg :maildir))))
+          :vars '((user-mail-address . "timothydskipper@gmail.com")
+                  (user-full-name . "Timothy D. Skipper")
+                  (mu4e-drafts-folder . "/Work/[Gmail]/Drafts")
+                  (mu4e-sent-folder . "/Work/[Gmail]/Sent Mail")
+                  (mu4e-refile-folder . "/Work/[Gmail]/All Mail")
+                  (mu4e-trash-folder . "/Work/[Gmail]/Trash")
+                  (mu4e-maildir-shortcuts
+                   (:maildir "/Work/Inbox"             :key ?i)
+                   (:maildir "/Work/[Gmail]/Sent Mail" :key ?s)
+                   (:maildir "/Work/[Gmail]/Trash"     :key ?b)
+                   (:maildir "/Work/[Gmail]/Drafts"    :key ?d)
+                   (:maildir "/Work/[Gmail]/All Mail"  :key ?a))))
+         ))
 
-  (setq mu4e-maildir-shortcuts
-  '((:maildir "/Inbox"             :key ?i)
-    (:maildir "/[Gmail]/Sent Mail" :key ?s)
-    (:maildir "/[Gmail]/Trash"     :key ?b)
-    (:maildir "/[Gmail]/Drafts"    :key ?d)
-    (:maildir "/[Gmail]/All Mail"  :key ?a))))
+  (setq mu4e-bookmarks
+        '((:name "Unread messages" :query "flag:unread AND NOT flag:trashed" :key ?u)
+          (:name "All inboxes" :query "maildir:/^.*/Inbox/" :key ?i)
+          (:name "Today's messages" :query "date:today..now" :key ?t)
+          (:name "Last 7 days" :query "date:7d..now" :hide-unread t :key ?w)
+          (:name "Messages with images" :query "mime:image/*" :key ?p)))
+
+  (mu4e t))
 
 (use-package speed-type)
 (use-package typit)
