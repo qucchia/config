@@ -125,13 +125,20 @@
   (q/leader-keys
     "a"  '(org-agenda :which-key "agenda")
     "c"  '(org-capture :which-key "capture")
+    "e" '(emms :which-key "emms")
     "m"  '(mu4e :which-key "mail")
+    "p"  '(emms-pause :which-key "pause music")
     "t"  '(:ignore t :which-key "toggles")
+    "te" '(emms-mode-line-toggle :which-key "emms modeline")
     "tt" '(counsel-load-theme :which-key "choose theme")
-    "ts" '(hydra-text-scale/body :which-key "scale text"))
+    "ts" '(hydra-text-scale/body :which-key "scale text")
+    "s"  '(mu4e-update-mail-and-index :which-key "sync mail"))
 
   (general-define-key
-   "C-M-n" 'counsel-switch-buffer))
+   "C-M-n" 'counsel-switch-buffer)
+
+  (general-define-key
+   "<pause>" 'emms-pause))
 
 (use-package evil
   :init
