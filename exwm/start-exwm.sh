@@ -1,6 +1,7 @@
 #!/bin/sh
 
 export CONFIG_DIR=$HOME/Documents/config
+export SCHOOL_MAIL=timothydavid.skipper@alumnat.ins-mediterrania.cat
 
 # Set keyboard layout
 xmodmap $CONFIG_DIR/layout/.Xmodmap

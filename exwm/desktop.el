@@ -62,6 +62,7 @@
   (exwm-enable))
 
 (setq display-time-default-load-average nil)
+(setq display-time-24hr-format t)
 (display-time-mode t)
 
 ;; Start server to allow opening files from other applications
