@@ -517,3 +517,9 @@
 
 (use-package atomic-chrome)
 
+(use-package emms
+  :config
+  (emms-all)
+  (emms-default-players)
+  :custom
+  (emms-source-file-default-directory "~/Music/"))
