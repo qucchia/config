@@ -188,7 +188,7 @@
 
 https://github.com/noctuid/general.el
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :noweb yes
 
   (use-package general
     :config
@@ -198,22 +198,64 @@ https://github.com/noctuid/general.el
       :global-prefix "C-SPC")
 
     (q/leader-keys
-      "a"  '(org-agenda :which-key "agenda")
+      <<bookmarks>>
+      <<open>>
       "c"  '(org-capture :which-key "capture")
-      "e" '(emms :which-key "emms")
-      "m"  '(mu4e :which-key "mail")
       "p"  '(emms-pause :which-key "pause music")
-      "t"  '(:ignore t :which-key "toggles")
+      "t"  '(:ignore t :which-key "toggle")
       "te" '(emms-mode-line-toggle :which-key "emms modeline")
       "tt" '(counsel-load-theme :which-key "choose theme")
       "ts" '(hydra-text-scale/body :which-key "scale text")
       "s"  '(mu4e-update-mail-and-index :which-key "sync mail"))
 
     (general-define-key
-     "C-M-n" 'counsel-switch-buffer)
-
-    (general-define-key
+     "C-M-n" 'counsel-switch-buffer
      "<pause>" 'emms-pause))
+
+#+end_src
+
+*** Bookmarks
+
+#+begin_src emacs-lisp :noweb-ref bookmarks :tangle no
+
+  "b"  '(:ignore t :which-key "bookmark")
+  "bc" '(lambda ()
+          (interactive)
+          (browse-url "https://classroom.google.com/h")
+          :which-key "classroom")
+  "bd" '(lambda ()
+          (interactive)
+          (browse-url "https://discord.com/app")
+          :which-key "discord")
+  "bg" '(lambda ()
+          (interactive)
+          (browse-url "https://codeberg.org")
+          :which-key "codeberg")
+  "bm" '(lambda ()
+          (interactive)
+          (browse-url "https://moodle.ins-mediterrania.cat/login/index.php")
+          :which-key "moodle")
+  "bw" '(lambda ()
+          (interactive)
+          (browse-url "https://web.whatsapp.com")
+          :which-key "whatsapp")
+
+#+end_src
+
+*** Open app
+
+#+begin_src emacs-lisp :noweb-ref open :tangle no
+
+  "o"  '(:ignore t :which-key "open")
+  "oa"  '(org-agenda :which-key "agenda")
+  "oe"  '(emms :which-key "emms")
+  "of"  '(lambda ()
+              (interactive)
+              (start-process-shell-command "firefox" nil "firefox")
+              :which-key "firefox")
+  "om"  '(mu4e :which-key "mail")
+  "os"  '(eshell :which-key "eshell")
+  "ot"  '(term :which-key "term")
 
 #+end_src
 
