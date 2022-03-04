@@ -74,6 +74,7 @@
   
   ;; Play Code Radio
   (emms-play-url "https://coderadio-relay-ffm.freecodecamp.org/radio/8010/radio.mp3")
+  (emms-mode-line-toggle)
   
   (eshell-command "ssh-add ~/.ssh/codeberg")
   )

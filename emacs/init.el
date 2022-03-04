@@ -188,6 +188,10 @@
             (interactive)
             (browse-url "https://web.whatsapp.com")
             :which-key "whatsapp")
+    "by"  '(lambda ()
+            (interactive)
+            (browse-url "https://www.youtube.com")
+            :which-key "youtube")
     
     "c"   '(org-capture :which-key "capture")
     
@@ -199,6 +203,7 @@
                 (interactive)
                 (start-process-shell-command "firefox" nil "firefox")
                 :which-key "firefox")
+    "oi"    '(ibuffer :which-key "ibuffer")
     "om"    '(mu4e :which-key "mail")
     "os"    '(shell :which-key "shell")
     "ot"    '(term :which-key "term")
@@ -251,7 +256,6 @@
   :config
   (evil-mode 1)
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
-  (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
 
   ;; Use visual line motions even outside of visual-line-mode buffers
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)

@@ -97,7 +97,7 @@
 
 #+end_src
 
-* Run on start
+* Run on Start
 
 #+begin_src emacs-lisp :noweb-ref on-start :tangle no
 
@@ -113,7 +113,9 @@
 
   ;; Play Code Radio
   (emms-play-url "https://coderadio-relay-ffm.freecodecamp.org/radio/8010/radio.mp3")
+  (emms-mode-line-toggle)
 
   (eshell-command "ssh-add ~/.ssh/codeberg")
 
 #+end_src
+
