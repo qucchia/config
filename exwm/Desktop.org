@@ -86,29 +86,17 @@
                             (exwm-workspace-switch-create ,i))))
                       (number-sequence 0 9))))
 
-    (exwm-enable))
+    ;; Show time
+    (setq display-time-default-load-average nil)
+    (setq display-time-24hr-format t)
+    (display-time-mode t)
+
+    ;; Start server to allow opening files from other applications
+    (server-start)
+
+    (exwm-enable)
+
+    (eshell-command "ssh-add ~/.ssh/codeberg"))
 
 #+end_src
 
-* Show Time
-
-#+begin_src emacs-lisp
-
-  (setq display-time-default-load-average nil)
-  (setq display-time-24hr-format t)
-  (display-time-mode t)
-
-#+end_src
-
-* Run On Start
-
-#+begin_src emacs-lisp
-
-  ;; Start server to allow opening files from other applications
-  (server-start)
-
-  (org-agenda)
-
-  (eshell-command "ssh-add ~/.ssh/codeberg")
-
-#+end_src
