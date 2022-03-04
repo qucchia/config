@@ -446,13 +446,8 @@
 (add-to-list 'org-structure-template-alist '("conf" . "src conf"))
 
 (defun q/org-babel-tangle-config ()
-  (when (string-equal (buffer-file-name)
-                      (expand-file-name "~/Documents/config/emacs/Emacs.org"))
-    (let ((org-confirm-babel-evaluate nil))
-      (org-babel-tangle)))
-
-  (when (string-equal (buffer-file-name)
-                      (expand-file-name "~/Documents/config/emacs/Emacs.org"))
+  (when (string-prefix-p (expand-file-name "~/Documents/config/")
+                       (buffer-file-name))
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle))))
 
