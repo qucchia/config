@@ -117,12 +117,12 @@
 
 (use-package general
   :config
-  (general-create-definer q/leader-keys
+  (general-create-definer qucchia/leader-keys
     :keymaps '(normal insert visual emacs)
     :prefix "SPC"
     :global-prefix "C-SPC")
 
-  (q/leader-keys
+  (qucchia/leader-keys
     
     "b"   '(:ignore t :which-key "bookmark")
     
@@ -269,12 +269,12 @@
   :config
   (evil-collection-init))
 
-(defun q/org-mode-setup ()
+(defun qucchia/org-mode-setup ()
   (org-indent-mode)
   (variable-pitch-mode 1)
   (visual-line-mode 1))
 
-(defun q/org-font-setup ()
+(defun qucchia/org-font-setup ()
   ;; Replace list hypens with dots
   (font-lock-add-keywords 'org-mode
                           '(("^ *\\([-]\\) "
@@ -299,7 +299,7 @@
   (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
 
 (use-package org
-  :hook (org-mode . q/org-mode-setup)
+  :hook (org-mode . qucchia/org-mode-setup)
   :config
   (setq org-ellipsis " ▾")
 
@@ -422,7 +422,7 @@
           ("my" "Typing Speed" table-line (file+headline "~/Documents/life/Metrics.org" "Typing Speed")
            "| %U | %^{Speed} | %^{Accuracy} | %^{Program} | %^{Notes} |" :kill-buffer t)))
 
-  (q/org-font-setup))
+  (qucchia/org-font-setup))
 
 (use-package org-bullets
   :after org
@@ -430,13 +430,13 @@
   :custom
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
-(defun q/org-visual-mode-fill ()
+(defun qucchia/org-visual-mode-fill ()
   (setq visual-fill-column-width 100
         visual-fill-column-center-text t)
   (visual-fill-column-mode 1))
 
 (use-package visual-fill-column
-  :hook (org-mode . q/org-visual-mode-fill))
+  :hook (org-mode . qucchia/org-visual-mode-fill))
 
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -454,13 +454,13 @@
 (add-to-list 'org-structure-template-alist '("js" . "src js"))
 (add-to-list 'org-structure-template-alist '("conf" . "src conf"))
 
-(defun q/org-babel-tangle-config ()
+(defun qucchia/org-babel-tangle-config ()
   (when (string-prefix-p (expand-file-name "~/Documents/config/")
                        (buffer-file-name))
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle))))
 
-(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'q/org-babel-tangle-config)))
+(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'qucchia/org-babel-tangle-config)))
 
 (use-package org-inline-pdf
   :config
@@ -470,7 +470,7 @@
 (use-package evil-nerd-commenter
   :bind ("M-/" . evilnc-comment-or-uncomment-lines))
 
-(defun q/lsp-mode-setup ()
+(defun qucchia/lsp-mode-setup ()
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
   (lsp-headerline-breadcrumb-mode))
 
@@ -480,7 +480,7 @@
   (setq lsp-keymap-prefix "C-c l")
   :config
   (lsp-enable-which-key-integration t)
-  :hook (lsp-mode . q/lsp-mode-setup))
+  :hook (lsp-mode . qucchia/lsp-mode-setup))
 
 (use-package lsp-ui
   :hook (lsp-mode . lsp-ui-mode)
@@ -563,7 +563,7 @@
 
 (use-package eshell-git-prompt)
 
-(defun q/configure-eshell ()
+(defun qucchia/configure-eshell ()
   ;; Save command history
   (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)
 
@@ -580,7 +580,7 @@
         eshell-scroll-to-bottom-on-input t))
 
 (use-package eshell
-  :hook (eshell-first-time-mode . q/configure-eshell)
+  :hook (eshell-first-time-mode . qucchia/configure-eshell)
   :config
   (with-eval-after-load 'esh-opt
     (setq eshell-destroy-buffer-when-process-dies t)

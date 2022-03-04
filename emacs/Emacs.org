@@ -192,12 +192,12 @@ https://github.com/noctuid/general.el
 
   (use-package general
     :config
-    (general-create-definer q/leader-keys
+    (general-create-definer qucchia/leader-keys
       :keymaps '(normal insert visual emacs)
       :prefix "SPC"
       :global-prefix "C-SPC")
 
-    (q/leader-keys
+    (qucchia/leader-keys
       <<bookmarks>>
       "c"   '(org-capture :which-key "capture")
       <<open>>
@@ -375,7 +375,7 @@ https://github.com/noctuid/general.el
 
 #+begin_src emacs-lisp
 
-  (defun q/org-mode-setup ()
+  (defun qucchia/org-mode-setup ()
     (org-indent-mode)
     (variable-pitch-mode 1)
     (visual-line-mode 1))
@@ -386,7 +386,7 @@ https://github.com/noctuid/general.el
 
 #+begin_src emacs-lisp
 
-  (defun q/org-font-setup ()
+  (defun qucchia/org-font-setup ()
     ;; Replace list hypens with dots
     (font-lock-add-keywords 'org-mode
                             '(("^ *\\([-]\\) "
@@ -417,7 +417,7 @@ https://github.com/noctuid/general.el
 #+begin_src emacs-lisp
 
   (use-package org
-    :hook (org-mode . q/org-mode-setup)
+    :hook (org-mode . qucchia/org-mode-setup)
     :config
     (setq org-ellipsis " ▾")
 
@@ -540,7 +540,7 @@ https://github.com/noctuid/general.el
             ("my" "Typing Speed" table-line (file+headline "~/Documents/life/Metrics.org" "Typing Speed")
              "| %U | %^{Speed} | %^{Accuracy} | %^{Program} | %^{Notes} |" :kill-buffer t)))
 
-    (q/org-font-setup))
+    (qucchia/org-font-setup))
 
 #+end_src
 
@@ -560,13 +560,13 @@ https://github.com/noctuid/general.el
 
 #+begin_src emacs-lisp
 
-  (defun q/org-visual-mode-fill ()
+  (defun qucchia/org-visual-mode-fill ()
     (setq visual-fill-column-width 100
           visual-fill-column-center-text t)
     (visual-fill-column-mode 1))
 
   (use-package visual-fill-column
-    :hook (org-mode . q/org-visual-mode-fill))
+    :hook (org-mode . qucchia/org-visual-mode-fill))
 
 #+end_src
 ** Babel Languages
@@ -601,13 +601,13 @@ https://github.com/noctuid/general.el
 
 #+begin_src emacs-lisp
 
-  (defun q/org-babel-tangle-config ()
+  (defun qucchia/org-babel-tangle-config ()
     (when (string-prefix-p (expand-file-name "~/Documents/config/")
                          (buffer-file-name))
       (let ((org-confirm-babel-evaluate nil))
         (org-babel-tangle))))
 
-  (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'q/org-babel-tangle-config)))
+  (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'qucchia/org-babel-tangle-config)))
 
 #+end_src
 
@@ -645,7 +645,7 @@ https://emacs-lsp.github.io/lsp-mode
 
 #+begin_src emacs-lisp
 
-  (defun q/lsp-mode-setup ()
+  (defun qucchia/lsp-mode-setup ()
     (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
     (lsp-headerline-breadcrumb-mode))
 
@@ -655,7 +655,7 @@ https://emacs-lsp.github.io/lsp-mode
     (setq lsp-keymap-prefix "C-c l")
     :config
     (lsp-enable-which-key-integration t)
-    :hook (lsp-mode . q/lsp-mode-setup))
+    :hook (lsp-mode . qucchia/lsp-mode-setup))
 
   (use-package lsp-ui
     :hook (lsp-mode . lsp-ui-mode)
@@ -807,7 +807,7 @@ https://github.com/akermu/emacs-libvterm
 
   (use-package eshell-git-prompt)
 
-  (defun q/configure-eshell ()
+  (defun qucchia/configure-eshell ()
     ;; Save command history
     (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)
 
@@ -824,7 +824,7 @@ https://github.com/akermu/emacs-libvterm
           eshell-scroll-to-bottom-on-input t))
 
   (use-package eshell
-    :hook (eshell-first-time-mode . q/configure-eshell)
+    :hook (eshell-first-time-mode . qucchia/configure-eshell)
     :config
     (with-eval-after-load 'esh-opt
       (setq eshell-destroy-buffer-when-process-dies t)

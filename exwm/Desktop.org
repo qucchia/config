@@ -25,24 +25,25 @@
 
 #+begin_src emacs-lisp :noweb yes
 
-  (defun q/run-in-background (command)
+  (defun qucchia/run-in-background (command)
     (let ((command-parts (split-string command "[ ]+")))
       (apply #'call-process `(,(car command-parts) nil 0 nil 0 ,@(cdr command-parts)))))
 
-  (defun q/exwm-init-hoom ()
+  (defun qucchia/exwm-init ()
     ;; Make workspace 1 be the one where we land at startup
     (exwk-workspace-switch-create 1)
 
     (eshell))
 
-  (defun q/exwm-update-class ()
+  (defun qucchia/exwm-update-class ()
     (exwm-workspace-rename-buffer exwm-class-name))
 
   (use-package exwm
     :config
     (setq exwm-workspace-number 5)
 
-    (add-hook 'exwm-update-class-hook #'q/exwm-update-class)
+    (add-hook 'exwm-update-class-hook #'qucchia/exwm-update-class)
+    (add-hook 'exwm-init-hook #'qucchia/exwm-init)
 
     (require 'exwm-systemtray)
     (exwm-systemtray-enable)
