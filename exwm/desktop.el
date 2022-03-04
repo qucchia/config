@@ -69,4 +69,6 @@
 
   (exwm-enable)
 
+  (emms-play-url "https://coderadio-relay-ffm.freecodecamp.org/radio/8010/radio.mp3")
+
   (eshell-command "ssh-add ~/.ssh/codeberg"))
