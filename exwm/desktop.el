@@ -1,12 +1,26 @@
+(defun qucchia/exwm-init ()
+  ;; Make workspace 1 be the one where we land at startup
+  (exwm-workspace-switch-create 1)
+
+  ;; Show time
+  (setq display-time-default-load-average nil)
+  (setq display-time-24hr-format t)
+  (display-time-mode t)
+
+  ;; Start server to allow opening files from other applications
+  (server-start)
+
+  ;; Play Code Radio
+  (emms-play-url "https://coderadio-relay-ffm.freecodecamp.org/radio/8010/radio.mp3")
+  (emms-mode-line-toggle)
+
+  (eshell)
+  (insert "ssh-add ~/.ssh/codeberg")
+  (eshell-send-input))
+
 (defun qucchia/run-in-background (command)
   (let ((command-parts (split-string command "[ ]+")))
     (apply #'call-process `(,(car command-parts) nil 0 nil 0 ,@(cdr command-parts)))))
-
-(defun qucchia/exwm-init ()
-  ;; Make workspace 1 be the one where we land at startup
-  (exwk-workspace-switch-create 1)
-
-  (eshell))
 
 (defun qucchia/exwm-update-class ()
   (exwm-workspace-rename-buffer exwm-class-name))
@@ -62,20 +76,4 @@
                     (number-sequence 0 9))))
   
 
-  
-  ;; Show time
-  (setq display-time-default-load-average nil)
-  (setq display-time-24hr-format t)
-  (display-time-mode t)
-  
-  ;; Start server to allow opening files from other applications
-  (server-start)
-  
-  (exwm-enable)
-  
-  ;; Play Code Radio
-  (emms-play-url "https://coderadio-relay-ffm.freecodecamp.org/radio/8010/radio.mp3")
-  (emms-mode-line-toggle)
-  
-  (eshell-command "ssh-add ~/.ssh/codeberg")
-  )
+  (exwm-enable))
