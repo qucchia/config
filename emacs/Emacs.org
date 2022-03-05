@@ -207,7 +207,11 @@ https://github.com/noctuid/general.el
       "tt"  '(counsel-load-theme :which-key "choose theme")
       "ts"  '(hydra-text-scale/body :which-key "scale text")
       <<search>>
-      "C-s" '(mu4e-update-mail-and-index :which-key "sync mail"))
+      "C-s" '(mu4e-update-mail-and-index :which-key "sync mail")
+      "x"   '((lambda ()
+                (interactive)
+                (start-process-shell-command "xmodmap" nil "xmodmap ~/Documents/config/layout/.Xmodmap"))
+              :which-key "set keymap"))
 
     (general-define-key
      "C-M-n" 'counsel-switch-buffer
