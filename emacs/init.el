@@ -465,11 +465,6 @@
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'qucchia/org-babel-tangle-config)))
 
-(use-package org-inline-pdf
-  :config
-  (add-hook 'org-mode-hook #'org-inline-pdf-mode)
-  (setq org-image-actual-width nil))
-
 (use-package evil-nerd-commenter
   :bind ("M-/" . evilnc-comment-or-uncomment-lines))
 
@@ -542,11 +537,6 @@
 (use-package magit
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
-
-(use-package forge
-  :after magit)
-
-(setq auth-sources '("~/.authinfo"))
 
 (use-package term
   :config
@@ -696,11 +686,6 @@
           (:name "Messages with images" :query "mime:image/*" :key ?p)))
 
   (mu4e t))
-
-(use-package speed-type)
-(use-package typit)
-
-(use-package atomic-chrome)
 
 (use-package emms
   :config

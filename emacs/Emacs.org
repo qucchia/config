@@ -614,21 +614,6 @@ https://github.com/noctuid/general.el
 
 #+end_src
 
-** PDF and Org mode
-
-https://github.com/shg/org-inline-pdf.el
-
-Requires installation of =pdf2svg=, e.g. by running =sudo apt install pdf2svg=.
-
-#+begin_src emacs-lisp
-
-  (use-package org-inline-pdf
-    :config
-    (add-hook 'org-mode-hook #'org-inline-pdf-mode)
-    (setq org-image-actual-width nil))
-
-#+end_src
-
 * Development
 
 ** Commenting
@@ -760,16 +745,6 @@ https://emacs-lsp.github.io/lsp-mode
     :custom
     (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
-#+end_src
-
-** Forge
-
-
-#+begin_src emacs-lisp
-  (use-package forge
-    :after magit)
-
-  (setq auth-sources '("~/.authinfo"))
 #+end_src
 
 * Terminals
@@ -973,25 +948,6 @@ https://github.com/akermu/emacs-libvterm
 #+end_src
 
 * Other
-** Typing Practise
-
-#+begin_src emacs-lisp
-
-  (use-package speed-type)
-  (use-package typit)
-
-#+end_src
-
-** GhostText
-
-Connect to the GhostText browser extension
-
-#+begin_src emacs-lisp
-
-  (use-package atomic-chrome)
-
-#+end_src
-
 ** EMMS
 
 #+begin_src emacs-lisp
