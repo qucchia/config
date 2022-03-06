@@ -198,7 +198,7 @@ https://github.com/noctuid/general.el
       :global-prefix "C-SPC")
 
     (qucchia/leader-keys
-      <<bookmarks-bindings>>
+      <<bookmark-bindings>>
       "c"   '(org-capture :which-key "capture")
       <<open-bindings>>
       <<mail-bindings>>
