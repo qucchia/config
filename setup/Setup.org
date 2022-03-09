@@ -102,6 +102,7 @@ This script installs and sets up all my configuration on a newly installed Raspb
   git clone git@codeberg.org:qucchia/life ~/Documents/life
   git clone git@codeberg.org:qucchia/school ~/Documents/school
   git clone git@codeberg.org:qucchia/mafia-bot ~/Projects/mafia-bot
+  git clone git@codeberg.org:qbangle/qbangle ~/Projects/qbangle
 
 #+end_src
 
