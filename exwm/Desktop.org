@@ -10,12 +10,6 @@
   export CONFIG_DIR=$HOME/Documents/config
   export SCHOOL_MAIL=timothydavid.skipper@alumnat.ins-mediterrania.cat
 
-  # Set keyboard layout
-  xmodmap $CONFIG_DIR/layout/.Xmodmap
-
-  # Start Tor service
-  sudo systemctl start tor@default.service
-
   # Start Emacs
   exec dbus-launch --exit-with-session emacs -mm --debug-init -l $CONFIG_DIR/exwm/desktop.el
 
@@ -28,6 +22,12 @@
   (defun qucchia/exwm-init ()
     ;; Make workspace 1 be the one where we land at startup
     (exwm-workspace-switch-create 1)
+
+    ;; Set keyboard layout
+    (start-process-shell-command "xmodmap" nil "xmodmap ~/Documents/config/layout/.Xmodmap")
+
+    ;; Start Tor service
+    (start-process-shell-command "tor" nil "sudo systemctl start tor@default.service")
 
     ;; Show time
     (setq display-time-default-load-average nil)

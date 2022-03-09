@@ -699,6 +699,7 @@ https://emacs-lsp.github.io/lsp-mode
   (use-package prettier-js
     :after prettier)
   (add-hook 'js-mode-hook 'prettier-js-mode)
+  (add-hook 'typescript-mode-hook 'prettier-mode)
 
 #+end_src
 
@@ -840,32 +841,39 @@ https://github.com/akermu/emacs-libvterm
 
 #+begin_src emacs-lisp :noweb yes
 
-  (use-package mu4e
-    :ensure nil
-    :load-path "/usr/share/emacs/site-lisp/mu4e/"
-    :defer 20
-    :config
+    (use-package mu4e
+      :ensure nil
+      :load-path "/usr/share/emacs/site-lisp/mu4e/"
+      :defer 20
+      :config
 
-    ;; This is set to 't' to avoid mail syncing issues when using mbsync
-    (setq mu4e-change-filenames-when-moving t)
+      ;; This is set to 't' to avoid mail syncing issues when using mbsync
+      (setq mu4e-change-filenames-when-moving t)
 
-    ;; Refresh mail using isync every 10 minutes
-    (setq mu4e-update-interval (* 10 60))
-    (setq mu4e-get-mail-command "mbsync -a")
-    (setq mu4e-maildir "~/Mail/")
+      ;; Refresh mail using isync every 10 minutes
+      (setq mu4e-update-interval (* 10 60))
+      (setq mu4e-get-mail-command "mbsync -a")
+      (setq mu4e-maildir "~/Mail/")
 
-    (setq mu4e-contexts
-          (list
-           <<mail-contexts>>))
+      (setq mu4e-contexts
+            (list
+             <<mail-contexts>>))
 
-    (setq mu4e-bookmarks
-          '((:name "Unread messages" :query "flag:unread AND NOT flag:trashed" :key ?u)
-            (:name "All inboxes" :query "maildir:/^.*/Inbox/" :key ?i)
-            (:name "Today's messages" :query "date:today..now" :key ?t)
-            (:name "Last 7 days" :query "date:7d..now" :hide-unread t :key ?w)
-            (:name "Messages with images" :query "mime:image/*" :key ?p)))
+      ;; Sending mail
+      (setq smtpmail-smtp-server "smtp.gmail.com"
+            smtpmail-smtp-service 465
+            smtpmail-stream-type 'ssl
+            message-send-mail-function 'smtpmail-send-it
+            mu4e-compose-format-flowed t)
 
-    (mu4e t))
+      (setq mu4e-bookmarks
+            '((:name "Unread messages" :query "flag:unread AND NOT flag:trashed" :key ?u)
+              (:name "All inboxes" :query "maildir:/^.*/Inbox/" :key ?i)
+              (:name "Today's messages" :query "date:today..now" :key ?t)
+              (:name "Last 7 days" :query "date:7d..now" :hide-unread t :key ?w)
+              (:name "Messages with images" :query "mime:image/*" :key ?p)))
+
+      (mu4e t))
 
 #+end_src
 
@@ -881,6 +889,7 @@ https://github.com/akermu/emacs-libvterm
        (string-prefix-p "/Personal" (mu4e-message-field msg :maildir))))
    :vars '((user-mail-address . "yijods@gmail.com")
            (user-full-name . "qucchia")
+           (mu4e-compose-signature . "qucchia")
            (mu4e-drafts-folder . "/Personal/[Gmail]/Drafts")
            (mu4e-sent-folder . "/Personal/[Gmail]/Sent Mail")
            (mu4e-refile-folder . "/Personal/[Gmail]/All Mail")
@@ -906,6 +915,7 @@ https://github.com/akermu/emacs-libvterm
        (string-prefix-p "/School" (mu4e-message-field msg :maildir))))
    :vars '((user-mail-address . "timothydavid.skipper@alumnat.ins-mediterrania.cat")
            (user-full-name . "Timothy D. Skipper")
+           (mu4e-compose-signature . "Timothy D. Skipper")
            (mu4e-drafts-folder . "/School/[Gmail]/Drafts")
            (mu4e-sent-folder . "/School/[Gmail]/Sent Mail")
            (mu4e-refile-folder . "/School/[Gmail]/All Mail")
@@ -931,6 +941,7 @@ https://github.com/akermu/emacs-libvterm
        (string-prefix-p "/Development" (mu4e-message-field msg :maildir))))
    :vars '((user-mail-address . "qucchia0@gmail.com")
            (user-full-name . "qucchia")
+           (mu4e-compose-signature . "qucchia")
            (mu4e-drafts-folder . "/Development/[Gmail]/Drafts")
            (mu4e-sent-folder . "/Development/[Gmail]/Sent Mail")
            (mu4e-refile-folder . "/Development/[Gmail]/All Mail")
@@ -956,6 +967,7 @@ https://github.com/akermu/emacs-libvterm
        (string-prefix-p "/Work" (mu4e-message-field msg :maildir))))
    :vars '((user-mail-address . "timothydskipper@gmail.com")
            (user-full-name . "Timothy D. Skipper")
+           (mu4e-compose-signature . "Timothy D. Skipper")
            (mu4e-drafts-folder . "/Work/[Gmail]/Drafts")
            (mu4e-sent-folder . "/Work/[Gmail]/Sent Mail")
            (mu4e-refile-folder . "/Work/[Gmail]/All Mail")
@@ -980,6 +992,18 @@ https://github.com/akermu/emacs-libvterm
     (emms-default-players)
     :custom
     (emms-source-file-default-directory "~/Music/"))
+
+#+end_src
+
+** Lookup Password function
+
+#+begin_src emacs-lisp
+
+  (defun qucchia/lookup-password (&rest keys)
+    (let ((result (apply #'auth-source-search keys)))
+     (if result
+         (funcall (plist-get (car result) :secret))
+       nil)))
 
 #+end_src
 

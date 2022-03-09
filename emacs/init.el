@@ -516,6 +516,7 @@
 (use-package prettier-js
   :after prettier)
 (add-hook 'js-mode-hook 'prettier-js-mode)
+(add-hook 'typescript-mode-hook 'prettier-mode)
 
 (use-package typescript-mode
   :mode "\\.ts\\'"
@@ -622,6 +623,7 @@
               (string-prefix-p "/Personal" (mu4e-message-field msg :maildir))))
           :vars '((user-mail-address . "yijods@gmail.com")
                   (user-full-name . "qucchia")
+                  (mu4e-compose-signature . "qucchia")
                   (mu4e-drafts-folder . "/Personal/[Gmail]/Drafts")
                   (mu4e-sent-folder . "/Personal/[Gmail]/Sent Mail")
                   (mu4e-refile-folder . "/Personal/[Gmail]/All Mail")
@@ -642,6 +644,7 @@
               (string-prefix-p "/School" (mu4e-message-field msg :maildir))))
           :vars '((user-mail-address . "timothydavid.skipper@alumnat.ins-mediterrania.cat")
                   (user-full-name . "Timothy D. Skipper")
+                  (mu4e-compose-signature . "Timothy D. Skipper")
                   (mu4e-drafts-folder . "/School/[Gmail]/Drafts")
                   (mu4e-sent-folder . "/School/[Gmail]/Sent Mail")
                   (mu4e-refile-folder . "/School/[Gmail]/All Mail")
@@ -662,6 +665,7 @@
               (string-prefix-p "/Development" (mu4e-message-field msg :maildir))))
           :vars '((user-mail-address . "qucchia0@gmail.com")
                   (user-full-name . "qucchia")
+                  (mu4e-compose-signature . "qucchia")
                   (mu4e-drafts-folder . "/Development/[Gmail]/Drafts")
                   (mu4e-sent-folder . "/Development/[Gmail]/Sent Mail")
                   (mu4e-refile-folder . "/Development/[Gmail]/All Mail")
@@ -682,6 +686,7 @@
               (string-prefix-p "/Work" (mu4e-message-field msg :maildir))))
           :vars '((user-mail-address . "timothydskipper@gmail.com")
                   (user-full-name . "Timothy D. Skipper")
+                  (mu4e-compose-signature . "Timothy D. Skipper")
                   (mu4e-drafts-folder . "/Work/[Gmail]/Drafts")
                   (mu4e-sent-folder . "/Work/[Gmail]/Sent Mail")
                   (mu4e-refile-folder . "/Work/[Gmail]/All Mail")
@@ -693,6 +698,13 @@
                    (:maildir "/Work/[Gmail]/Drafts"    :key ?d)
                    (:maildir "/Work/[Gmail]/All Mail"  :key ?a))))
          ))
+
+  ;; Sending mail
+  (setq smtpmail-smtp-server "smtp.gmail.com"
+        smtpmail-smtp-service 465
+        smtpmail-stream-type 'ssl
+        message-send-mail-function 'smtpmail-send-it
+        mu4e-compose-format-flowed t)
 
   (setq mu4e-bookmarks
         '((:name "Unread messages" :query "flag:unread AND NOT flag:trashed" :key ?u)
@@ -709,3 +721,9 @@
   (emms-default-players)
   :custom
   (emms-source-file-default-directory "~/Music/"))
+
+(defun qucchia/lookup-password (&rest keys)
+  (let ((result (apply #'auth-source-search keys)))
+   (if result
+       (funcall (plist-get (car result) :secret))
+     nil)))

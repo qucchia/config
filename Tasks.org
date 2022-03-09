@@ -1,0 +1,24 @@
+* Editors
+
+** TODO Vim
+
+** TODO GVim
+
+** TODO Neovim
+
+* Window managers
+
+** TODO i3
+
+** TODO dwm
+
+* Terminals
+
+** TODO vterm
+
+* Browsers
+
+** TODO vimb
+
+** TODO qtbrowser
+

@@ -1,7 +1,8 @@
 export CONFIG_DIR=$HOME/Documents/config
 SETUP_DIR=$CONFIG_DIR/setup
 
-sudo apt purge geany thonny chromium-browser -y
+sudo apt purge geany thonny -y
+# sudo apt purge chromium-browser
 sudo apt autoremove -y
 
 # Add Firefox source
@@ -19,10 +20,7 @@ sudo ln -f $SETUP_DIR/torrc /etc/tor/torrc
 
 curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 sudo apt install -y nodejs
-
-sudo apt install -y bluetooth bluez libbluetooth-dev libudev-dev
-sudo npm install -g espruino-web-ide espruino
-sudo setcap cap_net_raw+eip $(eval readlink -f `which node`)
+sudo npm i -g typescript typescript-language-server prettier
 
 git config --global user.name qucchia
 git config --global user.email "qucchia0@gmail.com"

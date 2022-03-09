@@ -17,8 +17,9 @@ This script installs and sets up all my configuration on a newly installed Raspb
 ** Remove preinstalled applications
 
 #+begin_src shell
-  
-  sudo apt purge geany thonny chromium-browser -y
+
+  sudo apt purge geany thonny -y
+  # sudo apt purge chromium-browser
   sudo apt autoremove -y
 
 #+end_src
@@ -63,19 +64,10 @@ This script installs and sets up all my configuration on a newly installed Raspb
 ** Node
 
 #+begin_src shell
-  
+
   curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
   sudo apt install -y nodejs
-
-#+end_src
-
-** Espruino IDE
-
-#+begin_src shell
-
-  sudo apt install -y bluetooth bluez libbluetooth-dev libudev-dev
-  sudo npm i -g espruino-web-ide espruino
-  sudo setcap cap_net_raw+eip $(eval readlink -f `which node`)
+  sudo npm i -g typescript typescript-language-server prettier
 
 #+end_src
 

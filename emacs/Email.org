@@ -7,7 +7,7 @@
   IMAPAccount gmail
   Host imap.gmail.com
   User yijods@gmail.com
-  PassCmd "pass Mail/Personal"
+  PassCmd "emacsclient -e \"(qucchia/lookup-password :host \\\"gmail.com\\\" :user \\\"yijods@gmail.com\\\")\" | cut -d '\"' -f2"
   SSLType IMAPS
   CertificateFile /etc/ssl/certs/ca-certificates.crt
 
@@ -35,7 +35,7 @@
   IMAPAccount gmail
   Host imap.gmail.com
   User timothydavid.skipper@alumnat.ins-mediterrania.cat
-  PassCmd "pass Mail/School"
+  PassCmd "emacsclient -e \"(qucchia/lookup-password :host \\\"gmail.com\\\" :user \\\"timothydavid.skipper@alumnat.ins-mediterrania.cat\\\")\" | cut -d '\"' -f2"
   SSLType IMAPS
   CertificateFile /etc/ssl/certs/ca-certificates.crt
 
@@ -63,7 +63,7 @@
   IMAPAccount gmail
   Host imap.gmail.com
   User qucchia0@gmail.com
-  PassCmd "pass Mail/Development"
+  PassCmd "emacsclient -e \"(qucchia/lookup-password :host \\\"gmail.com\\\" :user \\\"qucchia0@gmail.com\\\")\" | cut -d '\"' -f2"
   SSLType IMAPS
   CertificateFile /etc/ssl/certs/ca-certificates.crt
 
@@ -91,7 +91,7 @@
   IMAPAccount gmail
   Host imap.gmail.com
   User timothydskipper@gmail.com
-  PassCmd "pass Mail/Work"
+  PassCmd "emacsclient -e \"(qucchia/lookup-password :host \\\"gmail.com\\\" :user \\\"timothydskipper@gmail.com\\\")\" | cut -d '\"' -f2"
   SSLType IMAPS
   CertificateFile /etc/ssl/certs/ca-certificates.crt
 

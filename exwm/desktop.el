@@ -2,6 +2,12 @@
   ;; Make workspace 1 be the one where we land at startup
   (exwm-workspace-switch-create 1)
 
+  ;; Set keyboard layout
+  (start-process-shell-command "xmodmap" nil "xmodmap ~/Documents/config/layout/.Xmodmap")
+
+  ;; Start Tor service
+  (start-process-shell-command "tor" nil "sudo systemctl start tor@default.service")
+
   ;; Show time
   (setq display-time-default-load-average nil)
   (setq display-time-24hr-format t)
