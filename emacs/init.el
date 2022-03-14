@@ -54,8 +54,9 @@
   :init (doom-modeline-mode 1)
   :custom ((doom-modeline-height 15)))
 
-(use-package doom-themes)
-(load-theme 'doom-dracula t)
+(use-package nord-theme)
+;; (use-package doom-themes)
+(load-theme 'nord t)
 
 (use-package hydra)
 

@@ -87,8 +87,9 @@
 
 #+begin_src emacs-lisp
 
-  (use-package doom-themes)
-  (load-theme 'doom-dracula t)
+  (use-package nord-theme)
+  ;; (use-package doom-themes)
+  (load-theme 'nord t)
 
 #+end_src
 ** Text Scaling
