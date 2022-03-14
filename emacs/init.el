@@ -30,7 +30,7 @@
 ;; Disable line numbers for some modes
 (dolist (mode '(org-mode-hook
                 term-mode-hook
-
+                vterm-mode-hook
                 shell-mode-hook
                 treemacs-mode-hook
                 lsp-treemacs-generic-mode-hook
@@ -568,7 +568,7 @@
 (use-package term
   :config
   (setq explicit-shell-file-name "bash")
-  (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *"))
+  (setq term-prompt-regexp "^\\w+@\\w+:[^#$%>\n]* $ *"))
 
 (use-package eterm-256color
   :hook (term-mode . eterm-256color-mode))
