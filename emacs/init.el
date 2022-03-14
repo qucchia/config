@@ -222,6 +222,15 @@
     "ms" '(mu4e-update-mail-and-index :which-key "sync")
     
     "p"   '(emms-pause :which-key "pause music")
+    "C-p" '((lambda (name)
+               (interactive (list (read-string "password: ")))
+               (start-process-shell-command "pass" nil
+                 (string-join
+                   (list
+                     "pass -c "
+                     name
+                     " | xclip -selection clipboard"))))
+               :which-key "password")
     "t"   '(:ignore t :which-key "toggle")
     "te"  '(emms-mode-line-toggle :which-key "emms modeline")
     "tt"  '(counsel-load-theme :which-key "choose theme")
