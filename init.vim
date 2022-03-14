@@ -1,18 +1,19 @@
 " == General configuration ==
 
-set nocompatible            " disable compatibility to old-time Vi
+set nocompatible            " disable compatibility to Vi
 set showmatch               " show matching brackets
 set ignorecase              " case insensitive matching
 set hlsearch                " highlight search results
+set incsearch               " highlight results during search
 set autoindent              " indent a new line the same amount as the line just typed
 set number                  " add line numbers
 set wildmode=longest,list   " get bash-like tab completions
 set cc=80                   " show columns for good coding style
 set cursorline              " highlight cursor line
 set ttyfast                 " speed up scrolling
-
-filetype plugin on
-filetype plugin indent on   " allow auto-indenting depending on file type
+set backup                  " backup files
+set history=10000           " command history length
+set ruler                   " bottom-right position indicator
 
 " Tabs
 set tabstop=2               " set number of columns occupied by a tab character
