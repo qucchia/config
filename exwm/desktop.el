@@ -20,9 +20,7 @@
   (emms-play-url "https://coderadio-relay-ffm.freecodecamp.org/radio/8010/radio.mp3")
   (emms-mode-line-toggle)
 
-  (eshell)
-  (insert "ssh-add ~/.ssh/codeberg")
-  (eshell-send-input))
+  (eshell))
 
 (defun qucchia/run-in-background (command)
   (let ((command-parts (split-string command "[ ]+")))
