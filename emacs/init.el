@@ -1,3 +1,12 @@
+(defun qucchia/display-startup-time ()
+  (message "Emacs loaded in %s with %d garbage collections."
+           (format "%.2f seconds"
+                   (float-time
+                     (time-subtract after-init-time before-init-time)))
+           gcs-done))
+
+(add-hook 'emacs-startup-hook #'qucchia/display-startup-time)
+
 ;; Initialise package sources
 (require 'package)
 
@@ -15,6 +24,7 @@
 
 (require 'use-package)
 (setq use-package-always-ensure t)
+(setq use-package-verbose t)
 
 (use-package auto-package-update
   :custom
@@ -58,15 +68,16 @@
 (use-package all-the-icons)
 
 (use-package doom-modeline
-  :ensure t
   :init (doom-modeline-mode 1)
   :custom ((doom-modeline-height 15)))
 
-(use-package nord-theme)
-;; (use-package doom-themes)
-(load-theme 'nord t)
+(use-package nord-theme
+  :init (load-theme 'nord t))
 
-(use-package hydra)
+;; (use-package doom-themes)
+
+(use-package hydra
+  :defer t)
 
 (defhydra hydra-text-scale (:timeout 30)
   "scale text"
@@ -90,10 +101,12 @@
          ("C-k" . ivy-previous-line)
          ("C-d" . ivy-reverse-i-search-kill))
   :config
-  (ivy-mode 1))
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-height 10))
 
 (use-package ivy-rich
-  :after counsel
+  :after (counsel ivy)
   :init
   (ivy-rich-mode 1))
 
@@ -107,6 +120,7 @@
   (setq ivy-initial-inputs-alist nil)) ;; Don't start searches with ^
 
 (use-package helpful
+  :commands (helpful-callable helpful-variable helpful-command helpful-key)
   :custom
   (counsel-describe-function-function #'helpful-callable)
   (counsel-describe-variable-function #'helpful-variable)
@@ -119,12 +133,14 @@
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 (use-package which-key
-  :init (which-key-mode)
+  :defer 0
   :diminish which-key-mode
   :config
+  (which-key-mode)
   (setq which-key-idle-delay 0.3))
 
 (use-package general
+  :after evil
   :config
   (general-create-definer qucchia/leader-keys
     :keymaps '(normal insert visual emacs)
@@ -229,6 +245,7 @@
     "mm" '(mu4e :which-key "open")
     "ms" '(mu4e-update-mail-and-index :which-key "sync")
     
+    "k"   '(counsel-descbinds :which-key "keybindings")
     "p"   '(emms-pause :which-key "pause music")
     "C-p" '((lambda (name)
                (interactive (list (read-string "password: ")))
@@ -278,7 +295,8 @@
     "x"   '((lambda ()
               (interactive)
               (start-process-shell-command "xmodmap" nil "xmodmap ~/Documents/config/layout/.Xmodmap"))
-            :which-key "set keymap"))
+            :which-key "set keymap")
+    "y"   '(counsel-yank-pop :which-key "yank"))
 
   (general-define-key
    "C-M-n" 'counsel-switch-buffer
@@ -336,6 +354,8 @@
   (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
 
 (use-package org
+  :pin org
+  :commands (org-capture org-agenda)
   :hook (org-mode . qucchia/org-mode-setup)
   :config
   (setq org-ellipsis " ▾")
@@ -462,7 +482,6 @@
   (qucchia/org-font-setup))
 
 (use-package org-bullets
-  :after org
   :hook (org-mode . org-bullets-mode)
   :custom
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
@@ -475,21 +494,23 @@
 (use-package visual-fill-column
   :hook (org-mode . qucchia/org-visual-mode-fill))
 
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((emacs-lisp . t)
-   (python . t)
-   (js . t)
-   (shell . t)))
+(with-eval-after-load 'org
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (python . t)
+     (js . t)
+     (shell . t)))
 
-(push '("conf-unix" . conf-unix) org-src-lang-modes)
+  (push '("conf-unix" . conf-unix) org-src-lang-modes))
 
-(require 'org-tempo)
-(add-to-list 'org-structure-template-alist '("sh" . "src shell"))
-(add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
-(add-to-list 'org-structure-template-alist '("py" . "src python"))
-(add-to-list 'org-structure-template-alist '("js" . "src js"))
-(add-to-list 'org-structure-template-alist '("conf" . "src conf"))
+(with-eval-after-load 'org
+  (require 'org-tempo)
+  (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+  (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+  (add-to-list 'org-structure-template-alist '("py" . "src python"))
+  (add-to-list 'org-structure-template-alist '("js" . "src js"))
+  (add-to-list 'org-structure-template-alist '("conf" . "src conf")))
 
 (defun qucchia/org-babel-tangle-config ()
   (when (string-prefix-p (expand-file-name "~/Documents/config/")
@@ -497,52 +518,69 @@
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle))))
 
-(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'qucchia/org-babel-tangle-config)))
+(add-hook 'org-mode-hook (lambda ()
+  (add-hook 'after-save-hook #'qucchia/org-babel-tangle-config)))
 
 (use-package evil-nerd-commenter
   :bind ("M-/" . evilnc-comment-or-uncomment-lines))
+
+(use-package flycheck
+  :init (global-flycheck-mode)
+  (add-hook 'after-init-hook #'global-flycheck-mode))
 
 (defun qucchia/lsp-mode-setup ()
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
   (lsp-headerline-breadcrumb-mode))
 
 (use-package lsp-mode
-  :custom (lsp lsp-deferred)
+  :commands (lsp lsp-deferred)
+  :hook ((html-mode . lsp-deferred)
+    (js2-mode . lsp-deferred)
+    (json-mode . lsp-deferred)
+    (typescript-mode . lsp-deferred)
+    (php-mode . lsp-deferred)
+    (lsp-mode . qucchia/lsp-mode-setup))
   :init
   (setq lsp-keymap-prefix "C-c l")
+  (setq gc-cons-threshold (* 100 1000000)) ;; 100MB
+  (setq read-process-output-max (* 1024 1024)) ;; 1MB
   :config
-  (lsp-enable-which-key-integration t)
-  :hook (lsp-mode . qucchia/lsp-mode-setup))
+  (lsp-enable-which-key-integration t))
+
+(add-to-list 'auto-mode-alist '("\\.html\\'" . html-mode))
 
 (use-package lsp-ui
-  :hook (lsp-mode . lsp-ui-mode)
+  :commands lsp-ui-mode
   :custom
   (lsp-ui-doc-position 'bottom))
 
 (use-package lsp-treemacs
-  :after lsp)
+  :config (lsp-treemacs-sync-mode 1)
+  :commands lsp-treemacs-errors-list)
 
-(use-package lsp-ivy)
+(use-package lsp-ivy
+  :commands lsp-ivy-workspace-symbol)
 
-(setq js-indent-level 2)
-
-(use-package js2-mode)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-(add-to-list 'interpreter-mode-alist '("node" . js2-mode))
+;; (use-package dap-mode :after lsp-mode)
 
 (use-package prettier)
 (use-package prettier-js
   :after prettier)
-(add-hook 'js-mode-hook 'prettier-js-mode)
+(add-hook 'js2-mode-hook 'prettier-js-mode)
 (add-hook 'typescript-mode-hook 'prettier-mode)
+
+(use-package js2-mode
+  :mode "\\.js\\'"
+  :config (setq js-indent-level 2))
+
+(use-package json-mode :mode "\\.json\\'")
 
 (use-package typescript-mode
   :mode "\\.ts\\'"
-  :hook (typescript-mode . lsp-deferred)
   :config
   (setq typescript-indent-level 2))
 
-(use-package json-mode)
+(use-package php-mode :mode "\\.php\\'")
 
 (use-package company
   :after lsp-mode
@@ -554,6 +592,8 @@
   :custom
   (company-minimum-prefix-length 1)
   (company-idle-delay 0.0))
+
+(add-hook 'after-init-hook 'global-company-mode)
 
 (use-package company-box
   :hook (company-mode . company-box-mode))
@@ -569,7 +609,11 @@
     (setq projectile-project-search-path '("~/Projects")))
   (setq projectile-switch-project-acion #'projectile-dired))
 
+(use-package counsel-projectile
+  :init (counsel-projectile-mode))
+
 (use-package magit
+  :commands (magit magit-status)
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
@@ -583,12 +627,14 @@
     "h" 'dired-single-up-directory
     "l" 'dired-single-buffer))
 
-(use-package dired-single)
+(use-package dired-single
+  :commands (dired dired-jump))
 
 (use-package all-the-icons-dired
   :hook (dired-mode . all-the-icons-dired-mode))
 
 (use-package dired-open
+  :commands (dired dired-jump)
   :config
   (setq dired-open-extensions '(("png" . "display"))))
 
@@ -602,6 +648,7 @@
   :hook (dired-mode . diredfl-mode))
 
 (use-package term
+  :defer t
   :config
   (setq explicit-shell-file-name "bash")
   (setq term-prompt-regexp "^\\w+@\\w+:[^#$%>\n]* $ *"))
@@ -615,9 +662,11 @@
   (setq vterm-max-scrollback 10000))
 
 (use-package exec-path-from-shell
+  :after eshell
   :config (exec-path-from-shell-initialize))
 
-(use-package eshell-git-prompt)
+(use-package eshell-git-prompt
+  :after eshell)
 
 (defun qucchia/configure-eshell ()
   ;; Save command history
@@ -646,10 +695,10 @@
 
 (use-package mu4e
   :ensure nil
+  :commands (mu4e)
   :load-path "/usr/share/emacs/site-lisp/mu4e/"
-  :defer 20
+  ;; :defer 20
   :config
-
   ;; This is set to 't' to avoid mail syncing issues when using mbsync
   (setq mu4e-change-filenames-when-moving t)
 
@@ -757,9 +806,7 @@
           (:name "All inboxes" :query "maildir:/^.*/Inbox/" :key ?i)
           (:name "Today's messages" :query "date:today..now" :key ?t)
           (:name "Last 7 days" :query "date:7d..now" :hide-unread t :key ?w)
-          (:name "Messages with images" :query "mime:image/*" :key ?p)))
-
-  (mu4e t))
+          (:name "Messages with images" :query "mime:image/*" :key ?p))))
 
 (use-package emms
   :config
