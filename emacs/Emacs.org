@@ -704,6 +704,16 @@ https://github.com/noctuid/general.el
 
 #+end_src
 
+** Flycheck
+
+#+begin_src emacs-lisp
+
+  (use-package flycheck
+    :init (global-flycheck-mode)
+    (add-hook 'after-init-hook #'global-flycheck-mode))
+
+#+end_src
+
 ** Languages
 
 *** Language server
