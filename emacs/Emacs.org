@@ -107,7 +107,6 @@
   (use-package all-the-icons)
 
   (use-package doom-modeline
-    :ensure t
     :init (doom-modeline-mode 1)
     :custom ((doom-modeline-height 15)))
 
@@ -117,16 +116,19 @@
 
 #+begin_src emacs-lisp
 
-  (use-package nord-theme)
+  (use-package nord-theme
+    :init (load-theme 'nord t))
+
   ;; (use-package doom-themes)
-  (load-theme 'nord t)
 
 #+end_src
+
 ** Text Scaling
 
 #+begin_src emacs-lisp
 
-  (use-package hydra)
+  (use-package hydra
+    :defer t)
 
   (defhydra hydra-text-scale (:timeout 30)
     "scale text"
@@ -137,6 +139,7 @@
 #+end_src
 
 ** Ivy
+
 #+begin_src emacs-lisp
 
   (use-package ivy
@@ -164,7 +167,7 @@
 #+begin_src emacs-lisp
 
   (use-package ivy-rich
-    :after counsel
+    :after (counsel ivy)
     :init
     (ivy-rich-mode 1))
 
@@ -190,6 +193,7 @@
 #+begin_src emacs-lisp
 
   (use-package helpful
+    :commands (helpful-callable helpful-variable helpful-command helpful-key)
     :custom
     (counsel-describe-function-function #'helpful-callable)
     (counsel-describe-variable-function #'helpful-variable)
@@ -206,11 +210,18 @@
 #+begin_src emacs-lisp
 
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+  
+#+end_src
+
+** Which key
+
+#+begin_src emacs-lisp
 
   (use-package which-key
-    :init (which-key-mode)
+    :defer 0
     :diminish which-key-mode
     :config
+    (which-key-mode)
     (setq which-key-idle-delay 0.3))
 
 #+end_src
@@ -222,6 +233,7 @@ https://github.com/noctuid/general.el
 #+begin_src emacs-lisp :noweb yes
 
   (use-package general
+    :after evil
     :config
     (general-create-definer qucchia/leader-keys
       :keymaps '(normal insert visual emacs)
@@ -436,6 +448,7 @@ https://github.com/noctuid/general.el
 #+end_src
 
 * Org Mode
+
 ** Setup
 
 #+begin_src emacs-lisp
@@ -482,6 +495,8 @@ https://github.com/noctuid/general.el
 #+begin_src emacs-lisp
 
   (use-package org
+    :pin org
+    :commands (org-capture org-agenda)
     :hook (org-mode . qucchia/org-mode-setup)
     :config
     (setq org-ellipsis " ▾")
@@ -614,7 +629,6 @@ https://github.com/noctuid/general.el
 #+begin_src emacs-lisp
 
   (use-package org-bullets
-    :after org
     :hook (org-mode . org-bullets-mode)
     :custom
     (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
@@ -638,14 +652,15 @@ https://github.com/noctuid/general.el
 
 #+begin_src emacs-lisp
 
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((emacs-lisp . t)
-     (python . t)
-     (js . t)
-     (shell . t)))
+  (with-eval-after-load 'org
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((emacs-lisp . t)
+       (python . t)
+       (js . t)
+       (shell . t)))
 
-  (push '("conf-unix" . conf-unix) org-src-lang-modes)
+    (push '("conf-unix" . conf-unix) org-src-lang-modes))
 
 #+end_src
 
@@ -653,12 +668,13 @@ https://github.com/noctuid/general.el
 
 #+begin_src emacs-lisp
 
-  (require 'org-tempo)
-  (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
-  (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
-  (add-to-list 'org-structure-template-alist '("py" . "src python"))
-  (add-to-list 'org-structure-template-alist '("js" . "src js"))
-  (add-to-list 'org-structure-template-alist '("conf" . "src conf"))
+  (with-eval-after-load 'org
+    (require 'org-tempo)
+    (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+    (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+    (add-to-list 'org-structure-template-alist '("py" . "src python"))
+    (add-to-list 'org-structure-template-alist '("js" . "src js"))
+    (add-to-list 'org-structure-template-alist '("conf" . "src conf")))
 
 #+end_src
 
@@ -672,7 +688,8 @@ https://github.com/noctuid/general.el
       (let ((org-confirm-babel-evaluate nil))
         (org-babel-tangle))))
 
-  (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'qucchia/org-babel-tangle-config)))
+  (add-hook 'org-mode-hook (lambda ()
+    (add-hook 'after-save-hook #'qucchia/org-babel-tangle-config)))
 
 #+end_src
 
