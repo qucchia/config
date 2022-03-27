@@ -727,34 +727,35 @@ https://emacs-lsp.github.io/lsp-mode
     (lsp-headerline-breadcrumb-mode))
 
   (use-package lsp-mode
-    :custom (lsp lsp-deferred)
+    :commands (lsp lsp-deferred)
+    :hook ((html-mode . lsp-deferred)
+      (js2-mode . lsp-deferred)
+      (json-mode . lsp-deferred)
+      (typescript-mode . lsp-deferred)
+      (php-mode . lsp-deferred)
+      (lsp-mode . qucchia/lsp-mode-setup))
     :init
     (setq lsp-keymap-prefix "C-c l")
+    (setq gc-cons-threshold (* 100 1000000)) ;; 100MB
+    (setq read-process-output-max (* 1024 1024)) ;; 1MB
     :config
-    (lsp-enable-which-key-integration t)
-    :hook (lsp-mode . qucchia/lsp-mode-setup))
+    (lsp-enable-which-key-integration t))
+
+  (add-to-list 'auto-mode-alist '("\\.html\\'" . html-mode))
 
   (use-package lsp-ui
-    :hook (lsp-mode . lsp-ui-mode)
+    :commands lsp-ui-mode
     :custom
     (lsp-ui-doc-position 'bottom))
 
   (use-package lsp-treemacs
-    :after lsp)
+    :config (lsp-treemacs-sync-mode 1)
+    :commands lsp-treemacs-errors-list)
 
-  (use-package lsp-ivy)
-
-#+end_src
-
-*** JavaScript
-
-#+begin_src emacs-lisp
-
-  (setq js-indent-level 2)
-
-  (use-package js2-mode)
-  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-  (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
+  (use-package lsp-ivy
+    :commands lsp-ivy-workspace-symbol)
+    
+  ;; (use-package dap-mode :after lsp-mode)
 
 #+end_src
 
@@ -765,8 +766,26 @@ https://emacs-lsp.github.io/lsp-mode
   (use-package prettier)
   (use-package prettier-js
     :after prettier)
-  (add-hook 'js-mode-hook 'prettier-js-mode)
+  (add-hook 'js2-mode-hook 'prettier-js-mode)
   (add-hook 'typescript-mode-hook 'prettier-mode)
+
+#+end_src
+
+*** JavaScript
+
+#+begin_src emacs-lisp
+
+  (use-package js2-mode
+    :mode "\\.js\\'"
+    :config (setq js-indent-level 2))
+
+#+end_src
+
+*** JSON
+
+#+begin_src emacs-lisp
+
+  (use-package json-mode :mode "\\.json\\'")
 
 #+end_src
 
@@ -776,17 +795,16 @@ https://emacs-lsp.github.io/lsp-mode
 
   (use-package typescript-mode
     :mode "\\.ts\\'"
-    :hook (typescript-mode . lsp-deferred)
     :config
     (setq typescript-indent-level 2))
 
 #+end_src
 
-*** JSON
+*** PHP
 
 #+begin_src emacs-lisp
 
-  (use-package json-mode)
+  (use-package php-mode :mode "\\.php\\'")
 
 #+end_src
 
