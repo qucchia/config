@@ -822,6 +822,7 @@ https://emacs-lsp.github.io/lsp-mode
 #+begin_src emacs-lisp
 
   (use-package magit
+    :commands (magit magit-status)
     :custom
     (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
@@ -841,12 +842,14 @@ https://emacs-lsp.github.io/lsp-mode
       "h" 'dired-single-up-directory
       "l" 'dired-single-buffer))
 
-  (use-package dired-single)
+  (use-package dired-single
+    :commands (dired dired-jump))
 
   (use-package all-the-icons-dired
     :hook (dired-mode . all-the-icons-dired-mode))
 
   (use-package dired-open
+    :commands (dired dired-jump)
     :config
     (setq dired-open-extensions '(("png" . "display"))))
 
@@ -868,6 +871,7 @@ https://emacs-lsp.github.io/lsp-mode
 #+begin_src emacs-lisp
 
   (use-package term
+    :defer t
     :config
     (setq explicit-shell-file-name "bash")
     (setq term-prompt-regexp "^\\w+@\\w+:[^#$%>\n]* $ *"))
@@ -895,9 +899,11 @@ https://github.com/akermu/emacs-libvterm
 #+begin_src emacs-lisp
 
   (use-package exec-path-from-shell
+    :after eshell
     :config (exec-path-from-shell-initialize))
 
-  (use-package eshell-git-prompt)
+  (use-package eshell-git-prompt
+    :after eshell)
 
   (defun qucchia/configure-eshell ()
     ;; Save command history
