@@ -158,7 +158,9 @@
            ("C-k" . ivy-previous-line)
            ("C-d" . ivy-reverse-i-search-kill))
     :config
-    (ivy-mode 1))
+    (ivy-mode 1)
+    (setq ivy-use-virtual-buffers t)
+    (setq ivy-height 10))
 
 #+end_src
 
@@ -245,6 +247,7 @@ https://github.com/noctuid/general.el
       "c"   '(org-capture :which-key "capture")
       <<open-bindings>>
       <<mail-bindings>>
+      "k"   '(counsel-descbinds :which-key "keybindings")
       "p"   '(emms-pause :which-key "pause music")
       "C-p" '((lambda (name)
                  (interactive (list (read-string "password: ")))
@@ -264,7 +267,8 @@ https://github.com/noctuid/general.el
       "x"   '((lambda ()
                 (interactive)
                 (start-process-shell-command "xmodmap" nil "xmodmap ~/Documents/config/layout/.Xmodmap"))
-              :which-key "set keymap"))
+              :which-key "set keymap")
+      "y"   '(counsel-yank-pop :which-key "yank"))
 
     (general-define-key
      "C-M-n" 'counsel-switch-buffer
@@ -822,6 +826,8 @@ https://emacs-lsp.github.io/lsp-mode
     :custom
     (company-minimum-prefix-length 1)
     (company-idle-delay 0.0))
+    
+  (add-hook 'after-init-hook 'global-company-mode)
 
   (use-package company-box
     :hook (company-mode . company-box-mode))
