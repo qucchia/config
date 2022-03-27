@@ -1,6 +1,21 @@
 #+title Emacs Configuration
 #+PROPERTY: header-args:emacs-lisp :tangle ./init.el :mkdirp yes
 
+* Startup Performance
+
+#+begin_src emacs-lisp
+
+  (defun qucchia/display-startup-time ()
+    (message "Emacs loaded in %s with %d garbage collections."
+             (format "%.2f seconds"
+                     (float-time
+                       (time-subtract after-init-time before-init-time)))
+             gcs-done))
+
+  (add-hook 'emacs-startup-hook #'qucchia/display-startup-time)
+
+#+end_src
+
 * System Package Configuration
 
 #+begin_src emacs-lisp
@@ -22,6 +37,7 @@
 
   (require 'use-package)
   (setq use-package-always-ensure t)
+  (setq use-package-verbose t)
 
 #+end_src
 
