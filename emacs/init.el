@@ -137,7 +137,7 @@
   "Sets my custom keymap."
   (interactive)
   (start-process-shell-command "xmodmap" nil 
-    "xmodmap ~/Documents/config/layout/.Xmodmap"))
+    "xmodmap ~/Documents/dotfiles/layout/.Xmodmap"))
 
 (defun qucchia/get-password (name)
   "Retrieves the password NAME from pass and copies it to the clipboard."
@@ -550,7 +550,7 @@
   (add-to-list 'org-structure-template-alist '("conf" . "src conf")))
 
 (defun qucchia/org-babel-tangle-config ()
-  (when (string-prefix-p (expand-file-name "~/Documents/config/")
+  (when (string-prefix-p (expand-file-name "~/Documents/dotfiles/")
                        (buffer-file-name))
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle))))
