@@ -3,7 +3,7 @@
   (exwm-workspace-switch-create 1)
 
   ;; Set keyboard layout
-  (start-process-shell-command "xmodmap" nil "xmodmap ~/Documents/config/layout/.Xmodmap")
+  (start-process-shell-command "xmodmap" nil "xmodmap ~/.dotfiles/layout/.Xmodmap")
 
   ;; Start Tor service
   (start-process-shell-command "tor" nil "sudo systemctl start tor@default.service")

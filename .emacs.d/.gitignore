@@ -1,0 +1,6 @@
+.cache/
+elpa/
+eln-cache/
+eshell/history
+eshell/lastdir
+lsp-cache/

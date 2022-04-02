@@ -1,17 +1,12 @@
 #+title:Emacs Desktop Environment
-#+PROPERTY: header-args:emacs-lisp :tangle ./desktop.el
+#+PROPERTY: header-args:emacs-lisp :tangle ./.emacs.d/exwm/desktop.el
 
 * Bash Script
 
-#+begin_src shell :tangle ./start-exwm.sh
+#+begin_src shell :tangle ./.emacs.d/exwm/start-exwm.sh
 
   #!/bin/sh
-
-  export CONFIG_DIR=$HOME/Documents/config
-  export SCHOOL_MAIL=timothydavid.skipper@alumnat.ins-mediterrania.cat
-
-  # Start Emacs
-  exec dbus-launch --exit-with-session emacs -mm --debug-init -l $CONFIG_DIR/exwm/desktop.el
+  exec dbus-launch --exit-with-session emacs -mm --debug-init -l ~/.emacs.d/exwm/desktop.el
 
 #+end_src
 
@@ -24,7 +19,7 @@
     (exwm-workspace-switch-create 1)
 
     ;; Set keyboard layout
-    (start-process-shell-command "xmodmap" nil "xmodmap ~/Documents/config/layout/.Xmodmap")
+    (start-process-shell-command "xmodmap" nil "xmodmap ~/.dotfiles/layout/.Xmodmap")
 
     ;; Start Tor service
     (start-process-shell-command "tor" nil "sudo systemctl start tor@default.service")

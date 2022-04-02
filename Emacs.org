@@ -1,5 +1,5 @@
 #+title Emacs Configuration
-#+PROPERTY: header-args:emacs-lisp :tangle ./init.el :mkdirp yes
+#+PROPERTY: header-args:emacs-lisp :tangle ./.emacs.d/init.el :mkdirp yes
 
 * Startup Performance
 
@@ -233,7 +233,7 @@
     "Set my custom keymap."
     (interactive)
     (start-process-shell-command "xmodmap" nil
-      "xmodmap ~/Documents/dotfiles/layout/.Xmodmap"))
+      "xmodmap ~/.dotfiles/layout/.Xmodmap"))
 
 #+end_src
 
@@ -764,7 +764,7 @@ https://github.com/noctuid/general.el
 
   (defun qucchia/org-babel-tangle-config ()
     "Tangle dotfiles on save."
-    (when (string-prefix-p (expand-file-name "~/Documents/dotfiles/")
+    (when (string-prefix-p (expand-file-name "~/.dotfiles/")
                          (buffer-file-name))
       (let ((org-confirm-babel-evaluate nil))
         (org-babel-tangle))))
@@ -1208,7 +1208,7 @@ https://github.com/akermu/emacs-libvterm
 
 #+begin_src emacs-lisp
 
-  (setq dotfiles-folder "~/Documents/dotfiles")
+  (setq dotfiles-folder "~/.dotfiles")
   (setq dotfiles-org-files '("Emacs.org" "Desktop.org"))
   
   (defun dotfiles-tangle-org-file (&optional org-file)

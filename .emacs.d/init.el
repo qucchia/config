@@ -141,7 +141,7 @@
   "Set my custom keymap."
   (interactive)
   (start-process-shell-command "xmodmap" nil
-    "xmodmap ~/Documents/dotfiles/layout/.Xmodmap"))
+    "xmodmap ~/.dotfiles/layout/.Xmodmap"))
 
 (defun qucchia/get-password (name)
   "Retrieve the password NAME from pass and copies it to the clipboard."
@@ -561,7 +561,7 @@
 
 (defun qucchia/org-babel-tangle-config ()
   "Tangle dotfiles on save."
-  (when (string-prefix-p (expand-file-name "~/Documents/dotfiles/")
+  (when (string-prefix-p (expand-file-name "~/.dotfiles/")
                        (buffer-file-name))
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle))))
@@ -858,7 +858,7 @@
           (:name "Last 7 days" :query "date:7d..now" :hide-unread t :key ?w)
           (:name "Messages with images" :query "mime:image/*" :key ?p))))
 
-(setq dotfiles-folder "~/Documents/dotfiles")
+(setq dotfiles-folder "~/.dotfiles")
 (setq dotfiles-org-files '("Emacs.org" "Desktop.org"))
 
 (defun dotfiles-tangle-org-file (&optional org-file)
