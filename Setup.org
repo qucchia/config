@@ -1,5 +1,5 @@
 #+title:Raspberry Pi Setup
-#+PROPERTY: header-args:shell :tangle ./setup.sh
+#+PROPERTY: header-args:shell :tangle ./setup/setup.sh :mkdir p
 
 This script installs and sets up all my configuration on a newly installed Raspberry Pi OS.
 
@@ -36,13 +36,13 @@ This script installs and sets up all my configuration on a newly installed Raspb
 
 ** Add APT sources
       
-#+begin_src conf :tangle ./firefox.list :mkdir p
+#+begin_src conf :tangle ./setup/firefox.list
 
   deb http://ports.ubuntu.com/ubuntu-ports bionic-updates main
 
 #+end_src
 
-#+begin_src conf :tangle ./99bionic-updates
+#+begin_src conf :tangle ./setup/99bionic-updates
 
   Package: *
   Pin: release a=bionic-updates
@@ -233,7 +233,7 @@ This script installs and sets up all my configuration on a newly installed Raspb
 
 * Clone repositories
 
-#+begin_src shell :tangle ./clone-repos.sh
+#+begin_src shell :tangle ./setup/clone-repos.sh
 
   mkdir -p ~/Projects ~/Mail
   git clone git@codeberg.org:qucchia/life ~/Documents/life
