@@ -141,7 +141,7 @@
   "Set my custom keymap."
   (interactive)
   (start-process-shell-command "xmodmap" nil
-    "xmodmap ~/.dotfiles/layout/.Xmodmap"))
+    "xmodmap ~/.xmodmap"))
 
 (defun qucchia/get-password (name)
   "Retrieve the password NAME from pass and copies it to the clipboard."
