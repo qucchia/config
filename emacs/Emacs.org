@@ -255,6 +255,10 @@ https://github.com/noctuid/general.el
     (qucchia/leader-keys
       <<bookmark-bindings>>
       "c"   '(org-capture :which-key "capture")
+      "C-h"   '(org-shiftleft :which-key "shift left")
+      "C-j"   '(org-shiftdown :which-key "shift down")
+      "C-k"   '(org-shiftup :which-key "shift up")
+      "C-l"   '(org-shiftright :which-key "shift right")
       <<open-bindings>>
       <<mail-bindings>>
       "k"   '(counsel-descbinds :which-key "keybindings")

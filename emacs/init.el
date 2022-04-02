@@ -228,6 +228,10 @@
             :which-key "youtube")
     
     "c"   '(org-capture :which-key "capture")
+    "C-h"   '(org-shiftleft :which-key "shift left")
+    "C-j"   '(org-shiftdown :which-key "shift down")
+    "C-k"   '(org-shiftup :which-key "shift up")
+    "C-l"   '(org-shiftright :which-key "shift right")
     
     "o"     '(:ignore t :which-key "open")
     "oa"    '(org-agenda :which-key "agenda")
