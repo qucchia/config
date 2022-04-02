@@ -571,6 +571,9 @@
 (add-hook 'js2-mode-hook 'prettier-js-mode)
 (add-hook 'typescript-mode-hook 'prettier-mode)
 
+(use-package lua-mode
+  :mode "\\.lua\\'")
+
 (use-package js2-mode
   :mode "\\.js\\'"
   :config (setq js-indent-level 2))

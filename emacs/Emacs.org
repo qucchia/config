@@ -785,6 +785,15 @@ https://emacs-lsp.github.io/lsp-mode
 
 #+end_src
 
+*** Lua
+
+#+begin_src emacs-lisp
+
+  (use-package lua-mode
+    :mode "\\.lua\\'")
+
+#+end_src
+
 *** JavaScript
 
 #+begin_src emacs-lisp

@@ -235,3 +235,6 @@ set splitbelow
 " vimwiki 
 let g:vimwiki_list = [{'path': '~/doc/wiki/', 'path_html': '~/doc/wiki/html/'}]
 
+lua require("lsp")
+lua require("tsserver")
+
