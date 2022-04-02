@@ -1,2 +1,0 @@
-;;; .emms-cache -*- mode: emacs-lisp; coding: utf-8; -*-
-(puthash "https://coderadio-relay-ffm.freecodecamp.org/radio/8010/radio.mp3" '(*track* (type . url) (name . "https://coderadio-relay-ffm.freecodecamp.org/radio/8010/radio.mp3") (last-played 25158 63082 176409 127000) (play-count . 106)) emms-cache-db)
