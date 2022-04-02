@@ -132,6 +132,22 @@
 
 (defun qucchia/uri-encode (string) string)
 
+(defun qucchia/set-keymap ()
+  "Sets my custom keymap."
+  (interactive)
+  (start-process-shell-command "xmodmap" nil 
+    "xmodmap ~/Documents/config/layout/.Xmodmap"))
+
+(defun qucchia/get-password (name)
+  "Retrieves the password NAME from pass and copies it to the clipboard."
+  (interactive (list (read-string "Password name: ")))
+  (start-process-shell-command "pass" nil
+  (string-join
+    (list
+      "pass -c "
+      name
+      " | xclip -selection clipboard"))))
+
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 (use-package which-key
@@ -277,14 +293,7 @@
     
     "k"   '(counsel-descbinds :which-key "keybindings")
     "p"   '(emms-pause :which-key "pause music")
-    "C-p" '((lambda (name)
-               (interactive (list (read-string "password: ")))
-               (start-process-shell-command "pass" nil
-                 (string-join
-                   (list
-                     "pass -c "
-                     name
-                     " | xclip -selection clipboard"))))
+    "C-p" '(qucchia/get-password)
                :which-key "password")
     "t"   '(:ignore t :which-key "toggle")
     "te"  '(emms-mode-line-toggle :which-key "emms modeline")
@@ -322,11 +331,7 @@
            :which-key "youtube")
     
     "u"   '(browse-url :which-key "url")
-    "x"   '((lambda ()
-              (interactive)
-              (start-process-shell-command "xmodmap" nil 
-                "xmodmap ~/Documents/config/layout/.Xmodmap"))
-            :which-key "set keymap")
+    "x"   '(qucchia/set-keymap :which-key "set keymap")
     "y"   '(counsel-yank-pop :which-key "yank"))
 
   (general-define-key
