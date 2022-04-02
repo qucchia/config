@@ -633,8 +633,6 @@
   (company-minimum-prefix-length 1)
   (company-idle-delay 0.0))
 
-(add-hook 'after-init-hook 'global-company-mode)
-
 (use-package company-box
   :hook (company-mode . company-box-mode))
 
