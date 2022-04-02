@@ -324,8 +324,8 @@
     "u"   '(browse-url :which-key "url")
     "x"   '((lambda ()
               (interactive)
-              (start-process-shell-command "xmodmap" nil "xmodmap
-                ~/Documents/config/layout/.Xmodmap"))
+              (start-process-shell-command "xmodmap" nil 
+                "xmodmap ~/Documents/config/layout/.Xmodmap"))
             :which-key "set keymap")
     "y"   '(counsel-yank-pop :which-key "yank"))
 
