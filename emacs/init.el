@@ -228,10 +228,33 @@
             :which-key "youtube")
     
     "c"   '(org-capture :which-key "capture")
-    "C-h"   '(org-shiftleft :which-key "shift left")
-    "C-j"   '(org-shiftdown :which-key "shift down")
-    "C-k"   '(org-shiftup :which-key "shift up")
-    "C-l"   '(org-shiftright :which-key "shift right")
+    
+    "d"  '(:ignore t :which-key "directory")
+    "d." '((lambda ()
+             (interactive)
+             (dired "~/"))
+           :which-key "home")
+    "dd" '((lambda ()
+             (interactive)
+             (dired "~/Downloads"))
+           :which-key "downloads")
+    "dD" '((lambda ()
+             (interactive)
+             (dired "~/Documents"))
+           :which-key "documents")
+    "dm" '((lambda ()
+             (interactive)
+             (dired "~/Music"))
+           :which-key "music")
+    "dp" '((lambda ()
+             (interactive)
+             (dired "~/Projects"))
+           :which-key "projects")
+    
+    "C-h" '(org-shiftleft :which-key "shift left")
+    "C-j" '(org-shiftdown :which-key "shift down")
+    "C-k" '(org-shiftup :which-key "shift up")
+    "C-l" '(org-shiftright :which-key "shift right")
     
     "o"     '(:ignore t :which-key "open")
     "oa"    '(org-agenda :which-key "agenda")
@@ -244,6 +267,7 @@
     "oi"    '(ibuffer :which-key "ibuffer")
     "os"    '(shell :which-key "shell")
     "ot"    '(term :which-key "term")
+    "ov"    '(vterm :which-key "vterm")
     
     
     "m"  '(:ignore t :which-key "mail")
@@ -300,7 +324,8 @@
     "u"   '(browse-url :which-key "url")
     "x"   '((lambda ()
               (interactive)
-              (start-process-shell-command "xmodmap" nil "xmodmap ~/Documents/config/layout/.Xmodmap"))
+              (start-process-shell-command "xmodmap" nil "xmodmap
+                ~/Documents/config/layout/.Xmodmap"))
             :which-key "set keymap")
     "y"   '(counsel-yank-pop :which-key "yank"))
 
