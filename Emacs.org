@@ -3,7 +3,12 @@
 
 * Startup Performance
 
+- Make startup faster by reducing the frequency of garbage collection.
+- Measure Emacs startup time with a hook.
+
 #+begin_src emacs-lisp
+
+(setq gc-cons-threshold (* 100 1000 1000)) ;; 100MB
 
 (defun qucchia/display-startup-time ()
   "Send a message describing how long it took Emacs to start up."
@@ -813,7 +818,6 @@ https://emacs-lsp.github.io/lsp-mode
       (lsp-mode . qucchia/lsp-mode-setup))
     :init
     (setq lsp-keymap-prefix "C-c l")
-    (setq gc-cons-threshold (* 100 1000000)) ;; 100MB
     (setq read-process-output-max (* 1024 1024)) ;; 1MB
     :config
     (lsp-enable-which-key-integration t))

@@ -1,3 +1,5 @@
+(setq gc-cons-threshold (* 100 1000 1000)) ;; 100MB
+
 (defun qucchia/display-startup-time ()
   "Send a message describing how long it took Emacs to start up."
   (message "Emacs loaded in %s with %d garbage collections."
@@ -589,7 +591,6 @@
     (lsp-mode . qucchia/lsp-mode-setup))
   :init
   (setq lsp-keymap-prefix "C-c l")
-  (setq gc-cons-threshold (* 100 1000000)) ;; 100MB
   (setq read-process-output-max (* 1024 1024)) ;; 1MB
   :config
   (lsp-enable-which-key-integration t))
