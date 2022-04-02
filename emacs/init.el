@@ -1,4 +1,5 @@
 (defun qucchia/display-startup-time ()
+  "Sends a message describing how long it took Emacs to start up."
   (message "Emacs loaded in %s with %d garbage collections."
     (format "%.2f seconds"
     (float-time
