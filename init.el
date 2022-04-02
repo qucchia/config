@@ -1,5 +1,5 @@
 (defun qucchia/display-startup-time ()
-  "Sends a message describing how long it took Emacs to start up."
+  "Send a message describing how long it took Emacs to start up."
   (message "Emacs loaded in %s with %d garbage collections."
     (format "%.2f seconds"
     (float-time
@@ -131,16 +131,18 @@
   ([remap describe-variable] . counsel-describe-variable)
   ([remap describe-key] . helpful-key))
 
-(defun qucchia/uri-encode (string) string)
+(defun qucchia/uri-encode (string)
+  "Encode STRING to URI (currently not working."
+  string)
 
 (defun qucchia/set-keymap ()
-  "Sets my custom keymap."
+  "Set my custom keymap."
   (interactive)
-  (start-process-shell-command "xmodmap" nil 
+  (start-process-shell-command "xmodmap" nil
     "xmodmap ~/Documents/dotfiles/layout/.Xmodmap"))
 
 (defun qucchia/get-password (name)
-  "Retrieves the password NAME from pass and copies it to the clipboard."
+  "Retrieve the password NAME from pass and copies it to the clipboard."
   (interactive (list (read-string "Password name: ")))
   (start-process-shell-command "pass" nil
   (string-join
@@ -247,10 +249,14 @@
     "c"   '(org-capture :which-key "capture")
     
     "d"  '(:ignore t :which-key "directory")
-    "d." '((lambda ()
+    "d~" '((lambda ()
              (interactive)
              (dired "~/"))
            :which-key "home")
+    "d." '((lambda ()
+             (interactive)
+             (dired dotfiles-folder))
+           :which-key "dotfiles")
     "dd" '((lambda ()
              (interactive)
              (dired "~/Downloads"))
@@ -294,8 +300,7 @@
     
     "k"   '(counsel-descbinds :which-key "keybindings")
     "p"   '(emms-pause :which-key "pause music")
-    "C-p" '(qucchia/get-password)
-               :which-key "password")
+    "C-p" '(qucchia/get-password :which-key "password")
     "t"   '(:ignore t :which-key "toggle")
     "te"  '(emms-mode-line-toggle :which-key "emms modeline")
     "tt"  '(counsel-load-theme :which-key "choose theme")
@@ -362,11 +367,13 @@
   (evil-collection-init))
 
 (defun qucchia/org-mode-setup ()
+  "Setup Org mode."
   (org-indent-mode)
   (variable-pitch-mode 1)
   (visual-line-mode 1))
 
 (defun qucchia/org-font-setup ()
+  "Setup Org mode fonts."
   ;; Replace list hypens with dots
   (font-lock-add-keywords 'org-mode
                           '(("^ *\\([-]\\) "
@@ -524,6 +531,7 @@
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
 (defun qucchia/org-visual-mode-fill ()
+  "Setup Org mode visual fill."
   (setq visual-fill-column-width 100
         visual-fill-column-center-text t)
   (visual-fill-column-mode 1))
@@ -550,6 +558,7 @@
   (add-to-list 'org-structure-template-alist '("conf" . "src conf")))
 
 (defun qucchia/org-babel-tangle-config ()
+  "Tangle dotfiles on save."
   (when (string-prefix-p (expand-file-name "~/Documents/dotfiles/")
                        (buffer-file-name))
     (let ((org-confirm-babel-evaluate nil))
@@ -566,6 +575,7 @@
   (add-hook 'after-init-hook #'global-flycheck-mode))
 
 (defun qucchia/lsp-mode-setup ()
+  "Setup LSP."
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
   (lsp-headerline-breadcrumb-mode))
 
@@ -706,7 +716,8 @@
 (use-package eshell-git-prompt
   :after eshell)
 
-(defun qucchia/configure-eshell ()
+(defun qucchia/setup-eshell ()
+  "Setup eshell."
   ;; Save command history
   (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)
 
@@ -723,7 +734,7 @@
         eshell-scroll-to-bottom-on-input t))
 
 (use-package eshell
-  :hook (eshell-first-time-mode . qucchia/configure-eshell)
+  :hook (eshell-first-time-mode . qucchia/setup-eshell)
   :config
   (with-eval-after-load 'esh-opt
     (setq eshell-destroy-buffer-when-process-dies t)
@@ -846,6 +857,26 @@
           (:name "Last 7 days" :query "date:7d..now" :hide-unread t :key ?w)
           (:name "Messages with images" :query "mime:image/*" :key ?p))))
 
+(setq dotfiles-folder "~/Documents/dotfiles")
+(setq dotfiles-org-files '("Emacs.org" "Desktop.org"))
+
+(defun dotfiles-tangle-org-file (&optional org-file)
+  "Tangles a single .org file relative to the path in the dotfiles folder."
+  (interactive)
+  (message "File: %s" org-file)
+  ;; Suppress prompts and messages
+  (let ((org-confirm-babel-evaluate nil)
+        (message-log-max nil)
+        (inhibit-message t))
+    (org-babel-tangle-file (expand-file-name org-file dotfiles-folder))))
+
+(defun dotfiles-tangle-org-files ()
+  "Tangles all of the .org dotfiles."
+  (interactive)
+  (dolist (org-file dotfiles-org-files)
+    (dotfiles-tangle-org-file org-file))
+  (message "Dotfiles are up to date!"))
+
 (use-package emms
   :config
   (emms-all)
@@ -854,6 +885,7 @@
   (emms-source-file-default-directory "~/Music/"))
 
 (defun qucchia/lookup-password (&rest keys)
+  "Lookup password from auth source."
   (let ((result (apply #'auth-source-search keys)))
    (if result
        (funcall (plist-get (car result) :secret))
