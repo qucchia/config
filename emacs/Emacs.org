@@ -207,6 +207,16 @@
 
 #+end_src
 
+* Functions
+
+** TODO Make URI encode function
+
+#+begin_src emacs-lisp
+
+(defun qucchia/uri-encode (string) string)
+
+#+end_src
+
 * Keybindings
 
 #+begin_src emacs-lisp
@@ -382,31 +392,31 @@ https://github.com/noctuid/general.el
 
   "s"  '(:ignore t :which-key search)
   "sc" '((lambda (term)
-           (interactive (list (mm-url-form-encode-xwfu (read-string "DIEC "))))
+           (interactive (list (qucchia/uri-encode (read-string "DIEC "))))
            (browse-url (string-join (list "https://dlc.iec.cat/Results?DecEntradaText=" term))))
          :which-key "diec")
   "sd" '((lambda (term)
-           (interactive (list (mm-url-form-encode-xwfu (read-string "DuckDuckGo "))))
+           (interactive (list (qucchia/uri-encode (read-string "DuckDuckGo "))))
            (browse-url (string-join (list "https://duckduckgo.com/?q=" term))))
          :which-key "duckduckgo")
   "sm" '((lambda (term)
-           (interactive (list (mm-url-form-encode-xwfu (read-string "MDN "))))
+           (interactive (list (qucchia/uri-encode (read-string "MDN "))))
            (browse-url (string-join (list "https://developer.mozilla.org/en-US/search?q=" term))))
          :which-key "mdn")
   "sr" '((lambda (term)
-           (interactive (list (mm-url-form-encode-xwfu (read-string "RAE "))))
+           (interactive (list (qucchia/uri-encode (read-string "RAE "))))
            (browse-url (string-join (list "https://dle.rae.es/" term))))
          :which-key "rae")
   "ss" '((lambda (term)
-           (interactive (list (mm-url-form-encode-xwfu (read-string "StartPage "))))
+           (interactive (list (qucchia/uri-encode (read-string "StartPage "))))
            (browse-url (string-join (list "https://www.startpage.com/do/dsearch?query=" term))))
          :which-key "startpage")
   "sw" '((lambda (term)
-           (interactive (list (mm-url-form-encode-xwfu (read-string "SwissCows "))))
+           (interactive (list (qucchia/uri-encode (read-string "SwissCows "))))
            (browse-url (string-join (list "https://swisscows.com/web?query=" term))))
          :which-key "swisscows")
   "sy" '((lambda (term)
-           (interactive (list (mm-url-form-encode-xwfu (read-string "YouTube "))))
+           (interactive (list (qucchia/uri-encode (read-string "YouTube "))))
            (browse-url (string-join (list "https://www.youtube.com/results?search_query=" term))))
          :which-key "youtube")
 
