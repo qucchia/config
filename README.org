@@ -1,30 +1,67 @@
-* Config
+* qucchia/dotfiles
 
 This is my desktop configuration.
 
-** File structrue
+* Installation
 
-*** =layout=
+*Requirements*: [[https://www.gnu.org/software/stow/][GNU Stow]].
 
-My custom key bindings are made using [[https://wiki.archlinux.org/title/xmodmap][xmodmap]] in =.Xmodmap=. It does the following:
-- Maps Caps Lock to Left Super.
-- Maps the key between Left Shift and Z (only on ISO keyboards) to Escape.
+To install the repo to the =.dotfiles= folder and set up all the symlinks:
 
-*** =emacs=
+#+begin_src shell
 
-- The Emacs configuration is following the [[https://github.com/daviwil/emacs-from-scratch/][Emacs from Scratch tutorials by David Wilson]], but also has personal changes. It can be found in =Emacs.org=. Its contents is tangled to =init.el=, which in turn is symlinked to =~/emacs.d/init.el= in the setup script (see below).
-- =Email.org= contains the configuraition for mu4e, an email client for Emacs.
+  git clone https://codeberg.org/qucchia/dotfiles.git ~/.dotfiles
+  cd ~/.dotfiles
+  stow .
 
-*** =exwm=
+#+end_src
 
-- The start script in =start-exwm.sh= is intended to run when the user session starts. It sets up the Tor network, keyboard configuration, and starts Emacs with the desktop configuration.
-- The configuration in =Desktop.org= sets up EXWM and is tangled to =desktop.el=, which is loaded by the start script.
+* Emacs configuration
 
-*** =setup=
+The Emacs configuration is following the [[https://github.com/daviwil/emacs-from-scratch/][Emacs from Scratch tutorials by David Wilson]], but also has personal changes. It can be found in =Emacs.org=. Its contents is tangled to =.emacs.d/init.el=.
 
-- In =Setup.org= is the script intended to automatically set up my configuration on a newly installed Raspberry Pi OS. It's tangled to =setup.sh=.
+* Desktop configuration
+
+My desktop configuration uses EXWM, which is set up in =Desktop.org=.
+
+* Setup
+
+- In =Setup.org= is the script intended to automatically set up my configuration on a newly installed Raspberry Pi OS. It's tangled to files in the =setup= folder.
 - =FinalSetup.org= is a file which is opened in Emacs once the setup script is complete. It contains some configuration steps that can only be done manually.
-- =.authinfo-model= serves as a template for entering a GitHub auth token for forge.
-- =torrc= is the Tor network configuration. It is symlinked to =/etc/tor/torrc=.
-- =99bionic-updates= is some configuration to prevent the Ubuntu sources to override default ones. (These Ubuntu sources are only used to install Firefox's latest version).
 
+* Other configuration
+
+** =.bashrc=
+
+Run when a Bash terminal is opened (unmodified).
+
+** =.bin/=
+
+Custom commands.
+
+** =.config/=
+
+- =.config/nvim=: Neovim configuration
+- =.config/alacritty=: Alacritty configuration
+
+** =.gitconfig=
+
+Git configuration.
+
+** =.profile=
+
+Run when logging in.
+
+** =.stow-local-ignore=
+
+Files and folders which are not symlinked by Stow.
+
+** =.xmodmap=
+
+My custom key bindings are made using [[https://wiki.archlinux.org/title/xmodmap][xmodmap]]. It does the following:
+  - Maps Caps Lock to Left Super.
+  - Maps the key between Left Shift and Z (only on ISO keyboards) to Escape.
+
+** =.xsession=
+
+Startup script that runs EXWM.
