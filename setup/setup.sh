@@ -1,12 +1,15 @@
+#!bin/bash
 echo -e "\nqucchia's config setup"
-export CONFIG_DIR=$HOME/Documents/config
-export SETUP_DIR=$CONFIG_DIR/setup
 
-echo -e "\n\nSetting keyboard mapping..."
-xmodmap $CONFIG_DIR/layout/.Xmodmap
+# Navigate to the directory of this script
+cd $(dirname $(readlink -f $0))
+cd ..
+
+# Update remote to use SSH
+git remote set-url origin git@codeberg.org:qucchia/dotfiles
 
 echo -e "\nRemoving preinstalled applications..."
-sudo apt purge geany thonny -y
+sudo apt purge chromium geany thonny -y
 sudo apt autoremove -y
 
 sudo ln -s $SETUP_DIR/firefox.list /etc/apt/sources.list.d/firefox.list
@@ -18,22 +21,20 @@ sudo apt update
 echo -e "\n\nUpgrading packages..."
 sudo apt upgrade -y
 
-echo -e "\n\nInstalling Emacs..."
-sudo apt install -y emacs
+echo -e "\n\nInstalling GNU Stow..."
+sudo apt install -y stow
+stow .
 
-echo -e "\n\nInstalling Firefox..."
-sudo apt install -y firefox
+echo -e "\n\nSetting keyboard mapping..."
+xmodmap ~/.xmodmap
 
-echo -e "\n\nInstalling pass..."
-sudo apt install -y pass
-
-echo -e "\n\nInstalling isync (mbsync) and mu4e..."
-sudo apt install -y isync mu4e
+sudo apt install -y stow emacs firefox pass
+# sudo apt install -y isync mu4e
 
 echo -e "\n\nInstalling Tor..."
 sudo apt install tor -y
 sudo mv /etc/tor/torrc /etc/tor/torrc-backup
-sudo ln -f $SETUP_DIR/torrc /etc/tor/torrc
+sudo ln -f setup/torrc /etc/tor/torrc
 
 echo -e "\n\nRunning Nodesource script..."
 curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
@@ -57,7 +58,6 @@ make
 sudo make install
 
 mkdir -p ~/.config/nvim
-ln -s $CONFIG_DIR/init.nvim ~/.config/nvim/init.nvim 
 
 # Vim-plug
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
@@ -95,14 +95,7 @@ cp extra/completions/alacritty.bash ~/.bash_completion/alacritty
 echo "source ~/.bash_completion/alacritty" >> ~/.bashrc
 
 mkdir -p ~/.config/alacritty
-ln -s $CONFIG_DIR/alacritty.yml ~/.config/alacritty/alacritty.yml
-
-git config --global user.name qucchia
-git config --global user.email "qucchia0@gmail.com"
-git config --global init.defaultBranch main
-
-cd $CONFIG_DIR
-git remote set-url origin git@codeberg.org:qucchia/config
+ln -s $DOTFILES_DIR/alacritty.yml ~/.config/alacritty/alacritty.yml
 
 echo -e "\n\nInstalling fonts..."
 
@@ -111,9 +104,6 @@ cd /tmp
 git clone -q https://github.com/adobe-fonts/source-code-pro.git
 cp source-code-pro/TTF/*.ttf ~/.local/share/fonts
 fc-cache -f
-
-ln -s $CONFIG_DIR/emacs/init.el ~/.emacs.d/init.el
-sudo ln -f $CONFIG_DIR/exwm/EXWM.desktop /usr/share/xsessions/EXWM.desktop
 
 echo "sh ~/Documents/config/exwm/start-exwm.sh" > ~/.xsession
 

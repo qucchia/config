@@ -7,34 +7,35 @@ This script installs and sets up all my configuration on a newly installed Raspb
 
 #+begin_src shell
 
+  #!bin/bash
   echo -e "\nqucchia's config setup"
-  export CONFIG_DIR=$HOME/Documents/config
-  export SETUP_DIR=$CONFIG_DIR/setup
+
+  # Navigate to the directory of this script
+  cd $(dirname $(readlink -f $0))
+  cd ..
+
+  # Update remote to use SSH
+  git remote set-url origin git@codeberg.org:qucchia/dotfiles
 
 #+end_src
 
-* Set keyboard mapping
-
-#+begin_src shell
-
-  echo -e "\n\nSetting keyboard mapping..."
-  xmodmap $CONFIG_DIR/layout/.Xmodmap
-
-#+end_src
-
-* Install applications
+* Update sources
 
 ** Remove preinstalled applications
+
+These applications are installed by default on the Raspberry Pi OS and I don't need them.
 
 #+begin_src shell
 
   echo -e "\nRemoving preinstalled applications..."
-  sudo apt purge geany thonny -y
+  sudo apt purge chromium geany thonny -y
   sudo apt autoremove -y
 
 #+end_src
 
 ** Add APT sources
+
+Add Ubuntu Bionic sources to install latest version of Firefox.
       
 #+begin_src conf :tangle ./setup/firefox.list
 
@@ -69,23 +70,37 @@ This script installs and sets up all my configuration on a newly installed Raspb
 
 #+end_src
 
-** Install base applications
+* Install GNU Stow
+
+https://www.gnu.org/software/stow/
 
 #+begin_src shell
 
-  echo -e "\n\nInstalling Emacs..."
-  sudo apt install -y emacs
-
-  echo -e "\n\nInstalling Firefox..."
-  sudo apt install -y firefox
-
-  echo -e "\n\nInstalling pass..."
-  sudo apt install -y pass
-
-  echo -e "\n\nInstalling isync (mbsync) and mu4e..."
-  sudo apt install -y isync mu4e
+  echo -e "\n\nInstalling GNU Stow..."
+  sudo apt install -y stow
+  stow .
 
 #+end_src
+
+* Set keyboard mapping
+
+#+begin_src shell
+
+  echo -e "\n\nSetting keyboard mapping..."
+  xmodmap ~/.xmodmap
+
+#+end_src
+
+* Install applications
+
+#+begin_src shell
+
+  sudo apt install -y stow emacs firefox pass
+  # sudo apt install -y isync mu4e
+
+#+end_src
+
+* Set up applications
 
 ** Tor
 
@@ -94,7 +109,7 @@ This script installs and sets up all my configuration on a newly installed Raspb
   echo -e "\n\nInstalling Tor..."
   sudo apt install tor -y
   sudo mv /etc/tor/torrc /etc/tor/torrc-backup
-  sudo ln -f $SETUP_DIR/torrc /etc/tor/torrc
+  sudo ln -f setup/torrc /etc/tor/torrc
 
 #+end_src
 
@@ -136,7 +151,6 @@ This script installs and sets up all my configuration on a newly installed Raspb
   sudo make install
   
   mkdir -p ~/.config/nvim
-  ln -s $CONFIG_DIR/init.nvim ~/.config/nvim/init.nvim 
   
   # Vim-plug
   sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
@@ -180,20 +194,7 @@ This script installs and sets up all my configuration on a newly installed Raspb
   echo "source ~/.bash_completion/alacritty" >> ~/.bashrc
 
   mkdir -p ~/.config/alacritty
-  ln -s $CONFIG_DIR/alacritty.yml ~/.config/alacritty/alacritty.yml 
-
-#+end_src
-
-* Set up git
-
-#+begin_src shell
-
-  git config --global user.name qucchia
-  git config --global user.email "qucchia0@gmail.com"
-  git config --global init.defaultBranch main
-
-  cd $CONFIG_DIR
-  git remote set-url origin git@codeberg.org:qucchia/config
+  ln -s $DOTFILES_DIR/alacritty.yml ~/.config/alacritty/alacritty.yml 
 
 #+end_src
 
@@ -208,15 +209,6 @@ This script installs and sets up all my configuration on a newly installed Raspb
   git clone -q https://github.com/adobe-fonts/source-code-pro.git
   cp source-code-pro/TTF/*.ttf ~/.local/share/fonts
   fc-cache -f
-
-#+end_src
-
-* Set up Emacs and EXWM
-
-#+begin_src shell
-
-  ln -s $CONFIG_DIR/emacs/init.el ~/.emacs.d/init.el
-  sudo ln -f $CONFIG_DIR/exwm/EXWM.desktop /usr/share/xsessions/EXWM.desktop
 
 #+end_src
 
@@ -235,7 +227,7 @@ This script installs and sets up all my configuration on a newly installed Raspb
 
 #+begin_src shell :tangle ./setup/clone-repos.sh
 
-  mkdir -p ~/Projects ~/Mail
+  mkdir -p ~/Projects
   git clone git@codeberg.org:qucchia/life ~/Documents/life
   git clone git@codeberg.org:qucchia/school ~/Documents/school
   git clone git@codeberg.org:qucchia/mafia-bot ~/Projects/mafia-bot

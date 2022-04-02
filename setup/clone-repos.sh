@@ -1,4 +1,4 @@
-mkdir -p ~/Projects ~/Mail
+mkdir -p ~/Projects
 git clone git@codeberg.org:qucchia/life ~/Documents/life
 git clone git@codeberg.org:qucchia/school ~/Documents/school
 git clone git@codeberg.org:qucchia/mafia-bot ~/Projects/mafia-bot
