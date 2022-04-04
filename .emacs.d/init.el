@@ -617,6 +617,8 @@
 (add-hook 'js2-mode-hook 'prettier-js-mode)
 (add-hook 'typescript-mode-hook 'prettier-mode)
 
+(setq css-indent-offset 2)
+
 (use-package lua-mode
   :mode "\\.lua\\'")
 

@@ -852,6 +852,14 @@ https://emacs-lsp.github.io/lsp-mode
 
 #+end_src
 
+*** CSS
+
+#+begin_src emacs-lisp
+
+(setq css-indent-offset 2)
+
+#+end_src
+
 *** Lua
 
 #+begin_src emacs-lisp
