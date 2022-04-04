@@ -289,6 +289,10 @@ https://github.com/noctuid/general.el
       :global-prefix "C-SPC")
 
     (qucchia/leader-keys
+      "."   '((lambda ()
+                (interactive)
+                (insert-char ?·))
+              :which-key "middle dot")
       <<bookmark-bindings>>
       "c"   '(org-capture :which-key "capture")
       <<directory-bindings>>

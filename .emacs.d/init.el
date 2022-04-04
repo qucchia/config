@@ -171,6 +171,10 @@
     :global-prefix "C-SPC")
 
   (qucchia/leader-keys
+    "."   '((lambda ()
+              (interactive)
+              (insert-char ?·))
+            :which-key "middle dot")
     
     "b"   '(:ignore t :which-key "bookmark")
     
