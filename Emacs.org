@@ -754,11 +754,15 @@ https://github.com/noctuid/general.el
 
   (with-eval-after-load 'org
     (require 'org-tempo)
-    (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+    (add-to-list 'org-structure-template-alist '("src" . "src"))
+    (add-to-list 'org-structure-template-alist '("conf" . "src conf"))
+    (add-to-list 'org-structure-template-alist '("css" . "src css"))
     (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
-    (add-to-list 'org-structure-template-alist '("py" . "src python"))
+    (add-to-list 'org-structure-template-alist '("html" . "src html"))
     (add-to-list 'org-structure-template-alist '("js" . "src js"))
-    (add-to-list 'org-structure-template-alist '("conf" . "src conf")))
+    (add-to-list 'org-structure-template-alist '("py" . "src python"))
+    (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+    (add-to-list 'org-structure-template-alist '("ts" . "src typescript")))
 
 #+end_src
 
