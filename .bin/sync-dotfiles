@@ -36,4 +36,5 @@ if [[ ! -z $unmerged_files ]]; then
 else
     # Ensure all new dotfiles are linked
     stow .
+    sudo stow root -t /
 fi

@@ -12,9 +12,7 @@ echo -e "\nRemoving preinstalled applications..."
 sudo apt purge chromium geany thonny -y
 sudo apt autoremove -y
 
-sudo ln -s $SETUP_DIR/firefox.list /etc/apt/sources.list.d/firefox.list
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32
-sudo ln -s $SETUP_DIR/99bionic-updates /etc/apt/preferences.d/99bionic-updates
 
 echo -e "\n\nUpdating package sources..."
 sudo apt update
