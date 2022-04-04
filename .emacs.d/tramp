@@ -1,6 +1,0 @@
-;; -*- emacs-lisp -*- <22/03/26 22:36:00 /home/pi/.emacs.d/tramp>
-;; Tramp connection history.  Don't change this file.
-;; Run `M-x tramp-cleanup-all-connections' instead.
-
-(((tramp-file-name "sudo" "root" nil "raspberrypi" nil nil nil)
-  nil))
