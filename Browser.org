@@ -1,0 +1,330 @@
+#+title:Vimb configuration
+#+PROPERTY: header-args:fundamental :tangle ./.config/vimb/config :mkdirp yes
+
+See the [[https://fanglingsu.github.io/vimb/man.html][manual]], especially the section on [[https://fanglingsu.github.io/vimb/man.html#SETTINGS][settings]], for descriptions on each setting.
+
+* Internet
+
+#+begin_src fundamental
+
+  set dns-prefetching=off
+  set strict-ssl=on
+
+#+end_src
+
+** Headers
+
+- Remove User-Agent header
+- Send Do-Not-Track signal.
+
+#+begin_src fundamental
+
+  set header=User-Agent,DNT=1
+
+#+end_src
+
+* Web
+
+** Downloads
+
+#+begin_src fundamental
+
+  set download-path=~/Downloads
+  set download-use-external=off
+
+#+end_src
+
+** Graphics
+
+#+begin_src fundamental
+
+  set accelerated-2d-canvas=off
+  set webgl=off
+
+#+end_src
+
+** JavaScript
+
+#+begin_src fundamental
+
+  set scripts=on
+  set javascript-can-access-clipboard=off
+  set javascript-can-open-windows-automatically=off
+  set user-scripts=on
+  set xss-auditor=on
+
+#+end_src
+
+** Media
+
+#+begin_src fundamental
+
+  set images=on
+  set media-playback-allows-inline=on
+  set media-playback-requires-user-gesture=on
+  set media-stream=off
+  set webaudio=off
+
+#+end_src
+
+** Storage
+
+#+begin_src fundamental
+
+  set cookie-accept=origin
+  set html5-database=on
+  set html5-local-storage=on
+  set offline-cache=on
+
+#+end_src
+
+** Other APIs
+
+#+begin_src fundamental
+
+  set geolocation=never
+  set notification=ask
+
+#+end_src
+
+* Vimb
+
+** Hints
+
+#+begin_src fundamental
+
+  set hint-follow-last=on
+  set hint-keys-same-length=off
+  set hint-timeout=1000
+  set hint-keys=012345789
+  set hint-match-element=on
+
+#+end_src
+
+** Storage
+
+#+begin_src fundamental
+
+  set closed-max-items=10
+  set history-max-items=2000
+
+#+end_src
+
+** Navigation
+
+#+begin_src fundamental
+
+  set scroll-step=40
+  set scroll-multiplier=1
+  set smooth-scrolling=off
+  set spatial-navigation=off
+  set tabs-to-links=off
+
+#+end_src
+
+** Spell-checking
+
+#+begin_src fundamental
+
+  set spell-checking=on
+  set spell-checking-languages=en_GB,es_ES,ca_ES
+
+#+end_src
+
+** Miscellaneous
+
+#+begin_src fundamental
+
+  set caret=off
+  set allow-file-access-from-file-urls=off
+  set allow-universal-access-from-file-urls=off
+  set default-charset=utf8
+  set editor-command=emacsclient %s
+  set frame-flattening=off
+  set hardware-acceleration-policy=ondemand
+  set hyperlink-auditing=off
+  set prevent-newwindow=off
+  set incsearch=on
+  set site-specific-quirks=off
+  set timeoutlen=1000
+  set print-backgrounds=on
+  set plugins=on
+  set webinspector=on
+
+#+end_src
+
+* UI
+
+#+begin_src fundamental
+
+  set default-zoom=100
+  set fullscreen=off
+
+#+end_src
+
+** Theme
+
+The colours are from the [[https://www.nordtheme.com/docs/colors-and-palettes][Nord theme]].
+
+*** Dark colours
+
+#+NAME: dark0
+#+begin_src css
+#2e3440
+#+end_src
+
+#+NAME: dark1
+#+begin_src css
+#3b4252
+#+end_src
+
+#+NAME: dark2
+#+begin_src css
+#434c5e
+#+end_src
+
+#+NAME: dark2
+#+begin_src css
+#4c566a
+#+end_src
+
+*** Light colours
+
+#+NAME: light0
+#+begin_src css
+#d8dee9
+#+end_src
+
+#+NAME: light1
+#+begin_src css
+#e5e0f0
+#+end_src
+
+#+NAME: light2
+#+begin_src css
+#eceff4
+#+end_src
+
+*** Primary palette
+
+#+NAME:primary0
+#+begin_src css
+#8fbcbb
+#+end_src
+
+#+NAME:primary1
+#+begin_src css
+#88c0d0
+#+end_src
+
+#+NAME:primary2
+#+begin_src css
+#81a1c1
+#+end_src
+
+#+NAME:primary3
+#+begin_src css
+#5e81ac
+#+end_src
+
+*** Accent colours
+
+#+NAME: red
+#+begin_src css
+#bf616a
+#+end_src
+
+#+NAME: orange
+#+begin_src css
+#d08770
+#+end_src
+
+#+NAME: yellow
+#+begin_src css
+#ebcb8b
+#+end_src
+
+#+NAME: green
+#+begin_src css
+#a3be8c
+#+end_src
+
+#+NAME: purple
+#+begin_src css
+#b48ead
+#+end_src
+
+*** Font
+
+#+NAME: font
+#+begin_src css
+10pt monospace
+#+end_src
+
+** Input
+
+#+begin_src fundamental :noweb yes
+
+  set input-autohide=off
+  set input-css=background-color: <<dark0>>; color: <<light2>>; font: <<font>>
+  set input-error-css=background-color: <<red>>; color: <<light2>>;font: bold <<font>>
+
+#+end_src
+
+** Status bar
+
+#+begin_src fundamental :noweb yes
+
+  set status-bar=on
+  set status-bar-show-settings=off
+
+  set status-css=background-color: <<dark1>>; color: <<light2>>; font: bold <<font>>
+  set status-ssl-css=background-color: <<dark1>>; color: <<light2>>; font: bold <<font>>
+  set status-ssl-invalid-css=background-color: <<red>>; color: <<light2>>;font: bold <<font>>
+
+#+end_src
+
+** Completion
+
+#+begin_src fundamental :noweb yes
+
+  set completion-css=color:<<light2>>; background-color:<<dark3>>; font: <<font>>
+  set completion-hover-css=background-color: <<dark2>>;
+  set completion-hover-css=color: <<light0>>; background-color: <<dark1>>;
+
+#+end_src
+
+** Web fonts
+
+#+begin_src fundamental
+
+  set font-size=16
+  set minimum-font-size=5
+  set monospace-font-size=13
+
+  set default-font=DejaVu sans
+  set cursiv-font=serif
+  set monospace-font=Source Code Pro
+  set sans-serif-font=sans-serif
+  set serif-font=serif
+
+#+end_src
+
+** Web default style
+
+#+begin_src fundamental
+
+  set dark-mode=on
+  set stylesheet=on
+
+#+end_src
+
+#+begin_src css :tangle ./.config/vimb/style.css :noweb yes
+
+body {
+  background-color: <<dark0>>;
+  color: <<light2>>;
+}
+
+#+end_src
+

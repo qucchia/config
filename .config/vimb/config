@@ -1,0 +1,95 @@
+set dns-prefetching=off
+set strict-ssl=on
+
+set header=User-Agent,DNT=1
+
+set download-path=~/Downloads
+set download-use-external=off
+
+set accelerated-2d-canvas=off
+set webgl=off
+
+set scripts=on
+set javascript-can-access-clipboard=off
+set javascript-can-open-windows-automatically=off
+set user-scripts=on
+set xss-auditor=on
+
+set images=on
+set media-playback-allows-inline=on
+set media-playback-requires-user-gesture=on
+set media-stream=off
+set webaudio=off
+
+set cookie-accept=origin
+set html5-database=on
+set html5-local-storage=on
+set offline-cache=on
+
+set geolocation=never
+set notification=ask
+
+set hint-follow-last=on
+set hint-keys-same-length=off
+set hint-timeout=1000
+set hint-keys=012345789
+set hint-match-element=on
+
+set closed-max-items=10
+set history-max-items=2000
+
+set scroll-step=40
+set scroll-multiplier=1
+set smooth-scrolling=off
+set spatial-navigation=off
+set tabs-to-links=off
+
+set spell-checking=on
+set spell-checking-languages=en_GB,es_ES,ca_ES
+
+set caret=off
+set allow-file-access-from-file-urls=off
+set allow-universal-access-from-file-urls=off
+set default-charset=utf8
+set editor-command=emacsclient %s
+set frame-flattening=off
+set hardware-acceleration-policy=ondemand
+set hyperlink-auditing=off
+set prevent-newwindow=off
+set incsearch=on
+set site-specific-quirks=off
+set timeoutlen=1000
+set print-backgrounds=on
+set plugins=on
+set webinspector=on
+
+set default-zoom=100
+set fullscreen=off
+
+set input-autohide=off
+set input-css=background-color: #2e3440; color: #eceff4; font: 10pt monospace
+set input-error-css=background-color: #bf616a; color: #eceff4;font: bold 10pt monospace
+
+set status-bar=on
+set status-bar-show-settings=off
+
+set status-css=background-color: #3b4252; color: #eceff4; font: bold 10pt monospace
+set status-ssl-css=background-color: #3b4252; color: #eceff4; font: bold 10pt monospace
+set status-ssl-invalid-css=background-color: #bf616a; color: #eceff4;font: bold 10pt monospace
+
+set completion-css=color:#eceff4; background-color:; font: 10pt monospace
+set completion-hover-css=background-color: #434c5e;
+set completion-hover-css=color: #d8dee9; background-color: #3b4252;
+
+set font-size=16
+set minimum-font-size=5
+set monospace-font-size=13
+
+set default-font=DejaVu sans
+set cursiv-font=serif
+set monospace-font=Source Code Pro
+set sans-serif-font=sans-serif
+set serif-font=serif
+
+set dark-mode=on
+set stylesheet=on
