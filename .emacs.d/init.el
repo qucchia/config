@@ -888,6 +888,14 @@
     (dotfiles-tangle-org-file org-file))
   (message "Dotfiles are up to date!"))
 
+(defun qucchia/detect-bash-mode ()
+  (message buffer-file-name)
+  (when (string-match-p "/.bin/" buffer-file-name)
+    (sh-mode)
+    (set-file-modes buffer-file-name 493)))
+
+(add-to-list 'find-file-hook #'qucchia/detect-bash-mode)
+
 (use-package emms
   :config
   (emms-all)

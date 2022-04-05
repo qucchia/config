@@ -1226,6 +1226,12 @@ https://github.com/akermu/emacs-libvterm
 
   (setq dotfiles-folder "~/.dotfiles")
   (setq dotfiles-org-files '("Emacs.org" "Desktop.org"))
+
+#+end_src
+
+** Tangle
+
+#+begin_src emacs-lisp
   
   (defun dotfiles-tangle-org-file (&optional org-file)
     "Tangles a single .org file relative to the path in the dotfiles folder."
@@ -1243,6 +1249,20 @@ https://github.com/akermu/emacs-libvterm
     (dolist (org-file dotfiles-org-files)
       (dotfiles-tangle-org-file org-file))
     (message "Dotfiles are up to date!"))
+
+#+end_src
+
+** Executables
+
+#+begin_src emacs-lisp
+
+  (defun qucchia/detect-bash-mode ()
+    (message buffer-file-name)
+    (when (string-match-p "/.bin/" buffer-file-name)
+      (sh-mode)
+      (set-file-modes buffer-file-name 493)))
+
+  (add-to-list 'find-file-hook #'qucchia/detect-bash-mode)
 
 #+end_src
 
