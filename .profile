@@ -16,7 +16,5 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-. "$HOME/.cargo/env"
-
 # Augment path
 export PATH="$HOME/.bin:$PATH"

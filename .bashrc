@@ -111,9 +111,6 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-. "$HOME/.cargo/env"
-source ~/.bash_completion/alacritty
-source ~/.bash_completion/alacritty
 
 vterm_printf(){
     if [ -n "$TMUX" ] && ([ "${TERM%%-*}" = "tmux" ] || [ "${TERM%%-*}" = "screen" ] ); then
@@ -126,3 +123,5 @@ vterm_printf(){
         printf "\e]%s\e\\" "$1"
     fi
 }
+
+. torsocks on

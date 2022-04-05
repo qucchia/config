@@ -15,7 +15,7 @@
 ## Tor opens a socks proxy on port 9050 by default -- even if you don't
 ## configure one below. Set "SocksPort 0" if you plan to run Tor only
 ## as a relay, and not make any local application connections yourself.
-SocksPort 192.168.1.38:9050 # Default: Bind to localhost:9050 for local connections.
+#SocksPort 9050 # Default: Bind to localhost:9050 for local connections.
 #SocksPort 192.168.0.1:9100 # Bind to this address:port too.
 
 ## Entry policies to allow/deny SOCKS requests based on IP address.
@@ -23,7 +23,7 @@ SocksPort 192.168.1.38:9050 # Default: Bind to localhost:9050 for local connecti
 ## all (and only) requests that reach a SocksPort. Untrusted users who
 ## can access your SocksPort may be able to learn about the connections
 ## you make.
-SocksPolicy accept 192.168.1.0/24
+#SocksPolicy accept 192.168.0.0/16
 #SocksPolicy reject *
 
 ## Logs go to stdout at level "notice" unless redirected by something
@@ -45,11 +45,11 @@ SocksPolicy accept 192.168.1.0/24
 ## Uncomment this to start the process in the background... or use
 ## --runasdaemon 1 on the command line. This is ignored on Windows;
 ## see the FAQ entry if you want Tor to run as an NT service.
-RunAsDaemon 1
+#RunAsDaemon 1
 
 ## The directory for keeping all the keys/etc. By default, we store
 ## things in $HOME/.tor on Unix, and in Application Data\tor on Windows.
-DataDirectory /var/lib/tor
+#DataDirectory /var/lib/tor
 
 ## The port on which Tor will listen for local connections from Tor
 ## controller applications, as documented in control-spec.txt.
@@ -190,3 +190,5 @@ DataDirectory /var/lib/tor
 ## address manually to your friends, uncomment this line:
 #PublishServerDescriptor 0
 
+HashedControlPassword 16:3775331F5575F44D60B29FA5D58F6817E1E2F9B028620DECDA3C3F288F
+ControlPort 9051
