@@ -1,0 +1,57 @@
+#!bin/bash
+
+GREEN='\033[1;32m'
+BLUE='\033[1;34m'
+RED='\033[1;30m'
+NC='\033[0m'
+
+echo -e "\n${BLUE}qucchia's config setup${NC}"
+
+# Navigate to the directory of this script
+cd $(dirname $(readlink -f $0))
+cd ..
+
+echo -e "\n${BLUE}Removing some preinstalled applications...${NC}"
+sudo apt purge chromium-browser dillo geany thonny -y
+sudo apt autoremove -y
+
+echo -e "\n\n${BLUE}Updating package sources...${NC}"
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32
+sudo apt update
+echo -e "\n\n${BLUE}Upgrading packages...${NC}"
+sudo apt upgrade -y
+
+echo -e "\n\n${BLUE}Installing GNU Stow...${NC}"
+sudo apt install -y stow
+export PATH="$HOME/.bin:$PATH"
+dotfiles-stow
+
+echo -e "\n\n${BLUE}Setting keymap...${NC}"
+dotfiles-set-keymap
+
+echo -e "\n\n${BLUE}Installing applications...${NC}"
+sudo apt install -y emacs firefox pass tor
+echo -e "\n\n${BLUE}Installing server...${NC}"
+dotfiles-install-server
+
+echo -e "\n\n${BLUE}Running Nodesource script...${NC}"
+curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+echo -e "\n\n${BLUE}Installing Node.js and NPM...${NC}"
+sudo apt install -y nodejs
+
+echo -e "\n${BLUE}Updating NPM...${NC}"
+sudo npm i -g npm
+echo -e "\n${BLUE}Installing TypeScript...${NC}"
+sudo npm i -g typescript typescript-language-server
+echo -e "\n${BLUE}Installing Prettier...${NC}"
+sudo npm i -g prettier
+
+echo -e "\n${BLUE}Downloading and building Neovim...${NC}"
+dotfiles-install-neovim
+dotfiles-install-vimplug
+
+echo -e "Installing fonts..."
+dotfiles-install-fonts
+
+echo -e "\n"
+cat $SETUP_DIR/final-setup.txt

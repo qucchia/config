@@ -1,0 +1,6 @@
+# Navigate to the directory of this script
+cd $(dirname $(readlink -f $0))
+cd ..
+
+stow .
+sudo stow root -t /
