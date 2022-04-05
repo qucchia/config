@@ -1,2 +1,3 @@
+#!/bin/bash
 # Update remote to use SSH
 git remote set-url origin git@codeberg.org:qucchia/dotfiles

@@ -1,3 +1,4 @@
+#!bin/bash
 mkdir -p ~/Projects
 git clone git@codeberg.org:qucchia/life ~/Documents/life
 git clone git@codeberg.org:qucchia/school ~/Documents/school
