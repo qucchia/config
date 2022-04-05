@@ -5,6 +5,7 @@ eshell/history
 eshell/lastdir
 emms/
 lsp-cache/
+transient/history.el
 url/cookies
 
 .lsp-session-v1
