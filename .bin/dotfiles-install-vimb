@@ -1,0 +1,6 @@
+#!/bin/bash
+sudo apt install -y libwebkit2gtk-4.0-37 libwebkit2gtk-4.0-dev
+git clone https://github.com/fanglingsu/vimb.git /tmp/vimb
+cd /tmp/vimb
+make V=1
+sudo make install
