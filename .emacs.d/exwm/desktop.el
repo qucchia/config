@@ -16,9 +16,9 @@
   ;; Start server to allow opening files from other applications
   (server-start)
 
-  ;; Play Code Radio
-  (emms-play-url "https://coderadio-relay-ffm.freecodecamp.org/radio/8010/radio.mp3")
-  (emms-mode-line-toggle)
+  ;; Play music
+  (emms-play-directory-tree "~/Music")
+  (emms-mode-line-mode -1) ;; Turn modeline off
 
   (eshell))
 

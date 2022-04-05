@@ -3,7 +3,7 @@
 
 * Bash Script
 
-#+begin_src shell :tangle ./.emacs.d/exwm/start-exwm.sh
+#+begin_src shell :tangle ./.bin/dotfiles-start-exwm
 
   #!/bin/sh
   exec dbus-launch --exit-with-session emacs -mm --debug-init -l ~/.emacs.d/exwm/desktop.el
@@ -32,9 +32,9 @@
     ;; Start server to allow opening files from other applications
     (server-start)
 
-    ;; Play Code Radio
-    (emms-play-url "https://coderadio-relay-ffm.freecodecamp.org/radio/8010/radio.mp3")
-    (emms-mode-line-toggle)
+    ;; Play music
+    (emms-play-directory-tree "~/Music")
+    (emms-mode-line-mode -1) ;; Turn modeline off
 
     (eshell))
 
