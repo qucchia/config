@@ -133,6 +133,17 @@
   ([remap describe-variable] . counsel-describe-variable)
   ([remap describe-key] . helpful-key))
 
+(setq qucchia/use-tor t)
+
+(defun qucchia/toggle-tor ()
+  (interactive)
+  (setq qucchia/use-tor (not qucchia/use-tor)))
+
+(defun qucchia/start-process-shell-command (name buffer command)
+  (if qucchia/use-tor
+    (start-process-shell-command name buffer (string-join (list "torsocks " command)))
+    (start-process-shell-command name buffer command)))
+
 (defun qucchia/uri-encode (string)
   "Encode STRING to URI (currently not working."
   string)
@@ -291,12 +302,16 @@
     "o C-e" '(eshell :which-key "eshell")
     "of"    '((lambda ()
                 (interactive)
-                (start-process-shell-command "firefox" nil "firefox"))
+                (start-process-shell-command "firefox" "*Firefox log*" "firefox"))
               :which-key "firefox")
     "oi"    '(ibuffer :which-key "ibuffer")
     "os"    '(shell :which-key "shell")
     "ot"    '(term :which-key "term")
     "ov"    '(vterm :which-key "vterm")
+    "o C-v" '((lambda ()
+                (interactive)
+                (qucchia/start-process-shell-command "vimb" "*Vimb log*" "vimb"))
+              :which-key "vimb")
     
     
     "m"  '(:ignore t :which-key "mail")
@@ -309,6 +324,7 @@
     "C-p" '(qucchia/get-password :which-key "password")
     "t"   '(:ignore t :which-key "toggle")
     "te"  '(emms-mode-line-toggle :which-key "emms modeline")
+    "tp"  '(qucchia/toggle-tor :which-key "proxy")
     "tt"  '(counsel-load-theme :which-key "choose theme")
     "ts"  '(hydra-text-scale/body :which-key "scale text")
     
