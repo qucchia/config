@@ -1,1 +1,1 @@
-sh ~/.dotfiles/.emacs.d/exwm/start-exwm.sh
+dotfiles-start-exwm
