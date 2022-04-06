@@ -133,7 +133,8 @@
   ([remap describe-variable] . counsel-describe-variable)
   ([remap describe-key] . helpful-key))
 
-(setq qucchia/use-tor t)
+(defvar qucchia/use-tor t
+  "If non-nil, use torsocks in qucchia/start-process-shell-command.")
 
 (defun qucchia/toggle-tor ()
   (interactive)
@@ -722,8 +723,11 @@
 (use-package diredfl
   :hook (dired-mode . diredfl-mode))
 
-(setq dotfiles-folder "~/.dotfiles")
-(setq dotfiles-org-files '("Emacs.org" "Desktop.org"))
+(defvar dotfiles-folder "~/.dotfiles"
+  "Directory where the dotfiles repository is stored.")
+
+(defvar dotfiles-org-files '("Emacs.org" "Desktop.org")
+  "List of Org files in dotfiles repository to tangle.")
 
 (defun dotfiles-tangle-org-file (&optional org-file)
   "Tangles a single .org file relative to the path in the dotfiles folder."

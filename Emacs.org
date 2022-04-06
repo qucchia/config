@@ -217,7 +217,8 @@
 
 #+begin_src emacs-lisp
 
-  (setq qucchia/use-tor t)
+  (defvar qucchia/use-tor t
+    "If non-nil, use torsocks in qucchia/start-process-shell-command.")
   
   (defun qucchia/toggle-tor ()
     (interactive)
@@ -1033,8 +1034,11 @@ https://emacs-lsp.github.io/lsp-mode
 
 #+begin_src emacs-lisp
 
-  (setq dotfiles-folder "~/.dotfiles")
-  (setq dotfiles-org-files '("Emacs.org" "Desktop.org"))
+  (defvar dotfiles-folder "~/.dotfiles"
+    "Directory where the dotfiles repository is stored.")
+
+  (defvar dotfiles-org-files '("Emacs.org" "Desktop.org")
+    "List of Org files in dotfiles repository to tangle.")
 
 #+end_src
 
