@@ -714,13 +714,49 @@
   (setq dired-open-extensions '(("png" . "display"))))
 
 (use-package dired-hide-dotfiles
-  :hook (dired-mode . dired-hide-dotfiles-mode)
   :config
   (evil-collection-define-key 'normal 'dired-mode-map
-    "H" 'dired-hide-dotfiles-mode))
+    "H" 'dired-hide-dotfiles-mode)
+  (setq dired-after-readin-hook (cdr dired-after-readin-hook)))
 
 (use-package diredfl
   :hook (dired-mode . diredfl-mode))
+
+(setq dotfiles-folder "~/.dotfiles")
+(setq dotfiles-org-files '("Emacs.org" "Desktop.org"))
+
+(defun dotfiles-tangle-org-file (&optional org-file)
+  "Tangles a single .org file relative to the path in the dotfiles folder."
+  (interactive)
+  (message "File: %s" org-file)
+  ;; Suppress prompts and messages
+  (let ((org-confirm-babel-evaluate nil)
+        (message-log-max nil)
+        (inhibit-message t))
+    (org-babel-tangle-file (expand-file-name org-file dotfiles-folder))))
+
+(defun dotfiles-tangle-org-files ()
+  "Tangles all of the .org dotfiles."
+  (interactive)
+  (dolist (org-file dotfiles-org-files)
+    (dotfiles-tangle-org-file org-file))
+  (message "Dotfiles are up to date!"))
+
+(defun qucchia/detect-bash-mode ()
+  (message buffer-file-name)
+  (when (string-match-p "/.bin/" buffer-file-name)
+    (sh-mode)
+    (set-file-modes buffer-file-name 493)))
+
+(add-to-list 'find-file-hook #'qucchia/detect-bash-mode)
+
+(defun qucchia/dired-hide-dotfiles ()
+  (unless (string-prefix-p
+            (expand-file-name dotfiles-folder)
+            (expand-file-name dired-directory))
+    (progn (dired-hide-dotfiles-mode))))
+
+(add-to-list 'qucchia/dired-readin-hook #'qucchia/dired-hide-dotfiles)
 
 (use-package term
   :defer t
@@ -883,34 +919,6 @@
           (:name "Today's messages" :query "date:today..now" :key ?t)
           (:name "Last 7 days" :query "date:7d..now" :hide-unread t :key ?w)
           (:name "Messages with images" :query "mime:image/*" :key ?p))))
-
-(setq dotfiles-folder "~/.dotfiles")
-(setq dotfiles-org-files '("Emacs.org" "Desktop.org"))
-
-(defun dotfiles-tangle-org-file (&optional org-file)
-  "Tangles a single .org file relative to the path in the dotfiles folder."
-  (interactive)
-  (message "File: %s" org-file)
-  ;; Suppress prompts and messages
-  (let ((org-confirm-babel-evaluate nil)
-        (message-log-max nil)
-        (inhibit-message t))
-    (org-babel-tangle-file (expand-file-name org-file dotfiles-folder))))
-
-(defun dotfiles-tangle-org-files ()
-  "Tangles all of the .org dotfiles."
-  (interactive)
-  (dolist (org-file dotfiles-org-files)
-    (dotfiles-tangle-org-file org-file))
-  (message "Dotfiles are up to date!"))
-
-(defun qucchia/detect-bash-mode ()
-  (message buffer-file-name)
-  (when (string-match-p "/.bin/" buffer-file-name)
-    (sh-mode)
-    (set-file-modes buffer-file-name 493)))
-
-(add-to-list 'find-file-hook #'qucchia/detect-bash-mode)
 
 (use-package emms
   :config
