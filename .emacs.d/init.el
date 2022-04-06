@@ -134,19 +134,26 @@
   ([remap describe-key] . helpful-key))
 
 (defvar qucchia/use-tor t
-  "If non-nil, use torsocks in qucchia/start-process-shell-command.")
+    "If non-nil, use torsocks in `qucchia/start-process-shell-command'.")
+  
+  (defun qucchia/toggle-tor ()
+    "Toggle qucchia/use-tor."
+    (interactive)
+    (setq qucchia/use-tor (not qucchia/use-tor)))
+  
+  (defun qucchia/start-process-shell-command (name buffer command)
+    "Start program in a subprocess.  If `qucchia/use-tor' is non-nil, wrap it in torsocks.
 
-(defun qucchia/toggle-tor ()
-  (interactive)
-  (setq qucchia/use-tor (not qucchia/use-tor)))
-
-(defun qucchia/start-process-shell-command (name buffer command)
-  (if qucchia/use-tor
-    (start-process-shell-command name buffer (string-join (list "torsocks " command)))
-    (start-process-shell-command name buffer command)))
+NAME is a name for process.
+BUFFER is the buffer (or buffer name) to associate with the process.
+COMMAND is the shell command to run.
+See `start-process-shell-command' for more details."
+    (if qucchia/use-tor
+      (start-process-shell-command name buffer (string-join (list "torsocks " command)))
+      (start-process-shell-command name buffer command)))
 
 (defun qucchia/uri-encode (string)
-  "Encode STRING to URI (currently not working."
+  "Encode STRING to URI (currently not working)."
   string)
 
 (defun qucchia/set-keymap ()
@@ -730,7 +737,7 @@
   "List of Org files in dotfiles repository to tangle.")
 
 (defun dotfiles-tangle-org-file (&optional org-file)
-  "Tangles a single .org file relative to the path in the dotfiles folder."
+  "Tangle ORG-FILE relative to the path in the dotfiles folder."
   (interactive)
   (message "File: %s" org-file)
   ;; Suppress prompts and messages
@@ -740,27 +747,29 @@
     (org-babel-tangle-file (expand-file-name org-file dotfiles-folder))))
 
 (defun dotfiles-tangle-org-files ()
-  "Tangles all of the .org dotfiles."
+  "Tangle all of the .org dotfiles."
   (interactive)
   (dolist (org-file dotfiles-org-files)
     (dotfiles-tangle-org-file org-file))
   (message "Dotfiles are up to date!"))
 
-(defun qucchia/detect-bash-mode ()
+(defun qucchia/detect-sh-mode ()
+"Enable `sh-mode' if in a .bin folder."
   (message buffer-file-name)
   (when (string-match-p "/.bin/" buffer-file-name)
     (sh-mode)
     (set-file-modes buffer-file-name 493)))
 
-(add-to-list 'find-file-hook #'qucchia/detect-bash-mode)
+(add-to-list 'find-file-hook #'qucchia/detect-sh-mode)
 
 (defun qucchia/dired-hide-dotfiles ()
+  "Hide dotfiles unless in the dotfiles repository."
   (unless (string-prefix-p
             (expand-file-name dotfiles-folder)
             (expand-file-name dired-directory))
     (progn (dired-hide-dotfiles-mode))))
 
-(add-to-list 'qucchia/dired-readin-hook #'qucchia/dired-hide-dotfiles)
+(add-to-list 'dired-readin-hook #'qucchia/dired-hide-dotfiles)
 
 (use-package term
   :defer t
