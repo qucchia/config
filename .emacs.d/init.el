@@ -700,36 +700,6 @@ See `start-process-shell-command' for more details."
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
-(use-package dired
-  :ensure nil
-  :commands (dired dired-jump)
-  :custom ((dired-listing-switches "-agho --group-directories-first"))
-  :bind (("C-x C-j" . dired-jump))
-  :config
-  (evil-collection-define-key 'normal 'dired-mode-map
-    "h" 'dired-single-up-directory
-    "l" 'dired-single-buffer))
-
-(use-package dired-single
-  :commands (dired dired-jump))
-
-(use-package all-the-icons-dired
-  :hook (dired-mode . all-the-icons-dired-mode))
-
-(use-package dired-open
-  :commands (dired dired-jump)
-  :config
-  (setq dired-open-extensions '(("png" . "display"))))
-
-(use-package dired-hide-dotfiles
-  :config
-  (evil-collection-define-key 'normal 'dired-mode-map
-    "H" 'dired-hide-dotfiles-mode)
-  (setq dired-after-readin-hook (cdr dired-after-readin-hook)))
-
-(use-package diredfl
-  :hook (dired-mode . diredfl-mode))
-
 (defvar dotfiles-folder "~/.dotfiles"
   "Directory where the dotfiles repository is stored.")
 
@@ -764,12 +734,46 @@ See `start-process-shell-command' for more details."
 
 (defun qucchia/dired-hide-dotfiles ()
   "Hide dotfiles unless in the dotfiles repository."
-  (unless (string-prefix-p
-            (expand-file-name dotfiles-folder)
-            (expand-file-name dired-directory))
-    (progn (dired-hide-dotfiles-mode))))
+  (when (not (or dired-hide-dotfiles-mode
+               (string-prefix-p
+                 (expand-file-name dotfiles-folder)
+                 (expand-file-name dired-directory))))
+    (dired-hide-dotfiles-mode)))
 
-(add-to-list 'dired-readin-hook #'qucchia/dired-hide-dotfiles)
+(defun qucchia/dired-hide-dotfiles-mode-hook ()
+  (remove-hook 'dired-after-readin-hook #'dired-hide-dotfiles--hide))
+
+(use-package dired
+  :ensure nil
+  :commands (dired dired-jump)
+  :custom ((dired-listing-switches "-agho --group-directories-first"))
+  :bind (("C-x C-j" . dired-jump))
+  :config
+  (evil-collection-define-key 'normal 'dired-mode-map
+    "h" 'dired-single-up-directory
+    "l" 'dired-single-buffer))
+
+(use-package dired-single
+  :commands (dired dired-jump))
+
+(use-package all-the-icons-dired
+  :hook (dired-mode . all-the-icons-dired-mode))
+
+(use-package dired-open
+  :commands (dired dired-jump)
+  :config
+  (setq dired-open-extensions '(("png" . "display"))))
+
+(use-package dired-hide-dotfiles
+  :commands (dired-hide-dotfiles-mode)
+  :hook ((dired-after-readin . qucchia/dired-hide-dotfiles)
+         (dired-hide-dotfiles-mode . qucchia/dired-hide-dotfiles-mode-hook))
+  :config
+  (evil-collection-define-key 'normal 'dired-mode-map
+    "H" 'dired-hide-dotfiles-mode))
+
+(use-package diredfl
+  :hook (dired-mode . diredfl-mode))
 
 (use-package term
   :defer t
