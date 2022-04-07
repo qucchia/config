@@ -133,8 +133,10 @@
   ([remap describe-variable] . counsel-describe-variable)
   ([remap describe-key] . helpful-key))
 
-(defvar qucchia/use-tor t
-    "If non-nil, use torsocks in `qucchia/start-process-shell-command'.")
+(defcustom qucchia/use-tor t
+    "If non-nil, use torsocks in `qucchia/start-process-shell-command'."
+    :type 'boolean
+    :group 'qucchia)
   
   (defun qucchia/toggle-tor ()
     "Toggle qucchia/use-tor."
@@ -700,11 +702,15 @@ See `start-process-shell-command' for more details."
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
-(defvar dotfiles-folder "~/.dotfiles"
-  "Directory where the dotfiles repository is stored.")
+(defcustom dotfiles-folder "~/.dotfiles"
+  "Directory where the dotfiles repository is stored."
+  :type 'string
+  :group 'dotfiles)
 
-(defvar dotfiles-org-files '("Emacs.org" "Desktop.org")
-  "List of Org files in dotfiles repository to tangle.")
+(defcustom dotfiles-org-files '("Emacs.org" "Desktop.org")
+  "List of Org files under `dotfiles-folder' to tangle."
+  :type '(list string)
+  :group 'dotfiles)
 
 (defun dotfiles-tangle-org-file (&optional org-file)
   "Tangle ORG-FILE relative to the path in the dotfiles folder."
