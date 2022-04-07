@@ -131,6 +131,27 @@ See the [[https://fanglingsu.github.io/vimb/man.html][manual]], especially the s
 
 #+end_src
 
+** Shortcuts
+
+#+begin_src fundamental
+
+  shortcut-add duck=https://duckduckgo.com/?q=$0
+  shortcut-add y=http://www.youtube.com/results?search_query=$0
+  shortcut-add s=https://www.startpage.com/do/dsearch?query=$0
+  shortcut-default duck
+
+#+end_src
+
+** Mappings
+
+#+begin_src fundamental
+
+  nmap + zI
+  nmap - zO
+  nmap = zz
+
+#+end_src
+
 ** Miscellaneous
 
 #+begin_src fundamental
@@ -307,24 +328,6 @@ The colours are from the [[https://www.nordtheme.com/docs/colors-and-palettes][N
   set monospace-font=Source Code Pro
   set sans-serif-font=sans-serif
   set serif-font=serif
-
-#+end_src
-
-** Web default style
-
-#+begin_src fundamental
-
-  set dark-mode=on
-  set stylesheet=on
-
-#+end_src
-
-#+begin_src css :tangle ./.config/vimb/style.css :noweb yes
-
-body {
-  background-color: <<dark0>>;
-  color: <<light2>>;
-}
 
 #+end_src
 

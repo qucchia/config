@@ -47,6 +47,15 @@ set tabs-to-links=off
 set spell-checking=on
 set spell-checking-languages=en_GB,es_ES,ca_ES
 
+shortcut-add duck=https://duckduckgo.com/?q=$0
+shortcut-add y=http://www.youtube.com/results?search_query=$0
+shortcut-add s=https://www.startpage.com/do/dsearch?query=$0
+shortcut-default duck
+
+nmap + zI
+nmap - zO
+nmap = zz
+
 set caret=off
 set allow-file-access-from-file-urls=off
 set allow-universal-access-from-file-urls=off
