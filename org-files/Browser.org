@@ -1,5 +1,5 @@
 #+title:Vimb configuration
-#+PROPERTY: header-args:fundamental :tangle ./.config/vimb/config :mkdirp yes
+#+PROPERTY: header-args:fundamental :tangle ../.config/vimb/config :mkdirp yes
 
 See the [[https://fanglingsu.github.io/vimb/man.html][manual]], especially the section on [[https://fanglingsu.github.io/vimb/man.html#SETTINGS][settings]], for descriptions on each setting.
 
@@ -328,6 +328,15 @@ The colours are from the [[https://www.nordtheme.com/docs/colors-and-palettes][N
   set monospace-font=Source Code Pro
   set sans-serif-font=sans-serif
   set serif-font=serif
+
+#+end_src
+
+** Web style UI
+
+#+begin_src fundamental
+
+  set dark-mode=on
+  set stylesheet=on
 
 #+end_src
 

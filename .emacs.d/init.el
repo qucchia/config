@@ -706,52 +706,8 @@ See `start-process-shell-command' for more details."
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
-(defcustom dotfiles-folder "~/.dotfiles"
-  "Directory where the dotfiles repository is stored."
-  :type 'string
-  :group 'dotfiles)
-
-(defcustom dotfiles-org-files '("Emacs.org" "Desktop.org")
-  "List of Org files under `dotfiles-folder' to tangle."
-  :type '(list string)
-  :group 'dotfiles)
-
-(defun dotfiles-tangle-org-file (&optional org-file)
-  "Tangle ORG-FILE relative to the path in the dotfiles folder."
-  (interactive)
-  (message "File: %s" org-file)
-  ;; Suppress prompts and messages
-  (let ((org-confirm-babel-evaluate nil)
-        (message-log-max nil)
-        (inhibit-message t))
-    (org-babel-tangle-file (expand-file-name org-file dotfiles-folder))))
-
-(defun dotfiles-tangle-org-files ()
-  "Tangle all of the .org dotfiles."
-  (interactive)
-  (dolist (org-file dotfiles-org-files)
-    (dotfiles-tangle-org-file org-file))
-  (message "Dotfiles are up to date!"))
-
-(defun qucchia/detect-sh-mode ()
-"Enable `sh-mode' if in a .bin folder."
-  (message buffer-file-name)
-  (when (string-match-p "/.bin/" buffer-file-name)
-    (sh-mode)
-    (set-file-modes buffer-file-name 493)))
-
-(add-to-list 'find-file-hook #'qucchia/detect-sh-mode)
-
-(defun qucchia/dired-hide-dotfiles ()
-  "Hide dotfiles unless in the dotfiles repository."
-  (when (not (or dired-hide-dotfiles-mode
-               (string-prefix-p
-                 (expand-file-name dotfiles-folder)
-                 (expand-file-name dired-directory))))
-    (dired-hide-dotfiles-mode)))
-
-(defun qucchia/dired-hide-dotfiles-mode-hook ()
-  (remove-hook 'dired-after-readin-hook #'dired-hide-dotfiles--hide))
+(load-file "dotfiles.el")
+(customize-set-variable dotfiles '("Emacs.org" "Desktop.org"))
 
 (use-package dired
   :ensure nil

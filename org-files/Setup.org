@@ -2,13 +2,13 @@
 
 Add Ubuntu Bionic sources to install latest version of Firefox.
       
-#+begin_src conf :tangle ./root/etc/apt/sources.list.d/firefox.list
+#+begin_src conf :tangle ../root/etc/apt/sources.list.d/firefox.list
 
   deb http://ports.ubuntu.com/ubuntu-ports bionic-updates main
 
 #+end_src
 
-#+begin_src conf :tangle ./root/etc/apt/preferences.d/99bionic-updates
+#+begin_src conf :tangle ../root/etc/apt/preferences.d/99bionic-updates
 
   Package: *
   Pin: release a=bionic-updates
