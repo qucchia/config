@@ -163,7 +163,7 @@ See `start-process-shell-command' for more details."
     "xmodmap ~/.xmodmap"))
 
 (defun qucchia/get-password (name)
-  "Retrieve the password NAME from pass and copies it to the clipboard."
+  "Retrieve the password NAME from pass and copy it to the clipboard."
   (interactive (list (read-string "Password name: ")))
   (start-process-shell-command "pass" nil
   (string-join
