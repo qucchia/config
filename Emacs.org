@@ -61,6 +61,16 @@
 
 #+end_src
 
+* Emacs
+
+#+begin_src emacs-lisp
+
+  (use-package emacs
+    :custom
+    (tab-width 2))
+
+#+end_src
+
 * UI Configuration
 
 ** Basic UI Configuration

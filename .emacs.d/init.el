@@ -37,6 +37,10 @@
   :config
   (auto-package-update-maybe))
 
+(use-package emacs
+  :custom
+  (tab-width 2))
+
 (setq inhibit-startup-message t) ; Start up on a blank screen instead of the startup message
 
 (scroll-bar-mode -1) ; Disable visible scrollbar
