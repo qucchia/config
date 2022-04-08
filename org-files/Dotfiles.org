@@ -148,13 +148,21 @@ This custom function hides all dotfiles unless in the dotfiles repository.
 
 #+begin_src emacs-lisp
 
+  (defun qucchia/in-dotfiles-directory (directory)
+    (string-prefix-p
+      (expand-file-name dotfiles-directory)
+      (expand-file-name directory)))
+
+  (defun qucchia/dired-mode-hook ()
+    (if (qucchia/in-dotfiles-directory dired-directory)
+      (setq-local dired-omit-files "\\`[.]?#\\|\\`[.][.]?\\'")
+      (setq-local dired-omit-files "\\`[.]\\|\\`[.]?#\\|\\`[.][.]?\\'"))
+    (dired-omit-mode))
+
   (defun qucchia/dired-hide-dotfiles ()
     "Hide dotfiles unless under the `dotfiles-directory'."
-    (when (not (or dired-hide-dotfiles-mode
-                 (string-prefix-p
-                   (expand-file-name dotfiles-directory)
-                   (expand-file-name dired-directory))))
-      (dired-hide-dotfiles-mode)))
+    (when (not ))
+      (dired-hide-dotfiles-mode -1))
       
   (defun qucchia/dired-hide-dotfiles-mode-hook ()
     (remove-hook 'dired-after-readin-hook #'dired-hide-dotfiles--hide))

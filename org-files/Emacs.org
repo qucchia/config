@@ -451,7 +451,7 @@ https://github.com/noctuid/general.el
          :which-key "home")
   "d." '((lambda ()
            (interactive)
-           (dired dotfiles-folder))
+           (dired dotfiles-directory))
          :which-key "dotfiles")
   "dd" '((lambda ()
            (interactive)
@@ -1028,12 +1028,14 @@ https://emacs-lsp.github.io/lsp-mode
   (use-package dired
     :ensure nil
     :commands (dired dired-jump)
+    :hook (dired-mode . qucchia/dired-mode-hook)
     :custom ((dired-listing-switches "-agho --group-directories-first"))
     :bind (("C-x C-j" . dired-jump))
     :config
     (evil-collection-define-key 'normal 'dired-mode-map
       "h" 'dired-single-up-directory
-      "l" 'dired-single-buffer))
+      "l" 'dired-single-buffer
+      "H" 'dired-omit-mode))
 
   (use-package dired-single
     :commands (dired dired-jump))
@@ -1046,14 +1048,6 @@ https://emacs-lsp.github.io/lsp-mode
     :config
     (setq dired-open-extensions '(("png" . "display"))))
     
-  (use-package dired-hide-dotfiles
-    :commands (dired-hide-dotfiles-mode)
-    :hook ((dired-after-readin . qucchia/dired-hide-dotfiles)
-           (dired-hide-dotfiles-mode . qucchia/dired-hide-dotfiles-mode-hook))
-    :config
-    (evil-collection-define-key 'normal 'dired-mode-map
-      "H" 'dired-hide-dotfiles-mode))
-
   (use-package diredfl
     :hook (dired-mode . diredfl-mode))
 
