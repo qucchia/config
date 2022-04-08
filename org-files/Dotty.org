@@ -116,8 +116,11 @@ Go dotty with Dotty: dotfiles utilities.
                 (unless (or (not output-file)
                             (string-equal output-file "no"))
                   (setq output-files (cons
-                      (replace-regexp-in-string "^../" "" output-file)
-                      output-files))))))))
+                    ;; Get file path relative to ‘dotty-directory’
+                    (file-relative-name
+                      (expand-file-name output-file (dotty--expand-org-directory))
+                      dotty-directory)
+                    output-files))))))))
        output-files))
        
   (defun dotty--update-gitignore ()
