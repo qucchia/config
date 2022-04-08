@@ -75,7 +75,7 @@
 
 #+begin_src emacs-lisp
 
-  (load-file "~/.emacs.d/dotfiles.el")
+  (load-file "~/.emacs.d/dotty.el")
   (load-file "~/.emacs.d/dolly.el")
   (load-file "~/.emacs.d/racket.el")
   ;; (load-file "~/.emacs.d/email.el")
@@ -436,7 +436,7 @@ https://github.com/noctuid/general.el
          :which-key "home")
   "d." '((lambda ()
            (interactive)
-           (dired dotfiles-directory))
+           (dired dotty-directory))
          :which-key "dotfiles")
   "dd" '((lambda ()
            (interactive)
@@ -1005,7 +1005,7 @@ https://emacs-lsp.github.io/lsp-mode
   (use-package dired
     :ensure nil
     :commands (dired dired-jump)
-    :hook (dired-mode . qucchia/dired-mode-hook)
+    :hook (dired-mode . dotty--dired-mode-hook)
     :custom ((dired-listing-switches "-agho --group-directories-first"))
     :bind (("C-x C-j" . dired-jump))
     :config
