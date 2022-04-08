@@ -1,6 +1,8 @@
 * qucchia/dotfiles
 
-This is my desktop configuration.
+This is my desktop configuration, using Emacs and EXWM on a Raspberry Pi.
+
+Most of the configuration is made under the =org-files= folder using Org mode files, which are then tangled with Org Babel and finally symlinked with GNU Stow to the home directory so Emacs and other programs can read them. Files in the =root= file are stowed to the filesystem root instead.
 
 * Installation
 
@@ -13,55 +15,27 @@ To install the repo to the =.dotfiles= folder and set up all the symlinks:
   git clone https://codeberg.org/qucchia/dotfiles.git ~/.dotfiles
   cd ~/.dotfiles
   stow .
+  sudo stow root -t /
 
 #+end_src
 
-* Emacs configuration
+* Summary
 
-The Emacs configuration is following the [[https://github.com/daviwil/emacs-from-scratch/][Emacs from Scratch tutorials by David Wilson]], but also has personal changes. It can be found in =Emacs.org=. Its contents is tangled to =.emacs.d/init.el=.
+Here’s a quick summary of the files in the =org-files= folder.
 
-* Desktop configuration
+- =Emacs.org= is the main file for my Emacs configuration. It also loads the configuration from:
+  - =Dolly.org=, which contains some functions to use the Tor proxy in Emacs.
+  - =Dotty.org=, which is a package for automating actions in this =dotfiles= repository.
+  - =Racket.org=, which plays a different Star Wars soundtrack depending on the day of the week.
+  - =Email.org= is currently unused.
+    
+- =Desktop.org= is the configuration for EXWM.
 
-My desktop configuration uses EXWM, which is set up in =Desktop.org=.
+- =Browser.org= is the configuration for Vimb.
 
-* Setup
-
-- In =Setup.org= is the script intended to automatically set up my configuration on a newly installed Raspberry Pi OS. It's tangled to files in the =setup= folder.
-- =FinalSetup.org= is a file which is opened in Emacs once the setup script is complete. It contains some configuration steps that can only be done manually.
-
-* Other configuration
-
-** =.bashrc=
-
-Run when a Bash terminal is opened (unmodified).
-
-** =.bin/=
-
-Custom commands.
-
-** =.config/=
-
-- =.config/nvim=: Neovim configuration
-- =.config/alacritty=: Alacritty configuration
-
-** =.gitconfig=
-
-Git configuration.
-
-** =.profile=
-
-Run when logging in.
-
-** =.stow-local-ignore=
-
-Files and folders which are not symlinked by Stow.
-
-** =.xmodmap=
-
-My custom key bindings are made using [[https://wiki.archlinux.org/title/xmodmap][xmodmap]]. It does the following:
-  - Maps Caps Lock to Left Super.
-  - Maps the key between Left Shift and Z (only on ISO keyboards) to Escape.
-
-** =.xsession=
-
-Startup script that runs EXWM.
+Some other directories and files worth noting:
+- =.bin/= contains custom bash commands which are loaded in =.profile=.
+- =root/= is stowed to the filesystem root.
+- =setup/= contains some self-notes for setup on a new machine and some pre-made Firefox configuration.
+- =.xmodmap= maps Caps Lock to Left Super and the key between Left Shift and Z to Escape.
+- =.xsession= starts EXWM.
