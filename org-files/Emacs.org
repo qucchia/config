@@ -1017,8 +1017,7 @@ https://emacs-lsp.github.io/lsp-mode
 
 #+begin_src emacs-lisp
 
-  (load-file "dotfiles.el")
-  (customize-set-variable dotfiles '("Emacs.org" "Desktop.org"))
+  (load-file "~/.emacs.d/dotfiles.el")
 
 #+end_src
 
