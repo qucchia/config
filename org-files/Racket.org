@@ -36,7 +36,7 @@
         (when (equal day-of-week "Fri")
           (setq star-wars-directory "06 Return of the Jedi"))
         (when (equal day-of-week "Sat")
-          (setq star-wars-directory "A New Hope (Definitive)"))
+          (setq star-wars-directory "The Mandalorian"))
         (string-join (list "~/Music/star-wars-soundtrack/" star-wars-directory)))))
 
 #+end_src
