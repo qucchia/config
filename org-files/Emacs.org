@@ -1100,6 +1100,14 @@ https://github.com/akermu/emacs-libvterm
 #+end_src
 
 * Other
+** Electric quotes
+
+#+begin_src emacs-lisp
+
+  (electric-quote-mode t)
+
+#+end_src
+
 ** Lookup Password function
 
 #+begin_src emacs-lisp
@@ -1112,4 +1120,3 @@ https://github.com/akermu/emacs-libvterm
        nil)))
 
 #+end_src
-
