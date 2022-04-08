@@ -13,5 +13,3 @@
 .emacs.d/exwm/desktop.el
 .emacs.d/init.el
 .emacs.d/racket.el
-root/etc/apt/preferences.d/99bionic-updates
-root/etc/apt/sources.list.d/firefox.list
