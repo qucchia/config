@@ -1,14 +1,19 @@
-.cache/
-elpa/
-eln-cache/
-eshell/history
-eshell/lastdir
-emms/
-lsp-cache/
-transient/history.el
-url/cookies
-
+# Files
 .last-package-update-day
 .lsp-session-v1
 projectile-bookmarks.eld
 tramp
+
+# Directories
+.cache/
+elpa/
+eln-cache/
+emms/
+games/
+lsp-cache/
+
+# Files in subdirectories
+eshell/history
+eshell/lastdir
+transient/history.el
+url/cookies
