@@ -1,6 +1,8 @@
 #+title:Racket
 #+PROPERTY: header-args:emacs-lisp :tangle ../.emacs.d/racket.el
 
+Make a racket with Racket: music utilities.
+
 * Use package
 
 #+begin_src emacs-lisp

@@ -1,7 +1,7 @@
 #+title:Dolly
 #+PROPERTY: header-args:emacs-lisp :tangle ../.emacs.d/dolly.el
 
-Dolly: proxy utilities
+Dolly: proxy utilities.
 
 #+begin_src emacs-lisp
 
