@@ -14,33 +14,13 @@
 
 #+begin_src emacs-lisp
 
-  (defun qucchia/play-star-wars-music ()
-    "Play a different Star Wars soundtrack depending on the day of the week."
-    (emms-play-directory-tree
-      (let ((day-of-week (substring (current-time-string) 0 3))
-            (star-wars-directory ""))
-        (when (equal day-of-week "Sun")
-          (setq star-wars-directory "01 The Phantom Menace"))
-        (when (equal day-of-week "Mon")
-          (setq star-wars-directory "02 Attack of the Clones"))
-        (when (equal day-of-week "Tue")
-          (setq star-wars-directory "03 Revenge of the Sith"))
-        (when (equal day-of-week "Wed")
-          (setq star-wars-directory "04 A New Hope"))
-        (when (equal day-of-week "Thu")
-          (setq star-wars-directory "05 The Empire Strikes Back"))
-        (when (equal day-of-week "Fri")
-          (setq star-wars-directory "06 Return of the Jedi"))
-        (when (equal day-of-week "Sat")
-          (setq star-wars-directory "A New Hope (Definitive)"))
-        (string-join (list "~/Music/star-wars-soundtrack/" star-wars-directory)))))
-
   (defun qucchia/exwm-init ()
+    "Initiate EXWM."
     ;; Make workspace 1 be the one where we land at startup
     (exwm-workspace-switch-create 1)
 
     ;; Set keyboard layout
-    (start-process-shell-command "xmodmap" nil "xmodmap ~/.dotfiles/layout/.Xmodmap")
+    (start-process-shell-command "xmodmap" nil "xmodmap ~/.xmodmap")
 
     ;; Start Tor service
     (start-process-shell-command "tor" nil "sudo systemctl start tor@default.service")
@@ -53,8 +33,8 @@
     ;; Start server to allow opening files from other applications
     (server-start)
 
-    ;; Play music
-    (qucchia/play-star-wars-music)
+    ;; Blast my ears off with Star Wars fanfare!
+    (racket-play-star-wars-music)
     (emms-mode-line-mode -1) ;; Turn modeline off
 
     (eshell))
