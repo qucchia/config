@@ -328,7 +328,7 @@ https://github.com/noctuid/general.el
       "C-p" '(qucchia/get-password :which-key "password")
       "t"   '(:ignore t :which-key "toggle")
       "te"  '(emms-mode-line-toggle :which-key "emms modeline")
-      "tp"  '(dolly/toggle-tor :which-key "proxy")
+      "tp"  '(dolly-toggle-tor :which-key "proxy")
       "tt"  '(counsel-load-theme :which-key "choose theme")
       "ts"  '(hydra-text-scale/body :which-key "scale text")
       <<search-bindings>>
@@ -475,7 +475,7 @@ https://github.com/noctuid/general.el
   "ov"    '(vterm :which-key "vterm")
   "o C-v" '((lambda ()
               (interactive)
-              (dolly/start-process-shell-command "vimb" "*Vimb log*" "vimb"))
+              (dolly-start-process-shell-command "vimb" "*Vimb log*" "vimb"))
             :which-key "vimb")
 
 #+end_src
