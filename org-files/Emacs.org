@@ -525,8 +525,9 @@ https://github.com/noctuid/general.el
 
   "r"  '(:ignore t :which-key "racket")
   "ra" 'racket-add-track-to-favourites
-  "rr" 'racket-remove-track-from-favourites
+  "rf" 'racket-play-favourites-playlist
   "ro" 'racket-open-favourites
+  "rr" 'racket-remove-track-from-favourites
          
 #+end_src
 

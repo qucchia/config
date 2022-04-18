@@ -58,6 +58,16 @@ Make a racket with Racket: music utilities.
 
 #+begin_src emacs-lisp
 
+  (defun racket-add-favourites ()
+    "Add favourites playlist"
+    (interactive)
+    (emms-add-playlist-file racket-favourites-playlist))
+
+  (defun racket-play-favourites ()
+    "Play favourites playlist"
+    (interactive)
+    (emms-play-playlist-file racket-favourites-playlist))
+
   (defun racket-add-track-to-favourites ()
     "Add current track to favourites"
     (interactive)
