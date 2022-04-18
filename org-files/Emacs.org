@@ -327,6 +327,7 @@ https://github.com/noctuid/general.el
       "k"   '(counsel-descbinds :which-key "keybindings")
       "p"   '(emms-pause :which-key "pause music")
       "C-p" '(qucchia/get-password :which-key "password")
+      <<racket-bindings>>
       "t"   '(:ignore t :which-key "toggle")
       "te"  '(emms-mode-line-toggle :which-key "emms modeline")
       "tp"  '(dolly-toggle-tor :which-key "proxy")
@@ -515,6 +516,18 @@ https://github.com/noctuid/general.el
            (browse-url (string-join (list "https://www.youtube.com/results?search_query=" term))))
          :which-key "youtube")
 
+#+end_src
+
+*** Racket
+
+
+#+begin_src emacs-lisp :noweb-ref racket-bindings :tangle no
+
+  "r"  '(:ignore t :which-key "racket")
+  "ra" 'racket-add-track-to-favourites
+  "rr" 'racket-remove-track-from-favourites
+  "ro" 'racket-open-favourites
+         
 #+end_src
 
 *** Mail

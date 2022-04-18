@@ -16,6 +16,17 @@ Make a racket with Racket: music utilities.
 
 #+end_src
 
+* Custom variables
+
+#+begin_src emacs-lisp
+
+  (defcustom racket-favourites-playlist "~/Music/playlists/Favourites.m3u"
+    "File path where favourites playlist is stored."
+    :type 'string
+    :group 'racket)
+
+#+end_src
+
 * Play Star Wars music
 
 #+begin_src emacs-lisp
@@ -40,6 +51,59 @@ Make a racket with Racket: music utilities.
         (when (equal day-of-week "Sat")
           (setq star-wars-directory "The Mandalorian"))
         (string-join (list "~/Music/star-wars-soundtrack/" star-wars-directory)))))
+
+#+end_src
+
+* Favourites playlist
+
+#+begin_src emacs-lisp
+
+  (defun racket-add-track-to-favourites ()
+    "Add current track to favourites"
+    (interactive)
+    (let ((line (concat "file://" (emms-score-current-selected-track-filename))))
+      (with-current-buffer (or (get-file-buffer racket-favourites-playlist)
+                               (find-file-noselect racket-favourites-playlist))
+        (save-excursion
+          (beginning-of-buffer)
+          (if (search-forward-regexp
+                (concat "^" (regexp-quote line) "$")
+              nil t)
+            ;; Don’t do anything if the track is already added
+            (message "The track is already inside the playlist.")
+            ;; Add to playlist
+            (progn 
+              (end-of-buffer)
+              (unless (eq ?\C-j (char-before))
+                (insert "\n"))
+              (insert line "\n")
+              (save-buffer)
+              (message "Track added to playlist.")))))))
+
+  (defun racket-remove-track-from-favourites ()
+    "Remove current track from favourites"
+    (interactive)
+    (let ((line (concat "file://" (emms-score-current-selected-track-filename))))
+      (with-current-buffer (or (get-file-buffer racket-favourites-playlist)
+                               (find-file-noselect racket-favourites-playlist))
+        (save-excursion
+          (beginning-of-buffer)
+          (if (search-forward-regexp
+                (concat "^" (regexp-quote line) "$")
+              nil t)
+            ;; Remove from playlist
+            (progn
+              (beginning-of-line)
+              (kill-line 1)
+              (save-buffer)
+              (message "Track removed from playlist."))
+            ;; Don’t do anything if the track is already added
+            (message "The track isn’t inside the playlist."))))))
+        
+  (defun racket-open-favourites ()
+    "Open favourites playlist"
+    (interactive)
+    (find-file racket-favourites-playlist))
 
 #+end_src
 
