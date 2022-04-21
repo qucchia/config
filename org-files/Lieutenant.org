@@ -231,6 +231,18 @@ https://github.com/noctuid/general.el
 
 #+end_src
 
+* =t=: Toggle
+
+#+begin_src emacs-lisp :noweb-ref bindings :tangle no
+
+  "t"   '(:ignore t :which-key "toggle")
+  "te"  '(emms-mode-line-toggle :which-key "emms modeline")
+  "tp"  '(dolly-toggle-tor :which-key "proxy")
+  "tt"  '(counsel-load-theme :which-key "choose theme")
+  "ts"  '(hydra-text-scale/body :which-key "scale text")
+
+#+end_src
+
 * =r=: Racket
 
 #+begin_src emacs-lisp :noweb-ref bindings :tangle no
@@ -260,11 +272,6 @@ https://github.com/noctuid/general.el
   "k"   '(counsel-descbinds :which-key "keybindings")
   "p"   '(emms-pause :which-key "pause music")
   "C-p" '(qucchia/get-password :which-key "password")
-  "t"   '(:ignore t :which-key "toggle")
-  "te"  '(emms-mode-line-toggle :which-key "emms modeline")
-  "tp"  '(dolly-toggle-tor :which-key "proxy")
-  "tt"  '(counsel-load-theme :which-key "choose theme")
-  "ts"  '(hydra-text-scale/body :which-key "scale text")
   "u"   '(browse-url :which-key "url")
   "x"   '(qucchia/set-keymap :which-key "set keymap")
   "y"   '(counsel-yank-pop :which-key "yank")
