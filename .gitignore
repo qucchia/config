@@ -12,4 +12,5 @@
 .emacs.d/email.el
 .emacs.d/exwm/desktop.el
 .emacs.d/init.el
+.emacs.d/lieutenant.el
 .emacs.d/racket.el

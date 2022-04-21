@@ -1,0 +1,273 @@
+#+title:Lieutenant
+#+PROPERTY: header-args:emacs-lisp :tangle ../.emacs.d/lieutenant.el
+
+Lieutenant: General keybindings.
+
+https://github.com/noctuid/general.el
+
+* Main
+
+#+begin_src emacs-lisp :noweb yes
+
+  (use-package general
+    :after evil
+    :config
+    (general-create-definer qucchia/leader-keys
+      :keymaps '(normal insert visual emacs)
+      :prefix "SPC"
+      :global-prefix "C-SPC")
+
+    (qucchia/leader-keys
+      <<bindings>>)
+
+    (general-define-key
+     "C-M-n" 'counsel-switch-buffer
+     "s-x"   '(lambda ()
+                (interactive)
+                (if ivy-mode
+                  (progn (ivy-mode -1)
+                         (execute-extended-command prefix-arg)
+                         (ivy-mode))
+                  (execute-extended-command prefix-arg)))
+     "M-v" 'scroll-other-window-down
+     "<pause>" 'emms-pause))
+
+  (provide 'lieutenant)
+
+#+end_src
+
+* b: bookmarks
+
+#+begin_src emacs-lisp :noweb-ref bindings :tangle no
+
+  "b"   '(:ignore t :which-key "bookmark")
+  "bd"  '((lambda ()
+            (interactive)
+            (browse-url "https://discord.com/app"))
+          :which-key "discord")
+
+  "bf"  '(:ignore t :which-key "firefox")
+  "bfp" '((lambda ()
+            (interactive)
+            (browse-url "about:preferences"))
+          :which-key "preferences")
+
+  "bg"  '((lambda ()
+            (interactive)
+            (browse-url "https://codeberg.org"))
+          :which-key "codeberg")
+  "bm"  '((lambda ()
+            (interactive)
+            (browse-url "https://moodle.ins-mediterrania.cat/login/index.php"))
+          :which-key "moodle")
+  "bw"  '((lambda ()
+            (interactive)
+            (browse-url "https://web.whatsapp.com"))
+          :which-key "whatsapp")
+  "by"  '((lambda ()
+            (interactive)
+            (browse-url "https://www.youtube.com"))
+          :which-key "youtube")
+
+#+end_src
+
+** bc: classroom
+
+#+begin_src emacs-lisp :noweb-ref bindings :tangle no
+
+  "bc"  '(:ignore t :which-key "classroom")
+  "bca" '((lambda ()
+            (interactive)
+            (browse-url "https://classroom.google.com/u/1/h"))
+          :which-key "english")
+  "bcc" '((lambda ()
+            (interactive)
+            (browse-url "https://classroom.google.com/u/1/c/Mzg5NzM5MTU1NzE1"))
+          :which-key "catalan")
+  "bcd" '((lambda ()
+            (interactive)
+            (browse-url "https://classroom.google.com/u/1/c/MTY0ODg2NDY5MjAx"))
+          :which-key "dibuix")
+  "bce" '((lambda ()
+            (interactive)
+            (browse-url "https://classroom.google.com/u/1/c/Mzg5NzcxMzA1ODQ1"))
+          :which-key "spanish")
+  "bcf" '((lambda ()
+            (interactive)
+            (browse-url "https://classroom.google.com/u/1/c/Mzg5OTkwODAzNjYz"))
+          :which-key "p.e.")
+  "bcl" '((lambda ()
+            (interactive)
+            (browse-url "https://classroom.google.com/u/1/c/MzIwODUyMDAyNTQw"))
+          :which-key "philosophy")
+  "bcm" '((lambda ()
+            (interactive)
+            (browse-url "https://classroom.google.com/u/1/c/MzIwNjgyODcyMDM4"))
+          :which-key "cmc")
+  "bcq" '((lambda ()
+            (interactive)
+            (browse-url "https://classroom.google.com/u/1/c/MzkwMjkzNzQ0Mjc3"))
+          :which-key "maths")
+  "bct" '((lambda ()
+            (interactive)
+            (browse-url "https://classroom.google.com/u/1/c/MzkwMjMwODAxMTM4"))
+          :which-key "technology")
+  "bcu" '((lambda ()
+            (interactive)
+            (browse-url "https://classroom.google.com/u/1/c/MzU2OTczMzczMDU3"))
+          :which-key "tutoria")
+  "bcy" '((lambda ()
+            (interactive)
+            (browse-url "https://classroom.google.com/u/1/c/MzIwNjE5OTE2ODMz"))
+          :which-key "physics")
+#+end_src
+
+* d: directories
+
+#+begin_src emacs-lisp :noweb-ref bindings :tangle no
+
+  "d"  '(:ignore t :which-key "directory")
+  "d~" '((lambda ()
+           (interactive)
+           (dired "~/"))
+         :which-key "home")
+  "d." '((lambda ()
+           (interactive)
+           (dired dotty-directory))
+         :which-key "dotfiles")
+  "dd" '((lambda ()
+           (interactive)
+           (dired "~/Downloads"))
+         :which-key "downloads")
+  "dD" '((lambda ()
+           (interactive)
+           (dired "~/Documents"))
+         :which-key "documents")
+  "dm" '((lambda ()
+           (interactive)
+           (dired "~/Music"))
+         :which-key "music")
+  "dp" '((lambda ()
+           (interactive)
+           (dired "~/Projects"))
+         :which-key "projects")
+
+#+end_src
+
+* f: files
+
+#+begin_src emacs-lisp :noweb-ref bindings :tangle no
+
+  "f"  '(:ignore t :which-key "file")
+  "fc" '((lambda () (interactive)
+           (find-file "~/.dotfiles/org-files/Emacs.org"))
+         :which-key "config")
+  "ft" '((lambda () (interactive)
+           (find-file "~/Documents/life/Tasks.org"))
+         :which-key "tasks")
+
+#+end_src
+
+* o: open app
+
+#+begin_src emacs-lisp :noweb-ref bindings :tangle no
+
+  "o"     '(:ignore t :which-key "open")
+  "oa"    '(org-agenda :which-key "agenda")
+  "oe"    '(emms :which-key "emms")
+  "o C-e" '(eshell :which-key "eshell")
+  "of"    '((lambda ()
+              (interactive)
+              (start-process-shell-command "firefox" "*Firefox log*" "firefox"))
+            :which-key "firefox")
+  "oi"    '(ibuffer :which-key "ibuffer")
+  "om"    '((lambda ()
+              (interactive)
+              (dolly-start-process-shell-command "min" "*Min log*" "min"))
+            :which-key "min")
+  "os"    '(shell :which-key "shell")
+  "ot"    '(term :which-key "term")
+  "ov"    '(vterm :which-key "vterm")
+  "o C-v" '((lambda ()
+              (interactive)
+              (dolly-start-process-shell-command "vimb" "*Vimb log*" "vimb"))
+            :which-key "vimb")
+
+#+end_src
+
+* s: search
+
+#+begin_src emacs-lisp :noweb-ref bindings :tangle no
+
+  "s"  '(:ignore t :which-key search)
+  "sc" '((lambda (term)
+           (interactive (list (qucchia/uri-encode (read-string "DIEC "))))
+           (browse-url (string-join (list "https://dlc.iec.cat/Results?DecEntradaText=" term))))
+         :which-key "diec")
+  "sd" '((lambda (term)
+           (interactive (list (qucchia/uri-encode (read-string "DuckDuckGo "))))
+           (browse-url (string-join (list "https://duckduckgo.com/?q=" term))))
+         :which-key "duckduckgo")
+  "sm" '((lambda (term)
+           (interactive (list (qucchia/uri-encode (read-string "MDN "))))
+           (browse-url (string-join (list "https://developer.mozilla.org/en-US/search?q=" term))))
+         :which-key "mdn")
+  "sr" '((lambda (term)
+           (interactive (list (qucchia/uri-encode (read-string "RAE "))))
+           (browse-url (string-join (list "https://dle.rae.es/" term))))
+         :which-key "rae")
+  "ss" '((lambda (term)
+           (interactive (list (qucchia/uri-encode (read-string "StartPage "))))
+           (browse-url (string-join (list "https://www.startpage.com/do/dsearch?query=" term))))
+         :which-key "startpage")
+  "sw" '((lambda (term)
+           (interactive (list (qucchia/uri-encode (read-string "SwissCows "))))
+           (browse-url (string-join (list "https://swisscows.com/web?query=" term))))
+         :which-key "swisscows")
+  "sy" '((lambda (term)
+           (interactive (list (qucchia/uri-encode (read-string "YouTube "))))
+           (browse-url (string-join (list "https://www.youtube.com/results?search_query=" term))))
+         :which-key "youtube")
+
+#+end_src
+
+* r: racket
+
+#+begin_src emacs-lisp :noweb-ref bindings :tangle no
+
+  "r"  '(:ignore t :which-key "racket")
+  "ra" 'racket-add-track-to-favourites
+  "rf" 'racket-play-favourites-playlist
+  "ro" 'racket-open-favourites
+  "rr" 'racket-remove-track-from-favourites
+         
+#+end_src
+
+* Other
+
+#+begin_src emacs-lisp :noweb-ref bindings :tangle no
+
+  "'"   '(electric-quote-mode :which-key "eletric-quote")
+  "."   '((lambda ()
+            (interactive)
+            (insert-char ?·))
+          :which-key "middle dot")
+  "c"   '(org-capture :which-key "capture")
+  "C-h" '(org-shiftleft :which-key "shift left")
+  "C-j" '(org-shiftdown :which-key "shift down")
+  "C-k" '(org-shiftup :which-key "shift up")
+  "C-l" '(org-shiftright :which-key "shift right")
+  "k"   '(counsel-descbinds :which-key "keybindings")
+  "p"   '(emms-pause :which-key "pause music")
+  "C-p" '(qucchia/get-password :which-key "password")
+  "t"   '(:ignore t :which-key "toggle")
+  "te"  '(emms-mode-line-toggle :which-key "emms modeline")
+  "tp"  '(dolly-toggle-tor :which-key "proxy")
+  "tt"  '(counsel-load-theme :which-key "choose theme")
+  "ts"  '(hydra-text-scale/body :which-key "scale text")
+  "u"   '(browse-url :which-key "url")
+  "x"   '(qucchia/set-keymap :which-key "set keymap")
+  "y"   '(counsel-yank-pop :which-key "yank")
+
+#+end_src
+
