@@ -36,6 +36,15 @@ https://github.com/noctuid/general.el
 
 #+end_src
 
+* =.=: Dotty
+
+#+begin_src emacs-lisp :noweb-ref bindings :tangle no
+
+  "."  '(:ignore t :which-key "dotty")
+  ".o" '(dotty-open-tangled-file)
+
+#+end_src
+
 * =b=: Bookmarks
 
 #+begin_src emacs-lisp :noweb-ref bindings :tangle no
@@ -260,10 +269,6 @@ https://github.com/noctuid/general.el
 #+begin_src emacs-lisp :noweb-ref bindings :tangle no
 
   "'"   '(electric-quote-mode :which-key "eletric-quote")
-  "."   '((lambda ()
-            (interactive)
-            (insert-char ?·))
-          :which-key "middle dot")
   "c"   '(org-capture :which-key "capture")
   "C-h" '(org-shiftleft :which-key "shift left")
   "C-j" '(org-shiftdown :which-key "shift down")
