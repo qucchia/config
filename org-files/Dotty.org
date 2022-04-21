@@ -193,6 +193,20 @@ Go dotty with Dotty: dotfiles utilities.
       
 #+end_src
 
+* Open tangled file
+
+#+begin_src emacs-lisp
+
+  (defun dotty-open-tangled-file ()
+    (interactive)
+    "Open the file the current buffer is tangled to."
+    (save-excursion
+      (beginning-of-buffer)
+      (search-forward-regexp "^#\\+PROPERTY: header-args:[a-z-]+ :tangle ")
+      (find-file (thing-at-point 'filename t))))
+
+#+end_src
+
 * Provide
 
 #+begin_src emacs-lisp
