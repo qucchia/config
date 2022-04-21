@@ -1020,7 +1020,6 @@ https://emacs-lsp.github.io/lsp-mode
   (use-package dired
     :ensure nil
     :commands (dired dired-jump)
-    :hook (dired-mode . dotty--dired-mode-hook)
     :custom ((dired-listing-switches "-agho --group-directories-first"))
     :bind (("C-x C-j" . dired-jump))
     :config
@@ -1028,7 +1027,9 @@ https://emacs-lsp.github.io/lsp-mode
       "h" 'dired-single-up-directory
       "l" 'dired-single-buffer
       "H" 'dired-omit-mode))
-
+      
+  (add-hook 'dired-mode-hook #'dotty--dired-mode-hook)
+      
   (use-package dired-single
     :commands (dired dired-jump))
 
