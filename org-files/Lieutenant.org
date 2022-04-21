@@ -36,7 +36,7 @@ https://github.com/noctuid/general.el
 
 #+end_src
 
-* b: bookmarks
+* =b=: Bookmarks
 
 #+begin_src emacs-lisp :noweb-ref bindings :tangle no
 
@@ -71,7 +71,7 @@ https://github.com/noctuid/general.el
 
 #+end_src
 
-** bc: classroom
+** =bc=: Classroom
 
 #+begin_src emacs-lisp :noweb-ref bindings :tangle no
 
@@ -122,7 +122,7 @@ https://github.com/noctuid/general.el
           :which-key "physics")
 #+end_src
 
-* d: directories
+* =d=: Directories
 
 #+begin_src emacs-lisp :noweb-ref bindings :tangle no
 
@@ -154,7 +154,7 @@ https://github.com/noctuid/general.el
 
 #+end_src
 
-* f: files
+* =f=: Files
 
 #+begin_src emacs-lisp :noweb-ref bindings :tangle no
 
@@ -168,7 +168,7 @@ https://github.com/noctuid/general.el
 
 #+end_src
 
-* o: open app
+* =o=: Open app
 
 #+begin_src emacs-lisp :noweb-ref bindings :tangle no
 
@@ -195,7 +195,7 @@ https://github.com/noctuid/general.el
 
 #+end_src
 
-* s: search
+* =s=: Search
 
 #+begin_src emacs-lisp :noweb-ref bindings :tangle no
 
@@ -231,7 +231,7 @@ https://github.com/noctuid/general.el
 
 #+end_src
 
-* r: racket
+* =r=: Racket
 
 #+begin_src emacs-lisp :noweb-ref bindings :tangle no
 
