@@ -1,12 +1,12 @@
 #+title:Emacs Desktop Environment
-#+PROPERTY: header-args:emacs-lisp :tangle ../.emacs.d/exwm/desktop.el
+#+PROPERTY: header-args:emacs-lisp :tangle ../home/.emacs.d/lisp/desktop.el :mkdirp y
 
 * Bash Script
 
-#+begin_src shell :tangle ../.bin/dotfiles-start-exwm
+#+begin_src shell :tangle ../scripts/dotfiles-start-exwm
 
   #!/bin/sh
-  exec dbus-launch --exit-with-session emacs -mm --debug-init -l ~/.emacs.d/exwm/desktop.el
+  exec dbus-launch --exit-with-session emacs -mm --debug-init -l ~/.emacs.d/lisp/desktop.el
 
 #+end_src
 

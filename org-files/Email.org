@@ -1,5 +1,5 @@
 #+title:Email
-#+PROPERTY: header-args:emacs-lisp :tangle ../.emacs.d/email.el
+#+PROPERTY: header-args:emacs-lisp :tangle ../home/.emacs.d/lisp/email.el
 
 * Main configuration
 

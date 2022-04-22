@@ -1,5 +1,5 @@
 #+title:Dotty
-#+PROPERTY: header-args:emacs-lisp :tangle ../.emacs.d/dotty.el
+#+PROPERTY: header-args:emacs-lisp :tangle ../home/.emacs.d/lisp/dotty.el
 
 Go dotty with Dotty: dotfiles utilities.
 

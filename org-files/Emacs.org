@@ -1,5 +1,5 @@
 #+title:Emacs Configuration
-#+PROPERTY: header-args:emacs-lisp :tangle ../.emacs.d/init.el
+#+PROPERTY: header-args:emacs-lisp :tangle ../home/.emacs.d/init.el :mkdirp y
 
 * Startup Performance
 
@@ -75,11 +75,8 @@
 
 #+begin_src emacs-lisp
 
-  (load-file "~/.emacs.d/dotty.el")
-  (load-file "~/.emacs.d/dolly.el")
-  (load-file "~/.emacs.d/lieutenant.el")
-  (load-file "~/.emacs.d/racket.el")
-  ;; (load-file "~/.emacs.d/email.el")
+  (dolist (package '("dotty" "dolly" "lieutenant" "racket"))
+    (load-file (concat "~/.emacs.d/lisp/" package ".el")))
 
 #+end_src
 
