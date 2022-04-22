@@ -1,7 +1,0 @@
-\.git
-root
-setup
-org-files
-LICENSE
-^/.*\.org
-^/.*~
