@@ -1,5 +1,5 @@
 #+title:Emacs Configuration
-#+PROPERTY: header-args:emacs-lisp :tangle ../home/.emacs.d/init.el :mkdirp y
+#+PROPERTY: header-args:emacs-lisp :tangle ../../home/.emacs.d/init.el :mkdirp y
 
 * Startup Performance
 
