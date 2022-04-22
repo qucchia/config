@@ -50,7 +50,7 @@ Make a racket with Racket: music utilities.
           (setq star-wars-directory "06 Return of the Jedi"))
         (when (equal day-of-week "Sat")
           (setq star-wars-directory "The Mandalorian"))
-        (string-join (list "~/Music/star-wars-soundtrack/" star-wars-directory)))))
+        (string-join (list "~/Music/Star Wars/" star-wars-directory)))))
 
 #+end_src
 
