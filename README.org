@@ -2,22 +2,22 @@
 
 This is my desktop configuration, using Emacs and EXWM on a Raspberry Pi.
 
-Most of the configuration is made under the =org-files= folder using Org mode files, which are then tangled with Org Babel and finally symlinked with GNU Stow to the home directory so Emacs and other programs can read them. Files in the =root= file are stowed to the filesystem root instead.
+Most of the configuration is made under the =config= folder using Org mode files, which are then tangled with Org Babel to files in =home= and =root= and finally symlinked with GNU Stow so they can be accessed by the rest of the file system.
 
 * Installation
 
 *Requirements*: [[https://www.gnu.org/software/stow/][GNU Stow]].
 
-To install the repo to the =.dotfiles= folder and set up all the symlinks:
+To install the repo to the =.dotfiles= folder and set custom commands:
 
 #+begin_src shell
 
   git clone https://codeberg.org/qucchia/dotfiles.git ~/.dotfiles
-  cd ~/.dotfiles
-  stow .
-  sudo stow root -t /
+  export PATH="$HOME/.dotfiles/home/.bin:$PATH"
 
 #+end_src
+
+Then run =dotfiles-stow= to set up all the symlinks.
 
 * Summary
 
