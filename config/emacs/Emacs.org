@@ -98,7 +98,8 @@
   (setq visible-bell t)
 
   ;; Disable line numbers for some modes
-  (dolist (mode '(org-mode-hook
+  (dolist (mode '(Info-mode-hook
+                  org-mode-hook
                   term-mode-hook
                   vterm-mode-hook
                   shell-mode-hook
@@ -519,14 +520,15 @@ Note: see [[file:Lieutenant.org][Lieutenant]] for general keybindings.
 
 #+begin_src emacs-lisp
 
-  (defun qucchia/org-visual-mode-fill ()
+  (defun qucchia/visual-mode-fill ()
     "Setup Org mode visual fill."
     (setq visual-fill-column-width 100
           visual-fill-column-center-text t)
     (visual-fill-column-mode 1))
 
   (use-package visual-fill-column
-    :hook (org-mode . qucchia/org-visual-mode-fill))
+    :hook ((org-mode . qucchia/visual-mode-fill)
+           (Info-mode . qucchia/visual-mode-fill)))
 
 #+end_src
 ** Babel Languages
