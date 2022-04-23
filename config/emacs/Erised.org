@@ -1,0 +1,108 @@
+#+title:Erised
+#+PROPERTY: header-args:emacs-lisp :tangle ../../home/.emacs.d/lisp/erised.el
+
+Erised: just the user interface I want.
+
+* Basic UI Configuration
+
+#+begin_src emacs-lisp
+
+  (setq inhibit-startup-message t) ; Start up on a blank screen instead of the startup message
+
+  (scroll-bar-mode -1) ; Disable visible scrollbar
+  (tool-bar-mode -1) ; Disable toolbar
+  (tooltip-mode -1) ; Disable tooltips
+  (set-fringe-mode 50) ; Add margins
+  (menu-bar-mode -1) ; Disable menubar
+
+  ;; Set up visible bell
+  (setq visible-bell t)
+
+  ;; Disable line numbers for some modes
+  (dolist (mode '(Info-mode-hook
+                  org-mode-hook
+                  term-mode-hook
+                  vterm-mode-hook
+                  shell-mode-hook
+                  treemacs-mode-hook
+                  lsp-treemacs-generic-mode-hook
+                  eshell-mode-hook))
+    (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
+  (column-number-mode)
+  (global-display-line-numbers-mode t)
+
+  (use-package rainbow-delimiters
+    :hook (prog-mode . rainbow-delimiters-mode))
+
+#+end_src
+
+* Fonts
+
+#+begin_src emacs-lisp
+
+  (set-face-attribute 'default nil :font "Source Code Pro" :height 120)
+  (set-face-attribute 'fixed-pitch nil :font "Source Code Pro" :height 120)
+  (set-face-attribute 'variable-pitch nil :font "DejaVu sans" :height 120 :weight 'regular)
+
+#+end_src
+
+* Modeline
+
+#+begin_src emacs-lisp
+
+  (use-package all-the-icons)
+
+  (use-package doom-modeline
+    :init (doom-modeline-mode 1)
+    :custom ((doom-modeline-height 15)))
+
+#+end_src
+
+* Theme
+
+#+begin_src emacs-lisp
+
+  (use-package nord-theme
+    :init (load-theme 'nord t))
+
+#+end_src
+
+* Text Scaling
+
+#+begin_src emacs-lisp
+
+  (use-package hydra
+    :defer t)
+
+  (defhydra hydra-text-scale (:timeout 30)
+    "scale text"
+    ("j" text-scale-increase "in")
+    ("k" text-scale-decrease "out")
+    ("f" nil "finished" :exit t))
+
+#+end_src
+
+* Visual Fill
+
+#+begin_src emacs-lisp
+
+  (use-package visual-fill-column
+    :hook ((org-mode . (lambda ()
+                          (setq visual-fill-column-width 100
+                            visual-fill-column-center-text t)
+                          (visual-fill-column-mode 1)))
+           (Info-mode . (lambda ()
+                          (setq visual-fill-column-width 79
+                            visual-fill-column-center-text t)
+                          (visual-fill-column-mode 1)))))
+
+#+end_src
+
+* Provide
+
+#+begin_src emacs-lisp
+
+  (provide 'erised)
+
+#+end_src

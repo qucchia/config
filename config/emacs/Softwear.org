@@ -1,0 +1,199 @@
+#+title:Softwear
+#+PROPERTY: header-args:emacs-lisp :tangle ../../home/.emacs.d/lisp/softwear.el
+
+Program comfortably with Softwear: Development configuration.
+
+* Commenting
+
+#+begin_src emacs-lisp
+
+  (use-package evil-nerd-commenter
+    :bind ("M-/" . evilnc-comment-or-uncomment-lines))
+
+#+end_src
+
+* Flycheck
+
+#+begin_src emacs-lisp
+
+  (use-package flycheck
+    :init (global-flycheck-mode)
+    (add-hook 'after-init-hook #'global-flycheck-mode))
+
+#+end_src
+
+* Languages
+
+** Language server
+
+https://emacs-lsp.github.io/lsp-mode
+
+#+begin_src emacs-lisp
+
+  (defun qucchia/lsp-mode-setup ()
+    "Setup LSP."
+    (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+    (lsp-headerline-breadcrumb-mode))
+
+  (use-package lsp-mode
+    :commands (lsp lsp-deferred)
+    :hook ((html-mode . lsp-deferred)
+      (js2-mode . lsp-deferred)
+      (json-mode . lsp-deferred)
+      (typescript-mode . lsp-deferred)
+      (php-mode . lsp-deferred)
+      (lsp-mode . qucchia/lsp-mode-setup))
+    :init
+    (setq lsp-keymap-prefix "C-c l")
+    (setq read-process-output-max (* 1024 1024)) ;; 1MB
+    :config
+    (lsp-enable-which-key-integration t))
+
+  (add-to-list 'auto-mode-alist '("\\.html\\'" . html-mode))
+
+  (use-package lsp-ui
+    :commands lsp-ui-mode
+    :custom
+    (lsp-ui-doc-position 'bottom))
+
+  (use-package lsp-treemacs
+    :config (lsp-treemacs-sync-mode 1)
+    :commands lsp-treemacs-errors-list)
+
+  (use-package lsp-ivy
+    :commands lsp-ivy-workspace-symbol)
+    
+  ;; (use-package dap-mode :after lsp-mode)
+
+#+end_src
+
+** Prettier
+
+#+begin_src emacs-lisp
+
+  (use-package prettier)
+  (use-package prettier-js
+    :after prettier)
+  (add-hook 'js2-mode-hook 'prettier-js-mode)
+  (add-hook 'typescript-mode-hook 'prettier-mode)
+
+#+end_src
+
+** CSS
+
+#+begin_src emacs-lisp
+
+(setq css-indent-offset 2)
+
+#+end_src
+
+** Lua
+
+#+begin_src emacs-lisp
+
+  (use-package lua-mode
+    :mode "\\.lua\\'")
+
+#+end_src
+
+** JavaScript
+
+#+begin_src emacs-lisp
+
+  (use-package js2-mode
+    :mode "\\.js\\'"
+    :config (setq js-indent-level 2))
+
+#+end_src
+
+** JSON
+
+#+begin_src emacs-lisp
+
+  (use-package json-mode :mode "\\.json\\'")
+
+#+end_src
+
+** TypeScript
+
+#+begin_src emacs-lisp
+
+  (use-package typescript-mode
+    :mode "\\.ts\\'"
+    :config
+    (setq typescript-indent-level 2))
+
+#+end_src
+
+** PHP
+
+#+begin_src emacs-lisp
+
+  (use-package php-mode :mode "\\.php\\'")
+
+#+end_src
+
+* Company Mode
+
+#+begin_src emacs-lisp
+
+  (use-package company
+    :after lsp-mode
+    :hook (lsp-mode . company-mode)
+    :bind (:map company-active-map
+                ("<tab>" . company-complete-selection))
+    (:map lsp-mode-map
+          ("<tab>" . company-indent-or-complete-common))
+    :custom
+    (company-minimum-prefix-length 1)
+    (company-idle-delay 0.0))
+    
+  (use-package company-box
+    :hook (company-mode . company-box-mode))
+
+#+end_src
+
+* Projectile
+
+#+begin_src emacs-lisp
+
+  (use-package projectile
+    :diminish projectile-mode
+    :config (projectile-mode)
+    :custom ((projectile-completion-system 'ivy))
+    :bind-keymap
+    ("C-c p" . projectile-command-map)
+    :init
+    (when (file-directory-p "~/Projects")
+      (setq projectile-project-search-path '("~/Projects")))
+    (setq projectile-switch-project-acion #'projectile-dired))
+
+#+end_src
+
+** Counsel-Projectile
+
+#+begin_src emacs-lisp
+
+  (use-package counsel-projectile
+    :init (counsel-projectile-mode))
+
+#+end_src
+
+* Magit
+
+#+begin_src emacs-lisp
+
+  (use-package magit
+    :commands (magit magit-status)
+    :custom
+    (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+
+#+end_src
+
+* Provide
+
+#+begin_example
+
+  (provide 'softwear)
+
+#+end_example

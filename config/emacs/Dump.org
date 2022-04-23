@@ -1,0 +1,51 @@
+#+title:Dump
+#+PROPERTY: header-args:emacs-lisp :tangle ../../home/.emacs.d/lisp/dump.el
+
+Dump: configuration I haven't organised or finished yet (warning: some of it may smell a bit).
+
+* TODO Make URI encode function
+
+#+begin_src emacs-lisp
+
+(defun qucchia-uri-encode (string)
+  "Encode STRING to URI (currently not working)."
+  string)
+
+#+end_src
+
+* Get password
+
+#+begin_src emacs-lisp
+
+  (defun qucchia-get-password (name)
+    "Retrieve the password NAME from pass and copy it to the clipboard."
+    (interactive (list (read-string "Password name: ")))
+    (start-process-shell-command "pass" nil
+    (string-join
+      (list
+        "pass -c "
+        name
+        " | xclip -selection clipboard"))))
+
+#+end_src
+
+* Lookup Password function
+
+#+begin_src emacs-lisp
+
+  (defun qucchia/lookup-password (&rest keys)
+    "Lookup password from auth source."
+    (let ((result (apply #'auth-source-search keys)))
+     (if result
+         (funcall (plist-get (car result) :secret))
+       nil)))
+
+#+end_src
+
+* Provide
+
+#+begin_src emacs-lisp
+
+  (provide 'dump)
+
+#+end_src

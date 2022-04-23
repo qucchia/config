@@ -279,7 +279,7 @@ https://github.com/noctuid/general.el
   "p"   '(emms-pause :which-key "pause music")
   "C-p" '(qucchia/get-password :which-key "password")
   "u"   '(browse-url :which-key "url")
-  "x"   '(qucchia/set-keymap :which-key "set keymap")
+  "x"   '(quiche-set-keymap :which-key "set keymap")
   "y"   '(counsel-yank-pop :which-key "yank")
 
 #+end_src

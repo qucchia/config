@@ -1,0 +1,79 @@
+#+title:Mash
+#+PROPERTY: header-args:emacs-lisp :tangle ../../home/.emacs.d/lisp/mash.el
+
+Mash: terminals configuration.
+
+* Term
+
+#+begin_src emacs-lisp
+
+  (use-package term
+    :defer t
+    :config
+    (setq explicit-shell-file-name "bash")
+    (setq term-prompt-regexp "^\\w+@\\w+:[^#$%>\n]* $ *"))
+
+  (use-package eterm-256color
+    :hook (term-mode . eterm-256color-mode))
+
+#+end_src
+
+* Vterm
+
+https://github.com/akermu/emacs-libvterm
+
+#+begin_src emacs-lisp
+
+  (use-package vterm
+    :commands vterm
+    :config
+    (setq vterm-max-scrollback 10000))
+
+#+end_src
+
+* Eshell
+
+#+begin_src emacs-lisp
+
+  (use-package exec-path-from-shell
+    :after eshell
+    :config (exec-path-from-shell-initialize))
+
+  (use-package eshell-git-prompt
+    :after eshell)
+
+  (defun qucchia/setup-eshell ()
+    "Setup eshell."
+    ;; Save command history
+    (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)
+
+    ;; Truncate buffer for performance
+    (add-to-list 'eshell-output-filter-functions 'eshell-truncate-buffer)
+
+    (evil-define-key '(normal insert visual) eshell-mode-map (kbd "C-r") 'counsel-esh-history)
+    (evil-define-key '(normal insert visual) eshell-mode-map (kbd "<home>") 'eshell-bol)
+    (evil-normalize-keymaps)
+
+    (setq eshell-history-size 10000
+          eshell-buffer-maximum-lines 10000
+          eshell-hist-ignoredups t
+          eshell-scroll-to-bottom-on-input t))
+
+  (use-package eshell
+    :hook (eshell-first-time-mode . qucchia/setup-eshell)
+    :config
+    (with-eval-after-load 'esh-opt
+      (setq eshell-destroy-buffer-when-process-dies t)
+      (setq eshell-visual-commands '("htop" "zsh" "vim")))
+
+    (eshell-git-prompt-use-theme 'powerline))
+
+#+end_src
+
+* Provide
+
+#+begin_src emacs-lisp
+
+  (provide 'mash)
+
+#+end_src
