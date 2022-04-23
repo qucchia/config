@@ -21,16 +21,17 @@ https://github.com/noctuid/general.el
       <<bindings>>)
 
     (general-define-key
-     "C-M-n" 'counsel-switch-buffer
-     "s-x"   '(lambda ()
-                (interactive)
-                (if ivy-mode
-                  (progn (ivy-mode -1)
-                         (execute-extended-command prefix-arg)
-                         (ivy-mode))
-                  (execute-extended-command prefix-arg)))
-     "M-v" 'scroll-other-window-down
-     "<pause>" 'emms-pause))
+      "C-M-n" 'counsel-switch-buffer
+      "s-x"   '(lambda ()
+                 (interactive)
+                 (if ivy-mode
+                   (progn (ivy-mode -1)
+                          (execute-extended-command prefix-arg)
+                          (ivy-mode))
+                   (execute-extended-command prefix-arg)))
+      "s-u" 'universal-argument
+      "M-v" 'scroll-other-window-down
+      "<pause>" 'emms-pause))
 
   (provide 'lieutenant)
 
