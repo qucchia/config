@@ -64,7 +64,10 @@ https://github.com/jwiegley/use-package
 
   (use-package emacs
     :custom
-    (tab-width 2))
+    (tab-width 2)
+    :init
+    ;; Preserve clipboard from external applications
+    (setq save-interprogram-paste-before-kill t))
 
 #+end_src
 
