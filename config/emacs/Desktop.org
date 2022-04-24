@@ -6,7 +6,7 @@
 #+begin_src shell :tangle ../../home/.bin/dotfiles-start-exwm
 
   #!/bin/sh
-  exec dbus-launch --exit-with-session emacs -mm --debug-init -l ~/.emacs.d/lisp/desktop.el
+  exec dbus-launch --exit-with-session emacs -mm --debug-init
 
 #+end_src
 
@@ -14,7 +14,7 @@
 
 #+begin_src emacs-lisp
 
-  (defun qucchia/exwm-init ()
+  (defun desktop-init ()
     "Initiate EXWM."
     ;; Make workspace 1 be the one where we land at startup
     (exwm-workspace-switch-create 1)
@@ -45,19 +45,19 @@
 
 #+begin_src emacs-lisp :noweb yes
 
-  (defun qucchia/run-in-background (command)
+  (defun desktop-run-in-background (command)
     (let ((command-parts (split-string command "[ ]+")))
       (apply #'call-process `(,(car command-parts) nil 0 nil 0 ,@(cdr command-parts)))))
 
-  (defun qucchia/exwm-update-class ()
+  (defun desktop-update-class ()
     (exwm-workspace-rename-buffer exwm-class-name))
 
   (use-package exwm
     :config
     (setq exwm-workspace-number 5)
 
-    (add-hook 'exwm-update-class-hook #'qucchia/exwm-update-class)
-    (add-hook 'exwm-init-hook #'qucchia/exwm-init)
+    (add-hook 'exwm-update-class-hook #'desktop-exwm-update-class)
+    (add-hook 'exwm-init-hook #'desktop-exwm-init)
 
     (require 'exwm-systemtray)
     (exwm-systemtray-enable)

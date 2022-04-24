@@ -30,7 +30,7 @@ https://emacs-lsp.github.io/lsp-mode
 
 #+begin_src emacs-lisp
 
-  (defun qucchia/lsp-mode-setup ()
+  (defun softwear-lsp-mode-setup ()
     "Setup LSP."
     (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
     (lsp-headerline-breadcrumb-mode))
@@ -42,7 +42,7 @@ https://emacs-lsp.github.io/lsp-mode
       (json-mode . lsp-deferred)
       (typescript-mode . lsp-deferred)
       (php-mode . lsp-deferred)
-      (lsp-mode . qucchia/lsp-mode-setup))
+      (lsp-mode . softwear-lsp-mode-setup))
     :init
     (setq lsp-keymap-prefix "C-c l")
     (setq read-process-output-max (* 1024 1024)) ;; 1MB

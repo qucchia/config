@@ -42,7 +42,7 @@ https://github.com/akermu/emacs-libvterm
   (use-package eshell-git-prompt
     :after eshell)
 
-  (defun qucchia/setup-eshell ()
+  (defun tired-setup-eshell ()
     "Setup eshell."
     ;; Save command history
     (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)
@@ -60,7 +60,7 @@ https://github.com/akermu/emacs-libvterm
           eshell-scroll-to-bottom-on-input t))
 
   (use-package eshell
-    :hook (eshell-first-time-mode . qucchia/setup-eshell)
+    :hook (eshell-first-time-mode . tired-setup-eshell)
     :config
     (with-eval-after-load 'esh-opt
       (setq eshell-destroy-buffer-when-process-dies t)

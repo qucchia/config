@@ -33,7 +33,7 @@ Dump: configuration I haven't organised or finished yet (warning: some of it may
 
 #+begin_src emacs-lisp
 
-  (defun qucchia/lookup-password (&rest keys)
+  (defun qucchia-lookup-password (&rest keys)
     "Lookup password from auth source."
     (let ((result (apply #'auth-source-search keys)))
      (if result

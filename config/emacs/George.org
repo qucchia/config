@@ -7,7 +7,7 @@ George: Org configuration.
 
 #+begin_src emacs-lisp
 
-  (defun qucchia/org-mode-setup ()
+  (defun george-setup ()
     "Setup Org mode."
     (org-indent-mode)
     (variable-pitch-mode 1)
@@ -19,7 +19,7 @@ George: Org configuration.
 
 #+begin_src emacs-lisp
 
-  (defun qucchia/org-font-setup ()
+  (defun george-font-setup ()
     "Setup Org mode fonts."
     ;; Replace list hypens with dots
     (font-lock-add-keywords 'org-mode
@@ -53,7 +53,7 @@ George: Org configuration.
   (use-package org
     :pin org
     :commands (org-capture org-agenda)
-    :hook (org-mode . qucchia/org-mode-setup)
+    :hook (org-mode . george-setup)
     :config
     (setq org-ellipsis " ▾")
 
@@ -176,7 +176,7 @@ George: Org configuration.
             ("my" "Typing Speed" table-line (file+headline "~/Documents/life/Metrics.org" "Typing Speed")
              "| %U | %^{Speed} | %^{Accuracy} | %^{Program} | %^{Notes} |" :kill-buffer t)))
 
-    (qucchia/org-font-setup))
+    (george-font-setup))
 
 #+end_src
 
@@ -229,7 +229,7 @@ George: Org configuration.
 
 #+begin_src emacs-lisp
 
-  (defun qucchia/org-babel-tangle-config ()
+  (defun george-babel-tangle-config ()
     "Tangle dotfiles on save."
     (when (string-prefix-p (expand-file-name "~/.dotfiles/")
                          (buffer-file-name))
@@ -237,6 +237,6 @@ George: Org configuration.
         (org-babel-tangle))))
 
   (add-hook 'org-mode-hook (lambda ()
-    (add-hook 'after-save-hook #'qucchia/org-babel-tangle-config)))
+    (add-hook 'after-save-hook #'george-babel-tangle-config)))
 
 #+end_src

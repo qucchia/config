@@ -12,12 +12,12 @@ https://github.com/noctuid/general.el
   (use-package general
     :after evil
     :config
-    (general-create-definer qucchia/leader-keys
+    (general-create-definer lieutenant-leader-keys
       :keymaps '(normal insert visual emacs)
       :prefix "SPC"
       :global-prefix "C-SPC")
 
-    (qucchia/leader-keys
+    (lieutenant-leader-keys
       <<bindings>>)
 
     (general-define-key
@@ -211,31 +211,31 @@ https://github.com/noctuid/general.el
 
   "s"  '(:ignore t :which-key search)
   "sc" '((lambda (term)
-           (interactive (list (qucchia/uri-encode (read-string "DIEC "))))
+           (interactive (list (qucchia-uri-encode (read-string "DIEC "))))
            (browse-url (string-join (list "https://dlc.iec.cat/Results?DecEntradaText=" term))))
          :which-key "diec")
   "sd" '((lambda (term)
-           (interactive (list (qucchia/uri-encode (read-string "DuckDuckGo "))))
+           (interactive (list (qucchia-uri-encode (read-string "DuckDuckGo "))))
            (browse-url (string-join (list "https://duckduckgo.com/?q=" term))))
          :which-key "duckduckgo")
   "sm" '((lambda (term)
-           (interactive (list (qucchia/uri-encode (read-string "MDN "))))
+           (interactive (list (qucchia-uri-encode (read-string "MDN "))))
            (browse-url (string-join (list "https://developer.mozilla.org/en-US/search?q=" term))))
          :which-key "mdn")
   "sr" '((lambda (term)
-           (interactive (list (qucchia/uri-encode (read-string "RAE "))))
+           (interactive (list (qucchia-uri-encode (read-string "RAE "))))
            (browse-url (string-join (list "https://dle.rae.es/" term))))
          :which-key "rae")
   "ss" '((lambda (term)
-           (interactive (list (qucchia/uri-encode (read-string "StartPage "))))
+           (interactive (list (qucchia-uri-encode (read-string "StartPage "))))
            (browse-url (string-join (list "https://www.startpage.com/do/dsearch?query=" term))))
          :which-key "startpage")
   "sw" '((lambda (term)
-           (interactive (list (qucchia/uri-encode (read-string "SwissCows "))))
+           (interactive (list (qucchia-uri-encode (read-string "SwissCows "))))
            (browse-url (string-join (list "https://swisscows.com/web?query=" term))))
          :which-key "swisscows")
   "sy" '((lambda (term)
-           (interactive (list (qucchia/uri-encode (read-string "YouTube "))))
+           (interactive (list (qucchia-uri-encode (read-string "YouTube "))))
            (browse-url (string-join (list "https://www.youtube.com/results?search_query=" term))))
          :which-key "youtube")
 
@@ -277,7 +277,7 @@ https://github.com/noctuid/general.el
   "C-l" '(org-shiftright :which-key "shift right")
   "k"   '(counsel-descbinds :which-key "keybindings")
   "p"   '(emms-pause :which-key "pause music")
-  "C-p" '(qucchia/get-password :which-key "password")
+  "C-p" '(qucchia-get-password :which-key "password")
   "u"   '(browse-url :which-key "url")
   "x"   '(quiche-set-keymap :which-key "set keymap")
   "y"   '(counsel-yank-pop :which-key "yank")
