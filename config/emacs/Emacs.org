@@ -11,6 +11,11 @@ My personal Emacs configuration.
     "Directory where lisp files from qucchia configuration are stored."
     :type 'string
     :group 'qucchia)
+    
+  (defcustom qucchia-use-exwm t
+    "If non-nil, load EXWM."
+    :type 'boolean
+    :group 'qucchia)
 
   (defun qucchia-load-file (file)
     "Load an emacs lisp file from ‘qucchia-lisp-directory’."
@@ -36,6 +41,8 @@ My personal Emacs configuration.
                      "softwear"
                      "tired"))
     (qucchia-load-file (concat package ".el")))
+    
+ (when qucchia-use-exwm (qucchia-load-file "desktop.el"))
 
 #+end_src
 
