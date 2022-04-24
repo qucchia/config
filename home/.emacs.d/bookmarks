@@ -1,0 +1,22 @@
+;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8-emacs -*-
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("emacs"
+ (front-context-string . "\n13.8 Bookmarks\n")
+ (rear-context-string . "  Up: Registers\n")
+ (position . 251031)
+ (filename . "/usr/share/info/emacs/emacs")
+ (info-node . "Bookmarks")
+ (handler . Info-bookmark-jump))
+("org-capture-last-stored"
+ (filename . "~/Documents/life/Tasks.org")
+ (front-context-string . "** TODO Improve ")
+ (rear-context-string)
+ (position . 10))
+("org-refile-last-stored"
+ (filename . "~/Documents/life/Archive.org")
+ (front-context-string . "** DONE [[file:~")
+ (rear-context-string . "\n:END:\n* April\n\n")
+ (position . 23704))
+)
