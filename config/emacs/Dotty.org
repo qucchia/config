@@ -12,13 +12,13 @@ Go dotty with Dotty: dotfiles utilities.
     :type 'string
     :group 'dotty)
 
-  (defcustom dotty-bin-directory ".bin"
+  (defcustom dotty-bin-directory "home/.bin"
     "Directory where shell scripts are stored, relative to
   `dotty-directory'."
     :type 'string
     :group 'dotty)
 
-  (defcustom dotty-org-directory "org-files"
+  (defcustom dotty-org-directory "config"
     "Directory where Org files are stored, relative to
   `dotty-directory'."
     :type 'string
