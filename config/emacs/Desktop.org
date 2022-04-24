@@ -56,7 +56,7 @@
     :config
     (setq exwm-workspace-number 5)
 
-    (add-hook 'exwm-update-class-hook #'desktop-exwm-update-class)
+    (add-hook 'exwm-update-class-hook #'desktop-update-class)
     (add-hook 'exwm-init-hook #'desktop-init)
 
     (require 'exwm-systemtray)
