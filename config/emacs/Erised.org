@@ -18,6 +18,8 @@ Erised: just the user interface I want.
   ;; Set up visible bell
   (setq visible-bell t)
 
+  (setq show-trailing-whitespace t)
+
   ;; Disable line numbers for some modes
   (dolist (mode '(Info-mode-hook
                   org-mode-hook
@@ -63,8 +65,101 @@ Erised: just the user interface I want.
 
 #+begin_src emacs-lisp
 
-  (use-package nord-theme
-    :init (load-theme 'nord t))
+  (use-package autothemer
+    :init (load-theme 'qucchia t))
+
+#+end_src
+
+#+begin_src emacs-lisp :tangle ../../home/.emacs.d/qucchia-theme.el
+
+  (require 'autothemer)
+
+  (autothemer-deftheme
+    qucchia "qucchia theme"
+
+    ((((class color) (min-colors #xFFFFFF))) ;; Use graphical Emacs
+
+      ;; Palette
+      (qucchia-dark0     "#0f3d23")
+      (qucchia-dark1     "#09301a")
+
+      (qucchia-light0    "#b6efcf")
+      (qucchia-light1    "#80d6a5")
+      (qucchia-light2    "#36f78a")
+
+      (qucchia-shadow0   "#437258")
+      (qucchia-shadow1   "#0f4727")
+
+      (qucchia-highlight "#155430")
+      (qucchia-red       "#f27489")
+      (qucchia-orange    "#f4ac5f")
+      (qucchia-yellow    "#f2e774")
+      (qucchia-green     "#85f274")
+      (qucchia-teal      "#5ff4a2")
+      (qucchia-cyan      "#5fd6f4")
+      (qucchia-blue      "#74aaf2")
+      (qucchia-violet    "#665ff4")
+      (qucchia-indigo    "#b9a4f4")
+      (qucchia-pink      "#e879fc")
+)
+
+    ;; Faces
+    ((default                   (:foreground qucchia-light0
+                                 :background qucchia-dark0))
+     (cursor                    (:background qucchia-light1))
+     (region                    (:background qucchia-highlight))
+     (fringe                    (:background qucchia-dark0))
+     (link                      (:underline t :foreground qucchia-light2))
+     (trailing-whitespace       (:background qucchia-red))
+     (escape-glyph              (:foreground qucchia-light2))
+
+     (font-lock-comment-face    (:foreground qucchia-shadow0))
+     (font-lock-keyword-face    (:foreground qucchia-teal))
+     (font-lock-string-face     (:foreground qucchia-cyan))
+     (font-lock-builtin-face    (:foreground qucchia-blue))
+     (font-lock-constant-face   (:foreground qucchia-orange))
+
+     ;; Rainbow delimiters
+     (rainbow-delimiters-depth-1-face (:foreground qucchia-green))
+     (rainbow-delimiters-depth-2-face (:foreground qucchia-yellow))
+     (rainbow-delimiters-depth-3-face (:foreground qucchia-orange))
+     (rainbow-delimiters-depth-4-face (:foreground qucchia-teal))
+     (rainbow-delimiters-depth-5-face (:foreground qucchia-cyan))
+     (rainbow-delimiters-depth-6-face (:foreground qucchia-blue))
+     (rainbow-delimiters-depth-7-face (:foreground qucchia-violet))
+     (rainbow-delimiters-depth-8-face (:foreground qucchia-indigo))
+     (rainbow-delimiters-depth-9-face (:foreground qucchia-pink))
+
+     ;; Org mode
+     (org-block-begin-line      (:inherit 'fixed-pitch :foreground qucchia-shadow0))
+     (org-block-end-line        (:inherit 'fixed-pitch :foreground qucchia-shadow0))
+     (org-block                 (:inherit 'fixed-pitch))
+     (org-document-info-keyword (:inherit 'fixed-pitch :foreground qucchia-shadow0))
+     (org-ellipsis              (:foreground qucchia-shadow0))
+     (org-level-1               (:foreground qucchia-yellow :height 1.2))
+     (org-level-2               (:foreground qucchia-teal :height 1.15))
+     (org-level-3               (:foreground qucchia-blue :height 1.1))
+     (org-level-4               (:foreground qucchia-indigo :height 1.1))
+
+     ;; Mode line and header line
+     (mode-line                  (:background qucchia-highlight))
+     (mode-line-inactive         (:background qucchia-dark1))
+     (header-line                (:background qucchia-highlight))
+     (vertical-border            (:foreground qucchia-highlight))
+
+     ;; Minibuffer
+     (minibuffer-prompt         (:foreground qucchia-light2))
+
+     ;; Ivy
+     (ivy-current-match         (:background qucchia-highlight))
+
+     (doom-modeline-evil-normal-state (:foreground qucchia-green))
+     (doom-modeline-evil-insert-state (:foreground qucchia-blue))
+     (doom-modeline-evil-visual-state (:foreground qucchia-violet))
+     (doom-modeline-evil-replace-state (:foreground qucchia-orange))
+     ))
+
+  (provide-theme 'qucchia)
 
 #+end_src
 

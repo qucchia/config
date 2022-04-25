@@ -28,3 +28,4 @@ home/.config/nvim/plugged/
 scripts/dotfiles-start-exwm
 home/.config/vimb/config
 home/.emacs.d/init.el
+home/.emacs.d/qucchia-theme.el
