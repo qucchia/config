@@ -14,11 +14,15 @@ https://github.com/noctuid/general.el
     :config
     (general-create-definer lieutenant-leader-keys
       :keymaps '(normal insert visual emacs)
-      :prefix "SPC"
+      :prefix "C-SPC"
       :global-prefix "C-SPC")
 
     (lieutenant-leader-keys
       <<bindings>>)
+      
+    (general-define-key :states '(normal emacs)
+      "SPC"   'evil-scroll-page-down
+      "S-SPC" 'evil-scroll-page-up)
 
     (general-define-key
       "C-M-n" 'counsel-switch-buffer
