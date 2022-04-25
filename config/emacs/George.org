@@ -23,8 +23,11 @@ George: Org configuration.
     "Setup Org mode fonts."
     ;; Replace list hypens with dots
     (font-lock-add-keywords 'org-mode
-                            '(("^ *\\([-]\\) "
-                               (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+      '(("^ *\\([-]\\) "
+          (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))
+        ("^ *\\([+]\\) "
+          (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "▪"))))))
+
 
     (dolist (face '((org-level-1 . 1.2)
                     (org-level-2 . 1.1)
