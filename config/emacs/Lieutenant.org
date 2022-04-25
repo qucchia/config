@@ -136,9 +136,15 @@ https://github.com/noctuid/general.el
           :which-key "physics")
 #+end_src
 
+* =m=: Mode
 
 #+begin_src emacs-lisp :noweb-ref bindings :tangle no
 
+  "m"   '(:ignore t :which-key "mode")
+  "m'"  '(electric-quote-mode :which-key "electric quote")
+  "mf"  '(follow-mode :which-key "follow")
+  "mo"  '(org-mode :which-key "org")
+  "mv"  '(visual-fill-column-mode :which-key "visual fill")
 
 #+end_src
 
@@ -233,7 +239,6 @@ https://github.com/noctuid/general.el
 
 #+begin_src emacs-lisp :noweb-ref bindings :tangle no
 
-  "'"   '(electric-quote-mode :which-key "eletric-quote")
   "c"   '(org-capture :which-key "capture")
   "C-h" '(org-shiftleft :which-key "shift left")
   "C-j" '(org-shiftdown :which-key "shift down")
