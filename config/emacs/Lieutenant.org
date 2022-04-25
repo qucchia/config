@@ -46,7 +46,7 @@ https://github.com/noctuid/general.el
 #+begin_src emacs-lisp :noweb-ref bindings :tangle no
 
   "."  '(:ignore t :which-key "dotty")
-  ".o" '(dotty-open-tangled-file)
+  ".o" '(dotty-open-tangled-file :which-key "open tangled file")
 
 #+end_src
 
@@ -247,4 +247,3 @@ https://github.com/noctuid/general.el
   "y"   '(counsel-yank-pop :which-key "yank")
 
 #+end_src
-
