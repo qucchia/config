@@ -42,6 +42,18 @@ Dump: configuration I haven't organised or finished yet (warning: some of it may
 
 #+end_src
 
+* Enable commands
+
+These commands are disabled by default.
+
+#+begin_src emacs-lisp
+
+  (put 'narrow-to-region 'disabled nil)
+  (put 'narrow-to-page 'disabled nil)
+  (put 'set-goal-column 'disabled nil)
+
+#+end_src
+
 * Provide
 
 #+begin_src emacs-lisp
