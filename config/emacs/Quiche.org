@@ -61,6 +61,25 @@ See [[file:Lieutenant.org][Lieutenant]] for general keybindings.
 
 #+end_src
 
+* Registers
+
+#+begin_src emacs-lisp
+
+  ;; Files
+  (set-register ?t '(file . "~/Documents/life/Tasks.org"))
+
+  ;; Directories
+  (set-register ?~ '(file . "~"))
+  (set-register ?/ '(file . "/"))
+  (set-register ?. '(file . "~/.dotfiles"))
+  (set-register ?c '(file . "~/.dotfiles/config/emacs"))
+  (set-register ?d '(file . "~/Downloads"))
+  (set-register ?D '(file . "~/Documents"))
+  (set-register ?m '(file . "~/Music"))
+  (set-register ?p '(file . "~/Projects"))
+
+#+end_src
+
 * Provide
 
 #+begin_src emacs-lisp

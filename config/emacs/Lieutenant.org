@@ -136,49 +136,9 @@ https://github.com/noctuid/general.el
           :which-key "physics")
 #+end_src
 
-* =d=: Directories
 
 #+begin_src emacs-lisp :noweb-ref bindings :tangle no
 
-  "d"  '(:ignore t :which-key "directory")
-  "d~" '((lambda ()
-           (interactive)
-           (dired "~/"))
-         :which-key "home")
-  "d." '((lambda ()
-           (interactive)
-           (dired dotty-directory))
-         :which-key "dotfiles")
-  "dd" '((lambda ()
-           (interactive)
-           (dired "~/Downloads"))
-         :which-key "downloads")
-  "dD" '((lambda ()
-           (interactive)
-           (dired "~/Documents"))
-         :which-key "documents")
-  "dm" '((lambda ()
-           (interactive)
-           (dired "~/Music"))
-         :which-key "music")
-  "dp" '((lambda ()
-           (interactive)
-           (dired "~/Projects"))
-         :which-key "projects")
-
-#+end_src
-
-* =f=: Files
-
-#+begin_src emacs-lisp :noweb-ref bindings :tangle no
-
-  "f"  '(:ignore t :which-key "file")
-  "fc" '((lambda () (interactive)
-           (find-file "~/.dotfiles/org-files/Emacs.org"))
-         :which-key "config")
-  "ft" '((lambda () (interactive)
-           (find-file "~/Documents/life/Tasks.org"))
-         :which-key "tasks")
 
 #+end_src
 
