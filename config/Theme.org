@@ -256,12 +256,17 @@ A theme to use across several programs.
 ** Miscellaneous
 
 #+begin_src emacs-lisp :noweb-ref emacs-faces
+
+  ;; Header line and vertical border
+  (header-line                      (:background qucchia-dark3))
+  (vertical-border                  (:foreground qucchia-dark3))
+
   ;; Minibuffer
-  (minibuffer-prompt         (:foreground qucchia-primary0))
+  (minibuffer-prompt         (:foreground qucchia-primary2))
 
   ;; Info
-  (info-xref-visited         (:inherit 'info-xref :foreground qucchia-blue))
-  (info-menu-star            (:foreground qucchia-indigo))
+  (info-xref-visited         (:inherit 'info-xref :foreground qucchia-cyan))
+  (info-menu-star            (:foreground qucchia-blue))
 
   ;; Ivy
   (ivy-current-match         (:background qucchia-dark3))
