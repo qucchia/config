@@ -12,16 +12,15 @@ Erised: just the user interface I want.
   (scroll-bar-mode -1) ; Disable visible scrollbar
   (tool-bar-mode -1) ; Disable toolbar
   (tooltip-mode -1) ; Disable tooltips
-  (set-fringe-mode 50) ; Add margins
+  (set-fringe-mode 30) ; Add margins
   (menu-bar-mode -1) ; Disable menubar
+  (global-display-fill-column-indicator-mode) ;; Show fill column
+  (setq x-stretch-cursor t) ;; Widen cursor on tabs
+  (setq visible-bell t) ;; Set up visible bell
 
-  ;; Set up visible bell
-  (setq visible-bell t)
-
-  (setq show-trailing-whitespace t)
-
-  ;; Disable line numbers for some modes
+  ;; Disable line numbers and fill column for some modes
   (dolist (mode '(Info-mode-hook
+                  magit-mode-hook
                   org-mode-hook
                   term-mode-hook
                   vterm-mode-hook
@@ -29,7 +28,14 @@ Erised: just the user interface I want.
                   treemacs-mode-hook
                   lsp-treemacs-generic-mode-hook
                   eshell-mode-hook))
-    (add-hook mode (lambda () (display-line-numbers-mode 0))))
+    (add-hook mode (lambda ()
+                     (display-line-numbers-mode 0)
+                     (display-fill-column-indicator-mode 0))))
+
+  (dolist (mode '(fundamental-mode-hook
+                  org-mode-hook))
+    (add-hook mode (lambda ()
+                     (setq show-trailing-whitespace t))))
 
   (column-number-mode)
   (global-display-line-numbers-mode t)
@@ -57,7 +63,8 @@ Erised: just the user interface I want.
 
   (use-package doom-modeline
     :init (doom-modeline-mode 1)
-    :custom ((doom-modeline-height 15)))
+    :custom ((doom-modeline-height 15)
+             (doom-modeline-buffer-encoding nil))
 
 #+end_src
 
