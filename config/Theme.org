@@ -253,6 +253,25 @@ A theme to use across several programs.
 
 #+end_src
 
+** Magit
+
+#+begin_src emacs-lisp :noweb-ref emacs-faces
+
+  (magit-section-heading
+    (:weight 'bold :extend t :foreground qucchia-yellow))
+  (magit-section-highlight
+    (:extend t :background qucchia-dark1))
+  (magit-diff-hunk-heading
+    (:extend t :foreground qucchia-light0 :background qucchia-dark2))
+  (magit-diff-hunk-heading-highlight
+    (:extend t :foreground qucchia-light0 :background qucchia-dark4))
+  (magit-diff-context
+    (:extend t :foreground qucchia-light1))
+  (magit-diff-context-highlight
+    (:extend t :foreground qucchia-light1 :background qucchia-dark1))
+
+#+end_src
+
 ** Miscellaneous
 
 #+begin_src emacs-lisp :noweb-ref emacs-faces
