@@ -212,6 +212,35 @@ A theme to use across several programs.
 #+end_src
 
 ** Mode line and header line
+** Dired
+
+#+begin_src emacs-lisp :noweb-ref emacs-faces
+
+  (diredfl-dir-heading
+    (:foreground qucchia-yellow :background qucchia-dark1))
+  (diredfl-dir-name
+    (:foreground qucchia-primary1 :background qucchia-dark1))
+  (diredfl-file-name
+    (:foreground qucchia-cyan))
+  (diredfl-file-suffix
+    (:foreground qucchia-yellow))
+  (diredfl-dir-priv
+    (:foreground qucchia-blue :background qucchia-dark1))
+  (diredfl-no-priv
+    (:background qucchia-dark0))
+  (diredfl-read-priv
+    (:foreground qucchia-orange :background qucchia-dark1))
+  (diredfl-write-priv
+    (:foreground qucchia-cyan :background qucchia-dark2))
+  (diredfl-exec-priv
+    (:foreground qucchia-primary1 :background qucchia-dark3))
+  (diredfl-date-time
+    (:foreground qucchia-blue))
+  (diredfl-number
+    (:foreground qucchia-yellow))
+
+#+end_src
+
 
 #+begin_src emacs-lisp :noweb-ref emacs-faces
 
