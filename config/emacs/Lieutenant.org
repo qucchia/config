@@ -19,7 +19,7 @@ https://github.com/noctuid/general.el
 
     (lieutenant-leader-keys
       <<bindings>>)
-      
+
     (general-define-key :states '(normal emacs)
       "SPC"   'evil-scroll-page-down
       "S-SPC" 'evil-scroll-page-up)
@@ -145,6 +145,7 @@ https://github.com/noctuid/general.el
   "mf"  '(follow-mode :which-key "follow")
   "mo"  '(org-mode :which-key "org")
   "mv"  '(visual-fill-column-mode :which-key "visual fill")
+  "mw"  '(whitespace-mode :which-key "whitespace")
 
 #+end_src
 
@@ -232,7 +233,7 @@ https://github.com/noctuid/general.el
   "rf" 'racket-play-favourites
   "ro" 'racket-open-favourites
   "rr" 'racket-remove-track-from-favourites
-         
+
 #+end_src
 
 * Other
@@ -250,5 +251,6 @@ https://github.com/noctuid/general.el
   "u"   '(browse-url :which-key "url")
   "x"   '(quiche-set-keymap :which-key "set keymap")
   "y"   '(counsel-yank-pop :which-key "yank")
+  "dtw" '(delete-trailing-whitespace :which-key "delete-trailing-whitespace")
 
 #+end_src
