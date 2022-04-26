@@ -35,10 +35,15 @@ A theme to use across several programs.
 
 #+NAME: light0
 #+begin_src css
-#b6efcf
+#d0efde
 #+end_src
 
 #+NAME: light1
+#+begin_src css
+#b6efcf
+#+end_src
+
+#+NAME: light2
 #+begin_src css
 #80d6a5
 #+end_src
@@ -47,19 +52,39 @@ A theme to use across several programs.
 
 #+NAME: primary0
 #+begin_src css
+#6edd9e
+#+end_src
+
+#+NAME: primary1
+#+begin_src css
+#4ff296
+#+end_src
+
+#+NAME: primary2
+#+begin_src css
 #36f78a
+#+end_src
+
+#+NAME: primary3
+#+begin_src css
+#06d660
 #+end_src
 
 ** Accents
 
 #+NAME: red
 #+begin_src css
-#f27489
+#f2524f
+#+end_src
+
+#+NAME: red1
+#+begin_src css
+#bc2022
 #+end_src
 
 #+NAME: orange
 #+begin_src css
-#f4ac5f
+#f29e4f
 #+end_src
 
 #+NAME: yellow
@@ -67,39 +92,14 @@ A theme to use across several programs.
 #f2e774
 #+end_src
 
-#+NAME: green
-#+begin_src css
-#85f274
-#+end_src
-
-#+NAME: teal
-#+begin_src css
-#5ff4a2
-#+end_src
-
 #+NAME: cyan
 #+begin_src css
-#5fd6f4
+#79f7e4
 #+end_src
 
 #+NAME: blue
 #+begin_src css
-#74aaf2
-#+end_src
-
-#+NAME: violet
-#+begin_src css
-#665ff4
-#+end_src
-
-#+NAME: indigo
-#+begin_src css
-#b9a4f4
-#+end_src
-
-#+NAME: pink
-#+begin_src css
-#e879fc
+#5fbef4
 #+end_src
 
 * Emacs
@@ -132,17 +132,17 @@ A theme to use across several programs.
   (qucchia-dark4    "<<dark4>>")
   (qucchia-light0   "<<light0>>")
   (qucchia-light1   "<<light1>>")
+  (qucchia-light2   "<<light2>>")
   (qucchia-primary0 "<<primary0>>")
+  (qucchia-primary1 "<<primary1>>")
+  (qucchia-primary2 "<<primary2>>")
+  (qucchia-primary3 "<<primary3>>")
   (qucchia-red      "<<red>>")
+  (qucchia-red1     "<<red1>>")
   (qucchia-orange   "<<orange>>")
   (qucchia-yellow   "<<yellow>>")
-  (qucchia-green    "<<green>>")
-  (qucchia-teal     "<<teal>>")
   (qucchia-cyan     "<<cyan>>")
   (qucchia-blue     "<<blue>>")
-  (qucchia-violet   "<<violet>>")
-  (qucchia-indigo   "<<indigo>>")
-  (qucchia-pink     "<<pink>>")
 
 #+end_src
 
@@ -150,16 +150,16 @@ A theme to use across several programs.
 
 #+begin_src emacs-lisp :noweb-ref emacs-faces
 
-  (default                   (:foreground qucchia-light0
-                               :background qucchia-dark0))
-  (cursor                    (:background qucchia-light1))
+  (default                   (:foreground qucchia-light1
+                              :background qucchia-dark0))
+  (cursor                    (:background qucchia-light2))
   (region                    (:background qucchia-dark3))
   (fringe                    (:background qucchia-dark0))
-  (link                      (:underline t :foreground qucchia-primary0))
+  (link                      (:underline t :foreground qucchia-primary2))
   (trailing-whitespace       (:background qucchia-red))
-  (escape-glyph              (:foreground qucchia-primary0))
+  (escape-glyph              (:foreground qucchia-primary2))
   (fill-column-indicator     (:foreground qucchia-dark2 :background qucchia-dark2))
-  (line-number-current-line  (:inherit 'line-number :foreground qucchia-light1))
+  (line-number-current-line  (:inherit 'line-number :foreground qucchia-light2))
 
 #+end_src
 
@@ -168,7 +168,7 @@ A theme to use across several programs.
 #+begin_src emacs-lisp :noweb-ref emacs-faces
 
   (font-lock-comment-face    (:foreground qucchia-dark4))
-  (font-lock-keyword-face    (:foreground qucchia-teal))
+  (font-lock-keyword-face    (:foreground qucchia-yellow))
   (font-lock-string-face     (:foreground qucchia-cyan))
   (font-lock-builtin-face    (:foreground qucchia-blue))
   (font-lock-constant-face   (:foreground qucchia-orange))
@@ -179,15 +179,15 @@ A theme to use across several programs.
 
 #+begin_src emacs-lisp :noweb-ref emacs-faces
 
-  (rainbow-delimiters-depth-1-face (:foreground qucchia-green))
+  (rainbow-delimiters-depth-1-face (:foreground qucchia-primary1))
   (rainbow-delimiters-depth-2-face (:foreground qucchia-yellow))
   (rainbow-delimiters-depth-3-face (:foreground qucchia-orange))
-  (rainbow-delimiters-depth-4-face (:foreground qucchia-teal))
-  (rainbow-delimiters-depth-5-face (:foreground qucchia-cyan))
-  (rainbow-delimiters-depth-6-face (:foreground qucchia-blue))
-  (rainbow-delimiters-depth-7-face (:foreground qucchia-violet))
-  (rainbow-delimiters-depth-8-face (:foreground qucchia-indigo))
-  (rainbow-delimiters-depth-9-face (:foreground qucchia-pink))
+  (rainbow-delimiters-depth-4-face (:foreground qucchia-cyan))
+  (rainbow-delimiters-depth-5-face (:foreground qucchia-blue))
+  (rainbow-delimiters-depth-6-face (:foreground qucchia-primary1))
+  (rainbow-delimiters-depth-7-face (:foreground qucchia-yellow))
+  (rainbow-delimiters-depth-8-face (:foreground qucchia-orange))
+  (rainbow-delimiters-depth-9-face (:foreground qucchia-cyan))
 
 #+end_src
 
