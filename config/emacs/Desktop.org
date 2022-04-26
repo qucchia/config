@@ -80,6 +80,8 @@
           ?\M-&
           ?\M-:
           ?\C-\M-j
+          ?\M-v
+          ?\C-\M-v
           ?\C-\ )) ;; C-SPC
 
   ;; C-q will always send the next key directly
