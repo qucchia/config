@@ -74,12 +74,7 @@ A theme to use across several programs.
 
 #+NAME: red
 #+begin_src css
-#f2524f
-#+end_src
-
-#+NAME: red1
-#+begin_src css
-#bc2022
+#f75b59
 #+end_src
 
 #+NAME: orange
