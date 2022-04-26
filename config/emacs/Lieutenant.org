@@ -245,6 +245,7 @@ https://github.com/noctuid/general.el
   "C-j" '(org-shiftdown :which-key "shift down")
   "C-k" '(org-shiftup :which-key "shift up")
   "C-l" '(org-shiftright :which-key "shift right")
+  "l"   '(counsel-linux-app :which-key "linux app")
   "k"   '(counsel-descbinds :which-key "keybindings")
   "p"   '(emms-pause :which-key "pause music")
   "C-p" '(qucchia-get-password :which-key "password")

@@ -207,6 +207,36 @@ Go dotty with Dotty: dotfiles utilities.
 
 #+end_src
 
+* Counsel Linux app
+
+This function overrides the one defined by =counsel.el=, removing the dependency on =gtk-launch= and integrating it with dolly.
+
+#+begin_src emacs-lisp
+
+(defun counsel-linux-app-action-default (desktop-shortcut)
+  "Launch DESKTOP-SHORTCUT."
+
+  ;; Get full path of desktop file
+  (setq desktop-alist (counsel-linux-apps-list-desktop-files))
+  (while (not (equal (cdr desktop-shortcut) (car (car desktop-alist))))
+    (setq desktop-alist (cdr desktop-alist)))
+  (setq desktop-file (cdr (car desktop-alist)))
+
+  ;; Get exec command for desktop file
+  (with-temp-buffer
+    (insert-file-contents desktop-file)
+    (goto-char (point-min))
+    (re-search-forward "^Exec *= *\\(.+\\)$" nil t)
+    (setq exec (match-string 1)))
+
+  ;; Remove % arguments
+  (setq exec (replace-regexp-in-string "[%]\\w" "" exec))
+
+  ;; Finally: run the program
+  (dolly-start-process-shell-command "" nil exec))
+
+#+end_src
+
 * Provide
 
 #+begin_src emacs-lisp
