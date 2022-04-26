@@ -211,7 +211,6 @@ A theme to use across several programs.
 
 #+end_src
 
-** Mode line and header line
 ** Dired
 
 #+begin_src emacs-lisp :noweb-ref emacs-faces
@@ -241,19 +240,19 @@ A theme to use across several programs.
 
 #+end_src
 
+** Modeline
 
 #+begin_src emacs-lisp :noweb-ref emacs-faces
 
   (mode-line                        (:background qucchia-dark3))
   (mode-line-inactive               (:background qucchia-dark1))
-  (header-line                      (:background qucchia-dark3))
-  (vertical-border                  (:foreground qucchia-dark3))
-  (doom-modeline-evil-normal-state  (:foreground qucchia-green))
-  (doom-modeline-evil-insert-state  (:foreground qucchia-blue))
-  (doom-modeline-evil-visual-state  (:foreground qucchia-violet))
+  (doom-modeline-evil-normal-state  (:foreground qucchia-yellow))
+  (doom-modeline-evil-insert-state  (:foreground qucchia-cyan))
+  (doom-modeline-evil-visual-state  (:foreground qucchia-blue))
   (doom-modeline-evil-replace-state (:foreground qucchia-orange))
 
 #+end_src
+
 ** Miscellaneous
 
 #+begin_src emacs-lisp :noweb-ref emacs-faces
