@@ -1,0 +1,239 @@
+#+title:Theme
+
+A theme to use across several programs.
+
+* Colours
+
+** Dark
+
+#+NAME: dark0
+#+begin_src css
+#09301a
+#+end_src
+
+#+NAME: dark1
+#+begin_src css
+#0f3d23
+#+end_src
+
+#+NAME: dark2
+#+begin_src css
+#0f4727
+#+end_src
+
+#+NAME: dark3
+#+begin_src css
+#155430
+#+end_src
+
+#+NAME: dark4
+#+begin_src css
+#437258
+#+end_src
+
+** Light
+
+#+NAME: light0
+#+begin_src css
+#b6efcf
+#+end_src
+
+#+NAME: light1
+#+begin_src css
+#80d6a5
+#+end_src
+
+** Primary
+
+#+NAME: primary0
+#+begin_src css
+#36f78a
+#+end_src
+
+** Accents
+
+#+NAME: red
+#+begin_src css
+#f27489
+#+end_src
+
+#+NAME: orange
+#+begin_src css
+#f4ac5f
+#+end_src
+
+#+NAME: yellow
+#+begin_src css
+#f2e774
+#+end_src
+
+#+NAME: green
+#+begin_src css
+#85f274
+#+end_src
+
+#+NAME: teal
+#+begin_src css
+#5ff4a2
+#+end_src
+
+#+NAME: cyan
+#+begin_src css
+#5fd6f4
+#+end_src
+
+#+NAME: blue
+#+begin_src css
+#74aaf2
+#+end_src
+
+#+NAME: violet
+#+begin_src css
+#665ff4
+#+end_src
+
+#+NAME: indigo
+#+begin_src css
+#b9a4f4
+#+end_src
+
+#+NAME: pink
+#+begin_src css
+#e879fc
+#+end_src
+
+* Emacs
+
+#+begin_src emacs-lisp :noweb yes :tangle ../home/.emacs.d/qucchia-theme.el
+
+  (require 'autothemer)
+
+  (autothemer-deftheme
+    qucchia "qucchia theme"
+
+    ((((class color) (min-colors #xFFFFFF))) ;; Use graphical Emacs
+       <<emacs-colours>>)
+
+    (
+    <<emacs-faces>>))
+
+  (provide-theme 'qucchia)
+
+#+end_src
+
+** Set colours
+
+#+begin_src emacs-lisp :noweb yes :noweb-ref emacs-colours
+
+  (qucchia-dark0    "<<dark0>>")
+  (qucchia-dark1    "<<dark1>>")
+  (qucchia-dark2    "<<dark2>>")
+  (qucchia-dark3    "<<dark3>>")
+  (qucchia-dark4    "<<dark4>>")
+  (qucchia-light0   "<<light0>>")
+  (qucchia-light1   "<<light1>>")
+  (qucchia-primary0 "<<primary0>>")
+  (qucchia-red      "<<red>>")
+  (qucchia-orange   "<<orange>>")
+  (qucchia-yellow   "<<yellow>>")
+  (qucchia-green    "<<green>>")
+  (qucchia-teal     "<<teal>>")
+  (qucchia-cyan     "<<cyan>>")
+  (qucchia-blue     "<<blue>>")
+  (qucchia-violet   "<<violet>>")
+  (qucchia-indigo   "<<indigo>>")
+  (qucchia-pink     "<<pink>>")
+
+#+end_src
+
+** Main
+
+#+begin_src emacs-lisp :noweb-ref emacs-faces
+
+  (default                   (:foreground qucchia-light0
+                               :background qucchia-dark0))
+  (cursor                    (:background qucchia-light1))
+  (region                    (:background qucchia-dark3))
+  (fringe                    (:background qucchia-dark0))
+  (link                      (:underline t :foreground qucchia-primary0))
+  (trailing-whitespace       (:background qucchia-red))
+  (escape-glyph              (:foreground qucchia-primary0))
+  (fill-column-indicator     (:foreground qucchia-dark2 :background qucchia-dark2))
+  (line-number-current-line  (:inherit 'line-number :foreground qucchia-light1))
+
+#+end_src
+
+** Font lock
+
+#+begin_src emacs-lisp :noweb-ref emacs-faces
+
+  (font-lock-comment-face    (:foreground qucchia-dark4))
+  (font-lock-keyword-face    (:foreground qucchia-teal))
+  (font-lock-string-face     (:foreground qucchia-cyan))
+  (font-lock-builtin-face    (:foreground qucchia-blue))
+  (font-lock-constant-face   (:foreground qucchia-orange))
+
+#+end_src
+
+** Rainbow delimiters
+
+#+begin_src emacs-lisp :noweb-ref emacs-faces
+
+  (rainbow-delimiters-depth-1-face (:foreground qucchia-green))
+  (rainbow-delimiters-depth-2-face (:foreground qucchia-yellow))
+  (rainbow-delimiters-depth-3-face (:foreground qucchia-orange))
+  (rainbow-delimiters-depth-4-face (:foreground qucchia-teal))
+  (rainbow-delimiters-depth-5-face (:foreground qucchia-cyan))
+  (rainbow-delimiters-depth-6-face (:foreground qucchia-blue))
+  (rainbow-delimiters-depth-7-face (:foreground qucchia-violet))
+  (rainbow-delimiters-depth-8-face (:foreground qucchia-indigo))
+  (rainbow-delimiters-depth-9-face (:foreground qucchia-pink))
+
+#+end_src
+
+** Org mode
+
+#+begin_src emacs-lisp :noweb-ref emacs-faces
+
+  (org-block-begin-line      (:inherit 'fixed-pitch :foreground qucchia-dark4))
+  (org-block-end-line        (:inherit 'fixed-pitch :foreground qucchia-dark4))
+  (org-block                 (:inherit 'fixed-pitch))
+  (org-document-info-keyword (:inherit 'fixed-pitch :foreground qucchia-dark4))
+  (org-ellipsis              (:foreground qucchia-dark4))
+  (org-hide                  (:foreground qucchia-dark0))
+  (org-level-1               (:foreground qucchia-yellow :height 1.2))
+  (org-level-2               (:foreground qucchia-teal :height 1.15))
+  (org-level-3               (:foreground qucchia-blue :height 1.1))
+  (org-level-4               (:foreground qucchia-indigo :height 1.1))
+
+#+end_src
+
+** Mode line and header line
+
+#+begin_src emacs-lisp :noweb-ref emacs-faces
+
+  (mode-line                        (:background qucchia-dark3))
+  (mode-line-inactive               (:background qucchia-dark1))
+  (header-line                      (:background qucchia-dark3))
+  (vertical-border                  (:foreground qucchia-dark3))
+  (doom-modeline-evil-normal-state  (:foreground qucchia-green))
+  (doom-modeline-evil-insert-state  (:foreground qucchia-blue))
+  (doom-modeline-evil-visual-state  (:foreground qucchia-violet))
+  (doom-modeline-evil-replace-state (:foreground qucchia-orange))
+
+#+end_src
+** Miscellaneous
+
+#+begin_src emacs-lisp :noweb-ref emacs-faces
+  ;; Minibuffer
+  (minibuffer-prompt         (:foreground qucchia-primary0))
+
+  ;; Info
+  (info-xref-visited         (:inherit 'info-xref :foreground qucchia-blue))
+  (info-menu-star            (:foreground qucchia-indigo))
+
+  ;; Ivy
+  (ivy-current-match         (:background qucchia-dark3))
+
+#+end_src
+
