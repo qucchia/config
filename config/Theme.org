@@ -271,5 +271,12 @@ A theme to use across several programs.
   ;; Ivy
   (ivy-current-match         (:background qucchia-dark3))
 
+  ;; Eshell
+  (eshell-git-prompt-powerline-dir-face (:background qucchia-dark3))
+  (eshell-git-prompt-powerline-not-clean-face
+    (:background qucchia-red))
+  (eshell-git-prompt-powerline-clean-face
+    (:background qucchia-dark4))
+
 #+end_src
 
