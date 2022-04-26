@@ -16,7 +16,7 @@ Get tired of Dired with Tired: File management configuration.
       "l" 'dired-single-buffer
       "H" 'dired-omit-mode))
       
-  (add-hook 'dired-mode-hook #'dotty--dired-mode-hook)
+  (add-hook 'dired-mode-hook #'dired-omit-mode)
       
   (use-package dired-single
     :commands (dired dired-jump))
