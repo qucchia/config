@@ -198,13 +198,16 @@ A theme to use across several programs.
   (org-block-begin-line      (:inherit 'fixed-pitch :foreground qucchia-dark4))
   (org-block-end-line        (:inherit 'fixed-pitch :foreground qucchia-dark4))
   (org-block                 (:inherit 'fixed-pitch))
+  (org-document-title        (:weight 'bold :foreground qucchia-primary0))
   (org-document-info-keyword (:inherit 'fixed-pitch :foreground qucchia-dark4))
   (org-ellipsis              (:foreground qucchia-dark4))
   (org-hide                  (:foreground qucchia-dark0))
-  (org-level-1               (:foreground qucchia-yellow :height 1.2))
-  (org-level-2               (:foreground qucchia-teal :height 1.15))
+  (org-todo                  (:weight 'bold :foreground qucchia-yellow))
+  (org-done                  (:weight 'bold :foreground qucchia-primary2))
+  (org-level-1               (:foreground qucchia-primary1 :height 1.2))
+  (org-level-2               (:foreground qucchia-cyan :height 1.15))
   (org-level-3               (:foreground qucchia-blue :height 1.1))
-  (org-level-4               (:foreground qucchia-indigo :height 1.1))
+  (org-level-4               (:foreground qucchia-orange :height 1.1))
 
 #+end_src
 
