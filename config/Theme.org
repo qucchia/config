@@ -147,10 +147,12 @@ A theme to use across several programs.
 
   (default                   (:foreground qucchia-light1
                               :background qucchia-dark0))
+  (error                     (:weight 'bold :foreground qucchia-red))
   (cursor                    (:background qucchia-light2))
   (region                    (:background qucchia-dark3))
   (fringe                    (:background qucchia-dark0))
   (link                      (:underline t :foreground qucchia-primary2))
+  (shadow                    (:foreground qucchia-blue))
   (trailing-whitespace       (:background qucchia-red))
   (escape-glyph              (:foreground qucchia-primary2))
   (fill-column-indicator     (:foreground qucchia-dark2 :background qucchia-dark2))
@@ -241,6 +243,7 @@ A theme to use across several programs.
 
   (mode-line                        (:background qucchia-dark3))
   (mode-line-inactive               (:background qucchia-dark1))
+  (doom-modeline-evil-replace-state (:foreground qucchia-orange))
   (doom-modeline-evil-normal-state  (:foreground qucchia-yellow))
   (doom-modeline-evil-insert-state  (:foreground qucchia-cyan))
   (doom-modeline-evil-visual-state  (:foreground qucchia-blue))
