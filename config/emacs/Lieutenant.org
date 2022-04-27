@@ -3,7 +3,13 @@
 
 Lieutenant: keymaps and keybindings, using Evil and General.
 
-See also the [[file:Desktop.org::*Keybindings][keybindings section in EXWM]].
+* See also
+
+I also have some keybindings configuration in the following places:
+- [[file:Desktop.org::*Keybindings][EXWM]]
+- [[file:Psst.org::*Ivy][Ivy]]
+- [[file:Psst.org::*Counsel][Counsel]]
+- Some =C-h= prefixed shortcuts to [[file:Psst.org::*Helpful][Helpful]]
 
 * Main
 

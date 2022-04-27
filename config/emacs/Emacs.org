@@ -1,6 +1,24 @@
 #+title:Emacs
 #+PROPERTY: header-args:emacs-lisp :tangle ../../home/.emacs.d/init.el
 
+My personal Emacs configuration.
+
+* Contents
+
+This file, [[file:Emacs.org][Emacs]], contains the most general configuration. I also have some other files with more specific configuration, listed below.
+
+- [[file:Desktop.org][Desktop]]: EXWM desktop configuration.
+- Go dotty with [[file:Dotty.org][Dotty]]: dotfiles utilities.
+- [[file:Erised.org][Erised]]: just the user interface I want.
+- [[file:George.org][George]]: Org configuration.
+- [[file:Lieutenant.org][Lieutenant]]: keymaps and keybindings.
+- [[file:Mash.org][Mash]]: terminals configuration.
+- [[file:Psst.org][Psst]]: all the hints and help I could need.
+- Make a racket with [[file:Racket.org][Racket]]: music utilities.
+- Program comfortably with [[file:Softwear.org][Softwear]]: Development configuration.
+
+Also see [[../Theme.org][Theme]].
+
 * Package configuration
 
 =use-package= is a macro for organising package configuration.
@@ -83,8 +101,6 @@ Enable some commands.
 
 * Load other files
 
-My personal Emacs configuration.
-
 #+begin_src emacs-lisp
 
   (defcustom qucchia-lisp-directory "~/.emacs.d/lisp"
@@ -154,9 +170,8 @@ Load other files.
   (use-package diredfl
     :hook (dired-mode . diredfl-mode))
 
-  (provide 'tired)
-
 #+end_src
+
 * Proxy
 
 Utilities for using Tor.
