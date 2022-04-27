@@ -107,7 +107,7 @@ https://github.com/noctuid/general.el
 
 * Evil
 
-https://github.com/emacs-evil/evil
+Links: [[https://github.com/emacs-evil/evil][GitHub]], [[info:evil][Info]]
 
 #+begin_src emacs-lisp
 

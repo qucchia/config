@@ -23,7 +23,7 @@ Also see [[../Theme.org][Theme]].
 
 =use-package= is a macro for organising package configuration.
 
-https://github.com/jwiegley/use-package
+Links: [[https://github.com/jwiegley/use-package][GitHub]], [[info:use-package][Info]]
 
 #+begin_src emacs-lisp
 
@@ -141,6 +141,10 @@ Load other files.
 
 * Dired
 
+Dired is the builtin file manager in Emacs.
+
+Links: [[info:emacs#Dired][Info]]
+
 #+begin_src emacs-lisp
 
   (use-package dired
@@ -156,16 +160,40 @@ Load other files.
 
   (add-hook 'dired-mode-hook #'dired-omit-mode)
 
+#+end_src
+
+By default, Dired opens a buffer for every directory open, which can clutter the buffer list. The =dired-single= package avoids this.
+
+#+begin_src emacs-lisp
+
   (use-package dired-single
     :commands (dired dired-jump))
 
+#+end_src
+
+=all-the-icons-dired= shows icons for folders and different file types.
+
+#+begin_src emacs-lisp
+
   (use-package all-the-icons-dired
     :hook (dired-mode . all-the-icons-dired-mode))
+
+#+end_src
+
+=dired-open= allows choosing what programs to use to open different types of files.
+
+#+begin_src emacs-lisp
 
   (use-package dired-open
     :commands (dired dired-jump)
     :config
     (setq dired-open-extensions '(("png" . "display"))))
+
+#+end_src
+
+=dired-fl= enables additional font locking, making Dired more aesthetically pleasing.
+
+#+begin_src emacs-lisp
 
   (use-package diredfl
     :hook (dired-mode . diredfl-mode))
