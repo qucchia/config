@@ -1,5 +1,7 @@
 #+title:Vimb configuration
-#+PROPERTY: header-args:fundamental :tangle ../.config/vimb/config :mkdirp yes
+#+PROPERTY: header-args:fundamental :tangle ../home/.config/vimb/config :mkdirp yes
+
+Configuration for the Vimb browser.
 
 See the [[https://fanglingsu.github.io/vimb/man.html][manual]], especially the section on [[https://fanglingsu.github.io/vimb/man.html#SETTINGS][settings]], for descriptions on each setting.
 
@@ -12,8 +14,7 @@ See the [[https://fanglingsu.github.io/vimb/man.html][manual]], especially the s
 
 #+end_src
 
-** Headers
-
+Headers:
 - Remove User-Agent header
 - Send Do-Not-Track signal.
 
@@ -204,7 +205,7 @@ The colours are from the [[https://www.nordtheme.com/docs/colors-and-palettes][N
 #434c5e
 #+end_src
 
-#+NAME: dark2
+#+NAME: dark3
 #+begin_src css
 #4c566a
 #+end_src
