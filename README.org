@@ -1,4 +1,4 @@
-* qucchia/dotfiles
+* =qucchia/dotfiles=
 
 This is my desktop configuration, using Emacs and EXWM on a Raspberry Pi.
 
@@ -21,21 +21,8 @@ Then run =dotfiles-stow= to set up all the symlinks.
 
 * Summary
 
-Here’s a quick summary of the files in the =org-files= folder.
-
-- =Emacs.org= is the main file for my Emacs configuration. It also loads the configuration from:
-  - =Dolly.org=, which contains some functions to use the Tor proxy in Emacs.
-  - =Dotty.org=, which is a package for automating actions in this =dotfiles= repository.
-  - =Racket.org=, which plays a different Star Wars soundtrack depending on the day of the week.
-  - =Email.org= is currently unused.
-    
-- =Desktop.org= is the configuration for EXWM.
-
-- =Browser.org= is the configuration for Vimb.
-
-Some other directories and files worth noting:
-- =.bin/= contains custom bash commands which are loaded in =.profile=.
-- =root/= is stowed to the filesystem root.
-- =setup/= contains some self-notes for setup on a new machine and some pre-made Firefox configuration.
-- =.xmodmap= maps Caps Lock to Left Super and the key between Left Shift and Z to Escape.
-- =.xsession= starts EXWM.
+Here’s a summary of the files in the =config= folder.
+- In the =emacs= folder is all my Emacs configuration. See [[file:config/emacs/Emacs.org][Emacs.org]] for a description of all the files there.
+- [[file:config/Theme.org][Theme]]: A theme to use across several programs.
+- [[file:config/Browser.org][Browser]]: Configuration for the Vimb browser.
+- [[file:config/FinalSetup.org][FinalSetup]]: Some self-reminders for setting up on a new machine.
