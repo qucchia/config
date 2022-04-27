@@ -320,7 +320,7 @@ These are the leader keys bound to =C-SPC= (see [[General][General]]), and are t
 
   "t"   '(:ignore t :which-key "toggle")
   "te"  '(emms-mode-line-toggle :which-key "emms modeline")
-  "tp"  '(dolly-toggle-tor :which-key "proxy")
+  "tp"  '(qucchia-toggle-tor :which-key "proxy")
   "tt"  '(counsel-load-theme :which-key "choose theme")
   "ts"  '(hydra-text-scale/body :which-key "scale text")
 

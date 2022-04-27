@@ -107,8 +107,7 @@ Load other files.
 
 #+begin_src emacs-lisp
 
-  (dolist (package '("dolly"
-                     "dotty"
+  (dolist (package '("dotty"
                      "erised"
                      "george"
                      "lieutenant"
@@ -156,5 +155,34 @@ Load other files.
     :hook (dired-mode . diredfl-mode))
 
   (provide 'tired)
+
+#+end_src
+* Proxy
+
+Utilities for using Tor.
+
+#+begin_src emacs-lisp
+
+  (defcustom qucchia-use-tor t
+    "If non-nil, use torsocks in `qucchia-start-process-shell-command'."
+    :type 'boolean
+    :group 'qucchia)
+
+  (defun qucchia-toggle-tor ()
+    "Toggle `qucchia-use-tor'."
+    (interactive)
+    (setq qucchia-use-tor (not qucchia-use-tor))
+    (message "Tor is %s" (if qucchia-use-tor "enabled" "disabled")))
+
+  (defun qucchia-start-process-shell-command (name buffer command)
+    "Start program in a subprocess.  If `qucchia-use-tor' is non-nil, wrap it in torsocks.
+
+NAME is a name for process.
+BUFFER is the buffer (or buffer name) to associate with the process.
+COMMAND is the shell command to run.
+See `start-process-shell-command' for more details."
+    (if qucchia-use-tor
+      (start-process-shell-command name buffer (string-join (list "torsocks " command)))
+      (start-process-shell-command name buffer command)))
 
 #+end_src

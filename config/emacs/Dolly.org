@@ -9,13 +9,13 @@ Dolly: proxy utilities.
     "If non-nil, use torsocks in `dolly/start-process-shell-command'."
     :type 'boolean
     :group 'dolly)
-  
+
   (defun dolly-toggle-tor ()
     "Toggle `dolly/use-tor'."
     (interactive)
     (setq dolly-use-tor (not dolly-use-tor))
     (message "Tor is %s" (if dolly-use-tor "enabled" "disabled")))
-  
+
   (defun dolly-start-process-shell-command (name buffer command)
     "Start program in a subprocess.  If `dolly/use-tor' is non-nil, wrap it in torsocks.
 
@@ -26,7 +26,7 @@ See `start-process-shell-command' for more details."
     (if dolly-use-tor
       (start-process-shell-command name buffer (string-join (list "torsocks " command)))
       (start-process-shell-command name buffer command)))
-      
+
   (provide 'dolly)
 
 #+end_src
