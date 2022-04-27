@@ -17,6 +17,7 @@ Erised: just the user interface I want.
   (set-fringe-mode 30) ; Add margins
   (menu-bar-mode -1) ; Disable menubar
 
+  (setq-default indent-tabs-mode nil) ; Don't indent using tabs
   (setq x-stretch-cursor t) ;; Widen cursor on tabs
   (setq visible-bell t) ;; Set up visible bell
 
