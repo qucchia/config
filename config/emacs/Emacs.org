@@ -21,9 +21,10 @@ Also see [[../Theme.org][Theme]].
 
 * Package configuration
 
-=use-package= is a macro for organising package configuration.
-
-Links: [[https://github.com/jwiegley/use-package][GitHub]], [[info:use-package][Info]]
+The package archives used are:
+- [[https://elpa.gnu.org/][ELPA]], Emacs’ official package archive
+- [[https://stable.melpa.org/][MELPA]], an archive with more packages
+- The [[https://orgmode.org/][Org Mode]] archive
 
 #+begin_src emacs-lisp
 
@@ -36,6 +37,14 @@ Links: [[https://github.com/jwiegley/use-package][GitHub]], [[info:use-package][
   (package-initialize)
   (unless package-archive-contents
     (package-refresh-contents))
+
+#+end_src
+
+=use-package= is a macro for organising package configuration.
+
+Links: [[https://github.com/jwiegley/use-package][GitHub]], [[info:use-package][Info]]
+
+#+begin_src emacs-lisp
 
   (require 'use-package)
   (setq use-package-always-ensure t)
@@ -163,6 +172,7 @@ Links: [[info:emacs#Dired][Info]]
 #+end_src
 
 By default, Dired opens a buffer for every directory open, which can clutter the buffer list. The =dired-single= package avoids this.
+https://github.com/crocket/dired-single/
 
 #+begin_src emacs-lisp
 
@@ -172,6 +182,7 @@ By default, Dired opens a buffer for every directory open, which can clutter the
 #+end_src
 
 =all-the-icons-dired= shows icons for folders and different file types.
+https://github.com/wyuenho/all-the-icons-dired/
 
 #+begin_src emacs-lisp
 
@@ -192,6 +203,7 @@ By default, Dired opens a buffer for every directory open, which can clutter the
 #+end_src
 
 =dired-fl= enables additional font locking, making Dired more aesthetically pleasing.
+https://github.com/purcell/diredfl/
 
 #+begin_src emacs-lisp
 
