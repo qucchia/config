@@ -3,19 +3,6 @@
 
 Make a racket with Racket: music utilities.
 
-* Use package
-
-#+begin_src emacs-lisp
-
-  (use-package emms
-    :config
-    (emms-all)
-    (emms-default-players)
-    :custom
-    (emms-source-file-default-directory "~/Music/"))
-
-#+end_src
-
 * Custom variables
 
 #+begin_src emacs-lisp
@@ -34,6 +21,19 @@ Make a racket with Racket: music utilities.
     "File path where favourites playlist is stored, relative to `racket-playlists-directory'."
     :type 'string
     :group 'racket)
+
+#+end_src
+
+* EMMS configuration
+
+#+begin_src emacs-lisp
+
+  (use-package emms
+    :config
+    (emms-all)
+    (emms-default-players)
+    :custom
+    (emms-source-file-default-directory racket-music-directory))
 
 #+end_src
 
@@ -60,7 +60,8 @@ Make a racket with Racket: music utilities.
           (setq star-wars-directory "06 Return of the Jedi"))
         (when (equal day-of-week "Sat")
           (setq star-wars-directory "The Mandalorian"))
-        (string-join (list "~/Music/Star Wars/" star-wars-directory)))))
+        (expand-file-name star-wars-directory
+          (expand-file-name "Star Wars" racket-music-directory)))))
 
 #+end_src
 
@@ -85,15 +86,17 @@ Make a racket with Racket: music utilities.
 
   (defun racket-add-playlist (file)
     "Add playlist FILE to EMMS."
-    (racket-load-playlist file)
+    (racket-load-playlist (racket-expand-playlist file))
     (let ((played t))
       (racket--add-directory racket-music-directory racket-playlist)))
 
   (defun racket-play-playlist (file)
     "Play playlist FILE in EMMS."
-    (racket-load-playlist file)
+    (racket-load-playlist (racket-expand-playlist file))
+    (emms-stop)
     (let ((played nil))
-      (racket--add-directory racket-music-directory racket-favourites-playlist)))
+      (racket--add-directory racket-music-directory racket-playlist)))
+    (message (racket-expand-playlist file))
 
   (defun racket-get-track (&optional track)
     "Return TRACK relative to `racket-music-directory'.  If no TRACK is provided, the currently playing track in EMMS is used."
@@ -138,7 +141,6 @@ Make a racket with Racket: music utilities.
               (message "Track removed from playlist."))
             ;; Don’t do anything if the track is already added
             (message "The track isn’t inside the playlist."))))))
-        
 
 #+end_src
 
@@ -174,7 +176,6 @@ Make a racket with Racket: music utilities.
     "Open favourites playlist."
     (interactive)
     (racket-open-playlist racket-favourites-playlist-file))
-
 
 #+end_src
 
