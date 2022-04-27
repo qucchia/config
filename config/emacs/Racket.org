@@ -25,8 +25,13 @@ Make a racket with Racket: music utilities.
     :type 'string
     :group 'racket)
 
-  (defcustom racket-favourites-playlist-file "~/Music/playlists/Favourites.el"
-    "File path where favourites playlist is stored."
+  (defcustom racket-playlists-directory "playlists"
+    "Path where playlists directory is stored, relative to `racket-directory-music'."
+    :type 'string
+    :group 'racket)
+
+  (defcustom racket-favourites-playlist-file "favourites.el"
+    "File path where favourites playlist is stored, relative to `racket-playlists-directory'."
     :type 'string
     :group 'racket)
 
@@ -59,46 +64,48 @@ Make a racket with Racket: music utilities.
 
 #+end_src
 
-* Favourites playlist
+* Playlists
 
 #+begin_src emacs-lisp
 
-  (defun racket-add-favourites ()
-    "Add favourites playlist"
-    (interactive)
-    (load-file racket-favourites-playlist-file)
+  (defun racket-expand-playlist (file)
+    "Expand playlist FILE from `racket-playlists-directory'."
+    (expand-file-name file
+      (expand-file-name
+        racket-playlists-directory
+        racket-music-directory)))
 
+  (defun racket-open-playlist (file)
+    "Open playlist FILE."
+    (find-file (racket-expand-playlist file)))
+
+  (defun racket-load-playlist (file)
+    "Load playlist from file FILE."
+    (load-file (racket-expand-playlist file)))
+
+  (defun racket-add-playlist (file)
+    "Add playlist FILE to EMMS."
+    (racket-load-playlist file)
     (let ((played t))
-      (racket--add-directory racket-music-directory racket-favourites-playlist)))
+      (racket--add-directory racket-music-directory racket-playlist)))
 
-  (defun racket-play-favourites ()
-    "Play favourites playlist"
-    (interactive)
-    (load-file racket-favourites-playlist-file)
-
+  (defun racket-play-playlist (file)
+    "Play playlist FILE in EMMS."
+    (racket-load-playlist file)
     (let ((played nil))
       (racket--add-directory racket-music-directory racket-favourites-playlist)))
-    
-  (defun racket--add-directory (directory items)
-      (dolist (item items)
-        (if (stringp item)
-          (if played
-            (emms-add-playlist-file (concat (expand-file-name item directory) ".ogg"))
-            (progn
-              (emms-play-playlist-file (concat (expand-file-name item directory) ".ogg"))
-              (setq played t)))
-          (racket--add-directory (expand-file-name (car item) directory) (cdr item)))))
 
-  (defun racket-add-track-to-favourites ()
-    "Add current track to favourites"
-    (interactive)
-    (load-file racket-favourites-playlist-file)
+  (defun racket-get-track (&optional track)
+    "Return TRACK relative to `racket-music-directory'.  If no TRACK is provided, the currently playing track in EMMS is used."
+    (let ((track (or track (emms-score-current-selected-track-filename))))
+      (file-relative-name
+        (file-name-sans-extension track)
+        "~/Music/")))
 
-    (let ((line (concat "\""
-                  (file-name-sans-extension
-                    (file-relative-name (emms-score-current-selected-track-filename) "~/Music/"))
-                  "\""))
-           (file racket-favourites-playlist-file))
+  (defun racket-add-track-to-playlist (file &optional track)
+    "Add TRACK (see `racket-get-track') to playlist in FILE."
+    (let ((line (format "\"%s\"" (racket-get-track track)))
+          (file (racket-expand-playlist file)))
       (with-current-buffer (or (get-file-buffer file) (find-file-noselect file))
         (save-excursion
           (beginning-of-buffer)
@@ -106,7 +113,7 @@ Make a racket with Racket: music utilities.
             ;; Don’t do anything if the track is already added
             (message "The track is already inside the playlist.")
             ;; Add to playlist
-            (progn 
+            (progn
               (end-of-buffer)
               (search-backward ")")
               (search-backward ")")
@@ -115,16 +122,10 @@ Make a racket with Racket: music utilities.
               (save-buffer)
               (message "Track added to playlist.")))))))
 
-  (defun racket-remove-track-from-favourites ()
-    "Remove current track from favourites"
-    (interactive)
-    (load-file racket-favourites-playlist-file)
-
-    (let ((line (concat "\""
-                  (file-name-sans-extension
-                    (file-relative-name (emms-score-current-selected-track-filename) "~/Music/"))
-                  "\""))
-           (file racket-favourites-playlist-file))
+  (defun racket-remove-track-from-playlist (file &optional track)
+    "Remove TRACK (see `racket-get-track') from playlist in FILE."
+    (let ((line (format "\"%s\"" (racket-get-track track)))
+          (file (racket-expand-playlist file)))
       (with-current-buffer (or (get-file-buffer file) (find-file-noselect file))
         (save-excursion
           (beginning-of-buffer)
@@ -138,10 +139,42 @@ Make a racket with Racket: music utilities.
             ;; Don’t do anything if the track is already added
             (message "The track isn’t inside the playlist."))))))
         
-  (defun racket-open-favourites ()
-    "Open favourites playlist"
+
+#+end_src
+
+** Favourites playlist
+
+#+begin_src emacs-lisp
+
+  (defun racket-add-favourites ()
+    "Add favourites playlist."
     (interactive)
-    (find-file racket-favourites-playlist-file))
+    (racket-add-playlist racket-favourites-playlist-file))
+
+  (defun racket-play-favourites ()
+    "Play favourites playlist."
+    (interactive)
+    (racket-play-playlist racket-favourites-playlist-file))
+
+  (defun racket-add-track-to-favourites (&optional track)
+    "Add current track to favourites."
+    (interactive)
+    (racket-add-track-to-playlist
+      racket-favourites-playlist-file
+      track))
+
+  (defun racket-remove-track-from-favourites (&optional track)
+    "Remove current track from favourites."
+    (interactive)
+    (racket-remove-track-from-playlist
+      racket-favourites-playlist-file
+      track))
+
+  (defun racket-open-favourites ()
+    "Open favourites playlist."
+    (interactive)
+    (racket-open-playlist racket-favourites-playlist-file))
+
 
 #+end_src
 
