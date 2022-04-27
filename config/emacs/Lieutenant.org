@@ -1,13 +1,72 @@
 #+title:Lieutenant
 #+PROPERTY: header-args:emacs-lisp :tangle ../../home/.emacs.d/lisp/lieutenant.el
 
-Lieutenant: General keybindings.
+Lieutenant: keymaps and keybindings, using Evil and General.
 
-https://github.com/noctuid/general.el
+See also the [[file:Desktop.org::*Keybindings][keybindings section in EXWM]].
 
 * Main
 
-#+begin_src emacs-lisp :noweb yes
+Use escape key to quit.
+
+#+begin_src emacs-lisp
+
+  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
+#+end_src
+
+Register shortcuts: use =C-x r j <char>= to jump to them.
+
+#+begin_src emacs-lisp
+
+  ;; Files
+  (set-register ?t '(file . "~/Documents/life/Tasks.org"))
+
+  ;; Directories
+  (set-register ?~ '(file . "~"))
+  (set-register ?/ '(file . "/"))
+  (set-register ?. '(file . "~/.dotfiles"))
+  (set-register ?c '(file . "~/.dotfiles/config/emacs"))
+  (set-register ?d '(file . "~/Downloads"))
+  (set-register ?D '(file . "~/Documents"))
+  (set-register ?m '(file . "~/Music"))
+  (set-register ?p '(file . "~/Projects"))
+
+#+end_src
+
+* Keymap
+
+I have a small keymap that maps Caps Lock to Left Super and the key between Z and Left Shift to Escape, to reduce the distance needed to press these keys.
+
+#+begin_src conf :tangle ../../home/.xmodmap
+
+  clear mod4
+
+  keycode 66 = Super_L
+  keycode 94 = Escape
+
+  add Mod4 = Super_L Super_R
+
+#+end_src
+
+Set keymap function (bound to =C-SPC x=).
+
+#+begin_src emacs-lisp
+
+  (defun lieutenant-set-keymap ()
+    "Set my custom keymap."
+    (interactive)
+    (start-process-shell-command "xmodmap" nil
+      "xmodmap ~/.xmodmap")
+    (message "Keymap set"))
+
+#+end_src
+
+* General
+
+https://github.com/noctuid/general.el
+
+#+begin_src emacs-lisp
 
   (use-package general
     :after evil
@@ -17,6 +76,7 @@ https://github.com/noctuid/general.el
       :prefix "C-SPC"
       :global-prefix "C-SPC")
 
+    ;; Leader keys: see section below
     (lieutenant-leader-keys
       <<bindings>>)
 
@@ -29,7 +89,7 @@ https://github.com/noctuid/general.el
       "s-x"   '(lambda ()
                  (interactive)
                  (if ivy-mode
-                   (progn (ivy-mode -1)
+                 (progn (ivy-mode -1)
                           (execute-extended-command prefix-arg)
                           (ivy-mode))
                    (execute-extended-command prefix-arg)))
@@ -37,11 +97,43 @@ https://github.com/noctuid/general.el
       "M-v" 'scroll-other-window-down
       "<pause>" 'emms-pause))
 
-  (provide 'lieutenant)
+#+end_src
+
+* Evil
+
+https://github.com/emacs-evil/evil
+
+#+begin_src emacs-lisp
+
+  (use-package evil
+    :init
+    (setq evil-want-integration t)
+    (setq evil-want-keybinding nil)
+    (setq evil-want-C-u-scroll t)
+    (setq evil-want-C-i-jump nil)
+    :config
+    (evil-mode 1)
+    (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+
+    ;; Use visual line motions even outside of visual-line-mode buffers
+    (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+    (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+
+    (evil-set-initial-state 'messages-buffer-mode 'normal)
+    (evil-set-initial-state 'dashboard-mode 'normal))
+
+  (use-package evil-collection
+    :after evil
+    :config
+    (evil-collection-init))
 
 #+end_src
 
-* =.=: Dotty
+* Leader keys
+
+These are the leader keys bound to =C-SPC= (see [[General][General]]), and are the home to most of my custom keyboard shortcuts. I have organised them according to their leader keys, along with the [[Miscellaneous][Miscellaneous]] ones at the end.
+
+** =.=: Dotty
 
 #+begin_src emacs-lisp :noweb-ref bindings :tangle no
 
@@ -50,7 +142,7 @@ https://github.com/noctuid/general.el
 
 #+end_src
 
-* =b=: Bookmarks
+** =b=: Bookmarks
 
 #+begin_src emacs-lisp :noweb-ref bindings :tangle no
 
@@ -85,7 +177,7 @@ https://github.com/noctuid/general.el
 
 #+end_src
 
-** =bc=: Classroom
+*** =bc=: Classroom
 
 #+begin_src emacs-lisp :noweb-ref bindings :tangle no
 
@@ -136,7 +228,7 @@ https://github.com/noctuid/general.el
           :which-key "physics")
 #+end_src
 
-* =m=: Mode
+** =m=: Mode
 
 #+begin_src emacs-lisp :noweb-ref bindings :tangle no
 
@@ -149,7 +241,7 @@ https://github.com/noctuid/general.el
 
 #+end_src
 
-* =o=: Open app
+** =o=: Open app
 
 #+begin_src emacs-lisp :noweb-ref bindings :tangle no
 
@@ -176,43 +268,53 @@ https://github.com/noctuid/general.el
 
 #+end_src
 
-* =s=: Search
+** =s=: Search
 
 #+begin_src emacs-lisp :noweb-ref bindings :tangle no
 
   "s"  '(:ignore t :which-key search)
   "sc" '((lambda (term)
-           (interactive (list (qucchia-uri-encode (read-string "DIEC "))))
+           (interactive (list (lieutenant-uri-encode (read-string "DIEC "))))
            (browse-url (string-join (list "https://dlc.iec.cat/Results?DecEntradaText=" term))))
          :which-key "diec")
   "sd" '((lambda (term)
-           (interactive (list (qucchia-uri-encode (read-string "DuckDuckGo "))))
+           (interactive (list (lieutenant-uri-encode (read-string "DuckDuckGo "))))
            (browse-url (string-join (list "https://duckduckgo.com/?q=" term))))
          :which-key "duckduckgo")
   "sm" '((lambda (term)
-           (interactive (list (qucchia-uri-encode (read-string "MDN "))))
+           (interactive (list (lieutenant-uri-encode (read-string "MDN "))))
            (browse-url (string-join (list "https://developer.mozilla.org/en-US/search?q=" term))))
          :which-key "mdn")
   "sr" '((lambda (term)
-           (interactive (list (qucchia-uri-encode (read-string "RAE "))))
+           (interactive (list (lieutenant-uri-encode (read-string "RAE "))))
            (browse-url (string-join (list "https://dle.rae.es/" term))))
          :which-key "rae")
   "ss" '((lambda (term)
-           (interactive (list (qucchia-uri-encode (read-string "StartPage "))))
+           (interactive (list (lieutenant-uri-encode (read-string "StartPage "))))
            (browse-url (string-join (list "https://www.startpage.com/do/dsearch?query=" term))))
          :which-key "startpage")
   "sw" '((lambda (term)
-           (interactive (list (qucchia-uri-encode (read-string "SwissCows "))))
+           (interactive (list (lieutenant-uri-encode (read-string "SwissCows "))))
            (browse-url (string-join (list "https://swisscows.com/web?query=" term))))
          :which-key "swisscows")
   "sy" '((lambda (term)
-           (interactive (list (qucchia-uri-encode (read-string "YouTube "))))
+           (interactive (list (lieutenant-uri-encode (read-string "YouTube "))))
            (browse-url (string-join (list "https://www.youtube.com/results?search_query=" term))))
          :which-key "youtube")
 
 #+end_src
 
-* =t=: Toggle
+*** TODO Make URI encode function
+
+#+begin_src emacs-lisp
+
+(defun lieutenant-uri-encode (string)
+  "Encode STRING to URI (currently not working)."
+  string)
+
+#+end_src
+
+** =t=: Toggle
 
 #+begin_src emacs-lisp :noweb-ref bindings :tangle no
 
@@ -224,7 +326,7 @@ https://github.com/noctuid/general.el
 
 #+end_src
 
-* =r=: Racket
+** =r=: Racket
 
 #+begin_src emacs-lisp :noweb-ref bindings :tangle no
 
@@ -236,7 +338,29 @@ https://github.com/noctuid/general.el
 
 #+end_src
 
-* Other
+** =C-p=: Lookup password
+
+#+begin_src emacs-lisp :noweb-ref bindings :tangle no
+
+  "C-p" '(lieutenant-lookup-password :which-key "password")
+
+#+end_src
+
+#+begin_src emacs-lisp
+
+  (defun lieutenant-lookup-password (name)
+    "Retrieve the password NAME from pass and copy it to the clipboard."
+    (interactive (list (read-string "Password name: ")))
+    (start-process-shell-command "pass" nil
+    (string-join
+      (list
+        "pass -c "
+        name
+        " | xclip -selection clipboard"))))
+
+#+end_src
+
+** Miscellaneous
 
 #+begin_src emacs-lisp :noweb-ref bindings :tangle no
 
@@ -248,10 +372,10 @@ https://github.com/noctuid/general.el
   "l"   '(counsel-linux-app :which-key "linux app")
   "k"   '(counsel-descbinds :which-key "keybindings")
   "p"   '(emms-pause :which-key "pause music")
-  "C-p" '(qucchia-get-password :which-key "password")
   "u"   '(browse-url :which-key "url")
-  "x"   '(quiche-set-keymap :which-key "set keymap")
+  "x"   '(lieutenant-set-keymap :which-key "set keymap")
   "y"   '(counsel-yank-pop :which-key "yank")
   "dtw" '(delete-trailing-whitespace :which-key "delete-trailing-whitespace")
 
 #+end_src
+
