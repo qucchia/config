@@ -2,12 +2,19 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("emacs"
- (front-context-string . "\n14.22 Visual Li")
- (rear-context-string . "n,  Up: Display\n")
- (position . 324204)
+(("evil"
+ (front-context-string . "\n3 Keymaps\n*****")
+ (rear-context-string . "tings,  Up: Top\n")
+ (position . 22770)
+ (filename . "/home/pi/.emacs.d/elpa/evil-20220425.2132/evil.info")
+ (info-node . "Keymaps")
+ (handler . Info-bookmark-jump))
+("emacs"
+ (front-context-string . "\n15.1.4 Errors i")
+ (rear-context-string . "remental Search\n")
+ (position . 345785)
  (filename . "/usr/share/info/emacs/emacs")
- (info-node . "Visual Line Mode")
+ (info-node . "Error in Isearch")
  (handler . Info-bookmark-jump))
 ("org-capture-last-stored"
  (filename . "~/Documents/life/Tasks.org")
