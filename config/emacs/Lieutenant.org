@@ -256,7 +256,6 @@ These are the leader keys bound to =C-SPC= (see [[General][General]]), and are t
 #+begin_src emacs-lisp :noweb-ref bindings :tangle no
 
   "o"     '(:ignore t :which-key "open")
-  "oa"    '(org-agenda :which-key "agenda")
   "oe"    '(emms :which-key "emms")
   "o C-e" '(eshell :which-key "eshell")
   "of"    '((lambda ()
@@ -374,12 +373,10 @@ These are the leader keys bound to =C-SPC= (see [[General][General]]), and are t
 
 #+begin_src emacs-lisp :noweb-ref bindings :tangle no
 
+  "a"   '(org-agenda :which-key "agenda")
   "c"   '(org-capture :which-key "capture")
-  "C-h" '(org-shiftleft :which-key "shift left")
-  "C-j" '(org-shiftdown :which-key "shift down")
-  "C-k" '(org-shiftup :which-key "shift up")
-  "C-l" '(org-shiftright :which-key "shift right")
-  "l"   '(counsel-linux-app :which-key "linux app")
+  "l"   '(org-store-link :which-key "store link")
+  "C-l" '(counsel-linux-app :which-key "linux app")
   "k"   '(counsel-descbinds :which-key "keybindings")
   "p"   '(emms-pause :which-key "pause music")
   "u"   '(browse-url :which-key "url")
