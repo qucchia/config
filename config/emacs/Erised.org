@@ -30,6 +30,7 @@ Show line numbers in some major modes, with some exceptions.
   ;; Line numbers and fill column in some modes
   (global-display-line-numbers-mode 0)
   (global-display-fill-column-indicator-mode 0)
+
   (dolist (mode '(text-mode-hook
                   prog-mode-hook
                   conf-mode-hook))
@@ -37,6 +38,13 @@ Show line numbers in some major modes, with some exceptions.
                      (display-line-numbers-mode)
                      (display-fill-column-indicator-mode)
                      (setq show-trailing-whitespace t))))
+
+  (dolist (mode '(text-mode-hook))
+    (add-hook mode (lambda () (flyspell-mode))))
+
+  (dolist (mode '(prog-mode-hook
+                  conf-mode-hook))
+    (add-hook mode (lambda () (flyspell-prog-mode))))
 
   (use-package rainbow-delimiters
     :hook (prog-mode . rainbow-delimiters-mode))
