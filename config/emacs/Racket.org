@@ -90,6 +90,16 @@ Make a racket with Racket: music utilities.
     (let ((played t))
       (racket--add-directory racket-music-directory racket-playlist)))
 
+  (defun racket--add-directory (directory items)
+    (dolist (item items)
+      (if (stringp item)
+        (if played
+          (emms-add-playlist-file (concat (expand-file-name item directory) ".ogg"))
+          (progn
+            (emms-play-playlist-file (concat (expand-file-name item directory) ".ogg"))
+            (setq played t)))
+        (racket--add-directory (expand-file-name (car item) directory) (cdr item)))))
+
   (defun racket-play-playlist (file)
     "Play playlist FILE in EMMS."
     (racket-load-playlist (racket-expand-playlist file))
