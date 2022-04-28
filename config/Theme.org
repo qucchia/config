@@ -197,7 +197,7 @@ A theme to use across several programs.
   (org-block                 (:inherit 'fixed-pitch))
   (org-document-title        (:weight 'bold :foreground qucchia-primary0))
   (org-document-info-keyword (:inherit 'fixed-pitch :foreground qucchia-dark4))
-  (org-ellipsis              (:foreground qucchia-dark4))
+  (org-ellipsis              (:inherit 'default :foreground qucchia-dark4))
   (org-hide                  (:foreground qucchia-dark0))
   (org-todo                  (:weight 'bold :foreground qucchia-yellow))
   (org-done                  (:weight 'bold :foreground qucchia-primary2))
