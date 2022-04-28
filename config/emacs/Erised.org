@@ -35,16 +35,7 @@ Show line numbers in some major modes, with some exceptions.
                   conf-mode-hook))
     (add-hook mode (lambda ()
                      (display-line-numbers-mode)
-                     (display-fill-column-indicator-mode))))
-
-  (dolist (mode '(org-mode-hook))
-    (add-hook mode (lambda ()
-                     (display-line-numbers-mode 0)
-                     (display-fill-column-indicator-mode 0))))
-
-  (dolist (mode '(fundamental-mode-hook
-                  org-mode-hook))
-    (add-hook mode (lambda ()
+                     (display-fill-column-indicator-mode)
                      (setq show-trailing-whitespace t))))
 
   (use-package rainbow-delimiters

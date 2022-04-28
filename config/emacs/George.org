@@ -12,7 +12,10 @@ George: Org configuration.
     (org-indent-mode)
     (flyspell-mode)
     (variable-pitch-mode 1)
-    (visual-line-mode 1))
+    (visual-line-mode 1)
+
+    (display-line-numbers-mode 0)
+    (display-fill-column-indicator-mode 0))
 
 #+end_src
 
