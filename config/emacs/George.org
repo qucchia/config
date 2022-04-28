@@ -3,6 +3,8 @@
 
 George: Org configuration.
 
+See also the [[file:~/.dotfiles/config/Theme.org::*Org mode][Org face customisation in Theme]].
+
 * Setup
 
 #+begin_src emacs-lisp
