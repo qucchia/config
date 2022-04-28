@@ -72,7 +72,7 @@ Set keymap function (bound to =C-SPC x=).
 
 https://github.com/noctuid/general.el
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :noweb yes
 
   (use-package general
     :after evil
