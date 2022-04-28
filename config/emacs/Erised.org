@@ -40,11 +40,15 @@ Show line numbers in some major modes, with some exceptions.
                      (setq show-trailing-whitespace t))))
 
   (dolist (mode '(text-mode-hook))
-    (add-hook mode (lambda () (flyspell-mode))))
+    (add-hook mode (lambda ()
+      (electric-quote-local-mode t)
+      (flyspell-mode))))
 
   (dolist (mode '(prog-mode-hook
                   conf-mode-hook))
-    (add-hook mode (lambda () (flyspell-prog-mode))))
+    (add-hook mode (lambda ()
+      (electric-quote-local-mode -1)
+      (flyspell-prog-mode))))
 
   (use-package rainbow-delimiters
     :hook (prog-mode . rainbow-delimiters-mode))
