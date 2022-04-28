@@ -15,6 +15,7 @@ See also the [[file:~/.dotfiles/config/Theme.org::*Org mode][Org face customisat
     (variable-pitch-mode 1)
     (visual-line-mode 1)
 
+    (flycheck-mode 0)
     (display-line-numbers-mode 0)
     (display-fill-column-indicator-mode 0))
 
