@@ -10,6 +10,7 @@ George: Org configuration.
   (defun george-setup ()
     "Setup Org mode."
     (org-indent-mode)
+    (flyspell-mode)
     (variable-pitch-mode 1)
     (visual-line-mode 1))
 
