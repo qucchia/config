@@ -64,6 +64,7 @@ See also the [[file:~/.dotfiles/config/Theme.org::*Org mode][Org face customisat
     :hook (org-mode . george-setup)
     :config
     (setq org-ellipsis " ▾")
+    (setq org-catch-invisible-edits 'smart)
 
     (setq org-agenda-start-with-log-mode t)
     (setq org-log-done 'time)
