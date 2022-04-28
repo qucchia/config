@@ -270,6 +270,29 @@ A theme to use across several programs.
 
 #+end_src
 
+** Term
+
+#+begin_src emacs-lisp :noweb-ref emacs-faces
+
+  (term-color-white
+    (:foreground qucchia-light0 :background qucchia-light0))
+  (term-color-cyan
+    (:foreground qucchia-cyan :background qucchia-cyan))
+  (term-color-magenta
+    (:foreground qucchia-primary1 :background qucchia-primary1))
+  (term-color-blue
+    (:foreground qucchia-blue :background qucchia-blue))
+  (term-color-yellow
+    (:foreground qucchia-yellow :background qucchia-yellow))
+  (term-color-green
+    (:foreground qucchia-primary3 :background qucchia-primary3))
+  (term-color-red
+    (:foreground qucchia-red :background qucchia-red))
+  (term-color-black
+    (:foreground qucchia-dark0 :background qucchia-dark0))
+
+#+end_src
+
 ** Miscellaneous
 
 #+begin_src emacs-lisp :noweb-ref emacs-faces
