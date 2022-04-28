@@ -1,6 +1,0 @@
-clear mod4
-
-keycode 66 = Super_L
-keycode 94 = Escape
-
-add Mod4 = Super_L Super_R
