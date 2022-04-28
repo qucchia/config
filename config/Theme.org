@@ -154,7 +154,7 @@ A theme to use across several programs.
   (region                    (:background qucchia-dark3))
   (fringe                    (:background qucchia-dark0))
   (link                      (:underline t :foreground qucchia-primary2))
-  (shadow                    (:foreground qucchia-blue))
+  (shadow                    (:foreground qucchia-dark4))
   (trailing-whitespace       (:background qucchia-red))
   (escape-glyph              (:foreground qucchia-primary2))
   (fill-column-indicator     (:foreground qucchia-dark2 :background qucchia-dark2))
@@ -197,6 +197,7 @@ A theme to use across several programs.
   (org-block-begin-line      (:inherit 'fixed-pitch :foreground qucchia-dark4))
   (org-block-end-line        (:inherit 'fixed-pitch :foreground qucchia-dark4))
   (org-block                 (:inherit 'fixed-pitch))
+  (org-verbatim              (:inherit 'fixed-pitch :foreground qucchia-blue))
   (org-document-title        (:weight 'bold :foreground qucchia-primary0))
   (org-document-info-keyword (:inherit 'fixed-pitch :foreground qucchia-dark4))
   (org-ellipsis              (:inherit 'default :foreground qucchia-dark4))
@@ -295,6 +296,25 @@ A theme to use across several programs.
 
 #+end_src
 
+** Ivy
+
+#+begin_src emacs-lisp
+
+  (ivy-action
+    (:inherit 'font-lock-builtin-face))
+  (ivy-current-match
+    (:background qucchia-dark3))
+  (ivy-minibuffer-match-face-1
+    (:background qucchia-dark2))
+  (ivy-minibuffer-match-face-2
+    (:weight 'bold :background qucchia-dark3))
+  (ivy-minibuffer-match-face-3
+    (:weight 'bold :foreground qucchia-yellow :background qucchia-dark2))
+  (ivy-minibuffer-match-face-4
+    (:weight 'bold :foreground qucchia-blue :background qucchia-dark2))
+
+#+end_src
+
 ** Miscellaneous
 
 #+begin_src emacs-lisp
@@ -309,9 +329,6 @@ A theme to use across several programs.
   ;; Info
   (info-xref-visited         (:inherit 'info-xref :foreground qucchia-cyan))
   (info-menu-star            (:foreground qucchia-blue))
-
-  ;; Ivy
-  (ivy-current-match         (:background qucchia-dark3))
 
   ;; Eshell
   (eshell-git-prompt-powerline-dir-face (:background qucchia-dark3))
