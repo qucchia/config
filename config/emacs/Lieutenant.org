@@ -107,6 +107,7 @@ https://github.com/noctuid/general.el
 
 * Evil
 
+=evil=: extensible vi layer
 Links: [[https://github.com/emacs-evil/evil][GitHub]], [[info:evil][Info]]
 
 #+begin_src emacs-lisp
@@ -129,6 +130,25 @@ Links: [[https://github.com/emacs-evil/evil][GitHub]], [[info:evil][Info]]
 
     (evil-set-initial-state 'messages-buffer-mode 'normal)
     (evil-set-initial-state 'dashboard-mode 'normal))
+
+#+end_src
+
+=evil-org=: https://github.com/Somelauw/evil-org-mode
+
+#+begin_src emacs-lisp
+
+  (use-package evil-org
+    :after org
+    :hook (org-mode . (lambda () evil-org-mode))
+    :config
+    (require 'evil-org-agenda)
+    (evil-org-agenda-set-keys))
+
+#+end_src
+
+=evil-collection=: https://github.com/emacs-evil/evil-collection
+
+#+begin_src emacs-lisp
 
   (use-package evil-collection
     :after evil
