@@ -99,7 +99,9 @@ A theme to use across several programs.
 
 * Emacs
 
-#+begin_src emacs-lisp :noweb yes :tangle ../home/.emacs.d/qucchia-theme.el
+#+PROPERTY: header-args:emacs-lisp :noweb-ref emacs-faces
+
+#+begin_src emacs-lisp :noweb-ref no :noweb yes :tangle ../home/.emacs.d/qucchia-theme.el
 
   (require 'autothemer)
 
@@ -143,7 +145,7 @@ A theme to use across several programs.
 
 ** Main
 
-#+begin_src emacs-lisp :noweb-ref emacs-faces
+#+begin_src emacs-lisp
 
   (default                   (:foreground qucchia-light1
                               :background qucchia-dark0))
@@ -162,7 +164,7 @@ A theme to use across several programs.
 
 ** Font lock
 
-#+begin_src emacs-lisp :noweb-ref emacs-faces
+#+begin_src emacs-lisp
 
   (font-lock-comment-face    (:foreground qucchia-dark4))
   (font-lock-keyword-face    (:foreground qucchia-yellow))
@@ -174,7 +176,7 @@ A theme to use across several programs.
 
 ** Rainbow delimiters
 
-#+begin_src emacs-lisp :noweb-ref emacs-faces
+#+begin_src emacs-lisp
 
   (rainbow-delimiters-depth-1-face (:foreground qucchia-primary1))
   (rainbow-delimiters-depth-2-face (:foreground qucchia-yellow))
@@ -190,7 +192,7 @@ A theme to use across several programs.
 
 ** Org mode
 
-#+begin_src emacs-lisp :noweb-ref emacs-faces
+#+begin_src emacs-lisp
 
   (org-block-begin-line      (:inherit 'fixed-pitch :foreground qucchia-dark4))
   (org-block-end-line        (:inherit 'fixed-pitch :foreground qucchia-dark4))
@@ -210,7 +212,7 @@ A theme to use across several programs.
 
 ** Dired
 
-#+begin_src emacs-lisp :noweb-ref emacs-faces
+#+begin_src emacs-lisp
 
   (diredfl-dir-heading
     (:foreground qucchia-yellow :background qucchia-dark1))
@@ -239,7 +241,7 @@ A theme to use across several programs.
 
 ** Modeline
 
-#+begin_src emacs-lisp :noweb-ref emacs-faces
+#+begin_src emacs-lisp
 
   (mode-line                        (:background qucchia-dark3))
   (mode-line-inactive               (:background qucchia-dark1))
@@ -253,7 +255,7 @@ A theme to use across several programs.
 
 ** Magit
 
-#+begin_src emacs-lisp :noweb-ref emacs-faces
+#+begin_src emacs-lisp
 
   (magit-section-heading
     (:weight 'bold :extend t :foreground qucchia-yellow))
@@ -272,7 +274,7 @@ A theme to use across several programs.
 
 ** Term
 
-#+begin_src emacs-lisp :noweb-ref emacs-faces
+#+begin_src emacs-lisp
 
   (term-color-white
     (:foreground qucchia-light0 :background qucchia-light0))
@@ -295,7 +297,7 @@ A theme to use across several programs.
 
 ** Miscellaneous
 
-#+begin_src emacs-lisp :noweb-ref emacs-faces
+#+begin_src emacs-lisp
 
   ;; Header line and vertical border
   (header-line                      (:background qucchia-dark3))
