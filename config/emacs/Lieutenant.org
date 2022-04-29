@@ -263,6 +263,7 @@ These are the leader keys bound to =C-SPC= (see [[General][General]]), and are t
   "m"   '(:ignore t :which-key "mode")
   "m'"  '(electric-quote-mode :which-key "electric quote")
   "mf"  '(follow-mode :which-key "follow")
+  "mi"  '(ivy-mode :which-key "ivy")
   "mo"  '(org-mode :which-key "org")
   "mp"  '(flyspell-prog-mode :which-key "flyspell prog")
   "ms"  '(flyspell-mode :which-key "flyspell")
