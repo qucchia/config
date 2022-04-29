@@ -277,10 +277,7 @@ These are the leader keys bound to =C-SPC= (see [[General][General]]), and are t
   "o"     '(:ignore t :which-key "open")
   "oe"    '(emms :which-key "emms")
   "o C-e" '(eshell :which-key "eshell")
-  "of"    '((lambda ()
-              (interactive)
-              (start-process-shell-command "firefox" "*Firefox log*" "firefox"))
-            :which-key "firefox")
+  "of"    '(lieutenant-open-firefox :which-key "firefox")
   "oi"    '(ibuffer :which-key "ibuffer")
   "om"    '((lambda ()
               (interactive)
@@ -293,6 +290,23 @@ These are the leader keys bound to =C-SPC= (see [[General][General]]), and are t
               (interactive)
               (dolly-start-process-shell-command "vimb" "*Vimb log*" "vimb"))
             :which-key "vimb")
+
+#+end_src
+
+- =C-SPC o f= switches to the Firefox buffer, or creates a new Firefox process if it doesn’t exist.
+- =C-u C-SPC o f= creates a new Firefox process.
+
+#+begin_src emacs-lisp
+
+  (defun lieutenant-open-firefox (&optional arg)
+    "Create a new Firefox process, or open the firefox buffer it it
+  exists.  If ARG is 0 or negative, create a new Firefox process
+  regardless."
+    (interactive "^p")
+    (message "arg: %s" arg)
+    (if (or (not (get-buffer "firefox")) (<= arg 0))
+      (start-process-shell-command "Firefox" "*Firefox log*" "firefox")
+      (switch-to-buffer "firefox")))
 
 #+end_src
 
