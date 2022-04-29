@@ -85,6 +85,15 @@ Psst: all the hints and help I could need.
 
 #+end_src
 
+* Spell checking
+
+#+begin_src emacs-lisp
+
+  (use-package ispell
+    :init (ispell-change-dictionary "en_GB-ise" t))
+
+#+end_src
+
 * Provide
 
 #+begin_src emacs-lisp
