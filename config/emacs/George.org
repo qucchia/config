@@ -19,7 +19,15 @@ Function to run after =org-mode-hook=.
 
     (flycheck-mode 0)
     (display-line-numbers-mode 0)
-    (display-fill-column-indicator-mode 0))
+    (display-fill-column-indicator-mode 0)
+    ;; Set correct spelling language
+    (save-excursion
+      (beginning-of-buffer)
+      (when (search-forward-regexp "^#[+]language: " nil t)
+        (when (string= "es" (word-at-point t))
+          (ispell-change-dictionary "castellano"))
+        (when (string= "ca" (word-at-point t))
+          (ispell-change-dictionary "català")))))
 
 #+end_src
 
