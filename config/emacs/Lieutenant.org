@@ -265,8 +265,6 @@ These are the leader keys bound to =C-SPC= (see [[General][General]]), and are t
   "mf"  '(follow-mode :which-key "follow")
   "mi"  '(ivy-mode :which-key "ivy")
   "mo"  '(org-mode :which-key "org")
-  "mp"  '(flyspell-prog-mode :which-key "flyspell prog")
-  "ms"  '(flyspell-mode :which-key "flyspell")
   "mv"  '(visual-fill-column-mode :which-key "visual fill")
   "mw"  '(whitespace-mode :which-key "whitespace")
 
@@ -348,11 +346,31 @@ These are the leader keys bound to =C-SPC= (see [[General][General]]), and are t
 
 #+begin_src emacs-lisp :noweb-ref bindings :tangle no
 
-  "t"   '(:ignore t :which-key "toggle")
-  "te"  '(emms-mode-line-toggle :which-key "emms modeline")
-  "tp"  '(qucchia-toggle-tor :which-key "proxy")
-  "tt"  '(counsel-load-theme :which-key "choose theme")
-  "ts"  '(hydra-text-scale/body :which-key "scale text")
+  "t"     '(:ignore t :which-key "toggle")
+  "te"    '(emms-mode-line-toggle :which-key "emms modeline")
+  "tp"    '(qucchia-toggle-tor :which-key "proxy")
+  "tt"    '(counsel-load-theme :which-key "choose theme")
+  "ts"    '(lieutenant-toggle-spelling :which-key "spelling")
+  "t C-s" '(hydra-text-scale/body :which-key "scale text")
+
+#+end_src
+
+The function below toggles the spellchecking, and decides whether to use =flyspell-mode= or =flyspell-prog-mode=.
+
+#+begin_src emacs-lisp
+
+  (defun lieutenant-toggle-spelling ()
+    (interactive)
+    (if flyspell-mode
+      (progn
+        (flyspell-mode 0)
+        (message "Spellcheck disabled"))
+      (progn
+        (if (or (derived-mode-p 'prog-mode)
+                (derived-mode-p 'conf-mode))
+          (flyspell-prog-mode)
+          (flyspell-mode))
+        (message "Spellcheck enabled"))))
 
 #+end_src
 
