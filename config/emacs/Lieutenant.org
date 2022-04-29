@@ -399,12 +399,16 @@ The function below toggles the spellchecking, and decides whether to use =flyspe
   (defun lieutenant-lookup-password (name)
     "Retrieve the password NAME from pass and copy it to the clipboard."
     (interactive (list (read-string "Password name: ")))
-    (start-process-shell-command "pass" nil
-    (string-join
-      (list
-        "pass -c "
-        name
-        " | xclip -selection clipboard"))))
+    (let ((process (start-process-shell-command "pass" nil
+            (format "pass %s" name))))
+      (set-process-filter process
+        ;; This function is called after the process completes
+        (lambda (process string)
+          (let ((string (s-trim string)))
+            (if (string-match-p "^Error: " string)
+              (message string)
+              (progn (kill-new string)
+                (message "Password copied"))))))))
 
 #+end_src
 
