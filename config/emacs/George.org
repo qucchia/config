@@ -48,7 +48,56 @@ Use package.
 
 #+end_src
 
-* Fonts
+* Keybindings
+
+=evil-org=: https://github.com/Somelauw/evil-org-mode
+
+#+begin_src emacs-lisp
+
+  (use-package evil-org
+    :after org
+    :hook (org-mode . (lambda () evil-org-mode))
+    :config
+    (require 'evil-org-agenda)
+    (evil-org-agenda-set-keys))
+
+#+end_src
+
+Define text objects for =verbatim= and ~code~ blocks. This way I can use Evil shortcuts like =yi~= to quickly copy the contents of a code expression.
+
+#+begin_src emacs-lisp
+
+  (with-eval-after-load 'org
+    (evil-define-text-object george-inner-verbatim (count &optional beg end type)
+      "Select inner Org verbatim expression."
+      :extend-selection nil
+      (evil-select-paren "=" "=" beg end type count))
+
+    (evil-define-text-object george-a-verbatim (count &optional beg end type)
+      "Select an Org verbatim expression."
+      :extend-selection nil
+      (evil-select-paren "=" "=" beg end type count t))
+
+    (evil-define-text-object george-inner-code (count &optional beg end type)
+      "Select inner Org code expression."
+      :extend-selection nil
+      (evil-select-paren "~" "~" beg end type count))
+
+    (evil-define-text-object george-a-code (count &optional beg end type)
+      "Select an Org code expression."
+      :extend-selection nil
+      (evil-select-paren "~" "~" beg end type count t))
+
+    (define-key evil-inner-text-objects-map "=" 'george-inner-verbatim)
+    (define-key evil-outer-text-objects-map "=" 'george-a-verbatim)
+    (define-key evil-inner-text-objects-map "~" 'george-inner-code)
+    (define-key evil-outer-text-objects-map "~" 'george-a-code))
+
+#+end_src
+
+* User interface
+
+Fonts
 
 #+begin_src emacs-lisp
 
@@ -81,7 +130,7 @@ Use package.
 
 #+end_src
 
-* Bullets
+Bullets
 
 #+begin_src emacs-lisp
 
@@ -92,7 +141,7 @@ Use package.
 
 #+end_src
 
-* Babel Languages
+* Babel languages
 
 #+begin_src emacs-lisp
 
@@ -105,6 +154,22 @@ Use package.
        (shell . t)))
 
     (push '("conf-unix" . conf-unix) org-src-lang-modes))
+
+#+end_src
+
+Auto-tangle configuration files
+
+#+begin_src emacs-lisp
+
+  (defun george-babel-tangle-config ()
+    "Tangle dotfiles on save."
+    (when (string-prefix-p (expand-file-name "~/.dotfiles/")
+                         (buffer-file-name))
+      (let ((org-confirm-babel-evaluate nil))
+        (org-babel-tangle))))
+
+  (add-hook 'org-mode-hook (lambda ()
+    (add-hook 'after-save-hook #'george-babel-tangle-config)))
 
 #+end_src
 
@@ -204,7 +269,7 @@ Use package.
 
 #+end_src
 
-* Capture Templates
+* Capture templates
 
 #+begin_src emacs-lisp
 
@@ -238,7 +303,7 @@ Use package.
 
 #+end_src
 
-* Structure Templates
+* Structure templates
 
 #+begin_src emacs-lisp
 
@@ -253,68 +318,5 @@ Use package.
     (add-to-list 'org-structure-template-alist '("py" . "src python"))
     (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
     (add-to-list 'org-structure-template-alist '("ts" . "src typescript")))
-
-#+end_src
-
-* Auto-tangle Configuration Files
-
-#+begin_src emacs-lisp
-
-  (defun george-babel-tangle-config ()
-    "Tangle dotfiles on save."
-    (when (string-prefix-p (expand-file-name "~/.dotfiles/")
-                         (buffer-file-name))
-      (let ((org-confirm-babel-evaluate nil))
-        (org-babel-tangle))))
-
-  (add-hook 'org-mode-hook (lambda ()
-    (add-hook 'after-save-hook #'george-babel-tangle-config)))
-
-#+end_src
-
-* Evil
-
-=evil-org=: https://github.com/Somelauw/evil-org-mode
-
-#+begin_src emacs-lisp
-
-  (use-package evil-org
-    :after org
-    :hook (org-mode . (lambda () evil-org-mode))
-    :config
-    (require 'evil-org-agenda)
-    (evil-org-agenda-set-keys))
-
-#+end_src
-
-Define text objects for =verbatim= and ~code~ blocks. This way I can use Evil shortcuts like =yi~= to quickly copy the contents of a code expression.
-
-#+begin_src emacs-lisp
-
-  (with-eval-after-load 'org
-    (evil-define-text-object george-inner-verbatim (count &optional beg end type)
-      "Select inner Org verbatim expression."
-      :extend-selection nil
-      (evil-select-paren "=" "=" beg end type count))
-
-    (evil-define-text-object george-a-verbatim (count &optional beg end type)
-      "Select an Org verbatim expression."
-      :extend-selection nil
-      (evil-select-paren "=" "=" beg end type count t))
-
-    (evil-define-text-object george-inner-code (count &optional beg end type)
-      "Select inner Org code expression."
-      :extend-selection nil
-      (evil-select-paren "~" "~" beg end type count))
-
-    (evil-define-text-object george-a-code (count &optional beg end type)
-      "Select an Org code expression."
-      :extend-selection nil
-      (evil-select-paren "~" "~" beg end type count t))
-
-    (define-key evil-inner-text-objects-map "=" 'george-inner-verbatim)
-    (define-key evil-outer-text-objects-map "=" 'george-a-verbatim)
-    (define-key evil-inner-text-objects-map "~" 'george-inner-code)
-    (define-key evil-outer-text-objects-map "~" 'george-a-code))
 
 #+end_src
