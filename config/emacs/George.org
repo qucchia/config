@@ -97,7 +97,7 @@ Define text objects for =verbatim= and ~code~ blocks. This way I can use Evil sh
 
 * User interface
 
-Fonts
+** Fonts
 
 #+begin_src emacs-lisp
 
@@ -130,14 +130,16 @@ Fonts
 
 #+end_src
 
-Bullets
+** =org-superstar-mode=: Bullets
 
 #+begin_src emacs-lisp
 
-  (use-package org-bullets
-    :hook (org-mode . org-bullets-mode)
+  (use-package org-superstar
+    :hook (org-mode . org-superstar-mode)
     :custom
-    (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+    (org-superstar-leading-bullet ?\s)
+    (org-indent-mode-turns-on-hiding-stars nil)
+    (org-superstar-headline-bullets-list '(?✷ ?○ ?◉ ?●)))
 
 #+end_src
 
