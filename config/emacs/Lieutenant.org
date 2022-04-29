@@ -301,7 +301,7 @@ These are the leader keys bound to =C-SPC= (see [[General][General]]), and are t
 #+begin_src emacs-lisp
 
   (defun lieutenant-open-firefox (&optional arg)
-    "Create a new Firefox process, or open the firefox buffer it it
+    "Create a new Firefox process, or open the firefox buffer if it
   exists.  If ARG is 0 or negative, create a new Firefox process
   regardless."
     (interactive "^p")
