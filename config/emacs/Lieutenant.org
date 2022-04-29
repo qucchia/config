@@ -212,7 +212,7 @@ These are the leader keys bound to =C-SPC= (see [[General][General]]), and are t
   "bc"  '(:ignore t :which-key "classroom")
   "bca" '((lambda ()
             (interactive)
-            (browse-url "https://classroom.google.com/u/1/h"))
+            (browse-url "https://classroom.google.com/u/1/c/Mzg3ODg5Nzg1Mzk0"))
           :which-key "english")
   "bcc" '((lambda ()
             (interactive)
