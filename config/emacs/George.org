@@ -102,14 +102,6 @@ Define text objects for =verbatim= and ~code~ blocks. This way I can use Evil sh
 #+begin_src emacs-lisp
 
   (with-eval-after-load 'org
-    ;; Display list bullets as dots and squares
-    (font-lock-add-keywords 'org-mode
-      '(("^ *\\([-]\\) "
-          (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))
-        ("^ *\\([+]\\) "
-          (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "▪"))))))
-
-
     (dolist (face '((org-level-1 . 1.2)
                     (org-level-2 . 1.1)
                     (org-level-3 . 1.05)
@@ -146,7 +138,12 @@ Define text objects for =verbatim= and ~code~ blocks. This way I can use Evil sh
     (org-superstar-special-todo-items t)
     (org-superstar-todo-bullet-alist '(("TODO" . ?☐)
                                        ("NEXT" . ?☐)
-                                       ("DONE" . ?☑))))
+                                       ("DONE" . ?☑)))
+
+    ;; List items
+    (org-superstar-item-bullet-alist '((?- . ?•)
+                                       (?+ . ?›)
+                                       (?* . ?⭑))))
 
 #+end_src
 
