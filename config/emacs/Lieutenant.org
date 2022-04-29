@@ -136,19 +136,6 @@ Links: [[https://github.com/emacs-evil/evil][GitHub]], [[info:evil][Info]]
 
 #+end_src
 
-=evil-org=: https://github.com/Somelauw/evil-org-mode
-
-#+begin_src emacs-lisp
-
-  (use-package evil-org
-    :after org
-    :hook (org-mode . (lambda () evil-org-mode))
-    :config
-    (require 'evil-org-agenda)
-    (evil-org-agenda-set-keys))
-
-#+end_src
-
 =evil-collection=: https://github.com/emacs-evil/evil-collection
 
 #+begin_src emacs-lisp
