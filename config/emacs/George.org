@@ -113,6 +113,8 @@ Use package.
 #+begin_src emacs-lisp
 
   (with-eval-after-load 'org
+    ;; Start week on Sunday
+    (setq org-agenda-start-on-weekday 0)
     (setq org-agenda-start-with-log-mode t)
     (setq org-agenda-files '("~/Documents/life/Tasks.org"))
 
