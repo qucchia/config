@@ -271,3 +271,37 @@ Use package.
     (add-hook 'after-save-hook #'george-babel-tangle-config)))
 
 #+end_src
+
+* Evil text objects
+
+Define text objects for =verbatim= and ~code~ blocks. This way I can use Evil shortcuts like =yi~= to quickly copy the contents of a code expression.
+
+#+begin_src emacs-lisp
+
+  (with-eval-after-load 'org
+    (evil-define-text-object george-inner-verbatim (count &optional beg end type)
+      "Select inner Org verbatim expression."
+      :extend-selection nil
+      (evil-select-paren "=" "=" beg end type count))
+
+    (evil-define-text-object george-a-verbatim (count &optional beg end type)
+      "Select an Org verbatim expression."
+      :extend-selection nil
+      (evil-select-paren "=" "=" beg end type count t))
+
+    (evil-define-text-object george-inner-code (count &optional beg end type)
+      "Select inner Org code expression."
+      :extend-selection nil
+      (evil-select-paren "~" "~" beg end type count))
+
+    (evil-define-text-object george-a-code (count &optional beg end type)
+      "Select an Org code expression."
+      :extend-selection nil
+      (evil-select-paren "~" "~" beg end type count t))
+
+    (define-key evil-inner-text-objects-map "=" 'george-inner-verbatim)
+    (define-key evil-outer-text-objects-map "=" 'george-a-verbatim)
+    (define-key evil-inner-text-objects-map "~" 'george-inner-code)
+    (define-key evil-outer-text-objects-map "~" 'george-a-code))
+
+#+end_src

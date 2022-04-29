@@ -12,6 +12,7 @@ I also have some keybindings configuration in the following places:
 - [[file:Psst.org::*Ivy][Ivy]]
 - [[file:Psst.org::*Counsel][Counsel]]
 - Some =C-h= prefixed shortcuts to [[file:Psst.org::*Helpful][Helpful]]
+- [[file:George.org::*Evil text objects][Org text objects]]
 
 * Main
 
