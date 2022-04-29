@@ -3,6 +3,8 @@
 
 Lieutenant: keymaps and keybindings, using Evil and General.
 
+Note: =universal-argument= is bound to =s-u= instead of =C-u=. I refer to it as =C-u= in this document to remain consistent with the official documentation, but I’m actually referring to =s-u=.
+
 * See also
 
 I also have some keybindings configuration in the following places:
