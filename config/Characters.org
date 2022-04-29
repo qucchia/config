@@ -1,0 +1,62 @@
+#+title:Characters
+
+* Shapes
+
+** Squares
+
+- Border: ❏ ❐ ❑ ❒ □ ▢ ◻ ◽ ▫ ⬝
+- Filled: ■ ▣ ▤ ▥ ▦ ▧ ▨ ▩ ◼ ◾ ▪ ⬞
+- Other: ◧ ◨ ◩ ◪ ◫ ◰ ◱ ◲ ◳
+- Rectangles: ▬ ▭ ▮ ▯ ▰ ▱
+
+** Circles
+
+- Border: ❍ ○ ◌ ◎ ◦ ◯
+- Filled: ◉ ◍ ● • ⬤
+- Numbers in circles: ❶ ❷ ❸ ❹ ❺ ❻ ❼ ❽ ❾ ❿ ➀ ➁ ➂ ➃ ➄ ➅ ➆ ➇ ➈ ➉ ➊ ➋ ➌ ➍ ➎ ➏ ➐ ➑ ➒ ➓
+- Other: ◐ ◑ ◒ ◓ ◔ ◕ ◖ ◗ ◘ ◙ ◚ ◛ ◜ ◝ ◞ ◟ ◠ ◡ ◴ ◵ ◶ ◷
+
+** Triangles
+
+- Border: △ ▵ ▷ ▹ ▻ ▽ ▿ ◁ ◃ ◅ ◸ ◹ ◺ ◿
+- Filled: ▲ ▴ ▶ ▸ ► ▼ ▾ ◀ ◂ ◄ ◢ ◣ ◤ ◥ ‣
+- Other: ◬ ◭ ◮
+
+** Diamonds
+
+- Border: ◇ ◊ ⬦ ⬨ ⬪
+- Filled: ◆ ◈ ⬥ ⬧ ⬩ ⬫
+
+** Stars
+
+- 4-pointed: ✦ ✧
+- 5-pointed: ✩ ✪ ✫ ✬ ✭ ✮ ✯ ✰ ⭑ ⭒
+- 6-pointed: ✱ ✲ ✶ ✡
+- More points: ⁕ ✳ ✴ ✵ ✷ ✸ ✹ ✺
+- Other: ⁑ ⁂ ✨
+
+** Arrows
+
+- Border: ⬀ ⬁ ⬂ ⬃ ⬄
+- Filled: ➡ ⬅ ⬆ ⬇ ⬈ ⬉ ⬊ ⬋ ⬌ ⬍
+- More filled: ➔ ➘ ➙ ➚ ➛ ➜ ➝ ➞ ➟ ➠
+- Arrowheads: ➢ ➣ ➤
+- 3D: ➪ ➫ ➬ ➭ ➮ ➯ ➱
+- ‘Feathered’: ➳ ➴ ➵ ➶ ➷ ➸ ➹ ➺ ➻ ➼ ➽
+- Other: ➲ ⬎ ⬏ ⬐ ⬑ ➥ ➦ ➧ ➨ ➩
+
+** Other
+
+- Flowers: ✻ ✼ ✽ ✾ ✿ ❀ ❁ ❂ ❃ ❄ ❅ ❆ ❇ ❈ ❉ ❊ ❋
+- Check marks: ✅ ✓ ✔
+- Xes: ✕ ✖ ✗ ✘ ❌ ❎
+- Crosses: ✙ ✚ ✛ ✜ ✝ ✞ ✟
+- Other: ➰ ➿ ❡ ❢ ❣ ❤ ❥ ❦ ❧ ❖ ※ ⁜ × ※ › ⁍ ⁘ ‧ ✠ ✢ ✣ ✤ ✥
+
+* Other
+
+- Hyphens: ‐ ‒ – — ―
+- Objects: ✈ ✉ ✊ ✋ ✌ ✍ ✎ ✏ ✐ ✑ ✒
+- Punctuation: ❓ ❔ ❕ ❗ ❛ ❜ ❝ ❞ ❟ ❠ ➕ ➖ ➗
+- Bars: ❘ ❙ ❚
+- Brackets: ❰ ❱ ❲ ❳ ❴ ❵ ❨ ❩ ❪ ❫ ❬ ❭ ❮ ❯
