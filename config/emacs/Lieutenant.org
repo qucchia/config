@@ -287,7 +287,6 @@ These are the leader keys bound to =s-c= (see [[General][General]]), and are the
   exists.  If ARG is 0 or negative, create a new Firefox process
   regardless."
     (interactive "^p")
-    (message "arg: %s" arg)
     (if (or (not (get-buffer "firefox")) (<= arg 0))
       (start-process-shell-command "Firefox" "*Firefox log*" "firefox")
       (switch-to-buffer "firefox")))
