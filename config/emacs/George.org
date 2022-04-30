@@ -50,6 +50,19 @@ Use package.
 
 * Keybindings
 
+** Global bindings
+
+#+begin_src emacs-lisp
+
+  (with-eval-after-load 'org
+    (global-set-key (kbd "C-c l") 'org-store-link)
+    (global-set-key (kbd "C-c a")'org-agenda)
+    (global-set-key (kbd "C-c c") 'org-capture))
+
+#+end_src
+
+** Evil Org
+
 =evil-org=: https://github.com/Somelauw/evil-org-mode
 
 #+begin_src emacs-lisp
@@ -62,6 +75,8 @@ Use package.
     (evil-org-agenda-set-keys))
 
 #+end_src
+
+** Evil text objects
 
 Define text objects for =verbatim= and ~code~ blocks. This way I can use Evil shortcuts like =yi~= to quickly copy the contents of a code expression.
 

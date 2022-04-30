@@ -84,7 +84,7 @@ EXWM desktop configuration.
           ?\C-\M-j
           ?\M-v
           ?\C-\M-v
-          ?\C-\ )) ;; C-SPC
+          ?\s-x))
 
   ;; C-q will always send the next key directly
   (define-key exwm-mode-map [?\C-q] 'exwm-input-send-next-key)

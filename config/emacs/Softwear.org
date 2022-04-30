@@ -44,7 +44,7 @@ https://emacs-lsp.github.io/lsp-mode
       (php-mode . lsp-deferred)
       (lsp-mode . softwear-lsp-mode-setup))
     :init
-    (setq lsp-keymap-prefix "C-c l")
+    (setq lsp-keymap-prefix "s-c l")
     (setq read-process-output-max (* 1024 1024)) ;; 1MB
     :config
     (lsp-enable-which-key-integration t))
@@ -62,7 +62,7 @@ https://emacs-lsp.github.io/lsp-mode
 
   (use-package lsp-ivy
     :commands lsp-ivy-workspace-symbol)
-    
+
   ;; (use-package dap-mode :after lsp-mode)
 
 #+end_src
@@ -147,7 +147,7 @@ https://emacs-lsp.github.io/lsp-mode
     :custom
     (company-minimum-prefix-length 1)
     (company-idle-delay 0.0))
-    
+
   (use-package company-box
     :hook (company-mode . company-box-mode))
 

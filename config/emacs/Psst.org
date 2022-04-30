@@ -65,10 +65,15 @@ Psst: all the hints and help I could need.
     (counsel-describe-function-function #'helpful-callable)
     (counsel-describe-variable-function #'helpful-variable)
     :bind
+    ;; Map some C-h commands to Helpful
     ([remap describe-function] . counsel-describe-function)
     ([remap describe-command] . helpful-command)
     ([remap describe-variable] . counsel-describe-variable)
-    ([remap describe-key] . helpful-key))
+    ([remap describe-key] . helpful-key)
+    :init
+    ;; Scroll with SPC and S-SPC
+    (evil-define-key 'normal helpful-mode-map " " 'evil-scroll-page-down)
+    (evil-define-key 'normal helpful-mode-map "S- " 'evil-scroll-page-up))
 
 #+end_src
 
