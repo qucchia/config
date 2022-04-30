@@ -76,6 +76,7 @@ EXWM desktop configuration.
 
   (setq exwm-input-prefix-keys
         '(?\C-x
+          ?\C-c
           ?\C-h
           ?\M-x
           ?\M-`
@@ -84,7 +85,8 @@ EXWM desktop configuration.
           ?\C-\M-j
           ?\M-v
           ?\C-\M-v
-          ?\s-x))
+          ?\s-x
+          ?\s-c))
 
   ;; C-q will always send the next key directly
   (define-key exwm-mode-map [?\C-q] 'exwm-input-send-next-key)
