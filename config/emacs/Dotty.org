@@ -190,7 +190,7 @@ Go dotty with Dotty: dotfiles utilities.
       (setq-local dired-omit-files "\\`[.]?#\\|\\`[.][.]?\\'")
       (setq-local dired-omit-files "\\`[.]\\|\\`[.]?#\\|\\`[.][.]?\\'"))
     (dired-omit-mode))
-      
+
 #+end_src
 
 * Open tangled file
@@ -204,36 +204,6 @@ Go dotty with Dotty: dotfiles utilities.
       (beginning-of-buffer)
       (search-forward-regexp "^#\\+PROPERTY: header-args:[a-z-]+ :tangle ")
       (find-file (thing-at-point 'filename t))))
-
-#+end_src
-
-* Counsel Linux app
-
-This function overrides the one defined by =counsel.el=, removing the dependency on =gtk-launch= and integrating it with dolly.
-
-#+begin_src emacs-lisp
-
-(defun counsel-linux-app-action-default (desktop-shortcut)
-  "Launch DESKTOP-SHORTCUT."
-
-  ;; Get full path of desktop file
-  (setq desktop-alist (counsel-linux-apps-list-desktop-files))
-  (while (not (equal (cdr desktop-shortcut) (car (car desktop-alist))))
-    (setq desktop-alist (cdr desktop-alist)))
-  (setq desktop-file (cdr (car desktop-alist)))
-
-  ;; Get exec command for desktop file
-  (with-temp-buffer
-    (insert-file-contents desktop-file)
-    (goto-char (point-min))
-    (re-search-forward "^Exec *= *\\(.+\\)$" nil t)
-    (setq exec (match-string 1)))
-
-  ;; Remove % arguments
-  (setq exec (replace-regexp-in-string "[%]\\w" "" exec))
-
-  ;; Finally: run the program
-  (dolly-start-process-shell-command "" nil exec))
 
 #+end_src
 
