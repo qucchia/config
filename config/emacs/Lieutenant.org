@@ -265,14 +265,14 @@ These are the leader keys bound to =s-c= (see [[General][General]]), and are the
   "oi"    '(ibuffer :which-key "ibuffer")
   "om"    '((lambda ()
               (interactive)
-              (dolly-start-process-shell-command "min" "*Min log*" "min"))
+              (qucchia-start-process-shell-command "min" "*Min log*" "min"))
             :which-key "min")
   "os"    '(shell :which-key "shell")
   "ot"    '(term :which-key "term")
   "ov"    '(vterm :which-key "vterm")
   "o s-v" '((lambda ()
               (interactive)
-              (dolly-start-process-shell-command "vimb" "*Vimb log*" "vimb"))
+              (qucchia-start-process-shell-command "vimb" "*Vimb log*" "vimb"))
             :which-key "vimb")
 
 #+end_src

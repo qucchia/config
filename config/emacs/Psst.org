@@ -57,7 +57,7 @@ Psst: all the hints and help I could need.
 
 ** Counsel Linux app
 
-This function overrides the one defined by =counsel.el=, removing the dependency on =gtk-launch= and integrating it with dolly.
+This function overrides the one defined by =counsel.el=, removing the dependency on =gtk-launch= and integrating it with the system proxy.
 
 #+begin_src emacs-lisp
 
