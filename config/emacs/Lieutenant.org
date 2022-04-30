@@ -434,5 +434,16 @@ These leader keys are bound to =s-x= and follow an acronym pattern, which is eas
 #+begin_src emacs-lisp :noweb-ref acronym-leader-keys :tangle no
 
   "dtw" '(delete-trailing-whitespace :which-key "delete-trailing-whitespace")
+  "l"   '(:ignore t :which-key "list")
+  "lb"  '(list-bookmarks :which-key "bookmarks")
+  "lcc" '(list-charset-chars :which-key "charset-chars")
+  "lcd" '(list-colors-display :which-key "colors-display")
+  "lch" '(list-command-history :which-key "command-history")
+  "lcs" '(list-coding-systems :which-key "coding-systems")
+  "lCs" '(list-character-sets :which-key "character-sets")
+  "lfd" '(list-faces-display :which-key "paces-display")
+  "lfe" '(list-flycheck-errors :which-key "flycheck-errors")
+  "lp"  '(list-packages :which-key "packages")
+  "lP"  '(list-processes :which-key "processes")
 
 #+end_src
