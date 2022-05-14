@@ -31,9 +31,18 @@ Make a racket with Racket: music utilities.
   (use-package emms
     :config
     (emms-all)
-    (emms-default-players)
+    (setq emms-player-list '(emms-player-vlc emms-player-vlc-playlist))
     :custom
     (emms-source-file-default-directory racket-music-directory))
+
+  (defun racket-fix-wrong-track-type ()
+    (let ((track (emms-playlist-current-selected-track)))
+      (if (and (equal (emms-track-type track)
+                       'playlist)
+               (s-ends-with-p ".ogg" (emms-track-name track)))
+        (emms-track-set track 'type 'file))))
+
+  (add-hook 'emms-playlist-selection-changed-hook #'racket-fix-wrong-track-type)
 
 #+end_src
 
