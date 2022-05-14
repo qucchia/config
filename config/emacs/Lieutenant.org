@@ -41,6 +41,20 @@ Register shortcuts: use =C-x r j <char>= to jump to them.
 
 #+end_src
 
+* Keyboard layout
+
+Keyboard layout: English US International with Alt Gr.
+
+#+begin_src conf :tangle ../../root/etc/default/keyboard
+
+  XKBMODEL=pc105
+  XKBLAYOUT=us
+  XKBVARIANT=altgr-intl
+  XKBOPTIONS=
+  BACKSPACE=guess
+
+#+end_src
+
 * Keymap
 
 I have a small keymap that maps Caps Lock to Left Super and the key between Z and Left Shift to Escape, to reduce the distance needed to press these keys.
