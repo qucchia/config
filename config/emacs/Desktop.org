@@ -64,6 +64,15 @@ EXWM desktop configuration.
     (desktop-rename-buffer exwm-title)))
 
   (use-package exwm
+    :custom
+    (exwm-input-simulation-keys '(([?\M-h] . [left])
+                                  ([?\M-j] . [down])
+                                  ([?\M-k] . [up])
+                                  ([?\M-l] . [right])
+                                  ([?\M-0] . [home])
+                                  ([?\M-$] . [end])
+                                  ([?\M-b] . [prior])
+                                  ([?\M-f] . [next]))
     :config
     (setq exwm-workspace-number 5)
 
