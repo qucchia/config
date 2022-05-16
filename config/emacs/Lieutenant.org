@@ -26,21 +26,18 @@ Keyboard layout: English US International with Alt Gr.
 
 #+end_src
 
-* Keymap
+* Key map
 
-I have a small keymap that maps Caps Lock to Left Super and the key between Z and Left Shift to Escape, to reduce the distance needed to press these keys.
+I have a small key map that maps Caps Lock to Left Super and the key between Z and Left Shift to Escape, to reduce the distance needed to press these keys.
 
 #+begin_src conf :tangle ../../home/.xmodmap
 
   clear control
-  clear mod4
 
-  keycode 66 = Super_L
   keycode 94 = Escape
   keycode 135 = Control_R
 
   add Control = Control_L Control_R
-  add Mod4 = Super_L Super_R
 
 #+end_src
 
