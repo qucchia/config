@@ -12,35 +12,6 @@ I also have some keybindings configuration in the following places:
 - Some =C-h= prefixed shortcuts to [[file:Psst.org::*Helpful][Helpful]], and Helpful also has some of its own bindings
 - [[file:George.org::*Evil text objects][Org text objects]]
 
-* Main
-
-Use escape key to quit.
-
-#+begin_src emacs-lisp
-
-  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-
-#+end_src
-
-Register shortcuts: use =C-x r j <char>= to jump to them.
-
-#+begin_src emacs-lisp
-
-  ;; Files
-  (set-register ?t '(file . "~/Documents/life/Tasks.org"))
-
-  ;; Directories
-  (set-register ?~ '(file . "~"))
-  (set-register ?/ '(file . "/"))
-  (set-register ?. '(file . "~/.dotfiles"))
-  (set-register ?c '(file . "~/.dotfiles/config/emacs"))
-  (set-register ?d '(file . "~/Downloads"))
-  (set-register ?D '(file . "~/Documents"))
-  (set-register ?m '(file . "~/Music"))
-  (set-register ?p '(file . "~/Projects"))
-
-#+end_src
-
 * Keyboard layout
 
 Keyboard layout: English US International with Alt Gr.
@@ -83,6 +54,35 @@ Set keymap function (bound to =s-x x=).
     (start-process-shell-command "xmodmap" nil
       "xmodmap ~/.xmodmap")
     (message "Keymap set"))
+
+#+end_src
+
+* Main
+
+Use escape key to quit.
+
+#+begin_src emacs-lisp
+
+  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
+#+end_src
+
+Register shortcuts: use =C-x r j <char>= to jump to them.
+
+#+begin_src emacs-lisp
+
+  ;; Files
+  (set-register ?t '(file . "~/Documents/life/Tasks.org"))
+
+  ;; Directories
+  (set-register ?~ '(file . "~"))
+  (set-register ?/ '(file . "/"))
+  (set-register ?. '(file . "~/.dotfiles"))
+  (set-register ?c '(file . "~/.dotfiles/config/emacs"))
+  (set-register ?d '(file . "~/Downloads"))
+  (set-register ?D '(file . "~/Documents"))
+  (set-register ?m '(file . "~/Music"))
+  (set-register ?p '(file . "~/Projects"))
 
 #+end_src
 
