@@ -51,14 +51,23 @@ EXWM desktop configuration.
     (let ((command-parts (split-string command "[ ]+")))
       (apply #'call-process `(,(car command-parts) nil 0 nil 0 ,@(cdr command-parts)))))
 
-  (defun desktop-update-class ()
-    (exwm-workspace-rename-buffer exwm-class-name))
+  (defun desktop-rename-buffer (name)
+    (exwm-workspace-rename-buffer (if (> (length name) 57)
+                                    (format "%s..." (substring name 0 57))
+                                    name)))
+
+  (defun desktop-update-title ()
+    (if (string-match-p "—" exwm-title)
+    (progn
+      (setq l (reverse (split-string exwm-title " +— +")))
+      (desktop-rename-buffer (string-join (cdr l))))
+    (desktop-rename-buffer exwm-title)))
 
   (use-package exwm
     :config
     (setq exwm-workspace-number 5)
 
-    (add-hook 'exwm-update-class-hook #'desktop-update-class)
+    (add-hook 'exwm-update-title-hook #'desktop-update-title)
     (add-hook 'exwm-init-hook #'desktop-init)
 
     (require 'exwm-systemtray)
