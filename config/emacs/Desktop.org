@@ -75,18 +75,12 @@ EXWM desktop configuration.
 #+begin_src emacs-lisp :noweb-ref keybindings :tangle no
 
   (setq exwm-input-prefix-keys
-        '(?\C-x
-          ?\C-c
-          ?\C-h
-          ?\M-x
-          ?\M-`
-          ?\M-&
-          ?\M-:
-          ?\C-\M-j
-          ?\M-v
-          ?\C-\M-v
-          ?\s-x
-          ?\s-c))
+        '(?\C-x ?\C-c ?\C-w ?\C-h
+          ?\M-x ?\M-` ?\M-& ?\M-: ?\M-v
+          ?\C-\M-j ?\C-\M-v ?\C-\M-n
+          ?\s-x ?\s-c))
+
+
 
   ;; C-q will always send the next key directly
   (define-key exwm-mode-map [?\C-q] 'exwm-input-send-next-key)
