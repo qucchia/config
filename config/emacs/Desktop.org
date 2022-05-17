@@ -51,17 +51,15 @@ EXWM desktop configuration.
     (let ((command-parts (split-string command "[ ]+")))
       (apply #'call-process `(,(car command-parts) nil 0 nil 0 ,@(cdr command-parts)))))
 
-  (defun desktop-rename-buffer (name)
-    (exwm-workspace-rename-buffer (if (> (length name) 57)
-                                    (format "%s..." (substring name 0 57))
-                                    name)))
-
   (defun desktop-update-title ()
-    (if (string-match-p "—" exwm-title)
-    (progn
-      (setq l (reverse (split-string exwm-title " +— +")))
-      (desktop-rename-buffer (string-join (cdr l))))
-    (desktop-rename-buffer exwm-title)))
+    (if (string-match-p " — Mozilla Firefox$" exwm-title)
+      (let ((tab-name (replace-regexp-in-string " — Mozilla Firefox$" "" exwm-title)))
+        (desktop-rename-buffer (concat
+          (if (> (length tab-name) 57)
+            (format "%s..." (substring tab-name 0 57))
+            tab-name)
+          " — Firefox")))
+      (desktop-rename-buffer exwm-title)))
 
   (use-package exwm
     :custom
