@@ -132,6 +132,11 @@ Links: [[https://github.com/emacs-evil/evil][GitHub]], [[info:evil][Info]]
     (setq-default evil-shift-width 2)
     (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
 
+    (define-key evil-ex-completion-map (kbd "M-p") 'previous-complete-history-element)
+    (define-key evil-ex-completion-map (kbd "M-n") 'next-complete-history-element)
+    (define-key evil-eval-map (kbd "M-p") 'previous-complete-history-element)
+    (define-key evil-eval-map (kbd "M-n") 'next-complete-history-element)
+
     ;; Use visual line motions even outside of visual-line-mode buffers
     (evil-global-set-key 'motion "j" 'evil-next-visual-line)
     (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
@@ -149,6 +154,50 @@ Links: [[https://github.com/emacs-evil/evil][GitHub]], [[info:evil][Info]]
     :after evil
     :config
     (evil-collection-init))
+
+#+end_src
+
+** Record macro
+
+#+begin_src emacs-lisp
+
+  (with-eval-after-load 'evil
+    (evil-define-command evil-record-macro (register)
+      "Record a keyboard macro into REGISTER.
+    If REGISTER is :, /, or ?, the corresponding command line window
+    will be opened instead."
+      :keep-visual t
+      :suppress-operator t
+      (interactive
+      (list (unless (and evil-this-macro defining-kbd-macro)
+              (or evil-this-register (evil-read-key "q-")))))
+      (let (last-macro)
+        (cond
+        ((eq register ?\C-g)
+          (keyboard-quit))
+        ((and evil-this-macro defining-kbd-macro)
+          (setq evil-macro-buffer nil)
+          (condition-case nil
+              (setq last-macro (evil-end-and-return-macro))
+            (error nil))
+          (when last-macro
+            (evil-set-register evil-this-macro last-macro))
+          (setq evil-this-macro nil))
+        ((eq register ?:)
+          (evil-command-window-ex))
+        ((eq register ?/)
+          (evil-command-window-search-forward))
+        ((eq register ??)
+          (evil-command-window-search-backward))
+        ((or (<= ?0 register ?9)
+              (<= ?a register ?z)
+              (<= ?A register ?Z))
+          (when defining-kbd-macro (end-kbd-macro))
+          (setq evil-this-macro register)
+          (evil-set-register evil-this-macro nil)
+          (kmacro-start-macro nil)
+          (setq evil-macro-buffer (current-buffer)))
+        (t (error "Invalid register"))))))
 
 #+end_src
 
@@ -304,8 +353,6 @@ These are the leader keys bound to =s-c= (see [[General][General]]), and are the
           (when buffer (switch-to-buffer buffer)
           buffer))))
       (start-process-shell-command name (format "*%s log*" name) command)))
-
-  (lieutenant-open-app "firefox" "Firefox" "firefox")
 
 #+end_src
 
