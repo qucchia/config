@@ -285,31 +285,77 @@ These are the leader keys bound to =s-c= (see [[General][General]]), and are the
 
 #+end_src
 
-- =s-x o f= switches to the Firefox buffer, or creates a new Firefox process if it doesn’t exist.
-- =C-u s-x o f= creates a new Firefox process.
+*** Open app
+
+#+begin_src emacs-lisp
+
+  (defun lieutenant-open-app (command name class &optional force-new)
+    "Create a new process with COMMAND and NAME, or open the first
+  buffer matching CLASS if it exists.  If FORCE-NEW is non-nil,
+  create a new process regardless."
+    (when (or force-new
+      (not
+        (let ((buffer
+          (-any
+            (lambda (buffer) (when
+              (string= (buffer-local-value 'exwm-class-name buffer) class)
+              buffer))
+            (buffer-list))))
+          (when buffer (switch-to-buffer buffer)
+          buffer))))
+      (start-process-shell-command name (format "*%s log*" name) command)))
+
+  (lieutenant-open-app "firefox" "Firefox" "firefox")
+
+#+end_src
+
+*** Open Firefox
+
+- =s-c o f= switches to the Firefox buffer, or creates a new Firefox process if it doesn’t exist.
+- =C-u s-c o f= creates a new Firefox process.
 
 #+begin_src emacs-lisp
 
   (defun lieutenant-open-firefox (&optional arg)
-    "Create a new Firefox process, or open the firefox buffer if it
-  exists.  If ARG is 0 or negative, create a new Firefox process
+    "Create a new Firefox process, or open the Firefox buffer if it
+  exists.  If ARG is not 1, create a new Firefox process
   regardless."
     (interactive "^p")
-    (if (or (not (get-buffer "firefox")) (<= arg 0))
-      (start-process-shell-command "Firefox" "*Firefox log*" "firefox")
-      (switch-to-buffer "firefox")))
+    (lieutenant-open-app "firefox" "Firefox" "firefox" (not (eq arg 1))))
 
-  (defun lieutenant-open-whatsapp ()
-    (interactive)
-    (let ((whatsapp-buffer
-            (-any
-              (lambda (buffer) (when
-                (string-match-p "\\(([0-9]+) \\)?WhatsApp" (buffer-name buffer))
-                buffer))
-              (buffer-list))))
-      (if whatsapp-buffer
-        (switch-to-buffer whatsapp-buffer)
-        (browse-url "https://web.whatsapp.com"))))
+#+end_src
+
+*** Open web app
+
+#+begin_src emacs-lisp
+
+  (defun lieutenant-open-web-app (url name-regexp &optional force-new)
+    "Open a new web-page in URL, or open the buffer matching
+    NAME-REGEXP if it exists.  If FORCE-NEW is non-nil, open a new
+    window regardless."
+    (when (or force-new
+      (not
+        (let ((buffer
+                (-any
+                  (lambda (buffer) (when
+                    (string-match-p name-regexp (buffer-name buffer))
+                    buffer))
+                  (buffer-list))))
+          (when buffer (switch-to-buffer buffer))
+          buffer)))
+      (browse-url url)))
+
+#+end_src
+
+*** Open WhatsApp
+
+#+begin_src emacs-lisp
+
+  (defun lieutenant-open-whatsapp (&optional arg)
+    "Open a WhatsApp, or open the WhatsApp buffer if it exists.  If
+    ARG is not 1, open a new WhatsApp window regardless."
+    (interactive "^p")
+    (lieutenant-open-web-app "https://web.whatsapp.com" "\\(([0-9]+) \\)?WhatsApp" (not (eq arg 1))))
 
 #+end_src
 
