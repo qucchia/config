@@ -141,8 +141,10 @@ Links: [[https://github.com/emacs-evil/evil][GitHub]], [[info:evil][Info]]
     (evil-global-set-key 'motion "j" 'evil-next-visual-line)
     (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
 
+    ;; Set some initial states
     (evil-set-initial-state 'messages-buffer-mode 'normal)
-    (evil-set-initial-state 'dashboard-mode 'normal))
+    (evil-set-initial-state 'dashboard-mode 'normal)
+    (evil-set-initial-state 'git-commit-mode 'insert))
 
 #+end_src
 
