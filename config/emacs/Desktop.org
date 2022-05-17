@@ -72,7 +72,7 @@ EXWM desktop configuration.
                                   ([?\M-0] . [home])
                                   ([?\M-$] . [end])
                                   ([?\M-b] . [prior])
-                                  ([?\M-f] . [next]))
+                                  ([?\M-f] . [next])))
     :config
     (setq exwm-workspace-number 5)
 
@@ -97,8 +97,6 @@ EXWM desktop configuration.
           ?\M-x ?\M-` ?\M-& ?\M-: ?\M-v
           ?\C-\M-j ?\C-\M-v ?\C-\M-n
           ?\s-x ?\s-c))
-
-
 
   ;; C-q will always send the next key directly
   (define-key exwm-mode-map [?\C-q] 'exwm-input-send-next-key)
