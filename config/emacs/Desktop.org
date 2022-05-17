@@ -1,5 +1,5 @@
 #+title:Emacs Desktop Environment
-#+PROPERTY: header-args:emacs-lisp :tangle ../../home/.emacs.d/lisp/desktop.el :mkdirp y
+#+PROPERTY: header-args:emacs-lisp :tangle ../../home/.emacs.d/lisp/desktop.el :mkdirp y :comments org
 
 EXWM desktop configuration.
 
@@ -88,7 +88,7 @@ EXWM desktop configuration.
 
 #+end_src
 
-** Keybindings
+* Keybindings
 
 #+begin_src emacs-lisp :noweb-ref keybindings :tangle no
 
