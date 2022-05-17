@@ -189,10 +189,6 @@ These are the leader keys bound to =s-c= (see [[General][General]]), and are the
             (interactive)
             (browse-url "https://moodle.ins-mediterrania.cat/login/index.php"))
           :which-key "moodle")
-  "bw"  '((lambda ()
-            (interactive)
-            (browse-url "https://web.whatsapp.com"))
-          :which-key "whatsapp")
   "by"  '((lambda ()
             (interactive)
             (browse-url "https://www.youtube.com"))
@@ -285,6 +281,7 @@ These are the leader keys bound to =s-c= (see [[General][General]]), and are the
               (interactive)
               (qucchia-start-process-shell-command "vimb" "*Vimb log*" "vimb"))
             :which-key "vimb")
+  "ow"    '(lieutenant-open-whatsapp :which-key "whatsapp")
 
 #+end_src
 
@@ -301,6 +298,18 @@ These are the leader keys bound to =s-c= (see [[General][General]]), and are the
     (if (or (not (get-buffer "firefox")) (<= arg 0))
       (start-process-shell-command "Firefox" "*Firefox log*" "firefox")
       (switch-to-buffer "firefox")))
+
+  (defun lieutenant-open-whatsapp ()
+    (interactive)
+    (let ((whatsapp-buffer
+            (-any
+              (lambda (buffer) (when
+                (string-match-p "\\(([0-9]+) \\)?WhatsApp" (buffer-name buffer))
+                buffer))
+              (buffer-list))))
+      (if whatsapp-buffer
+        (switch-to-buffer whatsapp-buffer)
+        (browse-url "https://web.whatsapp.com"))))
 
 #+end_src
 
