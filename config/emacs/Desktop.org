@@ -91,10 +91,10 @@ EXWM desktop configuration.
 #+begin_src emacs-lisp :noweb-ref keybindings :tangle no
 
   (setq exwm-input-prefix-keys
-        '(?\C-x ?\C-c ?\C-w ?\C-h
+        '(?\C-x ?\C-c ?\C-w ?\C-h ?\C-g
           ?\M-x ?\M-` ?\M-& ?\M-: ?\M-v
           ?\C-\M-j ?\C-\M-v ?\C-\M-n
-          ?\s-x ?\s-c))
+          ?\s-x ?\s-c ?\s-o))
 
   ;; C-q will always send the next key directly
   (define-key exwm-mode-map [?\C-q] 'exwm-input-send-next-key)
