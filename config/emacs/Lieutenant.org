@@ -441,30 +441,39 @@ The function below toggles the spellchecking, and decides whether to use =flyspe
         (let ((buffer
                 (-any
                   (lambda (buffer) (when
-                    (string-match-p name-regexp (buffer-name buffer))
+                    (string-match-p name-regexp
+                      (replace-regexp-in-string " — Firefox$" ""
+                        (buffer-name buffer)))
                     buffer))
                   (buffer-list))))
           (when buffer (switch-to-buffer buffer))
           buffer)))
       (browse-url url)))
 
-#+end_src
+  (defmacro lieutenant-open-web-app-command (url name-regexp which-key)
+    (list 'list
+      (list 'lambda (list '&optional 'arg)
+        (list 'interactive "^p")
+        (list 'lieutenant-open-web-app url name-regexp
+          (list 'not (list 'eq 'arg 1))))
+      :which-key which-key))
 
-***** WhatsApp
+#+end_src
 
 #+begin_src emacs-lisp :noweb-ref app-leader-keys :tangle no
 
-  "w"    '(lieutenant-open-whatsapp :which-key "whatsapp")
-
-#+end_src
-
-#+begin_src emacs-lisp
-
-  (defun lieutenant-open-whatsapp (&optional arg)
-    "Open a WhatsApp, or open the WhatsApp buffer if it exists.  If
-    ARG is not 1, open a new WhatsApp window regardless."
-    (interactive "^p")
-    (lieutenant-open-web-app "https://web.whatsapp.com" "\\(([0-9]+) \\)?WhatsApp" (not (eq arg 1))))
+  "d" (lieutenant-open-web-app-command
+        "https://drive.google.com/drive/u/1"
+        "^Google Drive$"
+        "drive")
+  "g" (lieutenant-open-web-app-command
+        "https://mail.google.com/mail/u/1/#inbox="
+        " Mail\\| - Gmail$"
+        "gmail")
+  "w" (lieutenant-open-web-app-command
+        "https://web.whatsapp.com"
+        "^\\(([0-9]+) \\)?WhatsApp$"
+        "whatsapp")
 
 #+end_src
 
