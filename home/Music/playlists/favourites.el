@@ -10,11 +10,15 @@
                                     "10 - Anakin's Dark Deeds"))
        ("04 A New Hope" . ("08 - Inner City"
                            "09 - Cantina Band"))
-       ("05 The Empire Strikes Back" . ("07 - Han Solo and the Princess"
+       ("05 The Empire Strikes Back" . ("04 - The Heroics of Luke and Han"
+                                        "05 - The Imperial March (Darth Vader's Theme)"
+                                        "07 - Han Solo and the Princess"
                                         "10 - The Asteroid Field"
                                         "17 - Finale"))
        ("The Mandalorian"
-        . (("Chapter 01" . ("05 Burg Attack"
+        . (("Chapter 01" . ("04 Hammer Time"
+                            "05 Burg Attack"
+                            "06 You Are a Mandalorian"
                             "07 Bounty Droid"))
            ("Chapter 02" . ("02 Jawas Attack"
                             "06 The Mudhorn"))
