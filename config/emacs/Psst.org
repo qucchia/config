@@ -131,6 +131,23 @@ This function overrides the one defined by =counsel.el=, removing the dependency
 
 #+end_src
 
+* Company Mode
+
+#+begin_src emacs-lisp
+
+  (use-package company
+    :bind
+    (:map company-active-map
+      ("<tab>" . company-complete-selection))
+    :custom
+    (company-minimum-prefix-length 1)
+    (company-idle-delay 0.0))
+
+  (use-package company-box
+    :hook (company-mode . company-box-mode))
+
+#+end_src
+
 * Provide
 
 #+begin_src emacs-lisp
