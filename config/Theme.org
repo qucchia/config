@@ -337,5 +337,9 @@ A theme to use across several programs.
   (eshell-git-prompt-powerline-clean-face
     (:background qucchia-dark4))
 
+  ;; Company
+  (company-tooltip-selection
+    (:extend t :inherit 'company-tooltip-selection :background qucchia-dark4))
+
 #+end_src
 
