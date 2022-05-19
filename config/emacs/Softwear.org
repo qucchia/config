@@ -33,7 +33,8 @@ https://emacs-lsp.github.io/lsp-mode
   (defun softwear-lsp-mode-setup ()
     "Setup LSP."
     (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
-    (lsp-headerline-breadcrumb-mode))
+    (lsp-headerline-breadcrumb-mode)
+    (company-mode))
 
   (use-package lsp-mode
     :commands (lsp lsp-deferred)
@@ -43,6 +44,8 @@ https://emacs-lsp.github.io/lsp-mode
       (typescript-mode . lsp-deferred)
       (php-mode . lsp-deferred)
       (lsp-mode . softwear-lsp-mode-setup))
+    :bind (:map lsp-mode-map
+            ("<tab>" . company-indent-or-complete-common))
     :init
     (setq lsp-keymap-prefix "s-c l")
     (setq read-process-output-max (* 1024 1024)) ;; 1MB
