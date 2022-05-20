@@ -450,7 +450,7 @@ The function below toggles the spellchecking, and decides whether to use =flyspe
           buffer)))
       (browse-url url)))
 
-  (defmacro lieutenant-open-web-app-command (url name-regexp which-key)
+  (defmacro lieutenant-web-app-command (url name-regexp which-key)
     (list 'list
       (list 'lambda (list '&optional 'arg)
         (list 'interactive "^p")
@@ -462,18 +462,22 @@ The function below toggles the spellchecking, and decides whether to use =flyspe
 
 #+begin_src emacs-lisp :noweb-ref app-leader-keys :tangle no
 
-  "d" (lieutenant-open-web-app-command
+  "d" (lieutenant-web-app-command
         "https://drive.google.com/drive/u/1"
         "^Google Drive$"
         "drive")
-  "g" (lieutenant-open-web-app-command
+  "g" (lieutenant-web-app-command
         "https://mail.google.com/mail/u/1/#inbox="
         " Mail\\| - Gmail$"
         "gmail")
-  "w" (lieutenant-open-web-app-command
+  "w" (lieutenant-web-app-command
         "https://web.whatsapp.com"
         "^\\(([0-9]+) \\)?WhatsApp$"
         "whatsapp")
+  "y" (lieutenant-web-app-command
+        "https://youtube.com"
+        "^\\( - \\)?Youtube"
+        "youtube")
 
 #+end_src
 
