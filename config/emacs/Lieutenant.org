@@ -354,7 +354,6 @@ The function below toggles the spellchecking, and decides whether to use =flyspe
   "p"   '(emms-pause :which-key "pause music")
   "u"   '(browse-url :which-key "url")
   "x"   '(lieutenant-set-keymap :which-key "set keymap")
-  "y"   '(counsel-yank-pop :which-key "yank")
 
 #+end_src
 

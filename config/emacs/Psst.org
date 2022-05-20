@@ -10,6 +10,10 @@ Psst: all the hints and help I could need.
   (use-package ivy
     :diminish
     :bind (("C-s" . swiper)
+           ("C-x b" . ivy-switch-buffer)
+           ("C-c v" . ivy-push-view)
+           ("C-c V" . ivy-pop-view)
+           ("C-c r" . ivy-resume)
            :map ivy-minibuffer-map
            ("TAB" . ivy-alt-done)
            ("C-l" . ivy-alt-done)
@@ -19,6 +23,7 @@ Psst: all the hints and help I could need.
            ("C-k" . ivy-previous-line)
            ("C-l" . ivy-done)
            ("C-d" . ivy-switch-buffer-kill)
+           ("RET" . ivy-alt-done)
            :map ivy-reverse-i-search-map
            ("C-k" . ivy-previous-line)
            ("C-d" . ivy-reverse-i-search-kill))
@@ -46,12 +51,24 @@ Psst: all the hints and help I could need.
 
   (use-package counsel
     :bind (("M-x" . counsel-M-x)
-           ("C-x b" . counsel-ibuffer)
+           ("M-y" . counsel-yank-pop)
+           ("C-S-o" . counsel-rhythmbox)
            ("C-x C-f" . counsel-find-file)
+           ("C-x l" . counsel-locate)
+           ("C-c C" . counsel-compile)
+           ("C-c g" . counsel-git)
+           ("C-c j" . counsel-git-grep)
+           ("C-c J" . counsel-file-jump)
+           ("C-c L" . counsel-git-log)
+           ("C-c k" . counsel-rg)
+           ("C-c b" . counsel-bookmark)
+           ("C-c o" . counsel-outline)
+           ("C-c F" . counsel-org-file)
            :map minibuffer-local-map
            ("C-r" . 'counsel-minibuffer-history))
     :config
-    (setq ivy-initial-inputs-alist nil)) ;; Don't start searches with ^
+    ;; Don't start searches with ^
+    (setq ivy-initial-inputs-alist nil))
 
 #+end_src
 
