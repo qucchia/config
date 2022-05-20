@@ -197,7 +197,8 @@ https://github.com/wyuenho/all-the-icons-dired/
   (use-package dired-open
     :commands (dired dired-jump)
     :config
-    (setq dired-open-extensions '(("png" . "display"))))
+    (setq dired-open-extensions '(("png" . "display")
+                                  ("mkv" . "mpv"))))
 
 #+end_src
 
