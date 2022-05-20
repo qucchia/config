@@ -122,7 +122,7 @@ These are the leader keys bound to =s-c=, and are the home to most of my custom 
 
 **** =.=: Dotty
 
-#+begin_src emacs-lisp :noweb-ref leader-keys :tangle no
+#+begin_src emacs-lisp :noweb-ref main-leader-keys :tangle no
 
   "."  '(:ignore t :which-key "dotty")
   ".o" '(dotty-open-tangled-file :which-key "open tangled file")
@@ -131,7 +131,7 @@ These are the leader keys bound to =s-c=, and are the home to most of my custom 
 
 **** =b=: Bookmarks
 
-#+begin_src emacs-lisp :noweb-ref leader-keys :tangle no
+#+begin_src emacs-lisp :noweb-ref main-leader-keys :tangle no
 
   "b"   '(:ignore t :which-key "bookmark")
   "bd"  '((lambda ()
@@ -162,7 +162,7 @@ These are the leader keys bound to =s-c=, and are the home to most of my custom 
 
 ***** =bc=: Classroom
 
-#+begin_src emacs-lisp :noweb-ref leader-keys :tangle no
+#+begin_src emacs-lisp :noweb-ref main-leader-keys :tangle no
 
   "bc"  '(:ignore t :which-key "classroom")
   "bca" '((lambda ()
@@ -213,7 +213,7 @@ These are the leader keys bound to =s-c=, and are the home to most of my custom 
 
 **** =m=: Mode
 
-#+begin_src emacs-lisp :noweb-ref leader-keys :tangle no
+#+begin_src emacs-lisp :noweb-ref main-leader-keys :tangle no
 
   "m"   '(:ignore t :which-key "mode")
   "m'"  '(electric-quote-mode :which-key "electric quote")
@@ -227,7 +227,7 @@ These are the leader keys bound to =s-c=, and are the home to most of my custom 
 
 **** =s=: Search
 
-#+begin_src emacs-lisp :noweb-ref leader-keys :tangle no
+#+begin_src emacs-lisp :noweb-ref main-leader-keys :tangle no
 
   "s"  '(:ignore t :which-key search)
   "sc" '((lambda (term)
@@ -277,7 +277,7 @@ These are the leader keys bound to =s-c=, and are the home to most of my custom 
 
 **** =t=: Toggle
 
-#+begin_src emacs-lisp :noweb-ref leader-keys :tangle no
+#+begin_src emacs-lisp :noweb-ref main-leader-keys :tangle no
 
   "t"     '(:ignore t :which-key "toggle")
   "te"    '(emms-mode-line-toggle :which-key "emms modeline")
@@ -309,7 +309,7 @@ The function below toggles the spellchecking, and decides whether to use =flyspe
 
 **** =r=: Racket
 
-#+begin_src emacs-lisp :noweb-ref leader-keys :tangle no
+#+begin_src emacs-lisp :noweb-ref main-leader-keys :tangle no
 
   "r"  '(:ignore t :which-key "racket")
   "ra" 'racket-add-track-to-favourites
@@ -321,7 +321,7 @@ The function below toggles the spellchecking, and decides whether to use =flyspe
 
 **** =s-p=: Lookup password
 
-#+begin_src emacs-lisp :noweb-ref leader-keys :tangle no
+#+begin_src emacs-lisp :noweb-ref main-leader-keys :tangle no
 
   "s-p" '(lieutenant-lookup-password :which-key "password")
 
@@ -347,7 +347,7 @@ The function below toggles the spellchecking, and decides whether to use =flyspe
 
 **** Miscellaneous
 
-#+begin_src emacs-lisp :noweb-ref leader-keys :tangle no
+#+begin_src emacs-lisp :noweb-ref main-leader-keys :tangle no
 
   "s-l" '(counsel-linux-app :which-key "linux app")
   "k"   '(counsel-descbinds :which-key "keybindings")
