@@ -404,27 +404,19 @@ The function below toggles the spellchecking, and decides whether to use =flyspe
           buffer))))
       (start-process-shell-command name (format "*%s log*" name) command)))
 
+  (defmacro lieutenant-app-command (command name-regexp class which-key)
+    (list 'list
+      (list 'lambda (list '&optional 'arg)
+        (list 'interactive "^p")
+        (list 'lieutenant-open-app command name-regexp class
+          (list 'not (list 'eq 'arg 1))))
+      :which-key which-key))
+
 #+end_src
-
-***** Firefox
-
-- =s-o f= switches to the Firefox buffer, or creates a new Firefox process if it doesn’t exist.
-- =C-u s-o f= creates a new Firefox process.
 
 #+begin_src emacs-lisp :noweb-ref app-leader-keys :tangle no
 
-  "f"    '(lieutenant-open-firefox :which-key "firefox")
-
-#+end_src
-
-#+begin_src emacs-lisp
-
-  (defun lieutenant-open-firefox (&optional arg)
-    "Create a new Firefox process, or open the Firefox buffer if it
-  exists.  If ARG is not 1, create a new Firefox process
-  regardless."
-    (interactive "^p")
-    (lieutenant-open-app "firefox" "Firefox" "firefox" (not (eq arg 1))))
+  "f" (lieutenant-app-command "firefox" "Firefox" "firefox" "firefox")
 
 #+end_src
 
