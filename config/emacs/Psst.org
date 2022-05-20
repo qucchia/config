@@ -32,16 +32,14 @@ Psst: all the hints and help I could need.
     (setq ivy-use-virtual-buffers t)
     (setq ivy-height 10))
 
-#+end_src
-
-** Ivy Rich
-
-#+begin_src emacs-lisp
-
   (use-package ivy-rich
     :after (counsel ivy)
     :init
     (ivy-rich-mode 1))
+
+  (use-package ivy-hydra :after ivy)
+
+  (use-package ivy-avy :after ivy)
 
 #+end_src
 
