@@ -403,12 +403,24 @@ The function below toggles the spellchecking, and decides whether to use =flyspe
           buffer))))
       (start-process-shell-command name (format "*%s log*" name) command)))
 
-  (defmacro lieutenant-app-command (command name-regexp class which-key)
+  (defun lieutenant-app (command name class)
+    (let ((choice
+      (ivy-read (format "Switch to %s buffer:" name) (append
+        (cl-mapcar (lambda (buffer) (buffer-name buffer))
+          (seq-filter (lambda (buffer) (when
+            (string= (buffer-local-value 'exwm-class-name buffer) class)
+              buffer))
+            (buffer-list)))
+        '("New process")))))
+        (if (string= choice "New process")
+          (start-process-shell-command name (format "*%s log*" name) command)
+          (switch-to-buffer choice))))
+
+  (defmacro lieutenant-app-command (command name class which-key)
     (list 'list
-      (list 'lambda (list '&optional 'arg)
-        (list 'interactive "^p")
-        (list 'lieutenant-open-app command name-regexp class
-          (list 'not (list 'eq 'arg 1))))
+      (list 'lambda (list)
+        (list 'interactive)
+        (list 'lieutenant-app command name class))
       :which-key which-key))
 
 #+end_src
