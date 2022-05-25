@@ -58,11 +58,7 @@ Go dotty with Dotty: dotfiles utilities.
 
   (defun dotty--org-files ()
     "Return Org files in `dotty-org-directory'."
-    (let (files '())
-      (dolist (file (directory-files (dotty--expand-org-directory)))
-        (when (string-match-p "^[^.].*\\.org$" file)
-          (setq files (cons file files))))
-      files))
+    (directory-files-recursively (dotty--expand-org-directory) "^[^.].*\\.org$"))
 
   (defun dotty--expand-org-file (org-file)
     "Return absolute path of ORG-FILE in `dotty-org-directory'."
