@@ -114,8 +114,8 @@ Make a racket with Racket: music utilities.
     (racket-load-playlist (racket-expand-playlist file))
     (emms-stop)
     (let ((played nil))
-      (racket--add-directory racket-music-directory racket-playlist)))
-    (message (racket-expand-playlist file))
+      (racket--add-directory racket-music-directory racket-playlist))
+    (message (racket-expand-playlist file)))
 
   (defun racket-get-track (&optional track)
     "Return TRACK relative to `racket-music-directory'.  If no TRACK is provided, the currently playing track in EMMS is used."
