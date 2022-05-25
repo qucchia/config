@@ -55,7 +55,7 @@ Go dotty with Dotty: dotfiles utilities.
   (defun dotty--expand-org-directory ()
     "Return absolute path of `dotty-org-directory'."
     (expand-file-name dotty-org-directory dotty-directory))
-    
+
   (defun dotty--org-files ()
     "Return Org files in `dotty-org-directory'."
     (let (files '())
@@ -67,7 +67,7 @@ Go dotty with Dotty: dotfiles utilities.
   (defun dotty--expand-org-file (org-file)
     "Return absolute path of ORG-FILE in `dotty-org-directory'."
     (expand-file-name org-file (dotty--expand-org-directory)))
-    
+
 #+end_src
 
 * Tangling
@@ -122,7 +122,7 @@ Go dotty with Dotty: dotfiles utilities.
                       dotty-directory)
                     output-files))))))))
        output-files))
-       
+
   (defun dotty--update-gitignore ()
     "Create or update a generated list of files in `dotty-directory''s .gitignore extracted from `dotty--scan-for-output-files'."
     ;; Get output files
@@ -145,11 +145,11 @@ Go dotty with Dotty: dotfiles utilities.
              (or (search-forward dotty-gitignore-marker nil t)
                  (progn (end-of-buffer)
                         (insert "\n" dotty-gitignore-marker)))
-             
+
              (delete-region (point) (point-max))
              (dolist (output-file output-files)
                (insert output-file "\n")))
-  
+
            (save-buffer)))))
 
 #+end_src
@@ -165,7 +165,7 @@ Go dotty with Dotty: dotfiles utilities.
             (expand-file-name ".bin/" dotty-directory)
             (expand-file-name buffer-file-name))
       (sh-mode)))
-      
+
   (defun dotty--make-scripts-executable ()
     (dolist (file (dotty--bin-files))
       (set-file-modes (dotty--expand-bin-file file) 493)))
