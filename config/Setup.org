@@ -26,6 +26,7 @@ To tangle all of Emacs’ files, open it for the first time and run (e.g. with =
 #+begin_src emacs-lisp
 
   (let ((dotty-directory "~/.dotfiles"))
+    (require 'org)
     (org-babel-tangle-file (expand-file-name "config/emacs/Dotty.org" dotty-directory))
     (load-file (expand-file-name "home/.emacs.d/lisp/dotty.el" dotty-directory))
     (dotty-tangle-org-files))
