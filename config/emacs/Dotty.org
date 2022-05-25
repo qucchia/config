@@ -102,7 +102,7 @@ Go dotty with Dotty: dotfiles utilities.
     (let ((output-files '())
           (current-match t))
       (with-current-buffer (or (get-file-buffer org-file)
-                               (find-file-noselect org-file))
+                              (find-file-noselect org-file))
         (save-excursion
           (beginning-of-buffer)
           (while current-match
@@ -111,16 +111,18 @@ Go dotty with Dotty: dotfiles utilities.
               (let ((output-file (thing-at-point 'filename t)))
                 (unless (or (not output-file)
                             (string-equal output-file "no"))
-                  (setq output-files (cons
-                    ;; Get file path relative to ‘dotty-directory’
-                    (file-relative-name
-                      (expand-file-name output-file (dotty--expand-org-directory))
-                      dotty-directory)
-                    output-files))))))))
-       output-files))
+                  (setq output-files
+                        (cons
+                        ;; Get file path relative to ‘dotty-directory’
+                        (file-relative-name
+                          (expand-file-name output-file (file-name-directory org-file))
+                          dotty-directory)
+                        output-files))))))))
+      output-files))
 
-  (defun dotty--update-gitignore ()
+  (defun dotty-update-gitignore ()
     "Create or update a generated list of files in `dotty-directory''s .gitignore extracted from `dotty--scan-for-output-files'."
+    (interactive)
     ;; Get output files
     (let ((output-files '()))
       (dolist (file (dotty--org-files))
