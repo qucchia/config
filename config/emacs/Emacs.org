@@ -38,6 +38,9 @@ The package archives used are:
   (unless package-archive-contents
     (package-refresh-contents))
 
+  (unless (package-installed-p 'use-package)
+    (package-install 'use-package))
+
 #+end_src
 
 =use-package= is a macro for organising package configuration.
