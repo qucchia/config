@@ -16,7 +16,7 @@ I also have some keybindings configuration in the following places:
 
 Keyboard layout: English US International with Alt Gr.
 
-#+begin_src conf :tangle ../../root/etc/default/keyboard
+#+begin_src conf :tangle ../../root/etc/default/keyboard :mkdirp yes
 
   XKBMODEL=pc105
   XKBLAYOUT=us
