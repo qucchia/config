@@ -1,7 +1,7 @@
 # Backup files
 *~
 
-# Emacs folder
+# Emacs directory
 home/.emacs.d/.cache
 home/.emacs.d/auto-save-list
 home/.emacs.d/elpa
@@ -12,6 +12,7 @@ home/.emacs.d/lisp
 home/.emacs.d/lsp-cache
 home/.emacs.d/transient
 home/.emacs.d/url
+home/.emacs.d/eln-cache
 
 home/.emacs.d/.dap-breakpoints
 home/.emacs.d/.last-package-update-day
