@@ -1,13 +1,50 @@
-#+title:Raspberry Pi Final Setup
+#+title:Setup
 
-To get right into the grind...
-- Run =bash ~/.xsession= to open Emacs with EXWM
-- Run =emacs= to open Emacs without EXWM
-- Run =nvim= to open Neovim
+* Installation
 
-Additional setup:
+** Linux
 
-* Set up SSH
+*Requirements*: [[https://www.gnu.org/software/stow/][GNU Stow]].
+
+#+begin_src shell
+
+  # Install the repository
+  git clone https://codeberg.org/qucchia/dotfiles.git ~/.dotfiles
+
+  # Set custom commands
+  export PATH="$HOME/.dotfiles/home/.bin:$PATH"
+
+  # Set up the symlinks
+  dotfiles-stow
+
+#+end_src
+
+* Tangling Emacs files
+
+To tangle all of Emacs’ files, open it for the first time and run (e.g. with =M-:= or in the Scratch buffer):
+
+#+begin_src emacs-lisp
+
+  (let ((dotty-directory "~/.dotfiles"))
+    (org-babel-tangle-file (expand-file-name "config/emacs/Dotty.org" dotty-directory))
+    (load-file (expand-file-name "home/.emacs.d/lisp/dotty.el" dotty-directory))
+    (dotty-tangle-org-files))
+
+#+end_src
+
+Replace =~/.dotfiles= for the directory where this repository is located.
+
+* Running
+
+Linux:
+- Run =dotfiles-start-exwm= to open Emacs with EXWM.
+- Run =dotfiles-start-emacs= to open Emacs without EXWM.
+
+Windows: simply open the application.
+
+* Additional setup
+
+** Set up SSH
 #+begin_src shell
 
   ssh-keygen -t ed25519 -C "qucchia0@gmail.com"
@@ -17,7 +54,7 @@ Additional setup:
 
 Add the output key to codeberg.org.
 
-* Clone repositories
+** Clone repositories
 
 #+begin_src shell
 
@@ -25,7 +62,7 @@ Add the output key to codeberg.org.
 
 #+end_src
 
-* Install icons
+** Install icons
 
 You'll have to restart Emacs for the changes to take effect.
 
@@ -35,14 +72,14 @@ You'll have to restart Emacs for the changes to take effect.
 
 #+end_src
 
-* Set up audio output
+** Set up audio output
 
 By default, the audio output is set to HDMI. To change it to the headphone jacks, follow these steps:
 1. Run =lxsession= on eshell.
 2. Find the volume icon > Default Sink > Built-in Audio Analog Stereo.
 3. Kill =lxsession=.
 
-* Import GPG key
+** Import GPG key
 
 Import the GPG key from a USB stick by running:
 
@@ -52,7 +89,7 @@ Import the GPG key from a USB stick by running:
 
 #+end_src
 
-* Configure Firefox settings
+** Configure Firefox settings
 
 - General: Make default browser
 
@@ -72,7 +109,7 @@ https://web.whatsapp.com
 
 - HTTPS-Only Mode: enabled
 
-** Extensions
+*** Extensions
 
 Privacy:
 - Ublock

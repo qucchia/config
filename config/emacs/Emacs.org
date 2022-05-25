@@ -19,6 +19,15 @@ This file, [[file:Emacs.org][Emacs]], contains the most general configuration. I
 
 Also see [[../Theme.org][Theme]].
 
+* Shell script
+
+#+begin_src shell :tangle ../../home/.bin/dotfiles-start-emacs :tangle-mode (identity #o755)
+
+  #!/bin/sh
+  exec dbus-launch emacs -mm --debug-init
+
+#+end_src
+
 * Package configuration
 
 The package archives used are:
@@ -119,32 +128,14 @@ Enable some commands.
     :type 'string
     :group 'qucchia)
 
-  (defcustom qucchia-use-exwm t
-    "If non-nil, load EXWM."
-    :type 'boolean
-    :group 'qucchia)
+  (defun qucchia-load (symbol)
+    "Load a qucchia package. SYMBOl is the name of the package."
+    (load-file (expand-file-name
+      (format "%s.el" (symbol-name symbol)) qucchia-lisp-directory)))
 
-  (defun qucchia-load-file (file)
-    "Load an emacs lisp file from ‘qucchia-lisp-directory’."
-    (load-file (expand-file-name file qucchia-lisp-directory)))
-
-#+end_src
-
-Load other files.
-
-#+begin_src emacs-lisp
-
-  (dolist (package '("dotty"
-                     "erised"
-                     "george"
-                     "lieutenant"
-                     "mash"
-                     "psst"
-                     "racket"
-                     "softwear"))
-    (qucchia-load-file (concat package ".el")))
-
-  (when qucchia-use-exwm (qucchia-load-file "desktop.el"))
+  (dolist (package '(dotty erised george lieutenant mash
+                     psst racket softwear))
+    (qucchia-load package))
 
   (provide 'qucchia)
 

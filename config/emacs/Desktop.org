@@ -8,7 +8,8 @@ EXWM desktop configuration.
 #+begin_src shell :tangle ../../home/.bin/dotfiles-start-exwm :tangle-mode (identity #o755)
 
   #!/bin/sh
-  exec dbus-launch --exit-with-session emacs -mm --debug-init
+  exec dbus-launch --exit-with-session emacs -mm --debug-init \
+    --eval "(qucchia-load 'desktop)"
 
 #+end_src
 
