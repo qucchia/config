@@ -34,14 +34,7 @@ https://github.com/akermu/emacs-libvterm
 
 #+begin_src emacs-lisp
 
-  (use-package exec-path-from-shell
-    :after eshell
-    :config (exec-path-from-shell-initialize))
-
-  (use-package eshell-git-prompt
-    :after eshell)
-
-  (defun tired-setup-eshell ()
+  (defun mash-setup-eshell ()
     "Setup eshell."
     ;; Save command history
     (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)
@@ -59,7 +52,7 @@ https://github.com/akermu/emacs-libvterm
           eshell-scroll-to-bottom-on-input t))
 
   (use-package eshell
-    :hook (eshell-first-time-mode . tired-setup-eshell)
+    :hook (eshell-first-time-mode . mash-setup-eshell)
     :config
     (with-eval-after-load 'esh-opt
       (setq eshell-destroy-buffer-when-process-dies t)
@@ -67,12 +60,11 @@ https://github.com/akermu/emacs-libvterm
 
     (eshell-git-prompt-use-theme 'powerline))
 
-#+end_src
+  (use-package exec-path-from-shell
+    :after eshell
+    :config (exec-path-from-shell-initialize))
 
-* Provide
-
-#+begin_src emacs-lisp
-
-  (provide 'mash)
+  (use-package eshell-git-prompt
+    :after eshell)
 
 #+end_src
