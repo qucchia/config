@@ -109,6 +109,7 @@
             (beginning-of-buffer)
             (search-forward-regexp "^#\\+subtitle:")
             (setq dotty--subtitle (buffer-substring (point) (progn (end-of-line) (point))))))
+        (delete-trailing-whitespace)
         (beginning-of-buffer)
         (insert (format ";;; %s --- %s\n" package-name dotty--subtitle))
         (insert ";;; Commentary:\n;;; Code:\n\n")
