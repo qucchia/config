@@ -98,6 +98,114 @@ Register shortcuts: use =C-x r j <char>= to jump to them.
 
 #+end_src
 
+* Apps
+
+** Linux apps
+
+#+begin_src emacs-lisp
+
+  (defun lieutenant-open-app (command name class &optional force-new)
+    "Open an app.
+  Create a new process with COMMAND and NAME, or open the first
+  buffer matching CLASS if it exists.  If FORCE-NEW is non-nil,
+  create a new process regardless."
+    (when (or force-new
+      (not
+        (let ((buffer
+          (-any
+            (lambda (buffer) (when
+              (string= (buffer-local-value 'exwm-class-name buffer) class)
+              buffer))
+            (buffer-list))))
+          (when buffer (switch-to-buffer buffer)
+          buffer))))
+      (start-process-shell-command name (format "*%s log*" name) command)))
+
+  (defun lieutenant-app (command name class)
+    "Open an app.
+  Prompt user to select either a buffer from app to open, create
+  a new process, or open a URL.  COMMAND is the command to run if
+  selecting to create a new process.  NAME is the name of the app.
+  CLASS is the value of `exwm-class-name' to filter buffers through."
+    (ivy-read (format "Switch to %s buffer, or insert URL or search term: " name)
+      (append
+        (seq-map (lambda (buffer) (format "Tab: %s" (buffer-name buffer)))
+          (seq-filter (lambda (buffer) (when
+            (string= (buffer-local-value 'exwm-class-name buffer) class)
+              buffer))
+            (buffer-list)))
+        '("New tab")
+        (seq-map (lambda (bookmark) (format "Bookmark: %s (%s)" (car bookmark) (cdr bookmark)))
+          lieutenant-web-bookmarks))
+      :action (lambda (choice)
+                (cond ((string-match-p "^Tab: " choice)
+                       (switch-to-buffer (replace-regexp-in-string "^Tab: " "" choice)))
+                      ((string= choice "New tab")
+                       (start-process-shell-command name (format "*%s log*" name) command))
+                      ((string-match-p "^Bookmark: " choice)
+                       ;; Extract URL from choice and open it
+                       (start-process-shell-command name (format "*%s log*" name)
+                         (format "%s %s" command
+                           (replace-regexp-in-string "^.*(\\(.*\\))$" "\\1" choice))))
+                      ((string-match-p browse-url-button-regexp choice)
+                       (start-process-shell-command name (format "*%s log*" name)
+                         (format "%s %s" command choice)))
+                      (t
+                       ;; In all other cases, search for the term
+                       (start-process-shell-command name (format "*%s log*" name)
+                         (format "%s https://duckduckgo.com/?q=%s" command choice)))))))
+
+  (defmacro lieutenant-app-command (command name class &optional which-key)
+    "Open an app.
+  Macro to create command entry for keybindings to
+  `lieutenant-app'.  COMMAND, NAME and CLASS are passed to
+  `lieutenant-app'.  WHICH-KEY is the description for which-key."
+    (list 'list
+      (list 'lambda (list)
+        (list 'interactive)
+        (list  'lieutenant-app command name class))
+      :which-key which-key))
+
+#+end_src
+
+** Web apps
+
+#+begin_src emacs-lisp
+
+  (defun lieutenant-open-web-app (url name-regexp &optional force-new)
+    "Open a web app.
+  Open a new web-page in URL, or open the buffer matching
+  NAME-REGEXP if it exists.  If FORCE-NEW is non-nil, open a new
+  window regardless."
+    (when (or force-new
+      (not
+        (let ((buffer
+                (-any
+                  (lambda (buffer) (when
+                    (string-match-p name-regexp
+                      (replace-regexp-in-string " — Firefox$" ""
+                        (buffer-name buffer)))
+                    buffer))
+                  (buffer-list))))
+          (when buffer (switch-to-buffer buffer))
+          buffer)))
+      (browse-url url)))
+
+  (defmacro lieutenant-web-app-command (url name-regexp which-key)
+    "Open a web app.
+  Macro to create command tentry for keybindings to
+  `lieutenant-web-app'.  URL and NAME-REGEXP are passed to
+  `lieutenant-web-app'.  WHICH-KEY is the description for
+  which-key."
+    (list 'list
+      (list 'lambda (list '&optional 'arg)
+        (list 'interactive "^p")
+        (list 'lieutenant-open-web-app url name-regexp
+          (list 'not (list 'eq 'arg 1))))
+      :which-key which-key))
+
+#+end_src
+
 * General
 
 https://github.com/noctuid/general.el
@@ -118,9 +226,7 @@ https://github.com/noctuid/general.el
 
 #+end_src
 
-** Leader keys
-
-*** Main
+** Main leader keys
 
 These are the leader keys bound to =s-c=, and are the home to most of my custom keyboard shortcuts. I have organised them according to their leader keys, along with the [[Miscellaneous][Miscellaneous]] ones at the end.
 
@@ -135,7 +241,7 @@ These are the leader keys bound to =s-c=, and are the home to most of my custom 
 
 #+end_src
 
-**** =.=: Dotty
+*** =.=: Dotty
 
 #+begin_src emacs-lisp :noweb-ref main-leader-keys :tangle no
 
@@ -144,7 +250,7 @@ These are the leader keys bound to =s-c=, and are the home to most of my custom 
 
 #+end_src
 
-**** =b=: Bookmarks
+*** =b=: Bookmarks
 
 #+begin_src emacs-lisp :noweb-ref main-leader-keys :tangle no
 
@@ -175,7 +281,7 @@ These are the leader keys bound to =s-c=, and are the home to most of my custom 
 
 #+end_src
 
-***** =bc=: Classroom
+**** =bc=: Classroom
 
 #+begin_src emacs-lisp :noweb-ref main-leader-keys :tangle no
 
@@ -226,7 +332,7 @@ These are the leader keys bound to =s-c=, and are the home to most of my custom 
           :which-key "physics")
 #+end_src
 
-**** =m=: Mode
+*** =m=: Mode
 
 #+begin_src emacs-lisp :noweb-ref main-leader-keys :tangle no
 
@@ -240,7 +346,7 @@ These are the leader keys bound to =s-c=, and are the home to most of my custom 
 
 #+end_src
 
-**** =s=: Search
+*** =s=: Search
 
 #+begin_src emacs-lisp :noweb-ref main-leader-keys :tangle no
 
@@ -280,7 +386,7 @@ These are the leader keys bound to =s-c=, and are the home to most of my custom 
 
 #+end_src
 
-***** TODO Make URI encode function
+**** TODO Make URI encode function
 
 #+begin_src emacs-lisp
 
@@ -290,7 +396,7 @@ These are the leader keys bound to =s-c=, and are the home to most of my custom 
 
 #+end_src
 
-**** =t=: Toggle
+*** =t=: Toggle
 
 #+begin_src emacs-lisp :noweb-ref main-leader-keys :tangle no
 
@@ -308,6 +414,10 @@ The function below toggles the spellchecking, and decides whether to use =flyspe
 #+begin_src emacs-lisp
 
   (defun lieutenant-toggle-spelling ()
+    "Toggle spell-checking.
+  If `flyspell-mode' is enabled, disabled it.  If it is disabled,
+  enable `flyspell-mode' or `flyspell-prog-mode', whichever is most
+  appropiate."
     (interactive)
     (if flyspell-mode
       (progn
@@ -322,7 +432,7 @@ The function below toggles the spellchecking, and decides whether to use =flyspe
 
 #+end_src
 
-**** =r=: Racket
+*** =r=: Racket
 
 #+begin_src emacs-lisp :noweb-ref main-leader-keys :tangle no
 
@@ -334,7 +444,7 @@ The function below toggles the spellchecking, and decides whether to use =flyspe
 
 #+end_src
 
-**** =s-p=: Lookup password
+*** =s-p=: Lookup password
 
 #+begin_src emacs-lisp :noweb-ref main-leader-keys :tangle no
 
@@ -352,7 +462,7 @@ The function below toggles the spellchecking, and decides whether to use =flyspe
       (set-process-filter process
         ;; This function is called after the process completes
         (lambda (process string)
-          (let ((string (s-trim string)))
+          (let ((string (string-trim string)))
             (if (string-match-p "^Error: " string)
               (message string)
               (progn (kill-new string)
@@ -360,7 +470,7 @@ The function below toggles the spellchecking, and decides whether to use =flyspe
 
 #+end_src
 
-**** Miscellaneous
+*** Miscellaneous
 
 #+begin_src emacs-lisp :noweb-ref main-leader-keys :tangle no
 
@@ -372,7 +482,7 @@ The function below toggles the spellchecking, and decides whether to use =flyspe
 
 #+end_src
 
-*** Apps
+** Apps leader keys
 
 #+begin_src emacs-lisp :noweb-ref leader-keys :noweb yes :tangle no
 
@@ -380,149 +490,38 @@ The function below toggles the spellchecking, and decides whether to use =flyspe
     :keymaps '(normal insert visual emacs)
     :prefix "s-o"
     :global-prefix "s-o")
+
   (lieutenant-app-leader-keys
-    <<app-leader-keys>>)
+    ;; Emacs apps
+    "e"    '(emms :which-key "emms")
+    "s-e" '(eshell :which-key "eshell")
+    "i"    '(ibuffer :which-key "ibuffer")
+    "s"    '(shell :which-key "shell")
+    "t"    '(term :which-key "term")
+    "v"    '(vterm :which-key "vterm")
+    ;; Linux apps
+    "f"    (lieutenant-app-command "firefox" "Firefox" "firefox" "firefox")
+    ;; Web apps
+    "d"    (lieutenant-web-app-command
+             "https://drive.google.com/drive/u/1"
+             "^Google Drive$"
+             "drive")
+    "g"    (lieutenant-web-app-command
+             "https://mail.google.com/mail/u/1/#inbox="
+             " Mail\\| - Gmail$"
+             "gmail")
+    "w"    (lieutenant-web-app-command
+             "https://web.whatsapp.com"
+             "^\\(([0-9]+) \\)?WhatsApp\\( Web\\)?$"
+             "whatsapp")
+    "y"    (lieutenant-web-app-command
+             "https://youtube.com"
+             "^\\( - \\)?Youtube"
+             "youtube"))
 
 #+end_src
 
-**** Emacs apps
-
-#+begin_src emacs-lisp :noweb-ref app-leader-keys :tangle no
-
-  "e"    '(emms :which-key "emms")
-  "s-e" '(eshell :which-key "eshell")
-  "i"    '(ibuffer :which-key "ibuffer")
-  "s"    '(shell :which-key "shell")
-  "t"    '(term :which-key "term")
-  "v"    '(vterm :which-key "vterm")
-
-#+end_src
-
-**** Linux apps
-
-#+begin_src emacs-lisp
-
-  (defun lieutenant-open-app (command name class &optional force-new)
-    "Create a new process with COMMAND and NAME, or open the first
-  buffer matching CLASS if it exists.  If FORCE-NEW is non-nil,
-  create a new process regardless."
-    (when (or force-new
-      (not
-        (let ((buffer
-          (-any
-            (lambda (buffer) (when
-              (string= (buffer-local-value 'exwm-class-name buffer) class)
-              buffer))
-            (buffer-list))))
-          (when buffer (switch-to-buffer buffer)
-          buffer))))
-      (start-process-shell-command name (format "*%s log*" name) command)))
-
-  (defun lieutenant-app (command name class)
-    "Prompt user to select either a buffer from app to open, create
-  a new process, or open a URL.  COMMAND is the command to run if
-  selecting to create a new process.  NAME is the name of the app.
-  CLASS is the value of `exwm-class-name' to filter buffers through."
-    (ivy-read (format "Switch to %s buffer, or insert URL or search term: " name)
-      (append
-        (seq-map (lambda (buffer) (format "Tab: %s" (buffer-name buffer)))
-          (seq-filter (lambda (buffer) (when
-            (string= (buffer-local-value 'exwm-class-name buffer) class)
-              buffer))
-            (buffer-list)))
-        '("New tab")
-        (seq-map (lambda (bookmark) (format "Bookmark: %s (%s)" (car bookmark) (cdr bookmark)))
-          lieutenant-web-bookmarks))
-      :action (lambda (choice)
-                (cond ((string-match-p "^Tab: " choice)
-                       (switch-to-buffer (replace-regexp-in-string "^Tab: " "" choice)))
-                      ((string= choice "New tab")
-                       (start-process-shell-command name (format "*%s log*" name) command))
-                      ((string-match-p "^Bookmark: " choice)
-                       ;; Extract URL from choice and open it
-                       (start-process-shell-command name (format "*%s log*" name)
-                         (format "%s %s" command
-                           (replace-regexp-in-string "^.*(\\(.*\\))$" "\\1" choice))))
-                      ((string-match-p browse-url-button-regexp choice)
-                       (start-process-shell-command name (format "*%s log*" name)
-                         (format "%s %s" command choice)))
-                      (t
-                       ;; In all other cases, search for the term
-                       (start-process-shell-command name (format "*%s log*" name)
-                         (format "%s https://duckduckgo.com/?q=%s" command choice)))))))
-
-  (defmacro lieutenant-app-command (command name class &optional which-key)
-    "Macro to create command entry for keybindings to
-  `lieutenant-app'.  The arguments are the same as that, as well as
-  WHICH-KEY, the description for which-key."
-    (list 'list
-      (list 'lambda (list)
-        (list 'interactive)
-        (list  'lieutenant-app command name class))
-      :which-key which-key))
-
-#+end_src
-
-#+begin_src emacs-lisp :noweb-ref app-leader-keys :tangle no
-
-  "f" (lieutenant-app-command "firefox" "Firefox" "firefox" "firefox")
-
-#+end_src
-
-**** Web apps
-
-#+begin_src emacs-lisp
-
-  (defun lieutenant-open-web-app (url name-regexp &optional force-new)
-    "Open a new web-page in URL, or open the buffer matching
-    NAME-REGEXP if it exists.  If FORCE-NEW is non-nil, open a new
-    window regardless."
-    (when (or force-new
-      (not
-        (let ((buffer
-                (-any
-                  (lambda (buffer) (when
-                    (string-match-p name-regexp
-                      (replace-regexp-in-string " — Firefox$" ""
-                        (buffer-name buffer)))
-                    buffer))
-                  (buffer-list))))
-          (when buffer (switch-to-buffer buffer))
-          buffer)))
-      (browse-url url)))
-
-  (defmacro lieutenant-web-app-command (url name-regexp which-key)
-    (list 'list
-      (list 'lambda (list '&optional 'arg)
-        (list 'interactive "^p")
-        (list 'lieutenant-open-web-app url name-regexp
-          (list 'not (list 'eq 'arg 1))))
-      :which-key which-key))
-
-#+end_src
-
-#+begin_src emacs-lisp :noweb-ref app-leader-keys :tangle no
-
-  "d" (lieutenant-web-app-command
-        "https://drive.google.com/drive/u/1"
-        "^Google Drive$"
-        "drive")
-  "g" (lieutenant-web-app-command
-        "https://mail.google.com/mail/u/1/#inbox="
-        " Mail\\| - Gmail$"
-        "gmail")
-  "w" (lieutenant-web-app-command
-        "https://web.whatsapp.com"
-        "^\\(([0-9]+) \\)?WhatsApp\\( Web\\)?$"
-        "whatsapp")
-  "y" (lieutenant-web-app-command
-        "https://youtube.com"
-        "^\\( - \\)?Youtube"
-        "youtube")
-
-#+end_src
-
-*** Acronyms
+** Acronyms leader keys
 
 These leader keys are bound to =s-x= and follow an acronym pattern, which is easy to remember.
 
