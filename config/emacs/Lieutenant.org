@@ -83,6 +83,22 @@ Register shortcuts: use =C-x r j <char>= to jump to them.
 
 #+end_src
 
+* Web bookmarks
+
+#+begin_src emacs-lisp
+
+  (defcustom lieutenant-web-bookmarks ()
+    "Alist of web bookmarks where every item is of the form (NAME . URL)."
+    :type 'alist
+    :group 'lieutenant)
+
+  (setq lieutenant-web-bookmarks '(("Codeberg" . "https://codeberg.org")
+                                   ("Moodle" .
+                                    "https://moodle.ins-mediterrania.cat/login/index.php")
+                                   ("YouTube" . "https://youtube.com")))
+
+#+end_src
+
 * General
 
 https://github.com/noctuid/general.el
@@ -415,16 +431,24 @@ The function below toggles the spellchecking, and decides whether to use =flyspe
             (string= (buffer-local-value 'exwm-class-name buffer) class)
               buffer))
             (buffer-list)))
-        '("New tab"))
+        '("New tab")
+        (seq-map (lambda (bookmark) (format "Bookmark: %s (%s)" (car bookmark) (cdr bookmark)))
+          lieutenant-web-bookmarks))
       :action (lambda (choice)
                 (cond ((string-match-p "^Tab: " choice)
                        (switch-to-buffer (replace-regexp-in-string "^Tab: " "" choice)))
                       ((string= choice "New tab")
                        (start-process-shell-command name (format "*%s log*" name) command))
+                      ((string-match-p "^Bookmark: " choice)
+                       ;; Extract URL from choice and open it
+                       (start-process-shell-command name (format "*%s log*" name)
+                         (format "%s %s" command
+                           (replace-regexp-in-string "^.*(\\(.*\\))$" "\\1" choice))))
                       ((string-match-p browse-url-button-regexp choice)
                        (start-process-shell-command name (format "*%s log*" name)
                          (format "%s %s" command choice)))
                       (t
+                       ;; In all other cases, search for the term
                        (start-process-shell-command name (format "*%s log*" name)
                          (format "%s https://duckduckgo.com/?q=%s" command choice)))))))
 
