@@ -1,7 +1,6 @@
 #+title:Racket
+#+subtitle:Make a racket with Racket: music utilities.
 #+PROPERTY: header-args:emacs-lisp :tangle ../../home/.emacs.d/lisp/racket.el
-
-Make a racket with Racket: music utilities.
 
 * Custom variables
 

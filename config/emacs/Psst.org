@@ -1,7 +1,6 @@
 #+title:Psst
+#+subtitle:All the hints and help I could need.
 #+PROPERTY: header-args:emacs-lisp :tangle ../../home/.emacs.d/lisp/psst.el
-
-Psst: all the hints and help I could need.
 
 * Ivy
 

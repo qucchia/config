@@ -1,7 +1,6 @@
 #+title:Erised
+#+subtitle:Just the user interface I want.
 #+PROPERTY: header-args:emacs-lisp :tangle ../../home/.emacs.d/lisp/erised.el
-
-Erised: just the user interface I want.
 
 * Basic UI Configuration
 

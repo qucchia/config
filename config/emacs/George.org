@@ -1,7 +1,6 @@
 #+title:George
+#+subtitle:Org configuration.
 #+PROPERTY: header-args:emacs-lisp :tangle ../../home/.emacs.d/lisp/george.el
-
-George: Org configuration.
 
 See also the [[file:~/.dotfiles/config/Theme.org::*Org mode][Org face customisation in Theme]].
 

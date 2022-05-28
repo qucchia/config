@@ -1,7 +1,6 @@
 #+title:Emacs
-#+PROPERTY: header-args:emacs-lisp :tangle ../../home/.emacs.d/init.el
-
-My personal Emacs configuration.
+#+subtitle:My personal Emacs configuration.
+#+PROPERTY: header-args:emacs-lisp :tangle ../../home/.emacs.d/init.el :comments org
 
 * Contents
 
@@ -124,15 +123,16 @@ Enable some commands.
 #+begin_src emacs-lisp
 
   (defcustom qucchia-lisp-directory "~/.emacs.d/lisp"
-    "Directory where lisp files from qucchia configuration are stored."
+    "Directory where Lisp files from qucchia configuration are stored."
     :type 'string
     :group 'qucchia)
 
   (defun qucchia-load (symbol)
-    "Load a qucchia package. SYMBOl is the name of the package."
+    "Load a qucchia package.  SYMBOL is the name of the package."
     (load-file (expand-file-name
       (format "%s.el" (symbol-name symbol)) qucchia-lisp-directory)))
 
+  ;; Load packages
   (dolist (package '(dotty erised george lieutenant mash
                      psst racket softwear))
     (qucchia-load package))
@@ -155,11 +155,13 @@ Links: [[info:emacs#Dired][Info]]
     :custom ((dired-listing-switches "-agho --group-directories-first"))
     :bind (("C-x C-j" . dired-jump))
     :config
+    (require 'evil-collection)
     (evil-collection-define-key 'normal 'dired-mode-map
       "h" 'dired-single-up-directory
       "l" 'dired-single-buffer
       "H" 'dired-omit-mode))
 
+  (require 'dired-x)
   (add-hook 'dired-mode-hook #'dired-omit-mode)
 
 #+end_src
@@ -224,12 +226,13 @@ Utilities for using Tor.
     (message "Tor is %s" (if qucchia-use-tor "enabled" "disabled")))
 
   (defun qucchia-start-process-shell-command (name buffer command)
-    "Start program in a subprocess.  If `qucchia-use-tor' is non-nil, wrap it in torsocks.
+    "Start program in a subprocess.
+  If `qucchia-use-tor' is non-nil, wrap it in torsocks.
 
-NAME is a name for process.
-BUFFER is the buffer (or buffer name) to associate with the process.
-COMMAND is the shell command to run.
-See `start-process-shell-command' for more details."
+  NAME is a name for process.  BUFFER is the buffer (or buffer
+  name) to associate with the process.  COMMAND is the shell
+  command to run.  See `start-process-shell-command' for more
+  details."
     (if qucchia-use-tor
       (start-process-shell-command name buffer (string-join (list "torsocks " command)))
       (start-process-shell-command name buffer command)))

@@ -1,7 +1,6 @@
 #+title:Lieutenant
+#+subtitle:Keyboard layout, key maps and keybindings.
 #+PROPERTY: header-args:emacs-lisp :tangle ../../home/.emacs.d/lisp/lieutenant.el
-
-Lieutenant: keyboard layout, key maps and keybindings.
 
 * See also
 

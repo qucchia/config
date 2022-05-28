@@ -1,7 +1,6 @@
 #+title:Softwear
+#+subtitle:Program comfortably with Softwear: Development configuration.
 #+PROPERTY: header-args:emacs-lisp :tangle ../../home/.emacs.d/lisp/softwear.el
-
-Program comfortably with Softwear: Development configuration.
 
 * Commenting
 
