@@ -117,7 +117,7 @@
         (delete-trailing-whitespace)
         (goto-char (point-min))
         (insert (format ";;; %s --- %s\n" package-name dotty--subtitle))
-        (insert ";;; Commentary:\n;;; Code:\n\n")
+        (insert ";;; Commentary:\n;;; Code:\n\n;; -*- lexical-binding: t; -*-\n\n")
         (goto-char (point-max))
         (insert (format "\n(provide '%s)\n\n" package-name))
         (insert (format ";;; %s ends here" tangled-file-name))
