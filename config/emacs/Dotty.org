@@ -93,6 +93,36 @@ Go dotty with Dotty: dotfiles utilities.
 
 #+end_src
 
+* Emacs Lisp tangling
+
+#+begin_src emacs-lisp
+
+  (defvar dotty-tangle-file "")
+
+  (defun dotty--format-lisp-file ()
+    (message buffer-file-name)
+    (when (string= "el" (file-name-extension buffer-file-name))
+      (let* ((tangled-file-name (file-name-nondirectory buffer-file-name))
+             (package-name (file-name-sans-extension tangled-file-name)))
+        (with-current-buffer (or (get-file-buffer dotty-tangle-file)
+                                 (find-file-noselect dotty-tangle-file))
+          (save-excursion
+            (beginning-of-buffer)
+            (search-forward-regexp "^#\\+subtitle:")
+            (setq dotty--subtitle (buffer-substring (point) (progn (end-of-line) (point))))))
+        (beginning-of-buffer)
+        (insert (format ";;; %s --- %s\n" package-name dotty--subtitle))
+        (insert ";;; Commentary:\n;;; Code:\n\n")
+        (end-of-buffer)
+        (insert (format "\n(provide '%s)\n\n" package-name))
+        (insert (format "\n;;; %s ends here" tangled-file-name))
+        (save-buffer))))
+
+  (add-hook 'org-babel-pre-tangle-hook (lambda () (setq dotty-tangle-file buffer-file-name)))
+  (add-hook 'org-babel-post-tangle-hook #'dotty--format-lisp-file)
+
+#+end_src
+
 * Gitignore
 
 #+begin_src emacs-lisp
