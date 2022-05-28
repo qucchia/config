@@ -1,6 +1,5 @@
 #+title:Theme
-
-A theme to use across several programs.
+#+subtitle:A theme to use across several programs.
 
 * Colours
 
