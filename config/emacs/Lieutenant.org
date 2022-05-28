@@ -16,7 +16,7 @@ I also have some keybindings configuration in the following places:
 
 Keyboard layout: English US International with Alt Gr.
 
-#+begin_src conf :tangle ../../root/etc/default/keyboard
+#+begin_src conf :tangle ../../root/etc/default/keyboard :mkdirp yes
 
   XKBMODEL=pc105
   XKBLAYOUT=us
@@ -490,7 +490,7 @@ The function below toggles the spellchecking, and decides whether to use =flyspe
         "gmail")
   "w" (lieutenant-web-app-command
         "https://web.whatsapp.com"
-        "^\\(([0-9]+) \\)?WhatsApp$"
+        "^\\(([0-9]+) \\)?WhatsApp\\( Web\\)?$"
         "whatsapp")
   "y" (lieutenant-web-app-command
         "https://youtube.com"
@@ -530,6 +530,7 @@ These leader keys are bound to =s-x= and follow an acronym pattern, which is eas
   "lP"  '(list-processes :which-key "processes")
 
 #+end_src
+
 * Evil
 
 =evil=: extensible vi layer
@@ -539,6 +540,7 @@ Links: [[https://github.com/emacs-evil/evil][GitHub]], [[info:evil][Info]]
 
   (use-package evil
     :init
+    (setq evil-want-keybinding t)
     (setq evil-want-integration t)
     (setq evil-want-C-i-jump t)
     (setq evil-want-Y-yank-to-eol t)
@@ -555,8 +557,9 @@ Links: [[https://github.com/emacs-evil/evil][GitHub]], [[info:evil][Info]]
 
     ;; Use visual line motions even outside of visual-line-mode buffers
     (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-    (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+    (evil-global-set-key 'motion "k" 'evil-previous-visual-line))
 
+  (with-eval-after-load 'evil
     ;; Set some initial states
     (evil-set-initial-state 'messages-buffer-mode 'normal)
     (evil-set-initial-state 'dashboard-mode 'normal)
