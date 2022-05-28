@@ -196,11 +196,3 @@
     (racket-open-playlist racket-favourites-playlist-file))
 
 #+end_src
-
-* Provide
-
-#+begin_src emacs-lisp
-
-  (provide 'racket)
-
-#+end_src

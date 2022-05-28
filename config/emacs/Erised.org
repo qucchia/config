@@ -123,10 +123,3 @@ See [[file:~/.dotfiles/config/Theme.org][my custom theme]].
 
 #+end_src
 
-* Provide
-
-#+begin_src emacs-lisp
-
-  (provide 'erised)
-
-#+end_src

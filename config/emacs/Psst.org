@@ -161,11 +161,3 @@ This function overrides the one defined by =counsel.el=, removing the dependency
     :hook (company-mode . company-box-mode))
 
 #+end_src
-
-* Provide
-
-#+begin_src emacs-lisp
-
-  (provide 'psst)
-
-#+end_src

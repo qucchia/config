@@ -172,10 +172,3 @@ https://emacs-lsp.github.io/lsp-mode
 
 #+end_src
 
-* Provide
-
-#+begin_example
-
-  (provide 'softwear)
-
-#+end_example
