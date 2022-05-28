@@ -120,7 +120,7 @@
         (insert ";;; Commentary:\n;;; Code:\n\n")
         (goto-char (point-max))
         (insert (format "\n(provide '%s)\n\n" package-name))
-        (insert (format "\n;;; %s ends here" tangled-file-name))
+        (insert (format ";;; %s ends here" tangled-file-name))
         (save-buffer))))
 
   (add-hook 'org-babel-pre-tangle-hook (lambda () (setq dotty-tangle-file buffer-file-name)))
