@@ -38,7 +38,7 @@ home/.emacs.d/lisp/mash.el
 home/.emacs.d/lisp/psst.el
 home/.emacs.d/lisp/racket.el
 home/.emacs.d/lisp/softwear.el
-home/.emacs.d/lisp/wicked.el
+home/.emacs.d/lisp/systems.el
 home/.emacs.d/qucchia-theme.el
 home/.xmodmap
 root/etc/default/keyboard

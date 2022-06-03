@@ -21,9 +21,7 @@
 
 #+end_src
 
-* Languages
-
-** Language server
+* LSP
 
 https://emacs-lsp.github.io/lsp-mode
 
@@ -35,39 +33,42 @@ https://emacs-lsp.github.io/lsp-mode
     (lsp-headerline-breadcrumb-mode)
     (company-mode))
 
-  (use-package lsp-mode
-    :commands (lsp lsp-deferred)
-    :hook ((html-mode . lsp-deferred)
-      (js2-mode . lsp-deferred)
-      (json-mode . lsp-deferred)
-      (typescript-mode . lsp-deferred)
-      (php-mode . lsp-deferred)
-      (lsp-mode . softwear-lsp-mode-setup))
-    :bind (:map lsp-mode-map
-            ("<tab>" . company-indent-or-complete-common))
-    :init
-    (setq lsp-keymap-prefix "s-c l")
-    (setq read-process-output-max (* 1024 1024)) ;; 1MB
-    :config
-    (lsp-enable-which-key-integration t))
+  (when qucchia-lsp
+    (use-package lsp-mode
+      :commands (lsp lsp-deferred)
+      :hook ((html-mode . lsp-deferred)
+             (js2-mode . lsp-deferred)
+             (json-mode . lsp-deferred)
+             (typescript-mode . lsp-deferred)
+             (php-mode . lsp-deferred)
+             (lsp-mode . softwear-lsp-mode-setup))
+      :bind (:map lsp-mode-map
+                  ("<tab>" . company-indent-or-complete-common))
+      :init
+      (setq lsp-keymap-prefix "s-c l")
+      (setq read-process-output-max (* 1024 1024)) ;; 1MB
+      :config
+      (lsp-enable-which-key-integration t))
 
-  (add-to-list 'auto-mode-alist '("\\.html\\'" . html-mode))
+    (add-to-list 'auto-mode-alist '("\\.html\\'" . html-mode))
 
-  (use-package lsp-ui
-    :commands lsp-ui-mode
-    :custom
-    (lsp-ui-doc-position 'bottom))
+    (use-package lsp-ui
+      :commands lsp-ui-mode
+      :custom
+      (lsp-ui-doc-position 'bottom))
 
-  (use-package lsp-treemacs
-    :config (lsp-treemacs-sync-mode 1)
-    :commands lsp-treemacs-errors-list)
+    (use-package lsp-treemacs
+      :config (lsp-treemacs-sync-mode 1)
+      :commands lsp-treemacs-errors-list)
 
-  (use-package lsp-ivy
-    :commands lsp-ivy-workspace-symbol)
+    (use-package lsp-ivy
+      :commands lsp-ivy-workspace-symbol))
 
   ;; (use-package dap-mode :after lsp-mode)
 
 #+end_src
+
+* Languages
 
 ** Prettier
 

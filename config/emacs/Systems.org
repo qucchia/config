@@ -1,0 +1,23 @@
+#+title:Systems
+#+subtitle:System-specific configuration.
+#+PROPERTY: header-args:emacs-lisp :tangle ../../home/.emacs.d/lisp/systems.el :comments org
+
+#+begin_src emacs-lisp
+
+  (defvar qucchia-spell nil "If non-nil, load Flyspell.")
+  (defvar qucchia-lsp nil "If non-nil, load LSP.")
+
+  (pcase system-name
+    ("EDUAR911P122" (setq qucchia-spell nil)
+     (setq qucchia-lsp nil)
+     (add-hook
+      'eshell-after-prompt-hook
+      (lambda () (setq eshell-path-env
+                       (replace-regexp-in-string
+                        ":/usr/bin"
+                        ":/msys64/usr/bin"
+                        eshell-path-env)))))
+    ("raspberrypi" (setq qucchia-spell t)
+     (setq qucchia-lsp t)))
+
+#+end_src
