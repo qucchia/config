@@ -177,19 +177,21 @@ Define text objects for =verbatim= and ~code~ blocks. This way I can use Evil sh
 
 #+end_src
 
-Auto-tangle configuration files
+Auto-tangle configuration files:
 
 #+begin_src emacs-lisp
 
   (defun george-babel-tangle-config ()
     "Tangle dotfiles on save."
-    (when (string-prefix-p (expand-file-name "~/.dotfiles/")
-                         (buffer-file-name))
+    (when (and (eq major-mode 'org-mode)
+               (string-prefix-p (expand-file-name "~/.dotfiles/config")
+                                (buffer-file-name)))
       (let ((org-confirm-babel-evaluate nil))
         (org-babel-tangle))))
 
-  (add-hook 'org-mode-hook (lambda ()
-    (add-hook 'after-save-hook #'george-babel-tangle-config)))
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (add-hook 'after-save-hook #'george-babel-tangle-config)))
 
 #+end_src
 
