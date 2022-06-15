@@ -37,11 +37,18 @@ Replace =~/.dotfiles= for the directory where this repository is located.
 
 * Running
 
-Linux:
 - Run =dotfiles-start-exwm= to open Emacs with EXWM.
 - Run =dotfiles-start-emacs= to open Emacs without EXWM.
 
-Windows: simply open the application.
+If you get a ‘failed to check signature error’:
+
+#+begin_src emacs-lisp
+
+  (let ((package-check-signature nil))
+    (package-install 'gnu-elpa-keyring-update)
+    (gnu-elpa-keyring-update))
+
+#+end_src
 
 * Additional setup
 
