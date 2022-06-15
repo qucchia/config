@@ -49,7 +49,12 @@ https://github.com/akermu/emacs-libvterm
     (setq eshell-history-size 10000
           eshell-buffer-maximum-lines 10000
           eshell-hist-ignoredups t
-          eshell-scroll-to-bottom-on-input t))
+          eshell-scroll-to-bottom-on-input t)
+
+    (when (eq qucchia-system 'windows)
+      (setq eshell-path-env
+            (concat "/msys64"(replace-regexp-in-string
+                              ":" ":/msys64" eshell-path-env)))))
 
   (use-package eshell
     :hook (eshell-first-time-mode . mash-setup-eshell)

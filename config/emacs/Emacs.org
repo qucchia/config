@@ -131,8 +131,8 @@ Enable some commands.
       (format "%s.el" (symbol-name symbol)) qucchia-lisp-directory)))
 
   ;; Load packages
-  (dolist (package '(dotty erised george lieutenant mash
-                     psst racket softwear))
+  (dolist (package '(systems dotty erised george lieutenant
+                     mash psst racket softwear))
     (qucchia-load package))
 
   (provide 'qucchia)

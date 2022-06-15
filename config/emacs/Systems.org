@@ -1,0 +1,14 @@
+#+title:Systems
+#+subtitle:Specific settings for each system
+
+#+begin_src emacs-lisp :tangle ../../home/.emacs.d/lisp/systems.el :noweb-ref system-settings
+
+  (pcase system-name
+    ("raspberrypi"
+     (setq qucchia-system 'linux)
+     (setq psst-spellcheck t))
+    ("EDUAR911P122" 2)
+     (setq qucchia-system 'windows)
+     (setq psst-spellcheck nil))
+
+#+end_src
