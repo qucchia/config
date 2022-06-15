@@ -120,7 +120,7 @@ Enable some commands.
 
 #+begin_src emacs-lisp
 
-  (defcustom qucchia-lisp-directory "~/.emacs.d/lisp"
+  (defcustom qucchia-lisp-directory "~/.dotfiles/home/.emacs.d/lisp"
     "Directory where Lisp files from qucchia configuration are stored."
     :type 'string
     :group 'qucchia)
@@ -131,8 +131,8 @@ Enable some commands.
       (format "%s.el" (symbol-name symbol)) qucchia-lisp-directory)))
 
   ;; Load packages
-  (dolist (package '(systems dotty erised george lieutenant
-                     mash psst racket softwear))
+  (dolist (package '(systems dotty erised george lieutenant mash
+                     psst racket softwear))
     (qucchia-load package))
 
   (provide 'qucchia)
