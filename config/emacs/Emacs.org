@@ -97,7 +97,6 @@ General Emacs configuration.
 
   (use-package emacs
     :custom (tab-width 2)
-    :hook (emacs-startup . qucchia-display-startup-time)
     :init
     ;; Make startup faster by reducing the frequency of garbage collection
     (setq gc-cons-threshold (* 100 1000 1000)) ;; 100MB
