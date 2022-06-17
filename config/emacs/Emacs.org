@@ -135,6 +135,8 @@ Enable some commands.
                      psst racket softwear))
     (qucchia-load package))
 
+  (when (eq qucchia-system 'linux) (qucchia-load 'desktop))
+
   (provide 'qucchia)
 
 #+end_src
